@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};
+
+        --light-grey: {{{account.colors.uea-light-grey}}};
+
+
+
+        --black: {{{account.colors.black}}};
+        --white: #fff;
+      }    
+
+      .themeColour--orange {
+        --dynamic-colour: var(--orange);
+      }
+
+      .themeColour--cyan { 
+        --dynamic-colour: var(--cyan);     
+      }
+
+      .themeColour--magenta { 
+        --dynamic-colour: var(--magenta); 
+      }
+
+      .themeColour--green { 
+        --dynamic-colour: var(--green); 
+      }
+
+      .themeColour--purple {
+        --dynamic-colour: var(--purple); 
+      }
+
+      .logoColour--white {
+        --dynamic-logo-colour: var(--white);
+      }
+
+      .logoColour--black {
+        --dynamic-logo-colour: var(--black);
+      }
+
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .fit--titlePage {
+        padding: 57pt 59pt 15pt 50pt;
+      }
+
+      .fit--infoPage {
+        padding: 27.9pt 24pt 27pt 20.3pt;
+      }
+
+      .fit--gridPage {
+        display: block;
+        padding: 28pt 21pt 21pt 22pt;
+      }
+
+      .fit--backPage {
+        padding: 28.4pt 0pt 14pt 0pt;
+      }
+
+      .fit--backPageAdditional {
+        margin: 22pt 23pt 25pt 23pt;
+        background: var(--light-grey);
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .header--titlePage {
+        margin-bottom: 20pt;
+        height: 73pt;
+      }
+
+      .header--infoPage {
+        margin-bottom: 9pt;
+        flex: 1;
+        padding-left: 5pt;
+      }
+
+      .header--backPageAdditional {
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-shrink: 0;
+        height: 80pt;
+        padding: 0 27pt 0pt 0;
+      }
+
+      .copy h1 {
+        margin-bottom: 3.5pt;
+        font-size: 10.2pt;
+        line-height: 1.2em;
+        font-weight: bold;
+        color: var(--dynamic-colour);
+      }
+      .is-export-mode .copy h1 { font-size: 10.1pt; }
+
+      .copy p {
+        margin-bottom: 5pt;
+        font-size: 8.8pt;
+        line-height: 1.2em;
+      }
+      .is-export-mode .copy p { font-size: 8.71pt; }
+
+      .copy p + h1 {
+        margin-top: 7pt;
+      }
+
+      .copy h1:last-child,
+      .copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .copy--backPageAdditional {
+        padding-top: 16pt;
+      }
+
+
+      .copy--backPageAdditional h1 {
+        margin-bottom: 19.1pt;
+        font-size: 12pt;
+        line-height: 1.2em;
+        color: var(--black);
+      }
+      .is-export-mode .copy--backPageAdditional h1 { font-size: 11.88pt; }
+
+      .copy--backPageAdditional p {
+        margin-bottom: 7pt;
+        font-size: 10.7pt;
+        line-height: 1.25em;
+        letter-spacing: 0.1pt;
+      }
+      .is-export-mode .copy--backPageAdditional p { font-size: 10.59pt; }
+
+      .countryIndicator__label {
+        text-transform: uppercase;
+      }
+
+      .countryIndicator {
+        display: flex;
+        height: 28pt;
+        padding-bottom: 0.2rem;
+        border-bottom: 1px solid rgb(150,150,155);
+      }
+
+      .countryIndicator__country {}
+      .countryInfo {
+        display: flex;
+        align-items: center;
+        margin-left: 0.34rem;
+        padding-bottom: 0.2rem;
+        border-bottom: 1px solid rgb(150,150,155);
+      }
+
+      .country--no-flag .countryIndicator {
+        visibility: hidden;
+      }
+
+      .country--no-flag .countryInfo--p3 {
+        display: none;
+        padding-bottom: 0.16rem;
+      }
+
+      .countryIndicator__flag {
+        margin-right: 0.2rem;
+        width: 1.12rem;
+        height: 0.700rem;
+        border: 1px solid var(--black);
+        background-color: var(--black);
+        background-size: 100% 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        overflow: hidden;
+        display: none;
+      }
+
+      .country--greece .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/dfeec9a6711694c307e5a9da1deb4130/Greece.svg);
+      }
+
+      .country--singapore .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/49ca4b965f5900991a92e12abbf97487/Singapore.svg);
+      }
+
+      .country--spain .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/264dfe308e41de2cc2b6c743294f0a84/Spain.svg);
+      }
+
+      .country--russia .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/9355683517165d599c9e5d50506aa6d5/Russia.svg);
+      }
+
+      .country--usa .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/f3ae4233009c5ac12f20723858f49d06/USA.svg);
+      }
+
+      .country--germany .countryIndicator__flag {
+        display: block;
+        background-image: url(https://files.outfit.io/media_library_items/123507/Flag_of_Germany.svg);
+      }
+
+      .country--italy .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/5a42b147a07846be4204ea7a9e0607fa/Italy.svg);
+      }
+
+      .country--france .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/61143a0e57fe65858d3338550647d542/France.svg);
+      }
+
+      .country--portugal .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/9481eec9d8bbdacb14be50f7a3ffee01/Portugal.svg);
+      }
+
+      .country--poland .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/0aefed9e64b656992ec6c1d6ddd8c197/Poland.svg);
+      }
+
+      .country--pakistan .countryIndicator__flag {
+        display: block;
+        background-image: url(https://files.outfit.io/media_library_items/156844/pakistan-flag.png);
+      }      
+
+      .country--cyprus .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/8e971e6036dea87245d9072ee6252715/Cyprus.svg);
+      }
+
+      .country--belgium .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/e43867572473ed282a9e68e6bdd80b87/Belgium.svg);
+      }
+
+      .country--netherlands .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/8e54000d9166c7b9e5830f388a117917/Netherlands.svg);
+      }
+
+      .country--ireland .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/b9ea7c526f8b62ce56b1cb3795ea5503/Ireland.svg);
+      }
+
+      .country--latvia .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/13a5c52d63983f3441f2a482559f8d23/Latvia.svg);
+      }
+
+      .country--lithuania .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/33b817d343fc5f4c1c419fa38576e482/Lithuania.svg);
+      }
+
+      .country--romania .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/d6ce7d69d8aad93324c0974645b52f77/Romania.svg);
+      }
+
+      .country--bulgaria .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/8fb9e15085a09c680ab7712c2136418b/Bulgaria.svg);
+      }
+
+      .country--switzerland .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/5c0fd63b57f1abaea702b81dc3f5daea/Switzerland.svg);
+      }
+
+      .country--sweden .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/cb976da8c68259479e2f1d8a92bf4158/Sweden.svg);
+      }
+
+      .country--brunei .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/697a6f059c945cd2798439d46ab3c097/Flag_of_Brunei.png);
+        background-position: center;
+
+      }
+      .country--canada .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/7b976baa0848a57b481402caca1fc38f/Canada.svg);
+      }
+
+      .country--china .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/058d8cfa3c1e5675b828a603576c8837/China.svg);
+      }
+
+      .country--hong-kong .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/a30dc47e4835d76a16f641ae6798f9d4/Hong%20Kong.svg);
+      }    
+
+      .country--india .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/a3a5fca08286b275be7df0a1ca11ffe9/India.svg);
+      }
+
+      .country--indonesia .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/23be5ac5ca00b322e14eb33c0521e222/Indonesia.svg);
+      }
+
+      .country--japan .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/d0e5f0fa18431ce560fa473a9e776755/Japan.svg);
+      }
+
+      .country--kazakhstan .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/5cc8aa22bb01acc797c21499ab15d699/Kazakhstan.svg);
+      }
+
+      .country--kenya .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/aee89506a27c5d48cfb3ca86f872a513/Kenya.svg);
+      }
+
+      .country--korea .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/630542c84edb81dca970f3b6e6c70363/Korea.svg);
+      }
+
+      .country--malaysia .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/d14a9e1e10d7b3a500fcdcf3d4854130/Malaysia.svg);
+      }
+
+      .country--mauritius .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/f624c31490b91ade139af012ba36f99c/Mauritius.svg);
+      }
+
+      .country--nigeria .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/9cee6c67b64136682984fd577d122779/Nigeria.svg);
+      }
+
+      .country--finland .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/b0e6529c0c03f56c22d4775c7100407e/Finland.svg);
+      }
+
+      .country--south-africa .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/6bb99c7c042d333457be25f701a4275a/South%20Africa.svg);
+      }
+
+      .country--taiwan .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/e21940e8d4d34690bbdd62c499d6c9dc/Taiwan.svg);
+      }
+
+      .country--thailand .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/2d774720fa996813b9d102ebc441407b/Thailand.svg);
+      }
+
+      .country--turkey .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/be7d468a298df851d0ef54ece6245c2b/Turkey.svg);
+      }
+
+      .country--vietnam .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/9370edc3f3637d744e254ebe408c04b7/Vietnam.svg);
+      }
+
+      .country--zimbabwe .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/2353514f7fd718f81761c0835231cfc8/Zimbabwe.svg);
+      }
+
+      .country--norway .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/9a97f70bc03cfb3975c09eed8d2f7fbb/Norway.svg);
+      }
+
+      .country--brazil .countryIndicator__flag {
+        display: block;
+        background-image: url(https://files.outfit.io/media_library_items/146559/Flag_of_Brazil.svg);
+      }
+
+      .country--colombia .countryIndicator__flag {
+        display: block;
+        background-image: url(https://files.outfit.io/media_library_items/146545/Flag_of_Colombia%2520%25281%2529.svg);
+      }
+
+      .country--mexico .countryIndicator__flag {
+        display: block;
+        background-image: url(https://files.outfit.io/media_library_items/146558/Flag_of_Mexico.svg);
+      }
+
+      .country--peru .countryIndicator__flag {
+        display: block;
+        background-image: url(https://files.outfit.io/media_library_items/146557/Flag_of_Peru_%2528state%2529.svg);
+      }
+
+      .country--united-kingdom .countryIndicator__flag {
+        display: block;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/6a0c1e7f904228ea3acddb8afba6ed1b/unitedKingdom.svg);
+      }
+
+      .country--united-kingdom .countryIndicator,
+      .country--hong-kong .countryIndicator,
+      .country--middle-east .countryIndicator,
+      .country--south-africa .countryIndicator {
+        border-bottom: none;
+      }
+
+      .country--middle-east .countryIndicator__flag {
+        display: none;
+      }
+
+      .countryIndicator__country {
+        font-weight: 900;
+        text-transform: uppercase;
+      } 
+
+      .countryIndicator__content {
+        max-width: 12.2em;
+        font-size: 0.32rem;
+        line-height: 1.1em;
+        color: var(--black);
+      }
+      .is-export-mode .countryIndicator__content { font-size: 0.3168rem; }
+
+      .united-kingdom .countryIndicator__content,
+      .middle-east .countryIndicator__content {
+        padding-right: 1.37rem;
+      }
+
+      .logo {
+        width: 83pt;
+        height: 52pt;
+      }
+
+      .logo .glint {
+        fill: var(--dynamic-colour);
+      }
+
+      .logoColour--black #shape,
+      .logoColour--white #shape {
+        fill: var(--dynamic-logo-colour);
+      }
+
+      .featureImage {
+        position: relative;
+        height: 193pt;
+      }
+
+      .body {
+        flex: 1;
+      }
+      
+      .fit--infoPage .body {
+        display: flex;
+        flex-direction: column;        
+      }
+
+      .body--infoPage {
+        display: flex;
+        flex-direction: column;
+        flex: none;
+        padding: 0pt 22pt 0pt 11pt;
+        background-color: #E6E7E8;
+      }
+
+      .body--backPage {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .body--backPageAdditional {
+        padding: 18pt 22pt 3pt 22pt;
+      }
+
+      .heading {
+        margin-left: 4pt;
+        position: relative;
+        max-height: 1400px;
+        font-size: 40pt;
+        line-height: 1em;
+        font-weight: 900;
+        letter-spacing: 0.2pt;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+      .is-export-mode .heading { font-size: 39.6pt; }
+
+      .heading .tinymce_style--dark {
+        color: var(--dynamic-colour);
+      }
+
+      .contact {
+        display: flex;
+        flex: 1;
+        padding: 8pt 0pt 9pt 0pt;
+      }
+
+      .contact--primary {
+        border-bottom: 1pt solid var(--black);
+      }
+
+      .contact--secondary {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact__header {
+        margin-right: 7pt;
+        width: 119pt;
+      }
+
+      .contact__label {
+        margin-bottom: 4pt;
+        padding: 5pt;
+        text-align: center;
+        font-size: 11.7pt;
+        font-weight: bold;
+        line-height: 1.2em;
+        background-color: var(--black);
+        color: var(--white);
+      }
+      .is-export-mode .contact__label { font-size: 11.58pt; }
+
+      .contact__label--alt {
+        height: 25pt;
+        margin-bottom: 4pt;
+        padding-right: 7pt;
+        text-transform: uppercase;
+        font-size: 13pt;
+        max-width: 141pt;
+      } 
+      .is-export-mode .contact__label--alt { font-size: 12.87pt; }
+
+      .contact__image {
+        position: relative;
+        width: 100%;
+        height: 140pt;
+        border: 6pt solid var(--white);
+      }
+
+      .contact__image--alt {
+        width: 96pt;
+        height: 107pt;
+        border: 4pt solid var(--white);
+      }
+
+      .contact__body {
+        flex: 1;
+      }
+
+      .contact__body a{
+        color: var(--black);
+        text-decoration: none;
+      }
+
+      .contact__details {
+        margin-bottom: 9.7pt;
+        padding-right: 10pt;
+      }
+
+      .contact__details p {
+        margin-bottom: 7pt;
+        font-size: 10.1pt;
+        line-height: 1.2em;
+      }
+      .is-export-mode .contact__details p { font-size: 9.99pt; }
+
+      .contact__details--alt p {
+        font-size: 11.9pt;
+      }
+      .is-export-mode .contact__details--alt p { font-size: 11.78pt; }
+
+      .contact__details strong {
+        font-weight: bold;
+      }
+
+      .contact__quote p {
+        margin-bottom: 7pt;
+        font-size: 10pt;
+        line-height: 1.2em;
+      }
+      .is-export-mode .contact__quote p { font-size: 9.9pt; }
+
+      .contact__quote p:last-child,
+      .contact__details p:last-child {
+        margin-bottom: 0;
+      }
+
+      .keyContact {
+        position: relative;
+        display: flex;
+        padding-right: 27pt;
+      }
+
+      .keyContact a {
+        color: var(--black);
+        text-decoration: none;
+      }
+
+      .url {
+        position: absolute;
+        bottom: 6pt;
+        right: -5pt;
+        font-size: 10.4pt;
+        font-weight: bold;
+        font-style: italic;
+        line-height: 1.2em;
+      }
+      .is-export-mode .url { font-size: 10.3pt; }
+
+      .column__container {
+        display: flex;
+        margin-left: -18pt;
+      }
+
+      .column__container--single {
+        padding: 5pt 17pt 0pt 47pt;
+      }
+
+      .column__container--dual {
+        padding: 0pt 26pt 0pt 41pt;
+      }
+
+      .column {
+        position: relative;
+        flex: 1;
+        font-size: 0;
+      }
+
+      .column--single {
+        padding: 12pt 31pt 16pt 11pt;
+      }
+
+      .column--dual {
+        display: flex;
+        flex-direction: column;
+        margin-left: 18pt;
+      }
+
+      .column--background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: var(--dynamic-colour);
+        opacity: 0.3;
+      }
+
+      .backgroundColour--no .column--background {
+        background: none;
+      }
+
+      .content { margin-bottom: 20pt; }
+
+      /* Quick fix because of the different font rendering and firing overset on the second page */
+      .is-mac .content { margin-bottom: 30pt; }
+
+      .content:last-child {
+        margin-bottom: 0;
+      }
+
+      .content__heading {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 3.3pt;
+        padding: 5pt;
+        font-size: 12pt;
+        font-weight: bold;
+        line-height: 1.25em;
+        text-transform: uppercase;
+        color: var(--white);
+        background: var(--dynamic-colour);
+      }
+      .is-export-mode .content__heading { font-size: 11.88pt; }
+
+      .backgroundColour--no .content__heading {
+        padding: 0;
+        background: none;
+        color: var(--dynamic-colour);
+      }
+
+      .content__body {
+        padding-left: 4pt;
+      }
+
+      .content__body p {
+        margin-bottom: 5.7pt;
+        font-size: 9.1pt;
+        line-height: 1.2em;
+      }
+      .is-export-mode .content__body p { font-size: 9pt; }
+
+      .content__body a {
+        color: var(--black);
+        text-decoration: none;
+      }
+
+      .content__body p:last-child {
+        margin-bottom: 0;
+      }
+
+      .table__container {
+        margin-bottom: 9pt;
+        padding-right: 13pt;
+      }
+
+      .table__heading {
+        margin-bottom: 3.4pt;
+        font-size: 10.3pt;
+        line-height: 1.2em;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: var(--dynamic-colour);
+      }
+      .is-export-mode .table__heading { font-size: 10.2pt; }
+
+      .table {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .table__row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--black);
+      }
+
+      .table__item {
+        padding: 2.8pt 0pt;
+        font-size: 8.7pt;
+        line-height: 1.2em;
+        font-weight: bold;
+        letter-spacing: 0.2pt;
+      }
+      .is-export-mode .table__item { font-size: 8.61pt; }
+
+      .table__item--alt {
+        padding-right: 4pt;
+        font-weight: normal;
+        letter-spacing: 0.2pt;
+      }
+
+      .table__copy p {
+        margin-bottom: 7pt;
+        font-size: 7.9pt;
+        line-height: 1.2em;
+      }
+      .is-export-mode .table__copy p { font-size: 7.82pt; }
+
+      .table__copy sup,
+      .table__copy sub {
+        font-size: 5pt;
+        font-weight: normal;
+      }
+      .is-export-mode .table__copy sup,
+      .is-export-mode .table__copy sub { font-size: 4.95pt; }
+
+      .tasble__copy strong sup,
+      .table__copy strong sub {
+        font-weight: bold;
+      }
+
+      .table__copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .table__container + .table__copy {
+        margin-top: 22pt;
+        padding-right: 13pt;
+      }
+
+      .footer {
+        margin-top: 8pt;
+        padding: 0 37pt;
+      }
+
+      .footer--backPageAdditional {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 126pt;
+        margin-top: 0;
+        padding: 6pt 20pt 7pt 20pt;
+      }
+
+      .footer--infoPage {
+          padding: 0;
+      }
+
+      .social__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .social {
+        display: flex;
+        align-items: center;
+        margin: 0 5pt;
+      }
+
+      .social__icon {
+        margin-right: 3pt;
+        width: 17pt;
+        height: 17pt;
+      }
+
+      .social__text {
+        font-size: 7pt;
+        line-height: 1.2em;
+      }
+      .is-export-mode .social__text { font-size: 6.93pt; }
+
+      .social__text a {
+        color: var(--black);
+        text-decoration: none;
+      }
+
+      .qrCode {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        margin-left: 9pt;
+      }
+
+      .qrCode__img {
+        max-width: 25pt;
+        max-height: 25pt;
+        object-fit: contain;
+      }
+
+      /* GRID */
+      .intro {
+        /*display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 3.47rem;
+        padding: 0.19rem 1.49rem 0.513rem 1.486rem;
+        font-size: 0.57rem;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 900;
+        line-height: 1.4em;
+        letter-spacing: -0.0025rem;
+        color: #fff;
+        background: var(--black);
+        */
+        position: relative;
+        height: 3.47rem;
+      }
+
+      .intro--secondary {
+        padding: 0;
+      }
+
+      /* Award Block Styling */  
+
+      .awardBlock {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+      }
+
+      .awardBlock__top {
+        font-size: 0.256rem;
+      }
+      .is-export-mode .awardBlock__top { font-size: 0.253rem; }
+
+      .awardBlock__title {
+        font-size: 0.35rem;
+        text-transform: uppercase;
+      }
+      .is-export-mode .awardBlock__title { font-size: 0.3465rem; }
+
+      .awardBlock__badge {
+        margin: 0.116rem auto;
+        width: 3.386711rem;
+        max-width: 100%;
+      }
+
+      .awardBlock__bottom {
+        font-size: 0.177rem;
+        text-transform: none;
+        line-height: 1.2em;
+      }
+      .is-export-mode .awardBlock__bottom { font-size: 0.175rem; }
+
+      /* Statistic Block module styling */      
+      .statisticBlock {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 0.116rem;
+        box-sizing: border-box;
+        color: #fff;
+        text-align: center;
+      }
+
+      .statisticBlock:first-child {
+        order:1;
+      }
+
+      .statisticBlock:third-child {
+        order:3;
+      }
+
+      .statisticBlock .awardBlock {
+        flex: 1;
+        text-align: center;
+        color: #fff;
+        order:2
+      }
+
+      .statisticBlock__title {
+        font-size: 0.256rem;
+        font-weight: 700;
+        line-height: 1em;
+        text-transform: uppercase;        
+      }
+      .is-export-mode .statisticBlock__title { font-size: 0.2534rem; }
+
+      .statisticBlock__number {
+        margin-bottom: 0.18685rem;
+        font-size: 2.312rem;
+        font-weight: 700;
+        line-height: 0.6em;
+      }
+      .is-export-mode .statisticBlock__number { font-size: 2.2889rem; }
+
+      .statisticBlock__bottom {
+        font-size: 0.2102rem;
+        line-height: 1.2em;
+        text-transform: none;
+      }   
+      .is-export-mode .statisticBlock__bottom { font-size: 0.2081rem; }
+
+      /* Grid section styling */
+      .grid {
+        display: flex;
+        flex-direction: column;
+        height: 455pt;
+      }
+
+      .grid__row {
+        flex: 1;
+        display: flex;
+        overflow: hidden;        
+      }
+
+      .grid__topRow > div {
+        flex: none;
+      }
+
+      .grid__topRow > div:first-child {
+        width: 8.44rem !important;
+      }
+
+      .grid__topRow > div:last-child {
+        width: 4.44rem;
+      }      
+
+      .grid__row--3 {
+        flex: 3;
+      }
+
+      .grid__col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;     
+      }
+
+      .grid__col-1,
+      .grid__col-2 {
+        flex: none;
+        width: 4.22rem;
+      }
+
+      .grid__col-3 {
+        flex: none;
+        width: 4.309rem;
+      }
+
+      .grid__cell {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex: 1;
+        font-size: 0.28rem;
+        font-weight: 700;
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        overflow: hidden;
+      }
+      .is-export-mode .grid__cell { font-size: 0.278rem; }
+
+      .grid__cell--bottomMiddleImage .grid__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        margin-bottom: 0.36rem;
+        padding: 0 0.35034rem;
+        font-size: 0.4rem;
+        letter-spacing: -0.01rem;
+      }
+      .is-export-mode .grid__cell--bottomMiddleImage .grid__content { font-size: 0.396rem; }
+
+      .grid__cell--top {
+        justify-content: flex-start;
+      }
+
+      .grid__cell--middle {
+        justify-content: center;
+      }
+
+      .grid__cell--2 {
+        flex: 2;
+      }
+
+      .grid__cell--squareBlack {
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.467rem;
+        font-size: 0.4904rem;
+        font-weight: 700;
+        background: var(--black);
+        text-transform: uppercase;
+        line-height: 1em;
+      }
+      .is-export-mode .grid__cell--squareBlack { font-size: 0.4855rem; }
+
+      .cyan .grid__cell--squareBlack {
+        color: rgb(0,174,239);
+      }
+
+      .orange .grid__cell--squareBlack {
+        color: rgb(250,166,26);
+      }
+
+      .green .grid__cell--squareBlack {
+        color: rgb(141,198,63);
+      }
+
+      .purple .grid__cell--squareBlack {
+        color: rgb(127,64,152);
+      }
+
+      .magenta .grid__cell--squareBlack {
+        color: rgb(236,0,140);
+      }
+
+      .grid__cell--dynamicColor {
+        color: var(--dynamic-colour);
+      }
+
+      .grid__mapImg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.1);      
+        fill: var(--dynamic-colour);
+      }
+
+
+      .grid__content {
+        margin-bottom: 0.467rem;
+        margin-top: 0.467rem;
+        padding: 0 0.2102rem;
+        font-size: 0.397rem;
+        font-weight: 900;
+        line-height: 1em;
+        letter-spacing: 0.0070069rem;
+        z-index: 1;
+      }
+      .is-export-mode .grid__content { font-size: 0.393rem; }
+
+      .grid__content--color {
+        background-color: var(--dynamic-colour);
+        color: var(--white);
+      }
+
+      .grid__content.grid__content--theme {
+        color: var(--dynamic-colour);
+      }
+
+      .grid__content.grid__content--white {
+        color: var(--white);
+      }    
+
+      .grid__content.grid__content--black {
+        color: var(--black);
+      }
+
+      .grid__cell--rightTallImage .grid__content {
+        margin-bottom: 1.027rem;
+        font-size: 0.397rem;
+        letter-spacing: -0.01rem;
+      }
+      .is-export-mode .grid__cell--rightTallImage .grid__content { font-size: 0.393rem; }
+
+      .grid__cell--rightTallImage .u-font-size {
+        margin-top: 0.1rem;
+        font-size: 0.20086rem;
+        line-height: 1.3em;
+        text-transform: none;
+        text-align: center;
+      }
+      .is-export-mode .grid__cell--rightTallImage .u-font-size { font-size: 0.1989rem; }
+
+      .grid_top-landscape {
+        margin-bottom: 0.443rem;
+        font-size: 0.37rem;
+      }
+      .is-export-mode .grid_top-landscape { font-size: 0.3663rem; }
+
+      .grid__cell--topMiddle { 
+        margin-bottom: 0.3503rem;
+        margin-top: 0.3503rem;
+        font-size: 0.366rem;
+        line-height: 1.1em;
+        letter-spacing: 0.2pt;
+        word-spacing: -0.6pt;
+      }
+      .is-export-mode .grid__cell--topMiddle { font-size: 0.3623rem; }
+
+      .grid__cell--middleTallImage .grid__content {       
+        margin-bottom: 0.653rem;
+        width: 4.297rem;
+        font-size: 0.397rem;
+        line-height: 1em;
+        z-index: 1;
+      }
+      .is-export-mode .grid__cell--middleTallImage .grid__content { font-size: 0.393rem; }
+
+      .grid__cell--middleTallImage .grid__content .grid__heading {
+        font-size: 2.522rem;
+      }
+      .is-export-mode .grid__cell--middleTallImage .grid__content .grid__heading { font-size: 2.4968rem; }
+
+      .grid__heading {
+        width: 3.7rem;
+        font-size: 1.3rem;
+        line-height: 1em;
+        letter-spacing: -0.1rem;
+      }
+      .is-export-mode .grid__heading { font-size: 1.287rem; }
+
+      .grid__qualifying-section {
+        margin-top: 0.07006rem;
+        font-size: 0.20086rem;
+        font-weight: 700;
+        line-height: 1.3em;
+        text-transform: none;
+        text-align: center;   
+      }
+      .is-export-mode .grid__qualifying-section {  font-size: 0.1989rem; }
+
+      sup {
+        font-size: 0.537rem;
+        letter-spacing: 0;
+        vertical-align: top;
+        font-weight: 700;
+        line-height: 1.9em;
+      }
+      .is-export-mode sup { font-size: 0.5316rem; }
+
+      sub {
+        vertical-align: bottom;
+        font-size: 0.537rem;
+        line-height: 1.5em;
+        letter-spacing: 0;
+      }
+      .is-export-mode sub { font-size: 0.5316rem; }
+
+      .middle-text sup {
+        font-size: 0.537rem;
+        letter-spacing: 0;
+        vertical-align: top;
+        font-weight: 700;
+        line-height: 1.9em;
+      }
+      .is-export-mode .middle-text sup { font-size: 0.5316rem; }
+
+      .top-text {
+        position: absolute;
+        top: 0.256rem;
+        left: 0.256rem;
+        right: 0.256rem;
+        font-size: 0.303rem;
+        font-weight: 900;
+        line-height: 1em; 
+      }
+      .is-export-mode .top-text { font-size: 0.2999rem; }
+
+      .middle-text {
+        position: absolute;
+        top: 40%;
+        left: 48%;
+        width: 77%;
+        margin-bottom: 0.3269rem;
+        transform: translate(-50%, -50%);
+        font-size: 2.522rem;
+        font-weight: 900;
+        line-height: 0.75em;
+        letter-spacing: -0.19rem;
+        color: #fff;
+      }
+      .is-export-mode .middle-text { font-size: 2.4967rem; }
+
+      .bottom-text {
+        position: absolute;
+        left: 0.1rem;
+        top: 2.756rem;
+        right: 0.256rem;
+        margin-top: -0.121rem;
+        text-align: center;
+        font-size: 0.20086rem;
+        line-height: 1.3em;
+        text-transform: none;
+      }
+      .is-export-mode .bottom-text { font-size: 0.1988rem; }
+
+      .bottom-text p {
+        font-size: 0.20086rem; 
+        font-weight: 700;
+      }
+      .is-export-mode .bottom-text p { font-size: 0.1988rem; }
+
+      /* Directions module styling */
+      .directions {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.46rem 0.116rem;
+      }
+
+      .directions__text {
+        text-align: center;
+        font-size: 0.280rem;
+        font-weight: 900;
+        line-height: 1.1em;
+        color: var(--dynamic-colour);
+      }
+      .is-export-mode .directions__text { font-size: 0.2772rem; }
+
+      .directions__image {
+        max-width: 58%;
+      }
+
+      /* squareGlint module styling */      
+      .squareGlint {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+        padding: 0.630rem 0.467rem;
+        max-height: 100%;
+        text-align: center;
+        font-size: 0.359rem;
+        text-align: center;
+        text-transform: uppercase;
+        line-height: 1.2em;
+        color: #fff;
+        box-sizing: border-box;
+        background-color: var(--dynamic-colour); 
+      }
+      .is-export-mode .squareGlint { font-size: 0.3554rem; }
+
+      .squareGlint--p2 {
+        position: relative;
+        display: block;
+        padding: 0.256rem 0.476rem 0;
+      }
+
+      .squareGlint.square__cell--top {
+        justify-content: flex-start;
+      }
+
+      .squareGlint.square__cell--middle {
+        justify-content: center;
+      }
+
+      .u-flex {
+        display: flex;
+      }
+
+      .u-flex-direction-col {
+        flex-direction: column;
+      }  
+
+      #Page-1 .u-black {
+        fill: var(--black);
+      }
+
+      .u-bc-black {
+        background-color: var(--black);
+      }
+
+      /*** END Page 2 GRID ***/
+
+      .u-mb-6 {
+        margin-bottom: 6pt;
+      }
+
+      .u-fs-13-5 {
+        font-size: 13.5pt;
+      }
+      .is-export-mode .u-fs-13-5 { font-size: 13.37pt; }
+
+      .u-lh-1-2 {
+        line-height: 1.2em;
+      }
+
+      .svgFill{
+        fill: var(--dynamic-colour);
+      }
+
+      /*padded multiline*/
+      .padded-multiline {
+        position: relative;
+      }
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.9em;
+        font-size: 1em;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .padded-multiline-bg span {
+        color: transparent;
+      }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.05em;
+        bottom: -0.15em;
+        left: -0.13em;
+        right: -0.3em;
+        background: var(--white);
+      }
+
+      .padded-multiline-bg span.emptyLine:before { display: none; }
+
+      .heading .padded-multiline-bg span:before {
+        background: var(--black);
+      }
+
+      .padded-multiline-fg {
+        position: relative;
+        z-index: 1;
+      }      
+
+      .padded-multiline-fg strong {
+        font-weight: 900;
+        color: var(--dynamic-colour);
+      }
+
+      .js-padded-multiline-src { 
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        z-index: 999;
+      }   
+
+      #js-padded-multiline-target-1 {
+        position: relative;
+        z-index: 1;
+      }
+
+
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" class="themeColour--{{{UEA_UEA-theme-colour--cfsn}}}{{^UEA_UEA-theme-colour--cfsn}}orange{{/UEA_UEA-theme-colour--cfsn}}
+                                                                   country--{{{UEA_country--cfsn}}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-3 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-4 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-5 }}"></div>
+    </div><!-- end placeholderMaster -->
+
+    {{#collection.UEA_pages--cfsn}}
+
+    {{#block.UEA_title-page--cfsn}}
+    <div class="page logoColour--{{{UEA_UEA-logo-colour--cfsn}}}{{^UEA_UEA-logo-colour--cfsn}}black{{/UEA_UEA-logo-colour--cfsn}}">
+
+      <div class="bleed">
+
+        <div class="container fit fit--titlePage">
+
+          <div class="backgroundImage"><div class="reposition-fix">{{{UEA_background-image--cfsn}}}</div></div><!--backgroundImage-->
+          <div class="header header--titlePage">
+            <div class="countryIndicator">
+              <div class="countryIndicator__flag"></div><!--countryIndicator__flag-->
+              <div class="countryIndicator__content">
+                <div class="countryIndicator__label">essential information</div><!--countryIndicator__label-->
+                <div class="countryIndicator__country"></div><!--countryIndicator__country-->
+              </div><!--countryIndication--content-->
+            </div><!--countryIndication-->
+            <div class="logo">{{{account.snippets.logo}}}</div><!--logo-->
+          </div><!--header-->
+          <div class="body">
+            {{^UEA_heading--cfsn}}
+            <div class="heading padded-multiline" data-max-line="2.2"> 
+              <div id="js-padded-multiline-target-1"></div>
+              <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-1">
+                This is<br><span class="tinymce_style--dark">uea</span>
+              </div><!--js-padded-multiline-src-->
+            </div><!--heading-->
+            {{/UEA_heading--cfsn}}
+
+            {{#UEA_heading--cfsn}}
+            <div class="heading padded-multiline" data-max-line="2.2"> 
+              <div id="js-padded-multiline-target-1"></div>
+              <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-1">
+                {{{UEA_heading--cfsn}}}{{^UEA_heading--cfsn}}This is <span class="tinymce_style--dark">uea</span>{{/UEA_heading--cfsn}}      
+              </div><!--js-padded-multiline-src-->
+            </div><!--heading-->
+            {{/UEA_heading--cfsn}}
+          </div><!--body-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.UEA_title-page--cfsn}}
+
+    {{#block.UEA_info-page--cfsn}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--infoPage">
+
+          <div class="body">
+          
+          <div class="header header--infoPage">
+            <div class="copy" data-max-height="235">{{{UEA_copy--cfsn}}}</div><!--copy-->
+          </div><!--header-->
+          <div class="body body--infoPage">
+            <div class="contact contact--primary">
+              {{#UEA_contact-photo--cfsn}}
+              <div class="contact__header">
+                <div class="contact__label" data-max-height="35">{{{UEA_contact-heading--cfsn}}}</div><!--contact__label-->
+                <div class="contact__image"><div class="reposition-fix">{{{UEA_contact-photo--cfsn}}}</div></div><!--contact__image-->
+              </div><!--contact__header-->
+              {{/UEA_contact-photo--cfsn}}
+              <div class="contact__body">
+                <div class="contact__details" data-max-height="60">{{{UEA_contact-details-cfsn}}}</div><!--contact__details-->
+                <div class="contact__quote" data-max-height="152">{{{UEA_contact-quote--cfsn}}}</div><!--contact__quote-->
+              </div><!--contact__body-->
+            </div><!--contact-->
+            <div class="keyContact">
+              {{#collection.UEA_key-contacts--cfsn}}
+              {{#block.UEA_contact-block--cfsn}}
+              <div class="contact contact--secondary">
+                <div class="contact__details" data-max-height="57">{{{UEA_contact-details--cfsn}}}</div><!--contact__details-->
+                {{#UEA_contact-image--cfsn}}<div class="contact__image contact__image--alt"><div class="reposition-fix">{{{UEA_contact-image--cfsn}}}</div></div><!--contact__image-->{{/UEA_contact-image--cfsn}}
+              </div><!--contact-->
+              {{/block.UEA_contact-block--cfsn}}
+              {{/collection.UEA_key-contacts--cfsn}}
+              <div class="url">www.uea.ac.uk</div>
+            </div><!--keyContact-->
+          </div><!--body-->
+          <div class="footer footer--infoPage">
+            <div class="social__container">
+              {{#collection.UEA_social--cfsn}}
+              {{#block.UEA_social-block--cfsn}}
+              <div class="social">
+                <img class="social__icon" src="{{{UEA_social-icon--cfsn}}}"><!--social__icon-->
+                <div class="social__text" data-max-line="1">{{{UEA_social-details--cfsn}}}</div><!--social__text-->
+              </div><!--social-->
+              {{/block.UEA_social-block--cfsn}}
+              {{/collection.UEA_social--cfsn}}
+              {{#UEA_qr-code--cfsn}}
+              <div class="qrCode"><img class="qrCode__img" src="{{{UEA_qr-code--cfsn}}}"></div><!--qrCode-->
+              {{/UEA_qr-code--cfsn}}
+            </div><!--social__container-->
+          </div><!--footer-->
+
+          </div>            
+            
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.UEA_info-page--cfsn}}
+
+    <!-- GRID-->
+    {{#block.UEA_grid-page--cfsn}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container container--grid fit fit--gridPage">    
+
+          <div class="intro">
+
+            <div class="reposition-fix">{{{UEA_intro-heading--cfsn}}}</div><!--reposition-fix-->
+
+          </div><!--end intro-->
+          <div class="grid">
+            {{#collection.UEA__grid--cfsn}}
+            {{#block.UEA__top-landscape-block--cfsn}}
+            <div class="grid__row grid__topRow">
+              <div class="grid__cell grid__cell--2">
+                <div class="reposition-fix">{{{UEA__grid_top-landscape-image--cfsn}}}</div>
+                <div class="grid__content grid_top-landscape grid__content--{{{UEAcs__grid_top-landscape-color--cfsn}}}" data-max-line="2">
+                  {{{UEA__grid_top-landscape-text--cfsn}}}
+                </div><!--end grid__content-->
+              </div><!--end grid__cell-->
+              {{/block.UEA__top-landscape-block--cfsn}} 
+              {{#block.UEA__top-square-block--cfsn}}
+              <div class="grid__cell grid__cell--{{{ UEAcs__grid_middle-top-text-alignment--cfsn }}} grid__content--color">
+                <div class="grid__content grid__cell--topMiddle u-lh-1-2" data-max-line="6">{{{ UEAcs__grid_middle-top-text--cfsn }}}</div><!-- end grid__content -->
+              </div><!-- end grid__cell -->
+            </div><!--end grid__row-->
+            {{/block.UEA__top-square-block--cfsn}}         
+
+            {{#block.UEA__middle-left-block--cfsn}}
+            <div class="grid__row grid__row--3">
+              <!--COL-1-->
+              <div class="grid__col grid__col-1">
+                <div class="grid__cell grid__cell--2 grid__cell--middleTallImage">
+                  <div class="reposition-fix"> {{{UEA__grid_middle-tall-image--cfsn}}}</div>
+                  <div class="grid__content grid__content--{{{UEAcs__grid_middle-tall-color--cfsn}}}">
+                    <div class="grid__heading" data-char-limit="5">
+                      <div class="textfit-1">{{{UEA__grid_middle-tall-title--cfsn}}}</div>
+                    </div><!--end grid__heading-->
+                    <div data-max-line="1">
+                      {{{UEA__grid_middle-tall-text--cfsn}}}
+                    </div><!--data-max-line-->
+                  </div><!--end grid__content-->
+                </div><!--end grid__cell-->
+              </div><!--end grid__col-->
+              {{/block.UEA__middle-left-block--cfsn}}
+              <!--COL-2-->
+              {{#block.UEA__middle-square-block--cfsn}}
+              <div class="grid__col grid__col-2">
+                <div class="grid__cell grid__cell--{{{UEAcs__grid_middle-top-text-alignment--cfsn}}}">
+                  <div class="reposition-fix">{{{UEA__grid_middle-top-image--cfsn}}}</div>           
+                  <div class="grid__content grid__cell--topMiddle grid__content--{{{UEAcs__grid_middle-top-color--cfsn}}}" data-max-line="3">
+                    {{{UEA__grid_middle-top-text--cfsn}}}
+                  </div><!--end grid__content-->
+                </div><!--end grid__cell-->
+                {{/block.UEA__middle-square-block--cfsn}}
+                {{#block.UEA__middle-block--cfsn}}
+                <div class="grid__cell grid__cell--dynamicColor grid__cell--{{{ UEAcs__grid_middle-top-text-alignment--cfsn }}} u-bc-black">
+                  <div class="grid__content grid__cell--topMiddle u-fs-13-5" data-max-line="2">{{{ UEAcs__grid_middle-top-text--cfsn }}}</div><!-- end grid__content -->
+                </div><!-- end grid__cell -->
+                {{/block.UEA__middle-block--cfsn}}
+                {{#block.UEA__bottom-middle-block--cfsn}}               
+                <div class="grid__cell grid__cell--bottomMiddleImage grid__cell--{{{UEAcs__grid_bottom-middle-text-alignment--cfsn}}}">
+                  <div class="reposition-fix">{{{ UEA__grid_bottom-middle-image }}}</div>
+                  <div class="grid__content grid__content--{{{UEAcs__grid_bottom-middle-color--cfsn}}}">
+                    <div class="grid__middleText">
+                      <div style="font-size: {{{UEAcs_grid-bottom-middle-text-size--cfsn}}}rem;" data-max-line="4">{{{UEA__grid_bottom-middle-text--cfsn}}}</div>
+                    </div><!--grid__middleText--> 
+                    <div class="grid__qualifying-section" data-max-line="2">
+                      {{{UEA_qualifying-section--cfsn}}}
+                    </div><!--grid__qualifying-section--> 
+                  </div><!--end grid__content-->
+                </div><!--grid__cell-->
+              </div><!--end grid__col-->
+              {{/block.UEA__bottom-middle-block--cfsn}}
+              <!--COL3-->
+              {{#block.UEA__right-tall-block--cfsn}} 
+              <div class="grid__col grid__col-3">
+                <div class="grid__cell grid__cell--2 grid__cell--rightTallImage">
+                  <div class="reposition-fix">{{{ UEAcs__grid_right-tall-image--cfsn }}}</div>              
+                  <div class="grid__content grid__content--{{{ UEAcs__grid_right-tall-color }}}">
+                    <div class="grid__heading" data-char-limit="5">
+                      {{{ UEAcs__grid_right-tall-title--cfsn }}}
+                    </div><!-- end grid__heading -->
+                    <div data-max-line="1">
+                      {{{ UEAcs__grid_right-tall-text-cfsn }}}
+                    </div><!--data-max-line-->
+                  </div><!-- end grid__content -->
+                </div><!-- end grid__cell -->
+              </div><!-- end grid__col -->
+            </div><!-- end grid__row -->
+            {{/block.UEA__right-tall-block--cfsn}} 
+            {{/collection.UEA__grid--cfsn}}
+          </div><!--end grid-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.UEA_grid-page--cfsn}}
+
+    {{#block.UEA_back-page--cfsn}}
+
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--backPage">
+
+          <div class="body body--backPage">
+            <div data-max-height="dynamic">
+              {{#collection.UEA_body-copy--cfsn}}
+              {{#block.UEA_dual-column-content--cfsn}}
+              <div class="column__container column__container--dual backgroundColour--{{{UEA_background-colour--cfsn}}}{{^UEA_background-colour--cfsn}}yes{{/UEA_background-colour--cfsn}}">
+                <div class="column column--dual">
+                  {{#collection.UEA_content-left--cfsn}}
+                  <div class="content">
+                    <div class="content__heading" data-max-height="35">{{{UEA_heading--cfsn}}}</div><!--heading-->
+                    <div class="content__body">{{{UEA_copy--cfsn}}}</div><!--copy-->
+                  </div><!--content-->
+                  {{/collection.UEA_content-left--cfsn}}
+                </div><!--column-->
+                <div class="column column--dual">
+                  {{#collection.UEA_content-right--cfsn}}
+                  <div class="content">
+                    <div class="content__heading">{{{UEA_heading--cfsn}}}</div><!--heading-->
+                    <div class="content__body">{{{UEA_copy--cfsn}}}</div><!--copy-->
+                  </div><!--content-->
+                  {{/collection.UEA_content-right--cfsn}}
+                </div><!--column-->
+              </div><!--column__container-->
+              {{/block.UEA_dual-column-content--cfsn}}
+              {{#block.UEA_single-column-content--cfsn}}
+              <div class="column__container column__container--single backgroundColour--{{{UEA_background-colour--cfsn}}}{{^UEA_background-colour--cfsn}}yes{{/UEA_background-colour--cfsn}}">
+                <div class="column column--single">
+                  <div class="column--background"></div>
+                  <div class="content__heading u-mb-6" data-max-height="35">{{{UEA_heading--cfsn}}}</div><!--heading-->
+                  {{#collection.UEA_content--cfsn}}
+                  {{#block.UEA_spreadsheet--cfsn}}
+                  <div class="table__container">
+                    <div class="table__heading" data-max-height="23">{{{UEA_heading--cfsn}}}</div><!--table__heading-->
+                    <div class="table">
+                      {{#spreadsheet.UEA_spreadsheet--cfsn}}
+                      <div class="table__row" data-max-height="22">
+                        <div class="table__item">{{program-name}}</div><!--table__item-->
+                        <div class="table__item table__item--alt">{{price}}</div><!--table__item-->
+                      </div><!--table__row-->
+                      {{/spreadsheet.UEA_spreadsheet--cfsn}}
+                    </div><!--table-->
+                  </div><!--table__container-->
+                  {{/block.UEA_spreadsheet--cfsn}}
+                  {{#block.UEA_copy--cfsn}}
+                  <div class="table__copy">{{{UEA_copy--cfsn}}}</div><!--table__copy-->
+                  {{/block.UEA_copy--cfsn}}
+                  {{/collection.UEA_content--cfsn}}
+                </div><!--column-->
+              </div><!--column__container-->
+              {{/block.UEA_single-column-content--cfsn}}
+              {{/collection.UEA_body-copy--cfsn}}
+            </div><!--data-max-height-->
+          </div><!--body-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    {{/block.UEA_back-page--cfsn}}
+
+
+    {{#block.UEA_additional-back-page--cfsn}}
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--backPageAdditional">
+
+          <div class="header header--backPageAdditional">
+            <div class="logo">{{{account.snippets.logo}}}</div><!--logo-->
+          </div><!--header-->
+          <div class="body body--backPageAdditional">
+            <div class="body__inner" data-max-height="dynamic">
+              <div class="featureImage"><div class="reposition-fix">{{{UEA_feature-image--cfsn}}}</div></div><!--featureImage-->
+              <div class="copy copy--backPageAdditional">{{{UEA_copy--cfsn}}}</div><!--copy-->
+            </div><!--body__inner-->
+          </div><!--body-->
+          <div class="footer footer--backPageAdditional">
+            <div class="contact contact--secondary">
+              {{#UEA_contact-heading--cfsn}}
+              <div class="contact__label contact__label--alt" data-max-height="35">{{{UEA_contact-heading--cfsn}}}</div><!--contact__label-->
+              {{/UEA_contact-heading--cfsn}}
+              <div class="contact__details contact__details--alt" data-max-height="65">{{{UEA_contact-details--cfsn}}}</div><!--contact__details-->
+            </div><!--contact-->
+            <div class="social__container">
+              {{#collection.UEA_social--cfsn}}
+              {{#block.UEA_social-block--cfsn}}
+              <div class="social">
+                <img class="social__icon" src="{{{UEA_social-icon--cfsn}}}">
+                <div class="social__text" data-max-height="28">{{{UEA_social-details--cfsn}}}</div><!--social__text-->
+              </div><!--social-->
+              {{/block.UEA_social-block--cfsn}}
+              {{/collection.UEA_social--cfsn}}
+              {{#qr-code}}
+              <div class="qrCode"><img class="qrCode__img" src="{{{qr-code}}}"></div><!--qrCode-->
+              {{/qr-code}}
+            </div><!--social__container-->
+          </div><!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+    {{/block.UEA_additional-back-page--cfsn}}
+
+
+    {{/collection.UEA_pages--cfsn}}
+
+
+    <!-- START DYNAMICALLY INJECTED STATIC GRID ITEMS -->
+    <div class="u-hide">
+      <div id="gridMap" class="grid__cell">
+        <svg width="408px" height="357px" viewBox="0 0 408 357" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="grid__mapImg">
+          <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+          <title>Group</title>
+          <desc>Created with Sketch.</desc>
+          <defs>
+            <polygon id="path-1" points="0.00975834144 0.869 119.995164 0.869 119.995164 93.6539035 0.00975834144 93.6539035"></polygon>
+            <polygon id="path-3" points="0 0 54 0 54 54 0 54"></polygon>
+          </defs>
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Group" transform="translate(0.000000, -1.000000)">
+              <g id="Page-1">
+                <path d="M118.9814,306.4958 C117.4644,307.0208 116.6304,308.0478 115.9104,309.4788 C115.4784,310.3368 114.1894,310.6798 113.3624,311.4808 C111.0934,313.6798 110.9814,313.5638 107.3144,313.5638 C107.0654,313.5638 106.8034,313.5138 106.5674,313.5718 C103.9944,314.2138 102.3614,312.8468 100.5484,311.2348 C98.7964,309.6798 98.0654,307.0988 95.4314,306.3278 C94.9584,306.1888 94.1974,304.7588 93.6834,303.9088 C93.2884,303.2568 93.0444,301.5078 94.0094,301.2508 C95.3974,300.8808 97.8344,300.3088 98.2944,301.6368 C98.9584,303.5508 100.0584,303.0278 101.1264,303.0408 C105.7854,303.0958 110.4644,303.3098 115.0964,302.9518 C117.1614,302.7928 117.7184,304.7598 119.3684,304.9258 C119.5854,304.9468 119.8514,306.1948 118.9814,306.4958 M242.6434,350.4528 C245.6364,349.8598 243.8594,347.2668 244.6444,345.8368 C245.6554,343.9908 246.2264,342.2458 246.1434,340.1528 C246.1004,339.0938 247.5754,339.2008 248.2674,338.4328 C249.9964,336.5138 249.3404,334.5868 249.5364,332.6418 C249.6024,331.9818 249.5464,331.3098 249.5464,330.6428 C249.5484,327.3568 251.2314,325.6258 254.4454,325.5568 C255.3604,325.5358 256.5334,325.9498 256.7064,324.3718 C256.7214,324.2308 257.4344,324.1488 257.8294,324.0698 C259.2884,323.7788 261.4164,325.0518 261.8724,322.2968 C261.9014,322.1208 263.0894,322.0758 263.7394,322.0738 C269.1544,322.0568 274.5694,322.0958 279.9844,322.0358 C280.9774,322.0248 282.3064,322.6938 282.7724,320.8668 C282.9304,320.2458 284.1554,320.7128 284.8644,320.5498 C286.0764,320.2698 288.0974,321.5628 288.1594,318.9228 C288.1624,318.8208 288.4264,318.6198 288.5284,318.6428 C290.9244,319.1848 292.8134,317.7128 294.9134,317.0758 C296.1114,316.7128 298.0644,318.0248 298.2334,315.3858 C298.2674,314.8548 299.4454,315.2068 300.0674,315.0498 C301.0854,314.7928 302.2724,315.2198 303.3514,315.1708 C303.6094,315.1188 303.8684,315.0718 304.1284,315.0248 C304.6544,314.8398 305.1354,314.4528 305.5274,313.6868 C305.6604,313.4288 306.6414,313.6688 307.2004,313.5498 C308.4934,313.2718 310.5804,314.5908 310.7214,311.8608 C310.7264,311.7588 311.1894,311.5448 311.3574,311.6058 C313.9204,312.5548 315.6474,309.9828 317.9924,310.0498 C318.2314,310.0568 318.6684,310.0028 318.6844,309.9158 C319.2274,306.9988 321.9144,308.8628 323.0794,307.9648 C326.7244,305.1528 330.7524,307.2068 334.5354,306.6008 C335.2964,306.4788 336.1814,306.2338 336.7094,307.5678 C337.1434,308.6638 342.7284,308.2348 343.5424,307.1288 C343.9244,306.6088 344.5664,306.4108 344.6994,306.7128 C345.8834,309.4198 348.1674,307.6778 349.8904,308.0038 C351.5024,308.3078 353.9624,310.2568 354.0374,311.8718 C354.1194,313.6568 356.2574,314.6938 355.7344,316.7348 C355.6454,317.0828 356.7124,317.0258 356.7044,316.9068 C356.5894,315.2028 358.4194,315.3368 359.0294,314.3648 C359.9944,312.8248 362.0264,313.3078 362.2934,313.9598 C362.9384,315.5448 363.9994,315.0048 364.9254,315.0388 C367.0884,315.1188 369.2614,314.9748 371.4204,315.0988 C372.6694,315.1708 374.1404,314.3118 374.8954,316.6818 C375.2384,317.7588 378.1114,316.9838 379.8344,317.0408 C381.3184,317.0898 383.5254,314.5138 383.5744,313.0538 C383.6164,311.7848 383.0714,311.4748 381.9464,311.5518 C380.9514,311.6178 379.9464,311.5328 378.9484,311.5708 C376.8244,311.6518 375.4244,310.5178 374.5674,308.7598 C374.2034,308.0098 373.7294,308.1418 373.1914,308.0628 C371.4514,307.8088 369.9584,306.6108 367.8824,307.9188 C366.6294,308.7078 364.4744,308.0368 362.7264,308.0748 C361.7484,308.0968 360.4044,307.6138 360.4984,309.4498 C360.5184,309.8268 360.2154,310.0098 359.8424,310.0268 C359.3294,310.0518 359.0444,309.7758 359.0734,309.2928 C359.1344,308.2788 358.6174,308.0578 357.7094,308.0488 C355.2844,308.0228 354.1394,306.7128 354.0244,304.3138 C353.9564,302.8958 350.9984,300.8398 349.5744,301.0598 C349.0484,301.1418 348.5884,301.1838 348.5564,301.8608 C348.4574,303.9668 346.8484,302.9638 345.9224,302.9978 C344.5504,303.0498 345.0714,301.8038 345.0784,301.1098 C345.0944,299.4358 343.6854,298.3178 342.8184,297.7358 C340.4904,296.1728 338.7934,294.0168 336.7554,292.2088 C335.6394,291.2198 337.1484,289.7118 338.3134,288.9398 C340.0254,287.8068 342.7554,288.5758 343.6504,286.0258 C343.8494,285.4618 348.2424,285.2958 348.3124,285.8178 C348.6384,288.2658 352.0804,288.1348 352.2224,290.7388 C352.2504,291.2558 353.3004,291.1818 353.7934,291.0338 C356.7984,290.1348 359.1394,292.5048 361.9274,292.6138 C362.4664,292.6348 362.3614,293.2008 362.5704,293.4938 C363.4614,294.7428 364.5194,295.5618 366.0574,296.2818 C367.7194,297.0588 370.4184,296.5498 371.1404,299.1168 C371.1894,299.2898 371.4914,299.4888 371.6904,299.5078 C374.5194,299.7668 376.9844,302.0078 380.0314,301.0538 C380.3074,299.5598 379.3544,299.4588 378.2744,299.5708 C377.0544,299.6988 376.3754,299.3658 376.5304,297.9638 C376.6404,296.9648 376.6184,296.2638 375.1624,295.8908 C373.9054,295.5688 374.2664,293.7128 374.7844,292.9078 C376.2634,290.6118 379.4904,290.4308 381.6654,292.2748 C382.4964,292.9788 387.9734,292.6398 388.5224,291.6888 C389.0014,290.8568 389.6234,291.0878 390.2114,291.0808 C393.1224,291.0458 396.0334,291.0578 398.9444,291.0698 C399.6534,291.0738 400.1934,291.0288 400.6724,291.9748 C401.2834,293.1808 403.0714,292.8898 403.6614,292.2748 C404.3434,291.5628 404.5904,290.0678 403.3984,289.0798 C402.4164,288.2658 401.6554,287.0328 400.0384,287.5328 C399.6794,287.6438 399.0824,287.5318 399.1184,286.9868 C399.2244,285.3948 398.1514,285.4398 397.1544,285.5858 C395.4824,285.8288 395.2494,283.5328 393.6634,283.7158 C393.8074,281.6818 391.8114,282.5708 391.2534,281.9668 C389.5474,280.1198 386.5824,281.4458 385.7544,280.3428 C384.5634,278.7548 383.4354,278.5938 381.9054,278.4128 C381.7464,278.3938 381.5874,277.7048 381.5664,277.3188 C381.5164,276.4068 381.5114,275.4878 381.5554,274.5758 C381.6194,273.2398 381.3774,272.2278 383.1724,271.1608 C385.0364,270.0538 387.3884,268.0548 388.0684,266.2438 C388.9594,263.8748 390.2054,262.4578 391.9024,260.8158 C393.1974,259.5638 393.8304,257.9628 396.0814,257.9718 C397.3604,257.9768 397.5544,256.0858 398.9304,255.4548 C400.4904,254.7398 400.7524,252.1838 403.4394,252.2728 C404.1144,252.2958 405.6054,250.9658 407.0464,251.0638 C407.0464,168.4808 407.0394,85.8978 407.0934,3.3138 C407.0954,1.4398 406.6714,1.0158 404.7964,1.0168 C336.2134,1.0728 267.6304,1.0638 199.0464,1.0638 C198.7554,2.1748 199.8784,3.8248 197.7854,4.2698 C197.5004,4.3298 197.4174,10.3598 197.6514,10.6728 C198.0784,11.2418 198.7114,11.0418 199.2674,11.0548 C200.5174,11.0828 201.7684,11.0338 203.0164,11.0798 C203.5384,11.0998 204.4434,10.8098 204.4434,11.6178 C204.4434,13.4118 205.7144,13.2598 206.6594,13.0118 C208.1954,12.6088 208.4014,14.1468 208.6664,14.6218 C209.7954,16.6448 211.8344,18.0438 213.3364,19.3038 C215.0614,20.7478 215.8434,24.1268 219.1104,23.5878 C219.5274,23.5188 220.0464,23.6758 219.9864,24.2088 C219.7994,25.8738 220.2684,26.8758 221.9554,27.6838 C223.3344,28.3448 223.8824,29.9588 223.5814,31.6958 C223.4394,32.5098 223.2314,33.6518 224.7534,33.5838 C225.2504,33.5618 225.5724,33.8748 225.5084,34.3498 C225.0024,38.1268 228.0334,41.3728 227.0924,45.2468 C226.8504,46.2438 226.6204,47.5648 228.5394,47.7078 C229.4344,47.7748 228.8894,48.9748 229.0484,49.6488 C229.4764,51.4588 227.9164,53.7468 230.4464,55.1148 C230.7744,55.2928 230.4514,56.5468 230.5644,57.2808 C230.7304,58.3498 229.8984,59.6518 231.7414,60.3518 C232.5354,60.6538 232.1624,62.3958 231.9974,63.4108 C231.6874,65.3178 233.2174,67.6708 230.6454,69.1338 C230.3094,69.3248 230.6564,70.5708 230.5284,71.3008 C230.2484,72.8988 231.3714,74.7178 229.2764,76.1348 C228.7214,76.5108 228.0854,79.3948 230.0024,80.5778 C230.6994,81.0088 230.5194,81.5498 230.5324,82.0728 C230.5704,83.6558 230.4824,85.2428 230.5684,86.8218 C230.6274,87.9148 230.1994,88.9678 231.7104,89.9198 C232.7374,90.5678 231.9194,92.7298 232.0454,94.2078 C232.1354,95.2608 231.7124,96.2298 233.4674,96.7848 C234.8114,97.2088 233.8284,99.2938 234.0214,100.6228 C234.1364,101.4178 233.5614,101.6098 232.9034,101.5528 C231.8734,101.4648 231.1624,101.6368 230.2994,100.2298 C229.2534,98.5248 227.4844,96.5378 224.8124,96.5468 C223.1084,96.5518 223.4764,94.3018 222.0814,93.8448 C221.9084,93.7888 221.8384,92.9998 221.3344,93.1078 C218.7604,93.6618 218.0784,91.1918 216.5374,90.1138 C216.3094,89.9548 216.1284,89.4978 215.8274,89.6098 C213.4054,90.5038 212.9014,88.0558 211.6694,87.0818 C210.2494,85.9608 208.8624,84.6478 207.9404,82.9608 C207.5764,82.2948 206.2754,82.4768 206.2884,82.8358 C206.3354,84.2078 203.2774,84.3308 204.8344,85.7718 C206.5934,87.3998 208.5334,88.8028 209.8224,90.8828 C209.8884,90.9878 210.1374,91.0588 210.2734,91.0288 C212.8514,90.4478 213.5214,92.9478 215.0584,94.0288 C215.2904,94.1918 215.4794,94.6188 215.7814,94.5208 C218.3164,93.7008 218.5074,96.6498 220.0544,97.1618 C222.5164,97.9778 221.3644,100.9708 223.4534,102.0138 C225.5644,103.0688 226.1204,105.9028 228.6284,106.8778 C229.1024,107.0618 230.1074,109.3158 230.7474,110.5728 C233.2254,115.4458 231.6814,120.4238 231.9774,125.3078 C232.2884,130.4558 232.4614,135.6838 231.8854,140.7848 C231.5604,143.6648 230.7094,146.9028 227.5684,148.7448 C226.8834,149.1458 225.4994,149.8788 225.5324,151.2788 C225.5664,152.6758 223.8554,152.5778 223.4634,152.7148 C221.5334,153.3928 220.1714,155.1438 218.2344,155.4988 C216.4944,155.8178 215.4424,157.6658 213.3674,157.3448 C212.9424,157.2788 212.6794,159.5458 213.3194,160.1948 C214.0604,160.9468 215.5094,160.9638 216.4564,160.1238 C218.0554,158.7068 218.4664,159.1988 220.1594,159.9728 C223.5144,161.5068 221.8204,164.1568 221.9364,166.2378 C222.0574,168.4188 222.4534,169.4608 224.8154,169.0898 C225.7914,168.9358 226.8114,169.0678 227.8114,169.0628 C229.0624,169.0578 230.1954,169.2728 231.0044,167.6808 C231.8014,166.1108 233.8654,165.5458 234.2934,163.2848 C234.4684,162.3548 235.5494,160.1898 238.0694,160.4638 C241.6934,160.8568 245.3914,160.5638 249.0584,160.5648 C249.5584,160.5648 250.4104,160.4028 250.5034,160.5988 C251.4284,162.5508 253.6544,162.2248 255.0204,163.3288 C255.2124,163.4838 255.2674,164.0788 255.5914,163.9918 C258.8094,163.1348 261.2364,166.4268 264.4954,165.6258 C265.4754,165.3848 267.1714,164.9188 267.1404,167.0728 C267.1384,167.2178 267.4544,167.4698 267.6474,167.4978 C269.5124,167.7738 271.2864,168.1648 273.1174,168.7688 C275.8064,169.6558 276.8624,171.9498 278.9084,173.2388 C279.3714,173.5298 280.1264,174.2368 280.5214,174.7288 C281.3414,175.7518 283.1284,176.4378 282.5794,178.3298 C282.4864,178.6498 282.7684,179.4108 282.8974,179.4148 C285.5374,179.5088 284.2414,181.5208 284.5414,182.7288 C284.8954,184.1508 283.6104,186.0598 285.8664,186.9598 C286.1074,187.0558 286.0374,188.0408 286.0404,188.6138 C286.0534,192.1138 285.6704,195.6668 286.1604,199.0968 C286.5874,202.0938 284.4484,204.2538 284.4964,206.9918 C281.4884,206.9918 283.6244,210.8288 281.2584,211.3808 C281.0884,211.4208 281.1064,212.2898 281.0484,212.7748 C280.9904,213.2628 281.0554,214.1338 280.8774,214.1848 C277.3494,215.2048 279.3514,218.0208 279.1484,219.9428 C278.8954,222.3238 278.3764,224.0448 276.0724,225.2588 C275.4094,225.6078 274.5924,227.0388 273.9184,227.6478 C272.1384,229.2548 271.5604,231.3948 270.4144,233.2638 C270.3394,233.3858 270.1264,233.5208 270.0014,233.5008 C267.4954,233.0998 265.7844,235.9668 263.1094,235.1028 C261.7494,234.6638 261.8994,235.8918 261.4534,236.7798 C260.1704,239.3328 259.9714,242.3668 257.1044,244.3208 C255.6684,245.2998 254.5294,245.4338 253.1074,245.5738 C252.6294,245.6208 251.7564,245.7378 251.7484,245.8688 C251.5644,248.6078 249.3494,247.7398 248.2194,247.4618 C245.5834,246.8148 244.0364,249.7098 241.5664,249.1208 C241.2464,250.9538 238.4414,251.1978 238.9514,253.7928 C239.4304,256.2318 239.4944,259.0298 235.9314,259.6518 C235.4074,262.4518 233.1844,261.3748 231.5294,261.5638 C230.9714,261.6278 230.5684,261.7538 230.5594,262.4148 C230.5444,263.4498 229.5854,264.3428 229.4464,264.8908 C228.8604,267.1958 227.3154,266.4038 226.0054,266.5718 C224.4594,266.7708 222.5234,265.7408 221.5654,267.9638 C221.4904,268.1368 220.7494,268.1538 220.3754,268.0448 C218.0514,267.3618 216.6844,268.8228 215.3194,270.2628 C215.1384,270.4538 215.1814,270.8568 215.1204,271.1628 C216.7854,271.3018 216.7924,273.3258 218.7244,273.9008 C220.8084,274.5208 222.8464,274.8188 224.9484,275.1298 C226.0614,275.2948 225.0314,277.5008 226.7764,277.2368 C226.7484,278.8968 229.5114,278.2598 229.3044,280.2708 C229.2814,280.4938 231.6314,281.1778 231.8904,279.9208 C232.2464,278.1918 233.2594,278.6108 234.2424,278.5728 C235.2414,278.5338 236.2424,278.5628 237.2424,278.5648 C238.1414,278.5668 238.5714,278.7798 239.2224,279.7268 C240.1144,281.0248 241.5594,282.5748 243.7584,282.0798 C245.6234,281.6598 246.2794,282.4968 246.0794,284.3708 C245.9194,285.8528 246.0994,287.3698 246.0264,288.8658 C245.9844,289.7368 246.5324,290.8368 244.9524,291.2188 C244.1824,291.4038 244.5854,292.5448 244.5624,293.2538 C244.5124,294.7518 244.5484,296.2528 244.5454,297.7528 C244.5444,298.6508 244.7504,299.5748 243.2824,299.6288 C242.1264,299.6708 242.5374,300.7798 242.5814,301.4078 C242.6754,302.7458 242.1434,303.3248 240.8714,303.0478 C239.0184,302.6428 237.9554,304.4748 237.7644,305.2058 C237.3294,306.8768 236.3794,306.5508 235.3874,306.5558 C231.5534,306.5768 227.7204,306.5898 223.8874,306.5538 C221.9704,306.5358 221.1014,307.9928 220.0574,309.1688 C219.0164,310.3408 218.3204,311.7308 216.2914,311.6138 C213.0524,311.4278 209.7944,311.5558 206.5444,311.5728 C205.9754,311.5758 204.9394,311.5988 204.9064,311.7668 C204.3154,314.7838 201.6894,312.7818 200.4304,313.6378 C196.6234,316.2268 192.4714,314.7688 188.4944,315.0088 C184.3424,315.2588 180.1604,315.1828 175.9994,315.0258 C172.8034,314.9058 170.1914,313.4018 168.0494,310.9788 C166.8154,309.5838 165.5144,308.2328 164.2544,306.8818 C163.3774,305.9398 160.6124,306.0028 160.0864,306.7848 C158.7354,308.7928 157.0494,307.8598 155.5214,308.0288 C154.0404,308.1918 152.5244,308.0968 151.0264,308.0518 C150.2014,308.0258 149.2694,308.4088 148.8914,307.0058 C148.6884,306.2478 142.4194,306.2868 142.1804,307.0528 C141.7624,308.3918 139.5914,307.9228 139.6644,309.8508 C139.6804,310.2598 137.5194,309.9038 136.3804,310.0758 C134.1644,310.4098 133.2974,309.6648 133.4944,307.2948 C133.7204,304.5628 133.5574,301.7988 133.5374,299.0498 C133.5324,298.4318 133.7424,297.5338 132.6944,297.5988 C130.4504,297.7368 129.1454,296.4018 127.8584,294.8558 C127.5864,294.5288 126.7754,294.6508 126.2124,294.5628 C125.7334,294.4878 124.8594,294.4728 124.8354,294.3208 C124.3534,291.3468 122.0374,292.9688 120.5544,292.5688 C119.4414,292.2678 117.8834,293.3528 117.2874,291.3498 C117.1344,290.8398 116.2784,290.9188 116.0834,291.7418 C116.0454,291.9008 116.0704,292.0738 116.0494,292.2388 C115.8934,293.4498 116.6584,295.1858 115.6594,295.7588 C114.5774,296.3768 112.9084,295.8788 111.5314,296.0968 C109.8574,296.3598 107.8904,295.0998 106.5274,297.4088 C105.9434,298.3978 99.5474,297.3078 98.4314,296.3588 C97.9314,295.9328 97.3234,296.0748 96.7554,296.0708 C94.7554,296.0548 92.7424,295.9198 90.7584,296.1018 C88.5194,296.3078 87.5114,295.0438 86.4994,293.3788 C85.3954,291.5628 83.5204,292.8348 82.0164,292.6278 C80.6614,292.4408 81.0824,293.7098 81.0654,294.4328 C81.0144,296.5998 81.0964,298.7678 81.0184,300.9328 C80.9934,301.6478 81.5734,302.8438 80.3244,302.9778 C78.9564,303.1268 76.7694,303.7028 76.2954,302.7018 C74.5134,298.9358 71.3504,299.6578 68.3204,299.5358 C67.2004,299.4908 65.5114,300.3448 65.4124,298.0148 C65.3834,297.3458 64.4454,297.5798 63.9054,297.5758 C60.9894,297.5528 58.0714,297.6008 55.1564,297.5468 C54.0414,297.5258 53.4634,297.7698 53.5094,299.0478 C53.5344,299.7388 54.0514,300.9788 52.7244,300.9988 C51.2014,301.0208 49.4864,301.6628 48.1704,300.6378 C46.9524,299.6868 46.7464,297.6738 44.8054,297.2998 C44.6074,297.2618 44.4974,296.0698 44.5704,295.4398 C44.8334,293.1748 43.8434,291.7538 41.7564,291.0508 C40.6294,290.6718 41.3464,288.6958 39.7314,288.8028 C40.3514,286.6498 37.9104,285.4738 38.0294,283.4648 C38.0614,282.9378 37.9304,281.8018 37.4184,282.1768 C35.4084,283.6498 34.4254,278.9788 32.5744,281.4598 C32.0164,282.2078 31.4664,282.0218 30.8824,282.0458 C29.4684,282.1008 28.0474,282.0098 26.6344,282.0768 C24.4104,282.1828 23.0134,281.0388 22.0064,279.2158 C21.8964,279.0148 21.7264,278.6618 21.6134,278.6738 C17.9324,279.0388 14.6714,275.7648 11.0424,277.2128 C9.9184,277.6608 7.7584,278.2098 8.0094,280.5688 C8.2724,283.0338 6.1944,282.0928 5.2164,281.9898 C2.7634,281.7318 2.9244,283.1708 3.0754,284.7388 C3.0974,284.9678 3.2324,285.3698 3.3424,285.3798 C6.1804,285.6238 4.7284,287.8028 5.0284,289.1508 C5.3684,290.6758 4.6064,291.4988 3.1434,291.0178 C1.4404,290.4598 1.6194,293.1848 0.0464,292.5638 C0.0464,313.2138 0.0754,333.8638 0.0004,354.5138 C-0.0066,356.4878 0.2354,357.1338 2.4924,357.1308 C82.0104,357.0518 161.5284,357.0638 241.0464,357.0638 C240.0704,354.4958 243.2874,352.9398 242.6434,350.4528" id="Fill-1" class="svgFill"></path>
+                <g id="Group-5" transform="translate(0.000000, 0.131000)">
+                  <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                  </mask>
+                  <g id="Clip-4"></g>
+                  <path d="M10.1908,65.7393 C10.7748,64.8663 11.3688,63.5893 12.7298,63.4483 C13.3878,63.3813 14.0588,63.4333 14.7248,63.4333 C18.9368,63.4323 20.3988,62.1483 20.5078,58.0413 C20.5448,56.6583 21.0508,56.3463 22.2788,56.4153 C23.6888,56.4943 25.1058,56.4303 26.5198,56.4333 C29.7208,56.4413 31.0458,57.8043 31.0468,61.0843 C31.0468,62.0823 31.0658,63.0813 31.0428,64.0783 C30.9938,66.1823 32.1038,67.5353 33.8628,68.4583 C36.4098,69.7953 36.1588,71.1773 34.9898,73.6793 C33.9528,75.9003 32.6158,75.3063 31.1498,75.4333 C30.2408,75.5123 29.6258,75.5603 28.7948,76.4993 C27.7168,77.7193 25.4938,76.7133 24.0508,76.9333 C22.7818,76.9333 21.7738,76.8423 20.7878,76.9533 C19.1368,77.1403 18.2308,76.7033 18.5388,74.8403 C18.7998,73.2663 16.7338,73.2703 16.5448,71.9833 C13.6828,72.4343 12.8978,69.5853 11.0128,68.5773 C9.3928,67.7113 9.8338,66.2723 10.1908,65.7393 M3.1228,90.2183 C6.2678,90.4103 8.8788,89.2183 11.4078,87.4723 C12.8158,86.5013 14.5298,85.5143 16.1498,85.4413 C20.7188,85.2323 23.9968,82.7273 27.6848,80.4963 C30.1468,79.0073 33.3798,77.9623 36.6628,78.1603 C39.0188,78.3033 41.5388,78.6973 43.4218,76.5983 C47.5698,76.6353 51.4548,74.9053 55.5768,74.7893 C56.8118,74.7543 57.7938,75.5663 58.7508,76.1503 C61.1608,77.6223 63.9238,78.1353 66.4528,79.2603 C68.2778,80.0723 70.2518,79.7863 72.1268,79.6503 C75.3938,79.4133 77.3578,80.7723 78.2828,83.8343 C78.5278,84.6453 78.8868,85.3833 80.0988,85.6273 C80.4978,84.0893 80.2718,82.5193 80.3338,80.9913 C80.4088,79.1493 81.2898,78.2473 83.1278,78.2283 C84.3768,78.2153 85.6358,78.0963 86.8658,78.3383 C89.2488,78.8073 90.6978,80.5723 90.7608,83.0853 C90.8248,85.5823 90.7258,88.0823 90.8028,90.5783 C90.8408,91.7983 90.2968,93.4323 92.3828,93.6413 C94.0168,93.8043 95.8578,92.3613 96.2558,90.7583 C96.9798,87.8453 95.1668,86.0653 93.4388,84.2653 C90.1438,80.8333 90.0348,80.3043 92.2738,75.9553 C92.6408,75.2423 92.4538,74.7483 92.0548,74.1363 C90.1988,71.2963 90.1218,68.4373 92.1408,65.6273 C92.3898,65.2813 92.6568,64.9433 92.6818,64.5263 C92.9388,60.3253 95.9128,58.5833 99.2108,56.9053 C101.4358,55.7723 102.7798,53.7833 102.8288,51.0693 C102.9028,46.9383 105.8748,43.7473 110.0468,43.1723 C111.1578,43.0183 112.4628,42.7943 112.5218,41.5343 C112.5908,40.0493 111.1818,39.6903 110.0088,39.7313 C107.0778,39.8343 106.1338,39.1703 106.3558,35.2763 C106.4298,33.9693 106.9548,33.1013 108.3108,32.7473 C110.5448,32.1643 111.7738,30.8543 111.9608,28.3573 C112.1438,25.8933 113.9658,24.4483 116.4618,24.2153 C117.1258,24.1533 117.8338,24.2163 118.4158,23.8823 C119.2938,23.3783 120.2188,22.7203 119.9468,21.5643 C119.7038,20.5243 118.6338,20.7233 117.8398,20.6893 C115.5488,20.5893 113.1718,21.0433 111.2758,19.0983 C110.7678,18.5763 110.0248,19.1313 109.5448,19.6373 C108.8658,20.3523 107.9998,20.5563 107.0608,20.6323 C103.8008,20.8983 103.2038,20.3643 102.6028,16.4703 C101.2008,16.9513 99.8498,17.4383 98.5238,18.1003 C96.0688,19.3273 94.4758,18.3363 94.3438,15.6003 C94.2518,13.6883 94.4508,11.7583 94.2878,9.8593 C94.1238,7.9443 95.6458,6.9083 96.2388,5.4013 C96.9768,3.5313 93.9058,2.8153 95.0468,0.9333 L60.5468,0.9333 C60.0738,2.8393 58.4928,3.4493 56.8848,3.8993 C56.0708,4.1273 54.9408,3.6543 55.0238,5.1633 C55.0498,5.6663 54.7148,5.8893 54.2368,5.9093 C50.1518,6.0893 46.3438,8.3043 42.0948,7.4843 C41.0748,7.2863 39.4438,6.8073 39.4448,8.9503 C39.4448,9.4453 38.8418,9.4193 38.4408,9.4213 C36.3578,9.4323 34.2748,9.4073 32.1918,9.4353 C30.8758,9.4533 30.7358,8.0673 31.2088,7.8873 C32.9928,7.2063 32.1068,5.6373 32.6668,4.6863 C33.2428,3.7063 34.4718,3.0493 35.5228,2.4323 C36.2428,2.0093 35.9408,1.4493 36.0468,0.9333 C24.7358,0.9333 13.4238,1.0003 2.1148,0.8693 C0.1608,0.8463 0.0068,1.4553 0.0098,3.1073 C0.0608,32.3823 0.0468,61.6573 0.0468,90.9333 C0.9358,90.1143 2.0558,90.1533 3.1228,90.2183" id="Fill-3" class="svgFill" mask="url(#mask-2)"></path>
+                </g>
+                <path d="M5.7787,91.1394 C7.8497,91.5394 8.5987,88.6544 10.6827,89.5234 C10.8587,89.5964 11.4117,89.2914 11.4437,89.1034 C11.9167,86.3154 14.8717,87.8224 16.3807,86.2414 C17.6827,84.8754 21.1527,87.4384 22.7997,84.2184 C23.0077,83.8104 25.2537,83.1254 26.5207,82.7314 C27.9417,82.2894 27.0507,80.6284 28.1137,80.6554 C30.1897,80.7084 31.9857,80.3024 33.8047,79.1654 C34.7047,78.6044 36.3007,79.3024 37.4787,79.0114 C39.4847,78.5164 42.3677,80.7414 43.4417,77.1974 C43.4657,77.1194 43.7417,77.0954 43.9017,77.0874 C47.0027,76.9264 50.0927,77.4614 53.0837,75.6544 C55.5447,74.1674 57.5537,77.6074 60.1497,77.1684 C60.2357,77.1544 60.4597,77.3904 60.4577,77.5074 C60.4217,79.8514 62.1967,78.8654 63.3117,79.0554 C63.9557,79.1654 65.0927,79.0144 65.1907,79.2794 C65.9497,81.3544 67.6457,80.4354 68.9437,80.5304 C70.7657,80.6644 72.6057,80.5734 74.4377,80.5614 C75.2997,80.5554 75.6527,81.3064 76.1547,81.6284 C78.1487,82.9074 76.6897,86.2504 79.5217,86.8484 C79.7057,86.8874 79.9847,87.6344 80.5597,87.4794 C81.2367,87.2974 81.0267,86.6844 81.0327,86.2374 C81.0617,84.3224 81.0307,82.4064 81.0587,80.4914 C81.0667,79.9574 80.8517,79.1604 81.7197,79.1294 C83.6317,79.0624 85.7767,78.5794 87.3847,79.2804 C88.5537,79.7894 90.4387,80.7284 90.1417,83.1814 C89.7547,86.3824 90.0347,89.6664 90.0577,92.9144 C90.0627,93.5994 89.8137,94.3484 90.9847,94.5844 C94.5457,95.3014 97.0997,93.3374 97.0217,89.6834 C96.9887,88.1674 97.7347,86.5254 95.2727,85.5394 C94.2917,85.1474 93.6337,82.9934 91.8927,82.3974 C91.0327,82.1034 91.4997,77.2384 92.3787,77.1394 C93.6667,76.9934 93.5647,76.2484 93.5427,75.4134 C93.5207,74.5464 93.8267,73.4684 92.3197,73.5384 C91.6257,73.5714 91.5597,73.0274 91.5567,72.5084 C91.5477,70.9264 91.5437,69.3444 91.5567,67.7614 C91.5607,67.2824 91.4917,66.6144 92.1827,66.6304 C93.7857,66.6694 93.7287,65.5404 93.5087,64.6104 C93.0827,62.8044 94.0467,60.8794 95.1407,60.6944 C96.9947,60.3814 96.5657,58.1404 98.3057,58.0294 C100.8827,57.8644 103.6437,54.8264 103.5127,52.2904 C103.3937,49.9844 103.5677,48.0064 105.5867,46.3834 C107.2617,45.0364 108.6037,43.2794 111.1157,44.0564 C111.2667,44.1034 111.4587,44.0964 111.6117,44.0494 C112.7577,43.6924 113.2967,42.5914 113.9467,41.7804 C114.5327,41.0504 113.0407,40.7604 112.9037,40.3714 C112.2067,38.3904 110.6407,39.0524 109.4217,39.1124 C107.6697,39.1994 106.6867,38.8504 107.0297,36.8414 C107.1397,36.1934 107.0877,35.5094 107.0407,34.8464 C106.9727,33.8714 107.4077,33.6204 108.3487,33.5364 C111.2627,33.2794 112.4427,31.8874 112.5477,28.8204 C112.6147,26.8304 114.4527,25.0884 116.4787,25.0594 C117.8607,25.0384 118.9857,25.0324 120.2287,23.7374 C121.3197,22.6014 121.0447,21.6754 120.9357,20.7314 C120.7967,19.5404 119.5947,20.1324 118.8657,20.0904 C117.3717,20.0034 115.8687,20.0704 114.3697,20.0614 C113.4847,20.0564 112.5347,20.2934 112.4867,18.8134 C112.4497,17.6484 111.3627,18.1194 110.7157,18.0924 C110.0527,18.0654 109.0827,17.7424 109.0597,18.9724 C109.0467,19.6604 108.8077,19.9454 108.0677,20.0814 C104.4417,20.7524 103.6277,20.1374 103.5477,16.4904 C103.5397,16.1574 103.5517,15.8234 103.5347,15.4914 C103.5117,15.0724 103.4687,14.6544 102.9107,14.6084 C102.4227,14.5694 102.0527,14.7664 102.0857,15.2754 C102.1797,16.7324 101.1877,16.5684 100.2677,16.5684 C99.4627,16.5674 98.8287,16.4844 98.3777,17.6094 C97.9847,18.5924 96.5757,18.0864 95.6517,17.9694 C94.7047,17.8484 95.0747,16.9124 95.0647,16.3224 C95.0237,13.9084 95.0297,11.4924 95.0617,9.0764 C95.0697,8.5564 94.7857,7.7534 95.6217,7.6404 C98.1747,7.2964 96.7007,5.3584 97.0187,4.1604 C97.3047,3.0794 96.8487,2.5084 95.5937,2.4814 C94.7497,2.4644 95.1647,1.5744 95.0467,1.0644 C93.9057,2.9464 96.9767,3.6624 96.2387,5.5324 C95.6457,7.0394 94.1237,8.0754 94.2877,9.9904 C94.4507,11.8894 94.2517,13.8194 94.3437,15.7314 C94.4757,18.4674 96.0697,19.4584 98.5237,18.2314 C99.8497,17.5694 101.2007,17.0824 102.6027,16.6014 C103.2037,20.4954 103.8007,21.0294 107.0607,20.7634 C107.9997,20.6874 108.8657,20.4834 109.5447,19.7684 C110.0257,19.2624 110.7677,18.7074 111.2757,19.2294 C113.1727,21.1744 115.5487,20.7204 117.8397,20.8204 C118.6337,20.8544 119.7037,20.6554 119.9467,21.6954 C120.2187,22.8514 119.2937,23.5094 118.4157,24.0134 C117.8337,24.3474 117.1257,24.2844 116.4627,24.3464 C113.9657,24.5794 112.1437,26.0244 111.9607,28.4884 C111.7747,30.9854 110.5447,32.2954 108.3107,32.8784 C106.9547,33.2324 106.4297,34.1004 106.3557,35.4074 C106.1337,39.3014 107.0777,39.9654 110.0087,39.8624 C111.1817,39.8214 112.5917,40.1804 112.5217,41.6654 C112.4627,42.9254 111.1577,43.1494 110.0467,43.3034 C105.8747,43.8784 102.9037,47.0694 102.8287,51.2004 C102.7797,53.9144 101.4357,55.9034 99.2107,57.0354 C95.9127,58.7144 92.9387,60.4564 92.6817,64.6574 C92.6567,65.0744 92.3897,65.4124 92.1407,65.7584 C90.1217,68.5684 90.1987,71.4274 92.0547,74.2674 C92.4537,74.8794 92.6407,75.3734 92.2737,76.0864 C90.0347,80.4354 90.1437,80.9644 93.4387,84.3964 C95.1667,86.1964 96.9797,87.9764 96.2557,90.8894 C95.8577,92.4924 94.0167,93.9354 92.3827,93.7724 C90.2967,93.5634 90.8417,91.9294 90.8027,90.7094 C90.7257,88.2134 90.8247,85.7134 90.7607,83.2164 C90.6977,80.7024 89.2487,78.9384 86.8657,78.4694 C85.6357,78.2274 84.3767,78.3464 83.1277,78.3594 C81.2897,78.3784 80.4087,79.2804 80.3337,81.1224 C80.2717,82.6504 80.4977,84.2204 80.0987,85.7584 C78.8867,85.5144 78.5287,84.7764 78.2827,83.9654 C77.3577,80.9034 75.3937,79.5444 72.1267,79.7814 C70.2517,79.9174 68.2777,80.2034 66.4527,79.3914 C63.9237,78.2664 61.1607,77.7534 58.7507,76.2814 C57.7937,75.6974 56.8117,74.8854 55.5767,74.9204 C51.4547,75.0364 47.5697,76.7664 43.4227,76.7294 C41.5387,78.8284 39.0187,78.4344 36.6627,78.2914 C33.3797,78.0934 30.1467,79.1384 27.6847,80.6274 C23.9967,82.8584 20.7187,85.3634 16.1507,85.5724 C14.5297,85.6454 12.8167,86.6324 11.4077,87.6034 C8.8787,89.3494 6.2677,90.5414 3.1227,90.3494 C2.0557,90.2844 0.9357,90.2454 0.0467,91.0644 C1.9627,91.0644 3.9327,90.7824 5.7787,91.1394" id="Fill-6" class="svgFill"></path>
+                <path d="M4.6254,229.3449 C7.2664,229.2569 9.7834,229.1629 12.4064,228.1829 C15.7904,226.9189 19.2324,227.8339 21.6104,230.8509 C22.9094,232.4979 24.4354,233.0239 26.3924,232.8339 C29.8014,232.5039 32.6904,233.8109 35.4144,235.6939 C37.6724,237.2539 41.0004,236.1309 42.1634,233.2579 C42.7234,231.8719 43.4154,230.9819 44.8844,230.7089 C45.5614,230.5839 46.1184,230.1599 46.5544,229.6619 C47.8134,228.2249 49.3964,227.7059 51.2514,227.8309 C52.8754,227.9409 53.8074,227.4499 54.6924,225.7749 C55.8104,223.6569 57.6324,221.9649 59.9594,220.6999 C62.2344,219.4639 64.3834,218.6019 66.9514,218.7459 C67.5324,218.7789 68.1504,218.5629 68.5304,218.0959 C71.8394,214.0359 76.3534,213.6339 81.1214,213.7989 C83.4034,213.8779 84.2424,212.8199 83.6924,211.0199 C83.4464,210.2139 82.8014,209.7319 82.2384,210.2819 C80.1824,212.2859 77.1964,211.7149 74.9244,213.1639 C71.5634,215.3079 67.7654,216.3669 63.8394,216.9619 C63.4124,217.0269 63.0274,217.2389 62.7854,217.5809 C60.0074,221.5129 56.0004,220.1479 52.2664,220.0859 C49.1164,220.0329 45.8544,219.4909 43.0774,221.6709 C42.8114,221.8799 42.5024,222.0759 42.1804,222.0849 C35.9974,222.2419 30.0264,224.7689 23.7354,223.7349 C20.8484,223.2609 19.4234,220.9329 18.1374,218.8149 C16.8724,216.7319 16.2874,214.2539 14.7644,212.2329 C14.0464,211.2799 14.3394,209.9759 14.3174,208.8159 C14.2964,207.7339 14.1784,206.6299 14.3354,205.5709 C14.9794,201.2509 12.2864,198.7659 7.8924,196.2449 C5.3184,194.7679 2.5814,193.6079 0.0464,192.0639 L0.0464,230.0639 C1.4324,228.9459 3.0794,229.3969 4.6254,229.3449" id="Fill-8" class="svgFill"></path>
+                <path d="M12.5448,228.8049 C14.9438,227.4939 18.6758,228.0279 20.7398,231.2829 C22.0558,233.3579 24.0628,234.0879 26.4978,233.5739 C26.8158,233.5059 27.1938,233.6549 27.4898,233.5499 C30.0508,232.6429 31.6528,235.6719 34.1228,235.1739 C34.2058,235.1569 34.5258,235.6919 34.5198,235.9649 C34.4908,237.1079 35.2428,237.0729 36.0238,237.0659 C37.1898,237.0549 38.3578,237.1129 39.5198,237.0519 C41.3978,236.9519 42.6498,234.9349 42.8138,234.0759 C43.1758,232.1719 43.4798,231.1979 45.5738,231.5359 C45.8438,231.5799 46.3578,231.4099 46.4248,231.2209 C47.5728,227.9869 50.3028,228.6189 52.7658,228.5529 C53.4868,228.5329 54.8398,228.7769 54.8148,228.2399 C54.7228,226.3079 55.7648,225.2639 57.0058,224.0839 C58.1108,223.0329 58.6448,221.3119 60.6478,221.5469 C61.1078,221.6009 61.9188,221.6939 61.9278,221.1309 C61.9648,218.7889 63.6778,219.6809 64.7998,219.5869 C66.6228,219.4339 68.4628,219.9189 69.9928,218.1269 C70.5738,217.4469 70.1028,216.1079 71.0208,216.1829 C73.6068,216.3949 75.4038,213.5809 78.1608,214.5209 C78.9818,214.8009 79.9778,214.5639 80.8938,214.5639 C84.9268,214.5639 84.9648,214.5059 84.5568,210.3759 C84.4868,209.6679 84.4888,208.9599 83.5258,209.0909 C82.7038,209.2019 81.3248,208.5329 81.1818,209.6789 C80.9858,211.2489 80.0358,211.3049 79.1348,211.0179 C76.6848,210.2389 75.3798,213.4249 72.9948,212.6499 C72.9148,212.6239 72.6468,212.8449 72.6468,212.9499 C72.6538,215.4449 70.7588,214.3299 69.5908,214.5549 C68.9558,214.6769 67.8848,214.2929 67.7378,214.8749 C67.2368,216.8509 65.7628,215.8619 64.7108,216.0429 C63.5478,216.2439 61.9768,215.4789 61.7988,217.6809 C61.7798,217.9109 60.5538,219.5219 60.0038,219.4259 C57.1218,218.9219 53.8638,221.1539 51.3028,218.2969 C51.1428,218.1189 50.4408,218.1179 50.4278,218.1619 C49.7628,220.4349 47.8988,219.3459 46.5288,219.5469 C45.4738,219.7009 43.5618,219.4479 43.4588,219.7979 C42.4758,223.1269 39.8718,221.0099 38.1148,221.5279 C37.0318,221.8479 35.1808,221.0289 34.8278,221.8909 C34.1408,223.5749 32.9998,222.9989 31.9948,223.0379 C29.8338,223.1229 27.6628,222.9889 25.5028,223.0879 C23.7998,223.1659 21.9698,223.2359 21.2338,221.5019 C20.6348,220.0879 18.5238,219.7399 18.6708,218.4869 C18.9268,216.2979 16.0608,215.3189 16.9738,213.0969 C17.0088,213.0129 16.8178,212.7169 16.7268,212.7139 C14.1638,212.6459 15.1468,210.7019 15.0788,209.4459 C14.9628,207.2869 14.7518,205.0649 15.1298,202.9689 C15.5028,200.9009 13.9428,199.8509 13.1098,198.7889 C11.3408,196.5339 8.4018,195.3529 5.9848,193.9449 C4.5348,193.1009 2.4178,191.3069 0.0468,192.0639 C2.5808,193.6079 5.3178,194.7679 7.8918,196.2449 C12.2868,198.7659 14.9788,201.2509 14.3358,205.5709 C14.1778,206.6299 14.2968,207.7339 14.3168,208.8159 C14.3388,209.9759 14.0468,211.2799 14.7648,212.2329 C16.2868,214.2539 16.8728,216.7319 18.1368,218.8149 C19.4228,220.9329 20.8478,223.2609 23.7358,223.7349 C30.0258,224.7689 35.9968,222.2419 42.1808,222.0849 C42.5028,222.0759 42.8118,221.8799 43.0778,221.6709 C45.8538,219.4919 49.1168,220.0329 52.2668,220.0859 C55.9998,220.1479 60.0068,221.5129 62.7848,217.5809 C63.0268,217.2389 63.4128,217.0269 63.8388,216.9619 C67.7658,216.3669 71.5638,215.3079 74.9248,213.1639 C77.1958,211.7149 80.1828,212.2859 82.2378,210.2819 C82.8018,209.7319 83.4458,210.2139 83.6928,211.0199 C84.2428,212.8199 83.4028,213.8779 81.1208,213.7989 C76.3528,213.6339 71.8398,214.0359 68.5298,218.0969 C68.1498,218.5629 67.5318,218.7789 66.9508,218.7459 C64.3828,218.6019 62.2338,219.4639 59.9598,220.6999 C57.6318,221.9649 55.8108,223.6569 54.6918,225.7749 C53.8068,227.4509 52.8748,227.9409 51.2518,227.8309 C49.3968,227.7059 47.8138,228.2249 46.5548,229.6619 C46.1178,230.1599 45.5618,230.5839 44.8838,230.7089 C43.4158,230.9819 42.7228,231.8719 42.1628,233.2579 C41.0008,236.1309 37.6718,237.2539 35.4148,235.6939 C32.6908,233.8109 29.8018,232.5039 26.3928,232.8339 C24.4348,233.0239 22.9088,232.4979 21.6098,230.8509 C19.2318,227.8339 15.7908,226.9189 12.4068,228.1829 C9.7828,229.1629 7.2658,229.2569 4.6258,229.3449 C3.0788,229.3969 1.4328,228.9459 0.0468,230.0639 C4.1398,229.3069 8.2958,231.1249 12.5448,228.8049" id="Fill-10" class="svgFill"></path>
+                <path d="M4.6889,144.3137 C6.6479,144.3967 8.7399,144.7227 10.2149,142.8497 C10.3139,142.7237 10.4989,142.6337 10.6589,142.6367 C14.2929,142.7117 15.8739,140.4497 17.4099,137.4927 C18.6799,135.0467 21.1929,133.3647 23.2539,131.4437 C24.1529,130.6057 25.2689,130.3037 26.5199,130.3287 C24.8579,130.3167 23.5789,129.8307 23.2689,127.9877 C23.1519,127.2967 22.6339,126.8437 22.1809,126.3517 C21.2959,125.3887 20.9809,124.0327 21.6949,123.1257 C23.2929,121.0987 23.7779,118.4397 25.7269,116.6217 C27.0449,115.3907 27.3189,109.0187 26.3169,107.5787 C25.0579,105.7697 21.6459,105.1057 19.2489,106.3897 C18.0109,107.0527 16.7749,107.2907 15.4269,107.2897 C11.8469,107.2887 8.2659,107.2217 4.6889,107.3157 C2.6829,107.3687 1.1039,106.8287 0.0469,105.0637 L0.0469,146.5637 C1.1039,144.7997 2.6819,144.2287 4.6889,144.3137" id="Fill-12" class="svgFill"></path>
+                <path d="M10.3783,143.2771 C10.4133,143.1141 11.2853,143.0921 11.7703,143.0711 C15.1013,142.9251 16.2873,142.0111 17.0483,138.9141 C17.1543,138.4841 17.3913,138.3101 17.7173,138.0351 C18.7413,137.1731 19.6253,136.1471 20.5703,135.1911 C22.6313,133.1081 24.2503,130.2521 27.9463,131.0401 C28.4113,131.1391 28.9763,131.0581 29.0043,130.3441 C29.0343,129.6231 28.5143,129.5881 28.0033,129.5741 C27.4213,129.5591 26.8283,129.4951 26.2583,129.5771 C24.5703,129.8201 23.7433,129.2631 24.0353,127.4431 C24.1723,126.5821 23.9023,126.0281 22.8543,126.0331 C21.8053,126.0391 22.0243,125.1421 22.0753,124.5521 C22.1343,123.8901 21.6073,122.7281 22.6403,122.6771 C24.2333,122.5981 24.0433,121.6591 24.0533,120.6571 C24.0613,119.9501 24.3373,119.5401 24.9043,118.9321 C26.4103,117.3161 28.4733,115.7031 27.5673,112.9051 C27.4203,112.4531 27.5533,111.9131 27.5453,111.4141 C27.5123,109.3151 28.2223,107.0401 25.5743,105.7301 C24.6583,105.2771 19.0133,104.5671 18.7203,105.4861 C18.2353,107.0141 17.1903,106.6191 16.3543,106.5301 C10.9263,105.9481 5.2523,108.0601 0.0463,105.0641 C1.1033,106.8291 2.6833,107.3681 4.6883,107.3161 C8.2653,107.2221 11.8473,107.2881 15.4263,107.2901 C16.7753,107.2911 18.0113,107.0531 19.2493,106.3891 C21.6453,105.1051 25.0573,105.7691 26.3163,107.5781 C27.3193,109.0181 27.0453,115.3911 25.7273,116.6211 C23.7783,118.4401 23.2933,121.0991 21.6953,123.1261 C20.9803,124.0321 21.2953,125.3881 22.1813,126.3511 C22.6343,126.8431 23.1523,127.2971 23.2683,127.9881 C23.5793,129.8301 24.8573,130.3171 26.5203,130.3291 C25.2683,130.3041 24.1523,130.6061 23.2533,131.4441 C21.1923,133.3641 18.6803,135.0471 17.4103,137.4921 C15.8743,140.4501 14.2933,142.7121 10.6583,142.6371 C10.4993,142.6331 10.3143,142.7241 10.2143,142.8491 C8.7403,144.7221 6.6483,144.3971 4.6893,144.3141 C2.6823,144.2281 1.1033,144.7991 0.0463,146.5641 C1.7993,145.6731 3.4673,144.8581 5.6263,144.9521 C7.2053,145.0211 9.7103,146.4091 10.3783,143.2771" id="Fill-14" class="svgFill"></path>
+                <path d="M380.3515,301.3854 C380.4545,301.4894 380.5525,301.5994 380.6325,301.7254 C380.5525,301.5994 380.4545,301.4894 380.3515,301.3854 C380.2765,301.3104 380.2005,301.2374 380.1205,301.1664 C380.1095,301.1784 380.0955,301.1874 380.0835,301.1984 C380.1525,301.8734 379.5845,302.7954 380.7875,303.0214 C381.2685,303.1114 381.4765,302.7654 381.5385,302.2934 C381.6905,301.1184 381.0185,301.0054 380.1955,301.0694 C380.1785,301.0924 380.1675,301.1194 380.1485,301.1414 C380.2185,301.2214 380.2825,301.3064 380.3515,301.3854" id="Fill-16" class="svgFill"></path>
+                <path d="M380.3515,301.3854 C380.2825,301.3064 380.2185,301.2214 380.1485,301.1414 C380.1415,301.1514 380.1285,301.1564 380.1205,301.1664 C380.2005,301.2374 380.2765,301.3104 380.3515,301.3854" id="Fill-18" class="svgFill"></path>
+                <path d="M380.1488,301.1413 C380.1678,301.1203 380.1788,301.0923 380.1948,301.0693 C380.1608,301.0713 380.1268,301.0733 380.0918,301.0773 C380.1108,301.0983 380.1298,301.1203 380.1488,301.1413" id="Fill-20" class="svgFill"></path>
+                <path d="M380.0746,301.1237 C380.0786,301.1477 380.0816,301.1737 380.0836,301.1977 C380.0956,301.1867 380.1096,301.1787 380.1206,301.1667 C380.1046,301.1527 380.0906,301.1377 380.0746,301.1237" id="Fill-22" class="svgFill"></path>
+                <path d="M380.0746,301.1237 C380.0906,301.1377 380.1046,301.1527 380.1206,301.1667 C380.1286,301.1567 380.1406,301.1507 380.1486,301.1417 C380.1306,301.1197 380.1106,301.0987 380.0926,301.0767 C380.0846,301.0767 380.0766,301.0777 380.0686,301.0777 C380.0726,301.0927 380.0716,301.1087 380.0746,301.1237" id="Fill-24" class="svgFill"></path>
+                <path d="M380.0688,301.0778 C380.0668,301.0678 380.0678,301.0558 380.0648,301.0448 L380.0278,301.0818 C380.0428,301.0798 380.0548,301.0798 380.0688,301.0778" id="Fill-26" class="svgFill"></path>
+              </g>
+              <text id="Cambridge" font-family="BrandonText-Black, Brandon Text" font-size="18pt" font-weight="900" fill="#000000">
+                <tspan x="94" y="217" style="text-transform: none;">Cambridge</tspan>
+              </text>
+              <text id="London" font-family="BrandonText-Black, Brandon Text" font-size="18pt" font-weight="900" fill="#000000">
+                <tspan x="135" y="255" style="text-transform: none;">London</tspan>
+              </text>
+              <text id="NORWICH" font-family="BrandonText-Black, Brandon Text" font-size="25" font-weight="900" fill="#000000">
+                <tspan x="220" y="140">NORWICH</tspan>
+              </text>
+              <rect id="Rectangle" fill="#000000" x="223" y="203" width="13" height="13"></rect>
+              <rect id="Rectangle-Copy" fill="#000000" x="177" y="263" width="13" height="13"></rect>
+              <g id="Page-1" transform="translate(246.000000, 165.000000)">
+                <mask id="mask-4" fill="white">
+                  <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M0,26.0141759 C21.1953237,25.7729466 25.7535971,21.0255524 25.957554,0 L28.0489209,0 C28.2593525,21.0255524 32.8079137,25.7729466 54,26.0141759 L54,27.9922568 C32.8079137,28.2367026 28.2723022,32.9680148 28.0651079,54 L25.957554,54 C25.7535971,32.9680148 21.1953237,28.2367026 0,27.9922568 L0,26.16213 L0,26.0141759 Z" id="Fill-1" fill=black mask="url(#mask-4)" class="u-black"></path>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div><!-- end grid__cell -->
+
+      <div id="gridPlane" class="grid__cell">
+        <div class="directions">
+          <div class="directions__text">Norwich has an<br /> international airport</div>
+          <img src="https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/bedf6aead105bdeb0a234e056b9f6868/plain-rail.png" class="directions__image" alt="Plain and rails image" />
+          <div class="directions__text">and is less than 90 minutes to london by train</div>
+        </div><!-- end directions -->
+      </div><!-- end grid__cell -->   
+    </div><!-- end u-hide -->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="js/text-fit-min.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      {{{account.snippets.multilineBackgrounds}}}   
+
+      {{ #placeholder-toggle-new }}document.body.classList.add("u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}"); {{ /placeholder-toggle-new }}
+      {{ #placeholder-validation }}document.body.classList.add("placeholder__validation--{{placeholder-validation}}"){{ /placeholder-validation }}
+    </script>
+    <script>
+      let country = document.querySelector(".countryIndicator__country");
+      country.innerText = "{{{UEA_country--cfsn}}}".split("-").join(" ");
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });   
+
+
+
+
+      const paddedMultilineObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          multilineBackgrounds();
+        });
+      });
+
+      const paddedMultilineSrcs = document.querySelectorAll('.js-padded-multiline-src');
+
+      paddedMultilineSrcs.forEach(paddedMultilineSrc => {
+        paddedMultilineObserver.observe(paddedMultilineSrc, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });        
+      })
+
+
+
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textfit-1'
+      });
+
+      multilineBackgrounds();  
+
+      // Grab Dynamic Blocks
+      var mapBlock = document.getElementById("mapBlock");
+      var airportBlock = document.getElementById("mapBlock");
+
+      // Grab the Grid
+      var grid = document.querySelector(".grid__row.grid__row--3");
+      // Get the Rows we need
+      var gridRows = grid.children;
+      var gridRow1 = gridRows[0];
+      var gridRow2 = gridRows[1];
+      var gridRow3 = gridRows[2];
+
+      // Find the Element Before so we can inject after.
+      var gridItem1 = gridRow1.children[0];
+      var gridItem2 = gridRow3.children[0];
+
+      var map = document.getElementById("gridMap");
+      var plane = document.getElementById("gridPlane");
+      gridRow1.insertBefore(map, gridItem1.nextSibling);
+      gridRow3.insertBefore(plane, gridItem2);
+
+
+
+
+    </script>
+
+
+  </body>
+</html>
