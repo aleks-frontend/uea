@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html data-sign="OSB" data-input-order="{{UEA_colour-theme--ptc}}{{UEA_logo-colour--ptc}}{{UEA_logo-position-ptc}}{{UEA_postgraduate--choice--ptc}}{{UEA_background-image--ptc}}
+                                        {{UEA_heading--ptc}}{{UEA_url--pb}}{{UEA_url-font-size--ptc}}{{UEA_heading-back-page--ptc}}{{UEA_text-colour-choice--ptc}}">
+  <head>               
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+        --white: #FFF;
+        --black: {{{account.colors.black}}};
+
+        --dynamic-colour: var(--orange);
+      }                               
+
+      .colourTheme--cyan { --dynamic-colour: var(--cyan); }
+      .colourTheme--magenta { --dynamic-colour: var(--magenta); }
+      .colourTheme--green { --dynamic-colour: var(--green); }
+      .colourTheme--purple { --dynamic-colour: var(--purple); }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      } 
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }  
+
+      .reposition-fix div {
+        width: 100% !important;
+        height: 100% !important;
+        right: 0 !important;
+        bottom: 0 !important;
+      }
+
+      .padded-multiline {
+        position: relative;
+      }
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.8em;
+        font-size: 1em;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .padded-multiline-bg span {
+        color: transparent;
+      }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.25em;
+        bottom: -0.3em;
+        left: -0.2em;
+        right: -0.2em;
+        background: var(--white);
+      }
+
+      .fit--frontPage .heading .padded-multiline-bg span:before { background: var(--dynamic-colour); }
+
+      .fit--backPage .heading .padded-multiline-bg span:before {
+        top: -0.35em;
+        bottom: -0.4em;
+        left: -0.32em;
+        right: -0.4em;
+      }
+
+      .copy .padded-multiline-bg span:before {
+        top: -0.35em;
+        bottom: -0.4em;
+        left: -0.4em;
+        right: -0.4em;
+      }
+
+      .cta .padded-multiline-bg span:before {
+        top: -0.3em;
+        bottom: -0.4em;
+        left: -0.5em;
+        right: -0.5em;
+      }
+
+      .padded-multiline-fg {
+        position: relative;
+        z-index: 999;
+      }      
+
+      .js-padded-multiline-src { 
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        z-index: 999;
+      }
+
+      .fit { 
+        display: flex;
+        padding: 3.35rem 1.72rem 1.8rem 3.39rem;
+      }
+
+      .templateTheme--uea.logoPosition--topLeft .fit--frontPage,
+      .templateTheme--uea.logoPosition--bottomLeft .fit--frontPage {
+        padding: 3.35rem 3.39rem 1.8rem 1.72rem;
+        flex-direction: row-reverse;
+      }
+
+      .fit--backPage {  padding: 2rem 1.72rem 1.8rem 1.75rem;  }
+
+      .templateTheme--brand .fit { padding: 1.79rem 9.32rem 1.7rem 1.79rem; }
+      .templateTheme--brand.backgroundImageSize--halfImage .fit { padding-right: 11.32rem; }
+
+      .templateTheme--uea .fit--backPage { background: var(--dynamic-colour); }
+      .templateTheme--brand .fit.fit--backPage { padding-right: 0.42rem; }
+
+      .templateTheme--postgraduate .fit {
+        padding: 0 0 0 1.45rem;
+        background: var(--black);
+      }
+
+      .templateTheme--postgraduate .backPageLayout--addressPannel .fit--backPage { padding-right: 1.35rem; }
+
+      .section {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .section--left {
+        margin-right: 1rem;
+        flex: 1;
+      }     
+      .templateTheme--postgraduate .section--left { 
+        padding: 1.8rem 1rem 1.6rem 0; 
+        margin-right: 0;
+      }
+
+      .fit--backPage .backPageLayout--noStat .section--left { margin-right: 0; }
+
+      .templateTheme--brand .section--left { 
+        padding-right: 0.52rem;
+      }
+
+      .templateTheme--brand .fit--frontPage .section--left {
+        padding-right: 0;
+        margin-right: 0;
+
+      }
+
+      .templateTheme--uea.logoPosition--topLeft .fit--frontPage .section--left,
+      .templateTheme--uea.logoPosition--bottomLeft .fit--frontPage .section--left {
+        align-items: flex-end;
+        margin-right: 0;
+        text-align: right;
+      }      
+
+      .templateTheme--uea.logoPosition--topLeft .fit--frontPage .section--left,
+      .templateTheme--uea.logoPosition--bottomLeft .fit--frontPage .section--left {
+        margin-left: 1rem;
+      }
+
+      .templateTheme--brand.backgroundImageSize--fullImage.logoPosition--bottomRight .fit--frontPage .section--left,
+      .templateTheme--brand.backgroundImageSize--fullImage.logoPosition--topRight .fit--frontPage .section--left {
+        align-items: flex-end;
+      }
+
+      .section--right {
+        width: 4.35rem;
+        justify-content: flex-end;
+        font-size: 0;
+      }
+
+      .templateTheme--uea.logoPosition--topRight .fit--frontPage .section--right,
+      .templateTheme--uea.logoPosition--topLeft .fit--frontPage .section--right {
+        justify-content: flex-start;
+        margin-top: -1.55rem;
+
+      }
+
+      .backPageLayout--withStat .section--right {
+        justify-content: space-between;
+        margin-top: 3.77rem;
+      }
+
+      .templateTheme--brand .section--right,
+      .backPageLayout--noStat .section--right,
+      .templateTheme--brand .backPageLayout--noStat .fit--backPage .section--right { 
+        display: none;
+      }
+
+      .templateTheme--brand .fit--backPage .section--right { 
+        display: block;
+        margin-top: 4rem;
+        width: 6.65rem;
+      }
+
+      .templateTheme--postgraduate .section--right { 
+        width: 8.35rem; 
+        justify-content: flex-start;
+      }
+
+      .templateTheme--postgraduate .backPageLayout--withStat .section--right {     
+        justify-content: space-between;
+        margin-top: 6.07rem;
+        margin-bottom: 1.6rem;
+        width: 6.65rem; 
+      }
+
+      .backPageLayout--addressPannel .fit--backPage .section--right {
+        justify-content: space-between;
+        width: 8.75rem;
+        padding-top: 3.9rem;
+        padding-left: 1.1rem;
+      }
+
+      .templateTheme--brand .backPageLayout--addressPannel .fit--backPage .section--right {
+        margin-top: 0;
+        padding-top: 4.1rem;
+        width: 10.05rem;
+        color: var(--black);
+      }
+
+      .backPageLayout--addressPannel .fit--backPage .section--right:after,
+      .backPageLayout--addressPannel .fit--backPage .section--right:before { 
+        content: '';
+        position: absolute;
+        display: block;
+      }
+
+      .backPageLayout--addressPannel .fit--backPage .section--right:after {
+        left: -0.1rem;
+        top: -0.2rem;
+        height: 12.1rem;
+        width: 0.1rem;
+        background: var(--white);
+      }
+
+      .templateTheme--brand .backPageLayout--addressPannel .fit--backPage .section--right:after { background: var(--dynamic-colour); }
+
+      .backPageLayout--addressPannel .fit--backPage .section--right:before {
+        top: -0.2rem;
+        right: 0.03rem;
+        height: 2.8rem;
+        width: 2.4rem;
+        border: 0.01rem solid var(--white);
+      }
+
+      .templateTheme--brand .backPageLayout--addressPannel .fit--backPage .section--right:before {
+        right: 1.33rem;
+        border-color: var(--black);
+      }
+
+      .templateTheme--brand .backPageLayout--addressPannel .fit--backPage .section--right:after,
+      .templateTheme--brand .backPageLayout--addressPannel .fit--backPage .section--right:before {
+        top: 0;
+      }
+
+      .templateTheme--postgraduate .backPageLayout--addressPannel .fit--backPage .section--right {
+        margin: 2rem 0 1.6rem;
+        padding: 4.1rem 0 0 0.9rem;
+      }
+
+      .templateTheme--postgraduate .backPageLayout--addressPannel .fit--backPage .section--right:after {
+        left: -0.3rem;
+        height: 12.4rem;
+      }
+
+      .heading {
+        position: relative;
+        display: none;
+        margin: 0.24rem 0 0.76rem 0.3rem;
+        font-size: 1.5rem;
+        line-height: 1.08em;
+        font-weight: 900;
+        text-transform: uppercase;
+        color: var(--white);
+        word-break: break-word;
+      }
+      .is-export-mode .heading--primary { font-size: 1.485rem; } 
+
+      .templateTheme--uea.logoPosition--topLeft .fit--frontPage .heading--primary, 
+      .templateTheme--uea.logoPosition--bottomLeft .fit--frontPage .heading--primary {
+        margin-right: 0.2em;
+      } 
+
+      .fit--backPage .heading--primary {
+        margin-bottom: 1.04rem;
+        font-size: 0.72rem;
+        line-height: 1em;
+        color: var(--black); 
+      }
+      .is-export-mode .fit--backPage .heading--primary { font-size: 0.713rem; } 
+
+      .backPageLayout--withStat .fit--backPage .heading--primary { margin-bottom: 0.94rem; }
+
+      .heading--secondary {
+        margin: 0 0 0.35rem 0.06rem;
+        max-height: 3.3rem;
+        font-size: 0.86rem;
+        line-height: 1.15em;
+        font-weight: bold;
+        text-transform: none;
+      }      
+      .is-export-mode .heading--secondary { font-size: 0.85rem; }
+
+      .templateTheme--postgraduate .heading--secondary {
+        display: block;
+        margin-left: 0;
+        margin-bottom: 0.4rem;
+        max-height: 4rem;
+        font-size: 1.11rem;
+        line-height: 1.05em;
+        font-weight: 300;
+        color: var(--white);
+      }
+      .is-export-mode.templateTheme--postgraduate .heading--secondary { font-size: 1.0989rem; }
+
+      .templateTheme--brand.textColourChoice--black.backgroundImageSize--fullImage .fit--frontPage .heading--secondary { color: var(--black); }
+      .templateTheme--brand.textColourChoice--white.backgroundImageSize--fullImage .fit--frontPage .heading--secondary { color: var(--white); }
+
+      .templateTheme--uea .heading--primary,
+      .templateTheme--brand .heading--secondary,
+      .templateTheme--postgraduate .heading--secondary { 
+        display: block;
+      }
+
+      .templateTheme--brand.backgroundImageSize--halfImage .heading--secondary { color: var(--black); }
+
+      .heading--primary:before {
+        content: '';
+        position: absolute;
+        top: -1.73rem;
+        left: -1.84rem;
+        height: 1.55rem;
+        width: 1.55rem;
+        background-color: var(--dynamic-colour);
+        background-image: url(https://files.outfit.io/media_library_items/93079/white-star.png);
+        background-repeat: no-repeat;
+        background-size: 1.05rem;
+        background-position: 0.25rem 0.25rem;
+      }
+
+      .templateTheme--uea.logoPosition--topLeft .fit--frontPage .section--left .heading--primary:before,
+      .templateTheme--uea.logoPosition--bottomLeft .fit--frontPage .section--left .heading--primary:before {
+        left: auto;
+        right: -0.2em;     
+        transform: translateX(98.5%);
+      }
+
+      .fit--backPage .heading--primary:before { display: none; }
+
+      .heading__inner { max-height: 4rem; }
+      .fit--backPage .heading__inner { max-height: 2.5rem; }
+
+      .content { flex: 1; }
+
+      .copy {
+        display: none;
+        margin: 0 0 0 0.3rem;
+        max-height: 4rem;
+        font-size: 0.715rem;
+        line-height: 1em;
+        font-weight: 900;
+        text-transform: uppercase;
+        word-break: break-word;
+      }
+      .is-export-mode .copy--primary { font-size: 0.708rem; } 
+
+      .templateTheme--uea.logoPosition--topLeft .fit--frontPage .copy--primary, 
+      .templateTheme--uea.logoPosition--bottomLeft .fit--frontPage .copy--primary {
+        margin-right: 0.4em;
+      }
+
+      .copy--secondary {
+        margin: 0 0 0 0.06rem;
+        max-height: 2.8rem;
+        font-size: 0.505rem;
+        line-height: 1.45em;
+        font-weight: normal;
+        color: var(--white);
+        text-transform: none;
+      }      
+      .is-export-mode .copy--secondary { font-size: 0.499rem;}
+
+      .templateTheme--postgraduate .copy--secondary {
+        margin-left: 0;
+        font-size: 0.455rem;
+        line-height: 1.35em;
+      }
+      .is-export-mode.templateTheme--postgraduate .copy--secondary { font-size: 0.4504; }
+
+
+      .templateTheme--brand.textColourChoice--black.backgroundImageSize--fullImage .fit--frontPage .copy--secondary { color: var(--black); }
+      .templateTheme--brand.textColourChoice--white.backgroundImageSize--fullImage .fit--frontPage .copy--secondary { color: var(--white); }
+
+      .fit--backPage .copy {
+        max-height: 4.4rem;
+        font-size: 0.45rem;
+        line-height: 1.45em;
+        font-weight: normal;
+        text-transform: none;
+      }      
+      .is-export-mode .fit--backPage .copy { font-size: 0.4455rem; }
+
+      .templateTheme--postgraduate .fit--backPage .copy { color: var(--white); }
+
+      .templateTheme--uea.textColourChoice--black .fit--backPage .copy { color: var(--black); }
+      .templateTheme--uea.textColourChoice--white .fit--backPage .copy { color: var(--white); }
+
+      .templateTheme--postgraduate .fit--backPage .copy {
+        margin-left: 0;
+        margin-right: 0.5rem;
+        max-height: 4.3rem;
+        line-height: 1.4em;
+      }
+
+      .templateTheme--postgraduate .backPageLayout--withStat .fit--backPage .copy,
+      .templateTheme--postgraduate .backPageLayout--addressPannel .fit--backPage .copy { 
+        max-height: 5.5rem;
+      }
+
+      .templateTheme--brand .copy { 
+        margin-left: 0;
+        max-height: 3.4rem;
+        line-height: 1.4em;
+      }
+
+      .templateTheme--brand .fit--backPage .copy { max-height: 5.5rem; }
+
+      .templateTheme--uea .copy--primary,
+      .templateTheme--brand .copy--secondary,
+      .templateTheme--postgraduate .copy--secondary,
+      .fit--backPage .copy { 
+        display: block;
+      }
+
+      .templateTheme--brand.backgroundImageSize--halfImage .copy--secondary { color: var(--black); }
+
+      .url { 
+        align-self: flex-start;
+        margin-bottom: 0.1rem;
+        max-height: 1.2rem;
+        padding: 0 0.3rem;
+        font-size: 0.52rem;
+        line-height: 1.9em;
+        background: var(--white);
+      }    
+      .is-export-mode .url { font-size: 0.5145rem; }
+
+      .templateTheme--brand .url,
+      .templateTheme--postgraduate .url {
+        line-height: 1.2em;
+        font-weight: bold;
+        color: var(--white);
+        background: transparent;
+      }
+
+      .templateTheme--brand .url { 
+        margin-bottom: 0;
+        padding: 0 0.05rem;
+        font-size: 0.71rem;
+      }   
+      .is-export-mode.templateTheme--brand .url { font-size: 0.7029rem; }
+
+      .templateTheme--brand.backgroundImageSize--fullImage .url {
+        align-self: unset;
+      }
+
+      .templateTheme--brand.textColourChoice--black.backgroundImageSize--fullImage .fit--frontPage .url { color: var(--black); }
+      .templateTheme--brand.textColourChoice--white.backgroundImageSize--fullImage .fit--frontPage .url { color: var(--white); }
+
+      .templateTheme--postgraduate .url { 
+        padding: 0;
+        font-size: 0.505rem;
+      }   
+      .is-export-mode.templateTheme--postgraduate .url { font-size: 0.4999rem; }
+
+      .templateTheme--brand.backgroundImageSize--halfImage .url,
+      .templateTheme--brand .fit--backPage .url { 
+        color: var(--dynamic-colour);
+      }
+
+      .fit--backPage .url {   
+        display: inline-block;
+        margin-top: 0.66rem;
+        line-height: 1.6em; 
+      }
+
+      .templateTheme--brand .fit--backPage .url { 
+        display: block;
+        margin-top: 0.16rem;
+        max-height: 1rem;
+        padding: 0;
+        line-height: 1em;
+      }
+
+      .templateTheme--brand.backgroundImageSize--fullImage.logoPosition--topRight .fit--frontPage,
+      .templateTheme--brand.backgroundImageSize--fullImage.logoPosition--bottomRight .fit--frontPage { 
+        padding: 1.79rem 1.79rem 1.7rem 9.32rem ; 
+        text-align: right;
+      }
+
+      .templateTheme--uea.logoPosition--topLeft .fit--frontPage .url, 
+      .templateTheme--uea.logoPosition--bottomLeft .fit--frontPage .url {
+        align-self: flex-end;
+      }
+
+
+
+      .templateTheme--brand .backPageLayout--withStat .fit.fit--backPage .url { color: var(--black); }
+
+      .templateTheme--postgraduate .fit--backPage .url { 
+        display: block;
+        margin: 0.3rem 0 0.1rem 0;
+      }
+
+      .logo { display: none; font-size: 0;}
+
+      .logo--secondary {
+        margin-bottom: 0.6rem;
+        width: 4.3rem;
+      }  
+
+      .templateTheme--postgraduate .logo--secondary { margin-bottom: 0.8rem; }
+      .templateTheme--brand.logoPosition--bottomLeft.backgroundImageSize--fullImage .logo--secondary,
+      .templateTheme--brand.logoPosition--bottomRight.backgroundImageSize--fullImage .logo--secondary { display: none; }
+
+      .logo--tertiary,
+      .logo--quaternary,
+      .logo--quinary {
+        width: 4.3rem;
+        font-size: 0;
+      }     
+
+      .logo--quinary { margin-bottom: 1.6rem; }
+      .templateTheme--brand .backPageLayout--withStat .logo--quinary { margin-bottom: 0.9rem; }
+
+      .templateTheme--postgraduate .logo--quinary { margin-bottom: 1.9rem;}
+
+      .templateTheme--postgraduate .backPageLayout--withStat .logo--quinary,
+      .templateTheme--postgraduate .backPageLayout--addressPannel .logo--quinary {
+        margin-bottom: 1.2rem;
+      }
+
+      .templateTheme--uea .logo--primary,
+      .templateTheme--brand .logo--secondary,
+      .templateTheme--postgraduate .logo--secondary,
+      .templateTheme--uea .backPageLayout--noStat .logo--tertiary,
+      .templateTheme--uea .backPageLayout--withStat .logo--quaternary,
+      .templateTheme--uea .backPageLayout--addressPannel .logo--quaternary,
+      .templateTheme--brand .logo--quinary,
+      .templateTheme--postgraduate .logo--quinary {
+        display: block; 
+      }
+
+      .logoColour--white #shape { fill: var(--white); }
+      .backgroundImageSize--halfImage.logoColour--white #shape { fill: var(--black); }
+      #star { fill: var(--dynamic-colour); }
+
+      .logo--tertiary #shape,
+      .logo--quaternary #shape,
+      .templateTheme--brand .fit--backPage .logo--quinary #shape { 
+        fill: var(--black); 
+      }
+
+      .logo--tertiary #star,
+      .logo--quaternary #star { 
+        fill: var(--white);
+      }
+
+      .backPageLayout--addressPannel .logo--quaternary { align-self: flex-end; }
+
+      .logo--senary {
+        margin-top: 0.6rem;
+        width: 4.3rem;
+      } 
+
+      .templateTheme--brand.logoPosition--bottomLeft.backgroundImageSize--fullImage .logo--senary,
+      .templateTheme--brand.logoPosition--bottomRight.backgroundImageSize--fullImage .logo--senary { display: block; }
+
+
+      .hero {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .hero--default {
+        background: url('https://files.outfit.io/media_library_items/95212/Students%252C%2520Talking%252C%2520Sainsbury%2520Centre%2520for%2520Visual%2520Arts%2520-%2520small.png') center no-repeat;
+        background-size: cover;
+      }    
+
+      .backgroundImageSize--halfImage .hero { 
+        left: auto;
+        width: 10.5rem;
+      }
+
+      .templateTheme--postgraduate .hero {    
+        left: auto;
+        width: 8.35rem;
+        z-index: 0;
+      }
+
+      .postgraduateText {
+        display: none;
+        align-self: flex-end;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 1.83rem;
+        height: 0.87rem;
+        width: 6.07rem;
+        padding-left: 0.25rem;
+        font-size: 0.48rem;
+        font-weight: bold;
+        background: var(--dynamic-colour);
+        color: var(--white);
+        z-index: 1;
+      }         
+      .is-export-mode .postgraduateText { font-size: 0.4752rem; }
+
+      .postgraduateText--phd {
+        height: 1.34rem;
+        line-height: 1em;
+      }
+
+      .templateTheme--postgraduate.pgChoice--postgraduate .postgraduateText--postgraduate,
+      .templateTheme--postgraduate.pgChoice--masters .postgraduateText--masters ,
+      .templateTheme--postgraduate.pgChoice--phd .postgraduateText--phd { 
+        display: flex; 
+      }
+
+      .element__container {
+        display: none;
+        position: absolute;
+        top: 4.1rem;
+        left: 103%;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 3.3rem;
+        transform: rotate(-90deg);
+        font-size: 0;
+        z-index: 1;
+      }
+
+
+      .element__container.glintPosition--bottom {
+        top: auto;
+        bottom: 4.1rem;
+      }
+
+      .hide-crop .element__container { right: -3.5rem }
+
+      .templateTheme--postgraduate .element__container { display: block; }
+
+      .section__bottom { 
+        display: flex; 
+        align-items: flex-end;
+      }
+
+      .info { 
+        margin-right: 1rem;
+        flex: 1; 
+      }
+
+      .cta { 
+        display: none;
+        margin-left: 0.3rem;
+        font-size: 0.52rem;
+        line-height: 1.05em;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .is-export-mode .cta--primary { font-size: 0.5145rem; } 
+
+      .cta--secondary { 
+        font-size: 0.5rem;
+        line-height: 1.45em;
+        text-transform: none;
+        margin-left: 0;
+      }
+
+      .is-export-mode .cta--secondary { font-size: 0.495rem; }
+
+      .templateTheme--brand .backPageLayout--withStat .cta--secondary,
+      .templateTheme--postgraduate .cta--secondary { 
+        color: var(--dynamic-colour);
+      }
+
+      .cta__inner {
+        margin-left: 0;
+        max-height: 2rem;
+      }
+
+      .templateTheme--uea .cta--primary, 
+      .templateTheme--brand .cta--secondary,
+      .templateTheme--postgraduate .cta--secondary {
+        display: block;
+      }
+
+      .statistic__container {
+        display: none;
+        margin-left: 0.2rem;
+        color: var(--white);
+      }
+
+      .templateTheme--brand .statistic__container  { 
+        margin-right: 0.2rem;
+        color: var(--dynamic-colour);
+      }
+
+      .templateTheme--uea.textColourChoice--black .fit--backPage .statistic__container { color: var(--black); }
+      .templateTheme--uea.textColourChoice--white .fit--backPage .statistic__container { color: var(--white); }
+
+      .backPageLayout--withStat .statistic__container { display: block; }
+
+      .templateTheme--postgraduate .backPageLayout--withStat .statistic__container {
+        margin-left: 0;
+        margin-right: 0.7rem;
+      }
+
+      .templateTheme--postgraduate .cta--secondary { 
+        line-height: 1.25em;
+        text-transform: none;
+      }
+
+      .statistic {
+        position: relative;
+        font-size: 1.77rem;
+        font-weight: 800;
+        line-height: 0.97em;
+        text-transform: uppercase;
+      }  
+      .is-export-mode .statistic { font-size: 1.7523rem; }
+
+      .statistic:before {
+        display: block;
+        position: absolute;
+        content: '';
+        left: 0;
+        top: -0.28rem;
+        height: 0.05rem;
+        width: 2.1rem;
+        background: var(--white);
+      }
+
+      .templateTheme--uea.textColourChoice--black .fit--backPage .statistic:before { background: var(--black); }
+
+      .templateTheme--brand .statistic:before {  background: var(--dynamic-colour); }
+
+      .templateTheme--brand .statistic.statistic--top:before { top: -0.56rem; }
+
+      .statistic sup,
+      .statistic sub {
+        font-size: 0.55em;
+      }
+
+      .statistic sup {
+        top: -0.59em;
+        left: 0.1rem;
+      }
+
+      .statistic__text { 
+        font-size: 0.37rem;
+        line-height: 1.2em;
+        font-weight: bold;
+        text-transform: uppercase;
+        word-break: break-word;
+      }
+      .is-export-mode .statistic__text { font-size: 0.3663rem; }
+
+      .statistic__text--preceeding { 
+        display: none; 
+        margin-bottom: -0.15rem
+      }
+
+      .templateTheme--brand .statistic__text--preceeding { display: block; }
+
+      .statistic__ref {    
+        max-height: 1rem;
+        font-size: 0.35rem;
+        line-height: 1.2em;
+        word-break: break-word;
+      }
+      .is-export-mode .statistic__ref { font-size: 0.3465rem; }
+
+      .templateTheme--brand .statistic__ref { max-height: 1rem; }
+
+      .details { 
+        display: none;
+        max-height: 4.6rem;
+        font-size: 0.55rem;
+        line-height: 1.4em;
+        color: var(--white);
+      }
+      .is-export-mode .details { font-size: 0.5445rem;}
+
+      .templateTheme--brand .details {
+        max-height: 4rem;
+        color: var(--black);    
+      }
+
+      .templateTheme--uea.textColourChoice--black .fit--backPage .details { color: var(--black); }
+      .templateTheme--uea.textColourChoice--white .fit--backPage .details { color: var(--white); }
+
+      .backPageLayout--addressPannel .details { display: block; }
+
+      .quote__container { 
+        display: none; 
+        width: 5.7rem;
+        padding-bottom: 0.2rem;
+      }
+
+      .templateTheme--postgraduate .backPageLayout--noStat .quote__container--primary,
+      .templateTheme--postgraduate .backPageLayout--withStat .quote__container--secondary,
+      .templateTheme--postgraduate .backPageLayout--addressPannel .quote__container--secondary {
+        display: block;
+      }     
+
+      .templateTheme--postgraduate .backPageQuoteDisplay--hide.backPageLayout--noStat .quote__container--primary,
+      .templateTheme--postgraduate .backPageQuoteDisplay--hide.backPageLayout--withStat .quote__container--secondary,
+      .templateTheme--postgraduate .backPageQuoteDisplay--hide.backPageLayout--addressPannel .quote__container--secondary {
+        display: none;
+      }
+
+      .quote {
+        font-size: 1rem;
+        line-height: 0.88em;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+      .is-export-mode .quote { font-size: 0.99rem; }
+
+      /*
+      .quote:last-child { margin: 0.1rem 1.2rem 0.2rem 0; }
+      */
+      /*    
+      .quote--bold { font-weight: bold; }
+      .templateTheme--postgraduate.pgChoice--postgraduate .backPageLayout--noStat .quote__container--primary.quote__container--postgraduate,
+      .templateTheme--postgraduate.pgChoice--masters .backPageLayout--noStat .quote__container--primary.quote__container--masters,
+      .templateTheme--postgraduate.pgChoice--phd .backPageLayout--noStat .quote__container--primary.quote__container--phd,
+      .templateTheme--postgraduate.pgChoice--postgraduate .backPageLayout--withStat .quote__container--secondary.quote__container--postgraduate,
+      .templateTheme--postgraduate.pgChoice--masters .backPageLayout--withStat .quote__container--secondary.quote__container--masters,
+      .templateTheme--postgraduate.pgChoice--phd .backPageLayout--withStat .quote__container--secondary.quote__container--phd,
+      .templateTheme--postgraduate.pgChoice--postgraduate .backPageLayout--addressPannel .quote__container--secondary.quote__container--postgraduate,
+      .templateTheme--postgraduate.pgChoice--masters .backPageLayout--addressPannel .quote__container--secondary.quote__container--masters,
+      .templateTheme--postgraduate.pgChoice--phd .backPageLayout--addressPannel .quote__container--secondary.quote__container--phd { 
+      display: block; 
+      }
+
+      .templateTheme--postgraduate.pgChoice--postgraduate .backPageQuoteDisplay--hide.backPageLayout--noStat .quote__container--primary.quote__container--postgraduate,
+      .templateTheme--postgraduate.pgChoice--masters .backPageQuoteDisplay--hide.backPageLayout--noStat .quote__container--primary.quote__container--masters,
+      .templateTheme--postgraduate.pgChoice--phd .backPageQuoteDisplay--hide.backPageLayout--noStat .quote__container--primary.quote__container--phd,
+      .templateTheme--postgraduate.pgChoice--postgraduate .backPageQuoteDisplay--hide.backPageLayout--withStat .quote__container--secondary.quote__container--postgraduate,
+      .templateTheme--postgraduate.pgChoice--masters .backPageQuoteDisplay--hide.backPageLayout--withStat .quote__container--secondary.quote__container--masters,
+      .templateTheme--postgraduate.pgChoice--phd .backPageQuoteDisplay--hide.backPageLayout--withStat .quote__container--secondary.quote__container--phd,
+      .templateTheme--postgraduate.pgChoice--postgraduate .backPageQuoteDisplay--hide.backPageLayout--addressPannel .quote__container--secondary.quote__container--postgraduate,
+      .templateTheme--postgraduate.pgChoice--masters .backPageQuoteDisplay--hide.backPageLayout--addressPannel .quote__container--secondary.quote__container--masters,
+      .templateTheme--postgraduate.pgChoice--phd .backPageQuoteDisplay--hide.backPageLayout--addressPannel .quote__container--secondary.quote__container--phd {
+      display: none
+      }
+
+      */
+
+      .heading.heading--secondary{
+        text-transform: uppercase;
+      }
+
+      /* Hot fixes for the approval status related bugs */
+      body { font-size: 0; }
+      body > .outfit-resizable-background { display: none; }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         textColourChoice--{{UEA_text-colour-choice--ptc}}{{^UEA_text-colour-choice--ptc}}black{{/UEA_text-colour-choice--ptc}}
+                                         colourTheme--{{UEA_colour-theme--ptc}}{{^UEA_colour-theme--ptc}}orange{{/UEA_colour-theme--ptc}}
+                                         templateTheme--{{UEA_template-theme--ptc}}{{^UEA_template-theme--ptc}}uea{{/UEA_template-theme--ptc}}
+                                         logoColour--{{UEA_logo-colour--ptc}}{{^UEA_logo-colour--ptc}}white{{/UEA_logo-colour--ptc}}
+                                         logoPosition--{{UEA_logo-position-ptc}}{{^UEA_logo-position-ptc}}bottomRight{{/UEA_logo-position-ptc}}
+                                         backgroundImageSize--{{UEA_background-image-size--ptc}}{{^UEA_background-image-size--ptc}}fullImage{{/UEA_background-image-size--ptc}}
+                                         pgChoice--{{UEA_postgraduate--choice--ptc}}{{^UEA_postgraduate--choice--ptc}}postgraduate{{/UEA_postgraduate--choice--ptc}}
+                                         " data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <!-- FRONT PAGE -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--frontPage">
+          <div class="hero hero--primary {{^UEA_background-image--ptc}}hero--default{{/UEA_background-image--ptc}}">
+            <div class="reposition-fix"> {{{UEA_background-image--ptc}}} </div> <!-- reposition-fix -->
+          </div> <!-- hero -->
+          <div class="section section--left">
+            <div class="logo logo--secondary">
+              <svg viewBox="0 0 113 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="fill" stroke="none" stroke-width="1" fill="" fill-rule="evenodd"> <g id="UEA_NEW_BRAND_Green"> <path d="M27.731,51.046 C27.117,51.046 27.535,51.029 26.958,51.029 C19.827,51.029 14.474,46.128 14.474,32.408 L14.474,12.187 C14.474,5.253 17.541,2.622 21.878,2.622 L21.878,1.798 L0,1.798 L0,2.612 C3.802,2.686 5.177,5.917 5.177,10.167 L5.177,30.101 C5.177,45.118 12.366,51.899 25.4,51.899 C25.541,51.899 25.86,51.899 25.86,51.899 L27.729,51.899 L27.731,51.046" id="shape" fill="#1A1919"></path> <path d="M71.689,37.099 C71.604,29.571 69.907,27.952 62.389,27.88 L62.389,27.136 C69.907,27.062 71.604,25.446 71.689,17.919 L72.397,17.919 C72.484,25.446 74.177,27.057 81.695,27.13 L81.695,27.88 C74.177,27.952 72.484,29.571 72.397,37.099 L71.689,37.099" id="star" fill="purple" class="glint"></path> <path d="M31.349,51.051 C38.152,51.051 41.146,46.432 41.146,39.903 C41.146,32.083 41.146,39.903 41.146,39.903 L41.139,11.515 C41.139,4.847 37.798,2.629 33.747,2.629 L33.744,1.796 L72.388,1.796 L72.406,12.283 L71.72,12.281 C70.567,6.116 68.162,3.708 60.322,3.708 C60.322,3.708 59.009,3.708 58.504,3.708 C51.131,3.708 49.681,6.06 49.681,12.659 C49.681,14.544 49.681,18.798 49.681,18.798 C49.681,26.8 52.948,27.128 59.106,27.128 L59.106,27.878 C52.948,27.878 49.681,28.55 49.681,36.63 L49.681,39.257 C49.681,49.155 50.93,49.814 59.249,49.814 C64.167,49.814 70.163,48.554 71.704,41.769 L72.407,41.772 L72.407,51.899 L31.349,51.899 L31.349,51.051" id="shape" fill="#1A1919"></path> <path d="M86.156,51.046 C92.949,51.046 94.665,46.659 91.585,39.778 L81.175,13.744 L84.183,0.868 L84.756,0.866 C84.756,0.866 99.072,34.856 102.622,41.733 C106.369,48.991 109.518,51.051 112.625,51.051 L112.625,51.899 L86.156,51.899 L86.156,51.046" id="shape" fill="#1A1919"></path> <path d="M7.958,66.364 C6.165,66.364 5.093,65.073 5.093,62.911 L5.093,58.488 L6.198,58.488 L6.198,62.855 C6.198,64.478 6.935,65.209 7.979,65.209 C9.019,65.209 9.73,64.497 9.73,62.911 L9.73,58.488 L10.834,58.488 L10.834,62.845 C10.834,65.048 9.76,66.364 7.958,66.364" id="shape" fill="#1A1919"></path> <path d="M16.516,66.189 L15.439,66.189 L15.439,62.755 C15.439,61.783 15.032,61.269 14.334,61.269 C13.603,61.269 13.027,61.853 13.027,62.823 L13.027,66.189 L11.951,66.189 L11.951,60.292 L12.964,60.292 L12.964,61.124 C13.309,60.487 13.854,60.17 14.546,60.17 C15.742,60.17 16.516,61.101 16.516,62.545 L16.516,66.189" id="shape" fill="#1A1919"></path> <path d="M17.901,59.588 L18.963,59.588 L18.963,58.497 L17.901,58.497 L17.901,59.588 Z M17.897,66.189 L18.973,66.189 L18.973,60.292 L17.897,60.292 L17.897,66.189 Z" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="22.841 66.231 21.89 66.231 19.778 60.292 20.917 60.292 22.368 64.71 23.827 60.292 24.947 60.292 22.841 66.231"></polyline> <path d="M26.335,62.766 L29.072,62.766 C28.978,61.885 28.53,61.192 27.723,61.192 C26.956,61.192 26.425,61.909 26.335,62.766 Z M27.837,66.322 C26.324,66.322 25.221,64.999 25.221,63.245 C25.221,61.491 26.315,60.17 27.742,60.17 C29.168,60.17 30.168,61.423 30.168,63.289 C30.168,63.369 30.168,63.46 30.158,63.597 L30.154,63.724 L26.341,63.724 C26.462,64.785 27.117,65.314 27.857,65.314 C28.336,65.314 28.851,65.114 29.296,64.574 L29.339,64.524 L29.384,64.569 L29.931,65.115 L29.977,65.163 L29.936,65.219 C29.389,65.974 28.698,66.322 27.837,66.322 Z" id="shape" fill="#1A1919"></path> <path d="M32.177,66.189 L31.119,66.189 L31.119,60.292 L32.152,60.292 L32.152,61.558 C32.51,60.642 33.14,60.19 33.919,60.19 C33.95,60.19 34.069,60.194 34.069,60.194 L34.069,61.462 L33.949,61.462 C32.978,61.462 32.177,62.224 32.177,63.823 L32.177,66.189" id="shape" fill="#1A1919"></path> <path d="M36.405,66.298 C35.75,66.298 35.01,66.03 34.441,65.497 L34.395,65.456 L34.879,64.614 L34.932,64.659 C35.474,65.13 35.953,65.317 36.513,65.317 C37.091,65.317 37.432,65.042 37.432,64.591 C37.432,64.118 37.067,63.95 36.388,63.731 C35.673,63.497 34.696,63.157 34.696,61.933 C34.696,60.898 35.541,60.192 36.574,60.192 C37.189,60.192 37.787,60.372 38.315,60.776 L38.366,60.814 L37.93,61.698 L37.877,61.657 C37.405,61.305 36.876,61.173 36.529,61.173 C35.998,61.173 35.68,61.453 35.68,61.821 C35.68,62.286 35.976,62.397 36.854,62.669 C37.82,62.97 38.413,63.524 38.413,64.48 C38.413,65.576 37.584,66.298 36.405,66.298" id="shape" fill="#1A1919"></path> <path d="M46.412,68 C45.693,68 45.01,67.501 45.01,67.501 L45.37,66.512 C45.37,66.512 45.924,66.925 46.351,66.925 C46.926,66.925 47.187,66.565 47.396,65.966 L45.153,60.292 L46.319,60.292 L47.917,64.505 L49.226,60.292 L50.362,60.292 L48.236,66.331 C47.828,67.403 47.231,68 46.436,68" id="shape" fill="#1A1919"></path> <path d="M54.704,61.223 C53.871,61.223 53.114,61.98 53.114,63.206 C53.114,64.44 53.879,65.229 54.723,65.229 C55.562,65.229 56.327,64.47 56.327,63.251 C56.327,62.129 55.624,61.225 54.704,61.225 M54.704,66.306 C53.222,66.306 52.019,64.963 52.019,63.251 C52.019,61.503 53.229,60.153 54.723,60.153 C56.21,60.153 57.428,61.494 57.428,63.206 C57.428,64.952 56.202,66.306 54.704,66.306" id="shape" fill="#1A1919"></path> <path d="M59.579,66.183 L58.486,66.183 L58.486,61.353 L57.802,61.353 L57.802,60.286 L58.486,60.286 L58.486,59.903 C58.486,58.466 59.592,58.173 60.103,58.173 C60.489,58.173 60.742,58.241 60.943,58.323 L60.985,58.341 L60.985,59.407 L60.931,59.382 C60.773,59.302 60.502,59.239 60.322,59.239 C59.781,59.239 59.57,59.542 59.57,60.029 L59.57,60.298 L60.975,60.298 L60.975,61.353 L59.579,61.353 L59.579,66.183" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="68.461 66.18 63.709 66.18 63.709 58.476 68.413 58.476 68.413 59.589 64.83 59.589 64.83 61.591 67.979 61.591 67.979 62.702 64.83 62.702 64.83 65.077 68.461 65.077 68.461 66.18"></polyline> <path d="M70.168,64.355 C70.168,64.964 70.61,65.278 71.183,65.278 C72.092,65.278 72.61,64.62 72.61,63.866 L72.61,63.545 C72.368,63.398 71.939,63.296 71.476,63.296 C70.819,63.296 70.168,63.625 70.168,64.355 Z M71.038,66.284 C70.084,66.284 69.076,65.678 69.076,64.383 C69.076,63.138 69.987,62.296 71.362,62.296 C71.891,62.296 72.331,62.41 72.587,62.519 L72.587,62.437 C72.587,61.817 72.271,61.239 71.413,61.239 C70.796,61.239 70.212,61.463 69.744,61.773 L69.683,61.813 L69.372,60.8 L69.423,60.761 C69.884,60.458 70.646,60.177 71.433,60.177 C72.143,60.177 72.739,60.403 73.11,60.832 C73.471,61.251 73.667,61.82 73.667,62.574 L73.667,66.18 L72.723,66.18 L72.723,65.433 C72.511,65.835 71.89,66.284 71.038,66.284 Z" id="shape" fill="#1A1919"></path> <path d="M88.896,63.121 L87.704,60.089 L86.514,63.124 L88.896,63.121 Z M91.24,66.18 L90.04,66.18 L89.31,64.232 L86.104,64.232 L85.374,66.18 L84.188,66.18 L87.282,58.486 L88.146,58.486 L91.24,66.18 Z" id="shape" fill="#1A1919"></path> <path d="M99.789,61.238 C99.01,61.238 98.341,61.847 98.341,62.926 C98.341,64.005 99.037,64.659 99.789,64.659 C100.637,64.659 101.365,63.972 101.365,62.958 C101.365,61.764 100.57,61.238 99.789,61.238 M99.797,67.98 C98.944,67.98 98.171,67.708 97.498,67.167 L97.451,67.128 L97.915,66.157 L97.971,66.206 C98.538,66.685 99.17,66.927 99.85,66.927 C100.96,66.927 101.469,66.151 101.469,65.126 L101.469,64.659 C101.127,65.384 100.395,65.733 99.645,65.733 C98.463,65.733 97.24,64.7 97.24,62.972 C97.24,61.202 98.463,60.161 99.645,60.161 C100.397,60.161 101.162,60.522 101.527,61.183 L101.527,60.282 L102.485,60.282 L102.485,65.106 C102.485,65.988 102.263,66.69 101.831,67.192 C101.383,67.708 100.623,67.98 99.797,67.98" id="shape" fill="#1A1919"></path> <polygon id="shape" fill="#1A1919" points="103.688 66.179 104.764 66.179 104.764 58.491 103.688 58.491"></polygon> <path d="M43.647,66.294 C42.701,66.294 42.126,65.69 42.126,64.597 L42.126,61.374 L41.433,61.374 L41.433,60.296 L42.11,60.295 L42.11,58.661 L43.207,58.661 L43.207,60.298 L44.665,60.298 L44.665,61.374 L43.207,61.374 L43.207,64.312 C43.207,64.866 43.392,65.194 43.86,65.194 C44.105,65.194 44.346,65.136 44.525,65.03 L44.615,64.981 L44.611,66.02 L44.57,66.04 C44.283,66.214 43.988,66.294 43.647,66.294" id="shape" fill="#1A1919"></path> <path d="M81.133,66.275 C80.186,66.275 79.611,65.672 79.611,64.579 L79.611,61.356 L78.917,61.356 L78.917,60.289 L79.59,60.288 L79.588,58.642 L80.692,58.642 L80.692,60.278 L82.149,60.278 L82.149,61.356 L80.692,61.356 L80.692,64.293 C80.692,64.847 80.877,65.175 81.345,65.175 C81.591,65.175 81.831,65.118 82.01,65.012 L82.1,64.962 L82.102,66.002 L82.055,66.023 C81.768,66.195 81.473,66.275 81.133,66.275" id="shape" fill="#1A1919"></path> <path d="M96.369,66.184 L95.29,66.184 L95.29,62.751 C95.29,61.779 94.883,61.265 94.186,61.265 C93.455,61.265 92.879,61.849 92.879,62.818 L92.879,66.184 L91.802,66.184 L91.802,60.288 L92.816,60.288 L92.816,61.12 C93.161,60.482 93.706,60.165 94.397,60.165 C95.594,60.165 96.369,61.097 96.369,62.54 L96.369,66.184" id="shape" fill="#1A1919"></path> <path d="M39.445,59.591 L40.508,59.591 L40.508,58.5 L39.445,58.5 L39.445,59.591 Z M39.441,66.202 L40.518,66.202 L40.518,60.294 L39.441,60.294 L39.441,66.202 Z" id="shape" fill="#1A1919"></path> <path d="M106.04,59.595 L107.103,59.595 L107.103,58.504 L106.04,58.504 L106.04,59.595 Z M106.036,66.176 L107.112,66.176 L107.112,60.28 L106.036,60.28 L106.036,66.176 Z" id="shape" fill="#1A1919"></path> <path d="M76.36,66.274 C75.704,66.274 74.964,66.006 74.397,65.474 L74.35,65.433 L74.835,64.589 L74.887,64.636 C75.429,65.106 75.909,65.294 76.467,65.294 C77.046,65.294 77.387,65.019 77.387,64.567 C77.387,64.095 77.022,63.926 76.342,63.706 C75.628,63.473 74.651,63.132 74.651,61.909 C74.651,60.874 75.496,60.168 76.529,60.168 C77.144,60.168 77.741,60.348 78.27,60.752 L78.321,60.79 L77.884,61.673 L77.832,61.634 C77.36,61.28 76.831,61.149 76.483,61.149 C75.953,61.149 75.635,61.429 75.635,61.798 C75.635,62.263 75.93,62.372 76.808,62.645 C77.774,62.944 78.368,63.5 78.368,64.456 C78.368,65.552 77.539,66.274 76.36,66.274" id="shape" fill="#1A1919"></path> <path d="M109.129,64.378 C109.129,64.988 109.572,65.302 110.145,65.302 C111.054,65.302 111.572,64.645 111.572,63.891 L111.572,63.569 C111.331,63.423 110.901,63.321 110.438,63.321 C109.782,63.321 109.129,63.649 109.129,64.378 Z M110,66.309 C109.046,66.309 108.039,65.702 108.039,64.407 C108.039,63.162 108.951,62.321 110.324,62.321 C110.852,62.321 111.293,62.435 111.55,62.544 L111.55,62.461 C111.55,61.843 111.234,61.265 110.375,61.265 C109.758,61.265 109.174,61.487 108.706,61.798 L108.644,61.837 L108.333,60.823 L108.385,60.786 C108.846,60.482 109.608,60.202 110.396,60.202 C111.105,60.202 111.701,60.427 112.073,60.856 C112.433,61.275 112.629,61.845 112.629,62.599 L112.629,66.187 L111.685,66.187 L111.685,65.457 C111.473,65.86 110.852,66.309 110,66.309 Z" id="shape" fill="#1A1919"></path> </g> </g> </svg>
+            </div><!--logo--> 
+            {{#UEA_heading--ptc}}
+            <div class="heading heading--primary padded-multiline">
+              <div class="heading__inner" data-max-height="css">
+                <div id="js-padded-multiline-target-1"></div>              
+                <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-1">
+                  {{{UEA_heading--ptc}}}
+                </div>            
+              </div> <!-- headin__inner -->
+            </div> <!-- heading -->
+            <div class="heading heading--secondary padded-multiline" data-max-height="css"> {{{UEA_heading--ptc}}} </div> <!-- heading--secondary -->
+            {{/UEA_heading--ptc}}
+            <div class="content">
+              {{#UEA_body-copy--ptc}}
+              <div class="copy copy--primary padded-multiline" data-max-height="css">
+                <div id="js-padded-multiline-target-2"></div>                      
+                <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-2"> {{{UEA_body-copy--ptc}}} </div>                    
+              </div> <!-- copy -->
+              <div class="copy copy--secondary" data-max-height="css"> {{{UEA_body-copy--ptc}}} </div> <!-- copy--secondary -->
+              {{/UEA_body-copy--ptc}}
+            </div> <!-- content -->
+            {{#UEA_url--pb}}
+            <div class="url" data-max-height="css"> 
+              <div style="font-size:{{UEA_url-font-size--ptc}}{{^UEA_url-font-size--ptc}}100{{/UEA_url-font-size--ptc}}%;">
+                www.{{{UEA_url--pb}}}
+              </div> <!-- font-size -->
+            </div> <!-- url -->
+            <div class="logo logo--senary">
+              <svg viewBox="0 0 113 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="fill" stroke="none" stroke-width="1" fill="" fill-rule="evenodd"> <g id="UEA_NEW_BRAND_Green"> <path d="M27.731,51.046 C27.117,51.046 27.535,51.029 26.958,51.029 C19.827,51.029 14.474,46.128 14.474,32.408 L14.474,12.187 C14.474,5.253 17.541,2.622 21.878,2.622 L21.878,1.798 L0,1.798 L0,2.612 C3.802,2.686 5.177,5.917 5.177,10.167 L5.177,30.101 C5.177,45.118 12.366,51.899 25.4,51.899 C25.541,51.899 25.86,51.899 25.86,51.899 L27.729,51.899 L27.731,51.046" id="shape" fill="#1A1919"></path> <path d="M71.689,37.099 C71.604,29.571 69.907,27.952 62.389,27.88 L62.389,27.136 C69.907,27.062 71.604,25.446 71.689,17.919 L72.397,17.919 C72.484,25.446 74.177,27.057 81.695,27.13 L81.695,27.88 C74.177,27.952 72.484,29.571 72.397,37.099 L71.689,37.099" id="star" fill="purple" class="glint"></path> <path d="M31.349,51.051 C38.152,51.051 41.146,46.432 41.146,39.903 C41.146,32.083 41.146,39.903 41.146,39.903 L41.139,11.515 C41.139,4.847 37.798,2.629 33.747,2.629 L33.744,1.796 L72.388,1.796 L72.406,12.283 L71.72,12.281 C70.567,6.116 68.162,3.708 60.322,3.708 C60.322,3.708 59.009,3.708 58.504,3.708 C51.131,3.708 49.681,6.06 49.681,12.659 C49.681,14.544 49.681,18.798 49.681,18.798 C49.681,26.8 52.948,27.128 59.106,27.128 L59.106,27.878 C52.948,27.878 49.681,28.55 49.681,36.63 L49.681,39.257 C49.681,49.155 50.93,49.814 59.249,49.814 C64.167,49.814 70.163,48.554 71.704,41.769 L72.407,41.772 L72.407,51.899 L31.349,51.899 L31.349,51.051" id="shape" fill="#1A1919"></path> <path d="M86.156,51.046 C92.949,51.046 94.665,46.659 91.585,39.778 L81.175,13.744 L84.183,0.868 L84.756,0.866 C84.756,0.866 99.072,34.856 102.622,41.733 C106.369,48.991 109.518,51.051 112.625,51.051 L112.625,51.899 L86.156,51.899 L86.156,51.046" id="shape" fill="#1A1919"></path> <path d="M7.958,66.364 C6.165,66.364 5.093,65.073 5.093,62.911 L5.093,58.488 L6.198,58.488 L6.198,62.855 C6.198,64.478 6.935,65.209 7.979,65.209 C9.019,65.209 9.73,64.497 9.73,62.911 L9.73,58.488 L10.834,58.488 L10.834,62.845 C10.834,65.048 9.76,66.364 7.958,66.364" id="shape" fill="#1A1919"></path> <path d="M16.516,66.189 L15.439,66.189 L15.439,62.755 C15.439,61.783 15.032,61.269 14.334,61.269 C13.603,61.269 13.027,61.853 13.027,62.823 L13.027,66.189 L11.951,66.189 L11.951,60.292 L12.964,60.292 L12.964,61.124 C13.309,60.487 13.854,60.17 14.546,60.17 C15.742,60.17 16.516,61.101 16.516,62.545 L16.516,66.189" id="shape" fill="#1A1919"></path> <path d="M17.901,59.588 L18.963,59.588 L18.963,58.497 L17.901,58.497 L17.901,59.588 Z M17.897,66.189 L18.973,66.189 L18.973,60.292 L17.897,60.292 L17.897,66.189 Z" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="22.841 66.231 21.89 66.231 19.778 60.292 20.917 60.292 22.368 64.71 23.827 60.292 24.947 60.292 22.841 66.231"></polyline> <path d="M26.335,62.766 L29.072,62.766 C28.978,61.885 28.53,61.192 27.723,61.192 C26.956,61.192 26.425,61.909 26.335,62.766 Z M27.837,66.322 C26.324,66.322 25.221,64.999 25.221,63.245 C25.221,61.491 26.315,60.17 27.742,60.17 C29.168,60.17 30.168,61.423 30.168,63.289 C30.168,63.369 30.168,63.46 30.158,63.597 L30.154,63.724 L26.341,63.724 C26.462,64.785 27.117,65.314 27.857,65.314 C28.336,65.314 28.851,65.114 29.296,64.574 L29.339,64.524 L29.384,64.569 L29.931,65.115 L29.977,65.163 L29.936,65.219 C29.389,65.974 28.698,66.322 27.837,66.322 Z" id="shape" fill="#1A1919"></path> <path d="M32.177,66.189 L31.119,66.189 L31.119,60.292 L32.152,60.292 L32.152,61.558 C32.51,60.642 33.14,60.19 33.919,60.19 C33.95,60.19 34.069,60.194 34.069,60.194 L34.069,61.462 L33.949,61.462 C32.978,61.462 32.177,62.224 32.177,63.823 L32.177,66.189" id="shape" fill="#1A1919"></path> <path d="M36.405,66.298 C35.75,66.298 35.01,66.03 34.441,65.497 L34.395,65.456 L34.879,64.614 L34.932,64.659 C35.474,65.13 35.953,65.317 36.513,65.317 C37.091,65.317 37.432,65.042 37.432,64.591 C37.432,64.118 37.067,63.95 36.388,63.731 C35.673,63.497 34.696,63.157 34.696,61.933 C34.696,60.898 35.541,60.192 36.574,60.192 C37.189,60.192 37.787,60.372 38.315,60.776 L38.366,60.814 L37.93,61.698 L37.877,61.657 C37.405,61.305 36.876,61.173 36.529,61.173 C35.998,61.173 35.68,61.453 35.68,61.821 C35.68,62.286 35.976,62.397 36.854,62.669 C37.82,62.97 38.413,63.524 38.413,64.48 C38.413,65.576 37.584,66.298 36.405,66.298" id="shape" fill="#1A1919"></path> <path d="M46.412,68 C45.693,68 45.01,67.501 45.01,67.501 L45.37,66.512 C45.37,66.512 45.924,66.925 46.351,66.925 C46.926,66.925 47.187,66.565 47.396,65.966 L45.153,60.292 L46.319,60.292 L47.917,64.505 L49.226,60.292 L50.362,60.292 L48.236,66.331 C47.828,67.403 47.231,68 46.436,68" id="shape" fill="#1A1919"></path> <path d="M54.704,61.223 C53.871,61.223 53.114,61.98 53.114,63.206 C53.114,64.44 53.879,65.229 54.723,65.229 C55.562,65.229 56.327,64.47 56.327,63.251 C56.327,62.129 55.624,61.225 54.704,61.225 M54.704,66.306 C53.222,66.306 52.019,64.963 52.019,63.251 C52.019,61.503 53.229,60.153 54.723,60.153 C56.21,60.153 57.428,61.494 57.428,63.206 C57.428,64.952 56.202,66.306 54.704,66.306" id="shape" fill="#1A1919"></path> <path d="M59.579,66.183 L58.486,66.183 L58.486,61.353 L57.802,61.353 L57.802,60.286 L58.486,60.286 L58.486,59.903 C58.486,58.466 59.592,58.173 60.103,58.173 C60.489,58.173 60.742,58.241 60.943,58.323 L60.985,58.341 L60.985,59.407 L60.931,59.382 C60.773,59.302 60.502,59.239 60.322,59.239 C59.781,59.239 59.57,59.542 59.57,60.029 L59.57,60.298 L60.975,60.298 L60.975,61.353 L59.579,61.353 L59.579,66.183" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="68.461 66.18 63.709 66.18 63.709 58.476 68.413 58.476 68.413 59.589 64.83 59.589 64.83 61.591 67.979 61.591 67.979 62.702 64.83 62.702 64.83 65.077 68.461 65.077 68.461 66.18"></polyline> <path d="M70.168,64.355 C70.168,64.964 70.61,65.278 71.183,65.278 C72.092,65.278 72.61,64.62 72.61,63.866 L72.61,63.545 C72.368,63.398 71.939,63.296 71.476,63.296 C70.819,63.296 70.168,63.625 70.168,64.355 Z M71.038,66.284 C70.084,66.284 69.076,65.678 69.076,64.383 C69.076,63.138 69.987,62.296 71.362,62.296 C71.891,62.296 72.331,62.41 72.587,62.519 L72.587,62.437 C72.587,61.817 72.271,61.239 71.413,61.239 C70.796,61.239 70.212,61.463 69.744,61.773 L69.683,61.813 L69.372,60.8 L69.423,60.761 C69.884,60.458 70.646,60.177 71.433,60.177 C72.143,60.177 72.739,60.403 73.11,60.832 C73.471,61.251 73.667,61.82 73.667,62.574 L73.667,66.18 L72.723,66.18 L72.723,65.433 C72.511,65.835 71.89,66.284 71.038,66.284 Z" id="shape" fill="#1A1919"></path> <path d="M88.896,63.121 L87.704,60.089 L86.514,63.124 L88.896,63.121 Z M91.24,66.18 L90.04,66.18 L89.31,64.232 L86.104,64.232 L85.374,66.18 L84.188,66.18 L87.282,58.486 L88.146,58.486 L91.24,66.18 Z" id="shape" fill="#1A1919"></path> <path d="M99.789,61.238 C99.01,61.238 98.341,61.847 98.341,62.926 C98.341,64.005 99.037,64.659 99.789,64.659 C100.637,64.659 101.365,63.972 101.365,62.958 C101.365,61.764 100.57,61.238 99.789,61.238 M99.797,67.98 C98.944,67.98 98.171,67.708 97.498,67.167 L97.451,67.128 L97.915,66.157 L97.971,66.206 C98.538,66.685 99.17,66.927 99.85,66.927 C100.96,66.927 101.469,66.151 101.469,65.126 L101.469,64.659 C101.127,65.384 100.395,65.733 99.645,65.733 C98.463,65.733 97.24,64.7 97.24,62.972 C97.24,61.202 98.463,60.161 99.645,60.161 C100.397,60.161 101.162,60.522 101.527,61.183 L101.527,60.282 L102.485,60.282 L102.485,65.106 C102.485,65.988 102.263,66.69 101.831,67.192 C101.383,67.708 100.623,67.98 99.797,67.98" id="shape" fill="#1A1919"></path> <polygon id="shape" fill="#1A1919" points="103.688 66.179 104.764 66.179 104.764 58.491 103.688 58.491"></polygon> <path d="M43.647,66.294 C42.701,66.294 42.126,65.69 42.126,64.597 L42.126,61.374 L41.433,61.374 L41.433,60.296 L42.11,60.295 L42.11,58.661 L43.207,58.661 L43.207,60.298 L44.665,60.298 L44.665,61.374 L43.207,61.374 L43.207,64.312 C43.207,64.866 43.392,65.194 43.86,65.194 C44.105,65.194 44.346,65.136 44.525,65.03 L44.615,64.981 L44.611,66.02 L44.57,66.04 C44.283,66.214 43.988,66.294 43.647,66.294" id="shape" fill="#1A1919"></path> <path d="M81.133,66.275 C80.186,66.275 79.611,65.672 79.611,64.579 L79.611,61.356 L78.917,61.356 L78.917,60.289 L79.59,60.288 L79.588,58.642 L80.692,58.642 L80.692,60.278 L82.149,60.278 L82.149,61.356 L80.692,61.356 L80.692,64.293 C80.692,64.847 80.877,65.175 81.345,65.175 C81.591,65.175 81.831,65.118 82.01,65.012 L82.1,64.962 L82.102,66.002 L82.055,66.023 C81.768,66.195 81.473,66.275 81.133,66.275" id="shape" fill="#1A1919"></path> <path d="M96.369,66.184 L95.29,66.184 L95.29,62.751 C95.29,61.779 94.883,61.265 94.186,61.265 C93.455,61.265 92.879,61.849 92.879,62.818 L92.879,66.184 L91.802,66.184 L91.802,60.288 L92.816,60.288 L92.816,61.12 C93.161,60.482 93.706,60.165 94.397,60.165 C95.594,60.165 96.369,61.097 96.369,62.54 L96.369,66.184" id="shape" fill="#1A1919"></path> <path d="M39.445,59.591 L40.508,59.591 L40.508,58.5 L39.445,58.5 L39.445,59.591 Z M39.441,66.202 L40.518,66.202 L40.518,60.294 L39.441,60.294 L39.441,66.202 Z" id="shape" fill="#1A1919"></path> <path d="M106.04,59.595 L107.103,59.595 L107.103,58.504 L106.04,58.504 L106.04,59.595 Z M106.036,66.176 L107.112,66.176 L107.112,60.28 L106.036,60.28 L106.036,66.176 Z" id="shape" fill="#1A1919"></path> <path d="M76.36,66.274 C75.704,66.274 74.964,66.006 74.397,65.474 L74.35,65.433 L74.835,64.589 L74.887,64.636 C75.429,65.106 75.909,65.294 76.467,65.294 C77.046,65.294 77.387,65.019 77.387,64.567 C77.387,64.095 77.022,63.926 76.342,63.706 C75.628,63.473 74.651,63.132 74.651,61.909 C74.651,60.874 75.496,60.168 76.529,60.168 C77.144,60.168 77.741,60.348 78.27,60.752 L78.321,60.79 L77.884,61.673 L77.832,61.634 C77.36,61.28 76.831,61.149 76.483,61.149 C75.953,61.149 75.635,61.429 75.635,61.798 C75.635,62.263 75.93,62.372 76.808,62.645 C77.774,62.944 78.368,63.5 78.368,64.456 C78.368,65.552 77.539,66.274 76.36,66.274" id="shape" fill="#1A1919"></path> <path d="M109.129,64.378 C109.129,64.988 109.572,65.302 110.145,65.302 C111.054,65.302 111.572,64.645 111.572,63.891 L111.572,63.569 C111.331,63.423 110.901,63.321 110.438,63.321 C109.782,63.321 109.129,63.649 109.129,64.378 Z M110,66.309 C109.046,66.309 108.039,65.702 108.039,64.407 C108.039,63.162 108.951,62.321 110.324,62.321 C110.852,62.321 111.293,62.435 111.55,62.544 L111.55,62.461 C111.55,61.843 111.234,61.265 110.375,61.265 C109.758,61.265 109.174,61.487 108.706,61.798 L108.644,61.837 L108.333,60.823 L108.385,60.786 C108.846,60.482 109.608,60.202 110.396,60.202 C111.105,60.202 111.701,60.427 112.073,60.856 C112.433,61.275 112.629,61.845 112.629,62.599 L112.629,66.187 L111.685,66.187 L111.685,65.457 C111.473,65.86 110.852,66.309 110,66.309 Z" id="shape" fill="#1A1919"></path> </g> </g> </svg>
+            </div><!--logo--> 
+            {{/UEA_url--pb}}
+            <div class="element__container glintPosition--{{UEA_glint-position--ptc}}{{^UEA_glint-position--ptc}}top{{/UEA_glint-position--ptc}}">
+              <img src="https://files.outfit.io/media_library_items/93089/glint-stand.svg" class="element__stand">               
+              <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="element">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"  id="star"/>
+              </svg>
+            </div> <!-- element__container -->
+          </div> <!-- section -->
+          <div class="section section--right">
+            <div class="postgraduateText postgraduateText--postgraduate"> POSTGRADUATE </div> <!-- postgraduateText -->
+            <div class="postgraduateText postgraduateText--masters"> MASTER'S DEGREES </div> <!-- postgraduateText -->
+            <div class="postgraduateText postgraduateText--phd"> PhDs AND<br> RESEARCH DEGREES
+            </div> <!-- postgraduateText -->
+            <div class="logo logo--primary">
+              <svg viewBox="0 0 113 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="fill" stroke="none" stroke-width="1" fill="" fill-rule="evenodd"> <g id="UEA_NEW_BRAND_Green"> <path d="M27.731,51.046 C27.117,51.046 27.535,51.029 26.958,51.029 C19.827,51.029 14.474,46.128 14.474,32.408 L14.474,12.187 C14.474,5.253 17.541,2.622 21.878,2.622 L21.878,1.798 L0,1.798 L0,2.612 C3.802,2.686 5.177,5.917 5.177,10.167 L5.177,30.101 C5.177,45.118 12.366,51.899 25.4,51.899 C25.541,51.899 25.86,51.899 25.86,51.899 L27.729,51.899 L27.731,51.046" id="shape" fill="#1A1919"></path> <path d="M71.689,37.099 C71.604,29.571 69.907,27.952 62.389,27.88 L62.389,27.136 C69.907,27.062 71.604,25.446 71.689,17.919 L72.397,17.919 C72.484,25.446 74.177,27.057 81.695,27.13 L81.695,27.88 C74.177,27.952 72.484,29.571 72.397,37.099 L71.689,37.099" id="star" fill="purple" class="glint"></path> <path d="M31.349,51.051 C38.152,51.051 41.146,46.432 41.146,39.903 C41.146,32.083 41.146,39.903 41.146,39.903 L41.139,11.515 C41.139,4.847 37.798,2.629 33.747,2.629 L33.744,1.796 L72.388,1.796 L72.406,12.283 L71.72,12.281 C70.567,6.116 68.162,3.708 60.322,3.708 C60.322,3.708 59.009,3.708 58.504,3.708 C51.131,3.708 49.681,6.06 49.681,12.659 C49.681,14.544 49.681,18.798 49.681,18.798 C49.681,26.8 52.948,27.128 59.106,27.128 L59.106,27.878 C52.948,27.878 49.681,28.55 49.681,36.63 L49.681,39.257 C49.681,49.155 50.93,49.814 59.249,49.814 C64.167,49.814 70.163,48.554 71.704,41.769 L72.407,41.772 L72.407,51.899 L31.349,51.899 L31.349,51.051" id="shape" fill="#1A1919"></path> <path d="M86.156,51.046 C92.949,51.046 94.665,46.659 91.585,39.778 L81.175,13.744 L84.183,0.868 L84.756,0.866 C84.756,0.866 99.072,34.856 102.622,41.733 C106.369,48.991 109.518,51.051 112.625,51.051 L112.625,51.899 L86.156,51.899 L86.156,51.046" id="shape" fill="#1A1919"></path> <path d="M7.958,66.364 C6.165,66.364 5.093,65.073 5.093,62.911 L5.093,58.488 L6.198,58.488 L6.198,62.855 C6.198,64.478 6.935,65.209 7.979,65.209 C9.019,65.209 9.73,64.497 9.73,62.911 L9.73,58.488 L10.834,58.488 L10.834,62.845 C10.834,65.048 9.76,66.364 7.958,66.364" id="shape" fill="#1A1919"></path> <path d="M16.516,66.189 L15.439,66.189 L15.439,62.755 C15.439,61.783 15.032,61.269 14.334,61.269 C13.603,61.269 13.027,61.853 13.027,62.823 L13.027,66.189 L11.951,66.189 L11.951,60.292 L12.964,60.292 L12.964,61.124 C13.309,60.487 13.854,60.17 14.546,60.17 C15.742,60.17 16.516,61.101 16.516,62.545 L16.516,66.189" id="shape" fill="#1A1919"></path> <path d="M17.901,59.588 L18.963,59.588 L18.963,58.497 L17.901,58.497 L17.901,59.588 Z M17.897,66.189 L18.973,66.189 L18.973,60.292 L17.897,60.292 L17.897,66.189 Z" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="22.841 66.231 21.89 66.231 19.778 60.292 20.917 60.292 22.368 64.71 23.827 60.292 24.947 60.292 22.841 66.231"></polyline> <path d="M26.335,62.766 L29.072,62.766 C28.978,61.885 28.53,61.192 27.723,61.192 C26.956,61.192 26.425,61.909 26.335,62.766 Z M27.837,66.322 C26.324,66.322 25.221,64.999 25.221,63.245 C25.221,61.491 26.315,60.17 27.742,60.17 C29.168,60.17 30.168,61.423 30.168,63.289 C30.168,63.369 30.168,63.46 30.158,63.597 L30.154,63.724 L26.341,63.724 C26.462,64.785 27.117,65.314 27.857,65.314 C28.336,65.314 28.851,65.114 29.296,64.574 L29.339,64.524 L29.384,64.569 L29.931,65.115 L29.977,65.163 L29.936,65.219 C29.389,65.974 28.698,66.322 27.837,66.322 Z" id="shape" fill="#1A1919"></path> <path d="M32.177,66.189 L31.119,66.189 L31.119,60.292 L32.152,60.292 L32.152,61.558 C32.51,60.642 33.14,60.19 33.919,60.19 C33.95,60.19 34.069,60.194 34.069,60.194 L34.069,61.462 L33.949,61.462 C32.978,61.462 32.177,62.224 32.177,63.823 L32.177,66.189" id="shape" fill="#1A1919"></path> <path d="M36.405,66.298 C35.75,66.298 35.01,66.03 34.441,65.497 L34.395,65.456 L34.879,64.614 L34.932,64.659 C35.474,65.13 35.953,65.317 36.513,65.317 C37.091,65.317 37.432,65.042 37.432,64.591 C37.432,64.118 37.067,63.95 36.388,63.731 C35.673,63.497 34.696,63.157 34.696,61.933 C34.696,60.898 35.541,60.192 36.574,60.192 C37.189,60.192 37.787,60.372 38.315,60.776 L38.366,60.814 L37.93,61.698 L37.877,61.657 C37.405,61.305 36.876,61.173 36.529,61.173 C35.998,61.173 35.68,61.453 35.68,61.821 C35.68,62.286 35.976,62.397 36.854,62.669 C37.82,62.97 38.413,63.524 38.413,64.48 C38.413,65.576 37.584,66.298 36.405,66.298" id="shape" fill="#1A1919"></path> <path d="M46.412,68 C45.693,68 45.01,67.501 45.01,67.501 L45.37,66.512 C45.37,66.512 45.924,66.925 46.351,66.925 C46.926,66.925 47.187,66.565 47.396,65.966 L45.153,60.292 L46.319,60.292 L47.917,64.505 L49.226,60.292 L50.362,60.292 L48.236,66.331 C47.828,67.403 47.231,68 46.436,68" id="shape" fill="#1A1919"></path> <path d="M54.704,61.223 C53.871,61.223 53.114,61.98 53.114,63.206 C53.114,64.44 53.879,65.229 54.723,65.229 C55.562,65.229 56.327,64.47 56.327,63.251 C56.327,62.129 55.624,61.225 54.704,61.225 M54.704,66.306 C53.222,66.306 52.019,64.963 52.019,63.251 C52.019,61.503 53.229,60.153 54.723,60.153 C56.21,60.153 57.428,61.494 57.428,63.206 C57.428,64.952 56.202,66.306 54.704,66.306" id="shape" fill="#1A1919"></path> <path d="M59.579,66.183 L58.486,66.183 L58.486,61.353 L57.802,61.353 L57.802,60.286 L58.486,60.286 L58.486,59.903 C58.486,58.466 59.592,58.173 60.103,58.173 C60.489,58.173 60.742,58.241 60.943,58.323 L60.985,58.341 L60.985,59.407 L60.931,59.382 C60.773,59.302 60.502,59.239 60.322,59.239 C59.781,59.239 59.57,59.542 59.57,60.029 L59.57,60.298 L60.975,60.298 L60.975,61.353 L59.579,61.353 L59.579,66.183" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="68.461 66.18 63.709 66.18 63.709 58.476 68.413 58.476 68.413 59.589 64.83 59.589 64.83 61.591 67.979 61.591 67.979 62.702 64.83 62.702 64.83 65.077 68.461 65.077 68.461 66.18"></polyline> <path d="M70.168,64.355 C70.168,64.964 70.61,65.278 71.183,65.278 C72.092,65.278 72.61,64.62 72.61,63.866 L72.61,63.545 C72.368,63.398 71.939,63.296 71.476,63.296 C70.819,63.296 70.168,63.625 70.168,64.355 Z M71.038,66.284 C70.084,66.284 69.076,65.678 69.076,64.383 C69.076,63.138 69.987,62.296 71.362,62.296 C71.891,62.296 72.331,62.41 72.587,62.519 L72.587,62.437 C72.587,61.817 72.271,61.239 71.413,61.239 C70.796,61.239 70.212,61.463 69.744,61.773 L69.683,61.813 L69.372,60.8 L69.423,60.761 C69.884,60.458 70.646,60.177 71.433,60.177 C72.143,60.177 72.739,60.403 73.11,60.832 C73.471,61.251 73.667,61.82 73.667,62.574 L73.667,66.18 L72.723,66.18 L72.723,65.433 C72.511,65.835 71.89,66.284 71.038,66.284 Z" id="shape" fill="#1A1919"></path> <path d="M88.896,63.121 L87.704,60.089 L86.514,63.124 L88.896,63.121 Z M91.24,66.18 L90.04,66.18 L89.31,64.232 L86.104,64.232 L85.374,66.18 L84.188,66.18 L87.282,58.486 L88.146,58.486 L91.24,66.18 Z" id="shape" fill="#1A1919"></path> <path d="M99.789,61.238 C99.01,61.238 98.341,61.847 98.341,62.926 C98.341,64.005 99.037,64.659 99.789,64.659 C100.637,64.659 101.365,63.972 101.365,62.958 C101.365,61.764 100.57,61.238 99.789,61.238 M99.797,67.98 C98.944,67.98 98.171,67.708 97.498,67.167 L97.451,67.128 L97.915,66.157 L97.971,66.206 C98.538,66.685 99.17,66.927 99.85,66.927 C100.96,66.927 101.469,66.151 101.469,65.126 L101.469,64.659 C101.127,65.384 100.395,65.733 99.645,65.733 C98.463,65.733 97.24,64.7 97.24,62.972 C97.24,61.202 98.463,60.161 99.645,60.161 C100.397,60.161 101.162,60.522 101.527,61.183 L101.527,60.282 L102.485,60.282 L102.485,65.106 C102.485,65.988 102.263,66.69 101.831,67.192 C101.383,67.708 100.623,67.98 99.797,67.98" id="shape" fill="#1A1919"></path> <polygon id="shape" fill="#1A1919" points="103.688 66.179 104.764 66.179 104.764 58.491 103.688 58.491"></polygon> <path d="M43.647,66.294 C42.701,66.294 42.126,65.69 42.126,64.597 L42.126,61.374 L41.433,61.374 L41.433,60.296 L42.11,60.295 L42.11,58.661 L43.207,58.661 L43.207,60.298 L44.665,60.298 L44.665,61.374 L43.207,61.374 L43.207,64.312 C43.207,64.866 43.392,65.194 43.86,65.194 C44.105,65.194 44.346,65.136 44.525,65.03 L44.615,64.981 L44.611,66.02 L44.57,66.04 C44.283,66.214 43.988,66.294 43.647,66.294" id="shape" fill="#1A1919"></path> <path d="M81.133,66.275 C80.186,66.275 79.611,65.672 79.611,64.579 L79.611,61.356 L78.917,61.356 L78.917,60.289 L79.59,60.288 L79.588,58.642 L80.692,58.642 L80.692,60.278 L82.149,60.278 L82.149,61.356 L80.692,61.356 L80.692,64.293 C80.692,64.847 80.877,65.175 81.345,65.175 C81.591,65.175 81.831,65.118 82.01,65.012 L82.1,64.962 L82.102,66.002 L82.055,66.023 C81.768,66.195 81.473,66.275 81.133,66.275" id="shape" fill="#1A1919"></path> <path d="M96.369,66.184 L95.29,66.184 L95.29,62.751 C95.29,61.779 94.883,61.265 94.186,61.265 C93.455,61.265 92.879,61.849 92.879,62.818 L92.879,66.184 L91.802,66.184 L91.802,60.288 L92.816,60.288 L92.816,61.12 C93.161,60.482 93.706,60.165 94.397,60.165 C95.594,60.165 96.369,61.097 96.369,62.54 L96.369,66.184" id="shape" fill="#1A1919"></path> <path d="M39.445,59.591 L40.508,59.591 L40.508,58.5 L39.445,58.5 L39.445,59.591 Z M39.441,66.202 L40.518,66.202 L40.518,60.294 L39.441,60.294 L39.441,66.202 Z" id="shape" fill="#1A1919"></path> <path d="M106.04,59.595 L107.103,59.595 L107.103,58.504 L106.04,58.504 L106.04,59.595 Z M106.036,66.176 L107.112,66.176 L107.112,60.28 L106.036,60.28 L106.036,66.176 Z" id="shape" fill="#1A1919"></path> <path d="M76.36,66.274 C75.704,66.274 74.964,66.006 74.397,65.474 L74.35,65.433 L74.835,64.589 L74.887,64.636 C75.429,65.106 75.909,65.294 76.467,65.294 C77.046,65.294 77.387,65.019 77.387,64.567 C77.387,64.095 77.022,63.926 76.342,63.706 C75.628,63.473 74.651,63.132 74.651,61.909 C74.651,60.874 75.496,60.168 76.529,60.168 C77.144,60.168 77.741,60.348 78.27,60.752 L78.321,60.79 L77.884,61.673 L77.832,61.634 C77.36,61.28 76.831,61.149 76.483,61.149 C75.953,61.149 75.635,61.429 75.635,61.798 C75.635,62.263 75.93,62.372 76.808,62.645 C77.774,62.944 78.368,63.5 78.368,64.456 C78.368,65.552 77.539,66.274 76.36,66.274" id="shape" fill="#1A1919"></path> <path d="M109.129,64.378 C109.129,64.988 109.572,65.302 110.145,65.302 C111.054,65.302 111.572,64.645 111.572,63.891 L111.572,63.569 C111.331,63.423 110.901,63.321 110.438,63.321 C109.782,63.321 109.129,63.649 109.129,64.378 Z M110,66.309 C109.046,66.309 108.039,65.702 108.039,64.407 C108.039,63.162 108.951,62.321 110.324,62.321 C110.852,62.321 111.293,62.435 111.55,62.544 L111.55,62.461 C111.55,61.843 111.234,61.265 110.375,61.265 C109.758,61.265 109.174,61.487 108.706,61.798 L108.644,61.837 L108.333,60.823 L108.385,60.786 C108.846,60.482 109.608,60.202 110.396,60.202 C111.105,60.202 111.701,60.427 112.073,60.856 C112.433,61.275 112.629,61.845 112.629,62.599 L112.629,66.187 L111.685,66.187 L111.685,65.457 C111.473,65.86 110.852,66.309 110,66.309 Z" id="shape" fill="#1A1919"></path> </g> </g> </svg>
+            </div><!--logo--> 
+          </div> <!-- section -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- FRONT PAGE -->
+    <!-- BACK PAGE -->
+    <div class="page backPageLayout--{{UEA_layout-selection--ptc}}{{^UEA_layout-selection--ptc}}noStat{{/UEA_layout-selection--ptc}} backPageQuoteDisplay--{{UEA_backpage-pg-choice--ptc}}{{^UEA_backpage-pg-choice--ptc}}show{{/UEA_backpage-pg-choice--ptc}}">
+
+      <div class="bleed">
+
+        <div class="container fit fit--backPage">
+          <div class="section section--left">
+            <div class="logo logo--quinary">
+              <svg viewBox="0 0 113 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="fill" stroke="none" stroke-width="1" fill="" fill-rule="evenodd"> <g id="UEA_NEW_BRAND_Green"> <path d="M27.731,51.046 C27.117,51.046 27.535,51.029 26.958,51.029 C19.827,51.029 14.474,46.128 14.474,32.408 L14.474,12.187 C14.474,5.253 17.541,2.622 21.878,2.622 L21.878,1.798 L0,1.798 L0,2.612 C3.802,2.686 5.177,5.917 5.177,10.167 L5.177,30.101 C5.177,45.118 12.366,51.899 25.4,51.899 C25.541,51.899 25.86,51.899 25.86,51.899 L27.729,51.899 L27.731,51.046" id="shape" fill="#1A1919"></path> <path d="M71.689,37.099 C71.604,29.571 69.907,27.952 62.389,27.88 L62.389,27.136 C69.907,27.062 71.604,25.446 71.689,17.919 L72.397,17.919 C72.484,25.446 74.177,27.057 81.695,27.13 L81.695,27.88 C74.177,27.952 72.484,29.571 72.397,37.099 L71.689,37.099" id="star" fill="purple" class="glint"></path> <path d="M31.349,51.051 C38.152,51.051 41.146,46.432 41.146,39.903 C41.146,32.083 41.146,39.903 41.146,39.903 L41.139,11.515 C41.139,4.847 37.798,2.629 33.747,2.629 L33.744,1.796 L72.388,1.796 L72.406,12.283 L71.72,12.281 C70.567,6.116 68.162,3.708 60.322,3.708 C60.322,3.708 59.009,3.708 58.504,3.708 C51.131,3.708 49.681,6.06 49.681,12.659 C49.681,14.544 49.681,18.798 49.681,18.798 C49.681,26.8 52.948,27.128 59.106,27.128 L59.106,27.878 C52.948,27.878 49.681,28.55 49.681,36.63 L49.681,39.257 C49.681,49.155 50.93,49.814 59.249,49.814 C64.167,49.814 70.163,48.554 71.704,41.769 L72.407,41.772 L72.407,51.899 L31.349,51.899 L31.349,51.051" id="shape" fill="#1A1919"></path> <path d="M86.156,51.046 C92.949,51.046 94.665,46.659 91.585,39.778 L81.175,13.744 L84.183,0.868 L84.756,0.866 C84.756,0.866 99.072,34.856 102.622,41.733 C106.369,48.991 109.518,51.051 112.625,51.051 L112.625,51.899 L86.156,51.899 L86.156,51.046" id="shape" fill="#1A1919"></path> <path d="M7.958,66.364 C6.165,66.364 5.093,65.073 5.093,62.911 L5.093,58.488 L6.198,58.488 L6.198,62.855 C6.198,64.478 6.935,65.209 7.979,65.209 C9.019,65.209 9.73,64.497 9.73,62.911 L9.73,58.488 L10.834,58.488 L10.834,62.845 C10.834,65.048 9.76,66.364 7.958,66.364" id="shape" fill="#1A1919"></path> <path d="M16.516,66.189 L15.439,66.189 L15.439,62.755 C15.439,61.783 15.032,61.269 14.334,61.269 C13.603,61.269 13.027,61.853 13.027,62.823 L13.027,66.189 L11.951,66.189 L11.951,60.292 L12.964,60.292 L12.964,61.124 C13.309,60.487 13.854,60.17 14.546,60.17 C15.742,60.17 16.516,61.101 16.516,62.545 L16.516,66.189" id="shape" fill="#1A1919"></path> <path d="M17.901,59.588 L18.963,59.588 L18.963,58.497 L17.901,58.497 L17.901,59.588 Z M17.897,66.189 L18.973,66.189 L18.973,60.292 L17.897,60.292 L17.897,66.189 Z" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="22.841 66.231 21.89 66.231 19.778 60.292 20.917 60.292 22.368 64.71 23.827 60.292 24.947 60.292 22.841 66.231"></polyline> <path d="M26.335,62.766 L29.072,62.766 C28.978,61.885 28.53,61.192 27.723,61.192 C26.956,61.192 26.425,61.909 26.335,62.766 Z M27.837,66.322 C26.324,66.322 25.221,64.999 25.221,63.245 C25.221,61.491 26.315,60.17 27.742,60.17 C29.168,60.17 30.168,61.423 30.168,63.289 C30.168,63.369 30.168,63.46 30.158,63.597 L30.154,63.724 L26.341,63.724 C26.462,64.785 27.117,65.314 27.857,65.314 C28.336,65.314 28.851,65.114 29.296,64.574 L29.339,64.524 L29.384,64.569 L29.931,65.115 L29.977,65.163 L29.936,65.219 C29.389,65.974 28.698,66.322 27.837,66.322 Z" id="shape" fill="#1A1919"></path> <path d="M32.177,66.189 L31.119,66.189 L31.119,60.292 L32.152,60.292 L32.152,61.558 C32.51,60.642 33.14,60.19 33.919,60.19 C33.95,60.19 34.069,60.194 34.069,60.194 L34.069,61.462 L33.949,61.462 C32.978,61.462 32.177,62.224 32.177,63.823 L32.177,66.189" id="shape" fill="#1A1919"></path> <path d="M36.405,66.298 C35.75,66.298 35.01,66.03 34.441,65.497 L34.395,65.456 L34.879,64.614 L34.932,64.659 C35.474,65.13 35.953,65.317 36.513,65.317 C37.091,65.317 37.432,65.042 37.432,64.591 C37.432,64.118 37.067,63.95 36.388,63.731 C35.673,63.497 34.696,63.157 34.696,61.933 C34.696,60.898 35.541,60.192 36.574,60.192 C37.189,60.192 37.787,60.372 38.315,60.776 L38.366,60.814 L37.93,61.698 L37.877,61.657 C37.405,61.305 36.876,61.173 36.529,61.173 C35.998,61.173 35.68,61.453 35.68,61.821 C35.68,62.286 35.976,62.397 36.854,62.669 C37.82,62.97 38.413,63.524 38.413,64.48 C38.413,65.576 37.584,66.298 36.405,66.298" id="shape" fill="#1A1919"></path> <path d="M46.412,68 C45.693,68 45.01,67.501 45.01,67.501 L45.37,66.512 C45.37,66.512 45.924,66.925 46.351,66.925 C46.926,66.925 47.187,66.565 47.396,65.966 L45.153,60.292 L46.319,60.292 L47.917,64.505 L49.226,60.292 L50.362,60.292 L48.236,66.331 C47.828,67.403 47.231,68 46.436,68" id="shape" fill="#1A1919"></path> <path d="M54.704,61.223 C53.871,61.223 53.114,61.98 53.114,63.206 C53.114,64.44 53.879,65.229 54.723,65.229 C55.562,65.229 56.327,64.47 56.327,63.251 C56.327,62.129 55.624,61.225 54.704,61.225 M54.704,66.306 C53.222,66.306 52.019,64.963 52.019,63.251 C52.019,61.503 53.229,60.153 54.723,60.153 C56.21,60.153 57.428,61.494 57.428,63.206 C57.428,64.952 56.202,66.306 54.704,66.306" id="shape" fill="#1A1919"></path> <path d="M59.579,66.183 L58.486,66.183 L58.486,61.353 L57.802,61.353 L57.802,60.286 L58.486,60.286 L58.486,59.903 C58.486,58.466 59.592,58.173 60.103,58.173 C60.489,58.173 60.742,58.241 60.943,58.323 L60.985,58.341 L60.985,59.407 L60.931,59.382 C60.773,59.302 60.502,59.239 60.322,59.239 C59.781,59.239 59.57,59.542 59.57,60.029 L59.57,60.298 L60.975,60.298 L60.975,61.353 L59.579,61.353 L59.579,66.183" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="68.461 66.18 63.709 66.18 63.709 58.476 68.413 58.476 68.413 59.589 64.83 59.589 64.83 61.591 67.979 61.591 67.979 62.702 64.83 62.702 64.83 65.077 68.461 65.077 68.461 66.18"></polyline> <path d="M70.168,64.355 C70.168,64.964 70.61,65.278 71.183,65.278 C72.092,65.278 72.61,64.62 72.61,63.866 L72.61,63.545 C72.368,63.398 71.939,63.296 71.476,63.296 C70.819,63.296 70.168,63.625 70.168,64.355 Z M71.038,66.284 C70.084,66.284 69.076,65.678 69.076,64.383 C69.076,63.138 69.987,62.296 71.362,62.296 C71.891,62.296 72.331,62.41 72.587,62.519 L72.587,62.437 C72.587,61.817 72.271,61.239 71.413,61.239 C70.796,61.239 70.212,61.463 69.744,61.773 L69.683,61.813 L69.372,60.8 L69.423,60.761 C69.884,60.458 70.646,60.177 71.433,60.177 C72.143,60.177 72.739,60.403 73.11,60.832 C73.471,61.251 73.667,61.82 73.667,62.574 L73.667,66.18 L72.723,66.18 L72.723,65.433 C72.511,65.835 71.89,66.284 71.038,66.284 Z" id="shape" fill="#1A1919"></path> <path d="M88.896,63.121 L87.704,60.089 L86.514,63.124 L88.896,63.121 Z M91.24,66.18 L90.04,66.18 L89.31,64.232 L86.104,64.232 L85.374,66.18 L84.188,66.18 L87.282,58.486 L88.146,58.486 L91.24,66.18 Z" id="shape" fill="#1A1919"></path> <path d="M99.789,61.238 C99.01,61.238 98.341,61.847 98.341,62.926 C98.341,64.005 99.037,64.659 99.789,64.659 C100.637,64.659 101.365,63.972 101.365,62.958 C101.365,61.764 100.57,61.238 99.789,61.238 M99.797,67.98 C98.944,67.98 98.171,67.708 97.498,67.167 L97.451,67.128 L97.915,66.157 L97.971,66.206 C98.538,66.685 99.17,66.927 99.85,66.927 C100.96,66.927 101.469,66.151 101.469,65.126 L101.469,64.659 C101.127,65.384 100.395,65.733 99.645,65.733 C98.463,65.733 97.24,64.7 97.24,62.972 C97.24,61.202 98.463,60.161 99.645,60.161 C100.397,60.161 101.162,60.522 101.527,61.183 L101.527,60.282 L102.485,60.282 L102.485,65.106 C102.485,65.988 102.263,66.69 101.831,67.192 C101.383,67.708 100.623,67.98 99.797,67.98" id="shape" fill="#1A1919"></path> <polygon id="shape" fill="#1A1919" points="103.688 66.179 104.764 66.179 104.764 58.491 103.688 58.491"></polygon> <path d="M43.647,66.294 C42.701,66.294 42.126,65.69 42.126,64.597 L42.126,61.374 L41.433,61.374 L41.433,60.296 L42.11,60.295 L42.11,58.661 L43.207,58.661 L43.207,60.298 L44.665,60.298 L44.665,61.374 L43.207,61.374 L43.207,64.312 C43.207,64.866 43.392,65.194 43.86,65.194 C44.105,65.194 44.346,65.136 44.525,65.03 L44.615,64.981 L44.611,66.02 L44.57,66.04 C44.283,66.214 43.988,66.294 43.647,66.294" id="shape" fill="#1A1919"></path> <path d="M81.133,66.275 C80.186,66.275 79.611,65.672 79.611,64.579 L79.611,61.356 L78.917,61.356 L78.917,60.289 L79.59,60.288 L79.588,58.642 L80.692,58.642 L80.692,60.278 L82.149,60.278 L82.149,61.356 L80.692,61.356 L80.692,64.293 C80.692,64.847 80.877,65.175 81.345,65.175 C81.591,65.175 81.831,65.118 82.01,65.012 L82.1,64.962 L82.102,66.002 L82.055,66.023 C81.768,66.195 81.473,66.275 81.133,66.275" id="shape" fill="#1A1919"></path> <path d="M96.369,66.184 L95.29,66.184 L95.29,62.751 C95.29,61.779 94.883,61.265 94.186,61.265 C93.455,61.265 92.879,61.849 92.879,62.818 L92.879,66.184 L91.802,66.184 L91.802,60.288 L92.816,60.288 L92.816,61.12 C93.161,60.482 93.706,60.165 94.397,60.165 C95.594,60.165 96.369,61.097 96.369,62.54 L96.369,66.184" id="shape" fill="#1A1919"></path> <path d="M39.445,59.591 L40.508,59.591 L40.508,58.5 L39.445,58.5 L39.445,59.591 Z M39.441,66.202 L40.518,66.202 L40.518,60.294 L39.441,60.294 L39.441,66.202 Z" id="shape" fill="#1A1919"></path> <path d="M106.04,59.595 L107.103,59.595 L107.103,58.504 L106.04,58.504 L106.04,59.595 Z M106.036,66.176 L107.112,66.176 L107.112,60.28 L106.036,60.28 L106.036,66.176 Z" id="shape" fill="#1A1919"></path> <path d="M76.36,66.274 C75.704,66.274 74.964,66.006 74.397,65.474 L74.35,65.433 L74.835,64.589 L74.887,64.636 C75.429,65.106 75.909,65.294 76.467,65.294 C77.046,65.294 77.387,65.019 77.387,64.567 C77.387,64.095 77.022,63.926 76.342,63.706 C75.628,63.473 74.651,63.132 74.651,61.909 C74.651,60.874 75.496,60.168 76.529,60.168 C77.144,60.168 77.741,60.348 78.27,60.752 L78.321,60.79 L77.884,61.673 L77.832,61.634 C77.36,61.28 76.831,61.149 76.483,61.149 C75.953,61.149 75.635,61.429 75.635,61.798 C75.635,62.263 75.93,62.372 76.808,62.645 C77.774,62.944 78.368,63.5 78.368,64.456 C78.368,65.552 77.539,66.274 76.36,66.274" id="shape" fill="#1A1919"></path> <path d="M109.129,64.378 C109.129,64.988 109.572,65.302 110.145,65.302 C111.054,65.302 111.572,64.645 111.572,63.891 L111.572,63.569 C111.331,63.423 110.901,63.321 110.438,63.321 C109.782,63.321 109.129,63.649 109.129,64.378 Z M110,66.309 C109.046,66.309 108.039,65.702 108.039,64.407 C108.039,63.162 108.951,62.321 110.324,62.321 C110.852,62.321 111.293,62.435 111.55,62.544 L111.55,62.461 C111.55,61.843 111.234,61.265 110.375,61.265 C109.758,61.265 109.174,61.487 108.706,61.798 L108.644,61.837 L108.333,60.823 L108.385,60.786 C108.846,60.482 109.608,60.202 110.396,60.202 C111.105,60.202 111.701,60.427 112.073,60.856 C112.433,61.275 112.629,61.845 112.629,62.599 L112.629,66.187 L111.685,66.187 L111.685,65.457 C111.473,65.86 110.852,66.309 110,66.309 Z" id="shape" fill="#1A1919"></path> </g> </g> </svg>
+            </div><!--logo--> 
+            {{#UEA_heading-back-page--ptc}}
+            <div class="heading heading--primary padded-multiline">
+              <div class="heading__inner" data-max-height="css">
+                <div id="js-padded-multiline-target-3"></div>              
+                <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-3">
+                  {{{UEA_heading-back-page--ptc}}}
+                </div>            
+              </div> <!-- headin__inner -->
+            </div> <!-- heading -->
+            <div class="heading heading--secondary padded-multiline" data-max-height="css"> {{{UEA_heading-back-page--ptc}}} </div> <!-- heading--secondary -->
+            {{/UEA_heading-back-page--ptc}}
+            <div class="content">
+              {{#UEA_body-copy-back-page--ptc}}
+              <div class="copy" data-max-height="css"> {{{UEA_body-copy-back-page--ptc}}} </div> <!-- copy -->
+              {{/UEA_body-copy-back-page--ptc}}
+            </div> <!-- content -->
+            <div class="section__bottom">
+              <div class="info">
+                {{#UEA_cta--ptc}}
+                <div class="cta cta--primary padded-multiline">
+                  <div class="cta__inner" data-max-height="css">
+                    <div id="js-padded-multiline-target-4"></div>              
+                    <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-4">
+                      {{{UEA_cta--ptc}}}
+                    </div>            
+                  </div> <!-- cta__inner -->
+                </div> <!-- cta -->
+                <div class="cta cta--secondary" data-max-line="3"> {{{UEA_cta--ptc}}}  </div> <!-- cta--secondary -->
+                {{/UEA_cta--ptc}}
+                {{#UEA_url-back-page--ptc}}
+                <div class="url" data-max-height="css"> 
+                  <div style="font-size:{{UEA_back-url-font-size--ptc}}{{^UEA_back-url-font-size--ptc}}100{{/UEA_back-url-font-size--ptc}}%;">
+                    www.{{{UEA_url-back-page--ptc}}}
+                  </div> <!--font-size -->
+                </div> <!-- url -->
+                {{/UEA_url-back-page--ptc}}
+              </div> <!-- info -->
+              <div class="logo logo--tertiary">
+                <svg viewBox="0 0 113 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="fill" stroke="none" stroke-width="1" fill="" fill-rule="evenodd"> <g id="UEA_NEW_BRAND_Green"> <path d="M27.731,51.046 C27.117,51.046 27.535,51.029 26.958,51.029 C19.827,51.029 14.474,46.128 14.474,32.408 L14.474,12.187 C14.474,5.253 17.541,2.622 21.878,2.622 L21.878,1.798 L0,1.798 L0,2.612 C3.802,2.686 5.177,5.917 5.177,10.167 L5.177,30.101 C5.177,45.118 12.366,51.899 25.4,51.899 C25.541,51.899 25.86,51.899 25.86,51.899 L27.729,51.899 L27.731,51.046" id="shape" fill="#1A1919"></path> <path d="M71.689,37.099 C71.604,29.571 69.907,27.952 62.389,27.88 L62.389,27.136 C69.907,27.062 71.604,25.446 71.689,17.919 L72.397,17.919 C72.484,25.446 74.177,27.057 81.695,27.13 L81.695,27.88 C74.177,27.952 72.484,29.571 72.397,37.099 L71.689,37.099" id="star" fill="purple" class="glint"></path> <path d="M31.349,51.051 C38.152,51.051 41.146,46.432 41.146,39.903 C41.146,32.083 41.146,39.903 41.146,39.903 L41.139,11.515 C41.139,4.847 37.798,2.629 33.747,2.629 L33.744,1.796 L72.388,1.796 L72.406,12.283 L71.72,12.281 C70.567,6.116 68.162,3.708 60.322,3.708 C60.322,3.708 59.009,3.708 58.504,3.708 C51.131,3.708 49.681,6.06 49.681,12.659 C49.681,14.544 49.681,18.798 49.681,18.798 C49.681,26.8 52.948,27.128 59.106,27.128 L59.106,27.878 C52.948,27.878 49.681,28.55 49.681,36.63 L49.681,39.257 C49.681,49.155 50.93,49.814 59.249,49.814 C64.167,49.814 70.163,48.554 71.704,41.769 L72.407,41.772 L72.407,51.899 L31.349,51.899 L31.349,51.051" id="shape" fill="#1A1919"></path> <path d="M86.156,51.046 C92.949,51.046 94.665,46.659 91.585,39.778 L81.175,13.744 L84.183,0.868 L84.756,0.866 C84.756,0.866 99.072,34.856 102.622,41.733 C106.369,48.991 109.518,51.051 112.625,51.051 L112.625,51.899 L86.156,51.899 L86.156,51.046" id="shape" fill="#1A1919"></path> <path d="M7.958,66.364 C6.165,66.364 5.093,65.073 5.093,62.911 L5.093,58.488 L6.198,58.488 L6.198,62.855 C6.198,64.478 6.935,65.209 7.979,65.209 C9.019,65.209 9.73,64.497 9.73,62.911 L9.73,58.488 L10.834,58.488 L10.834,62.845 C10.834,65.048 9.76,66.364 7.958,66.364" id="shape" fill="#1A1919"></path> <path d="M16.516,66.189 L15.439,66.189 L15.439,62.755 C15.439,61.783 15.032,61.269 14.334,61.269 C13.603,61.269 13.027,61.853 13.027,62.823 L13.027,66.189 L11.951,66.189 L11.951,60.292 L12.964,60.292 L12.964,61.124 C13.309,60.487 13.854,60.17 14.546,60.17 C15.742,60.17 16.516,61.101 16.516,62.545 L16.516,66.189" id="shape" fill="#1A1919"></path> <path d="M17.901,59.588 L18.963,59.588 L18.963,58.497 L17.901,58.497 L17.901,59.588 Z M17.897,66.189 L18.973,66.189 L18.973,60.292 L17.897,60.292 L17.897,66.189 Z" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="22.841 66.231 21.89 66.231 19.778 60.292 20.917 60.292 22.368 64.71 23.827 60.292 24.947 60.292 22.841 66.231"></polyline> <path d="M26.335,62.766 L29.072,62.766 C28.978,61.885 28.53,61.192 27.723,61.192 C26.956,61.192 26.425,61.909 26.335,62.766 Z M27.837,66.322 C26.324,66.322 25.221,64.999 25.221,63.245 C25.221,61.491 26.315,60.17 27.742,60.17 C29.168,60.17 30.168,61.423 30.168,63.289 C30.168,63.369 30.168,63.46 30.158,63.597 L30.154,63.724 L26.341,63.724 C26.462,64.785 27.117,65.314 27.857,65.314 C28.336,65.314 28.851,65.114 29.296,64.574 L29.339,64.524 L29.384,64.569 L29.931,65.115 L29.977,65.163 L29.936,65.219 C29.389,65.974 28.698,66.322 27.837,66.322 Z" id="shape" fill="#1A1919"></path> <path d="M32.177,66.189 L31.119,66.189 L31.119,60.292 L32.152,60.292 L32.152,61.558 C32.51,60.642 33.14,60.19 33.919,60.19 C33.95,60.19 34.069,60.194 34.069,60.194 L34.069,61.462 L33.949,61.462 C32.978,61.462 32.177,62.224 32.177,63.823 L32.177,66.189" id="shape" fill="#1A1919"></path> <path d="M36.405,66.298 C35.75,66.298 35.01,66.03 34.441,65.497 L34.395,65.456 L34.879,64.614 L34.932,64.659 C35.474,65.13 35.953,65.317 36.513,65.317 C37.091,65.317 37.432,65.042 37.432,64.591 C37.432,64.118 37.067,63.95 36.388,63.731 C35.673,63.497 34.696,63.157 34.696,61.933 C34.696,60.898 35.541,60.192 36.574,60.192 C37.189,60.192 37.787,60.372 38.315,60.776 L38.366,60.814 L37.93,61.698 L37.877,61.657 C37.405,61.305 36.876,61.173 36.529,61.173 C35.998,61.173 35.68,61.453 35.68,61.821 C35.68,62.286 35.976,62.397 36.854,62.669 C37.82,62.97 38.413,63.524 38.413,64.48 C38.413,65.576 37.584,66.298 36.405,66.298" id="shape" fill="#1A1919"></path> <path d="M46.412,68 C45.693,68 45.01,67.501 45.01,67.501 L45.37,66.512 C45.37,66.512 45.924,66.925 46.351,66.925 C46.926,66.925 47.187,66.565 47.396,65.966 L45.153,60.292 L46.319,60.292 L47.917,64.505 L49.226,60.292 L50.362,60.292 L48.236,66.331 C47.828,67.403 47.231,68 46.436,68" id="shape" fill="#1A1919"></path> <path d="M54.704,61.223 C53.871,61.223 53.114,61.98 53.114,63.206 C53.114,64.44 53.879,65.229 54.723,65.229 C55.562,65.229 56.327,64.47 56.327,63.251 C56.327,62.129 55.624,61.225 54.704,61.225 M54.704,66.306 C53.222,66.306 52.019,64.963 52.019,63.251 C52.019,61.503 53.229,60.153 54.723,60.153 C56.21,60.153 57.428,61.494 57.428,63.206 C57.428,64.952 56.202,66.306 54.704,66.306" id="shape" fill="#1A1919"></path> <path d="M59.579,66.183 L58.486,66.183 L58.486,61.353 L57.802,61.353 L57.802,60.286 L58.486,60.286 L58.486,59.903 C58.486,58.466 59.592,58.173 60.103,58.173 C60.489,58.173 60.742,58.241 60.943,58.323 L60.985,58.341 L60.985,59.407 L60.931,59.382 C60.773,59.302 60.502,59.239 60.322,59.239 C59.781,59.239 59.57,59.542 59.57,60.029 L59.57,60.298 L60.975,60.298 L60.975,61.353 L59.579,61.353 L59.579,66.183" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="68.461 66.18 63.709 66.18 63.709 58.476 68.413 58.476 68.413 59.589 64.83 59.589 64.83 61.591 67.979 61.591 67.979 62.702 64.83 62.702 64.83 65.077 68.461 65.077 68.461 66.18"></polyline> <path d="M70.168,64.355 C70.168,64.964 70.61,65.278 71.183,65.278 C72.092,65.278 72.61,64.62 72.61,63.866 L72.61,63.545 C72.368,63.398 71.939,63.296 71.476,63.296 C70.819,63.296 70.168,63.625 70.168,64.355 Z M71.038,66.284 C70.084,66.284 69.076,65.678 69.076,64.383 C69.076,63.138 69.987,62.296 71.362,62.296 C71.891,62.296 72.331,62.41 72.587,62.519 L72.587,62.437 C72.587,61.817 72.271,61.239 71.413,61.239 C70.796,61.239 70.212,61.463 69.744,61.773 L69.683,61.813 L69.372,60.8 L69.423,60.761 C69.884,60.458 70.646,60.177 71.433,60.177 C72.143,60.177 72.739,60.403 73.11,60.832 C73.471,61.251 73.667,61.82 73.667,62.574 L73.667,66.18 L72.723,66.18 L72.723,65.433 C72.511,65.835 71.89,66.284 71.038,66.284 Z" id="shape" fill="#1A1919"></path> <path d="M88.896,63.121 L87.704,60.089 L86.514,63.124 L88.896,63.121 Z M91.24,66.18 L90.04,66.18 L89.31,64.232 L86.104,64.232 L85.374,66.18 L84.188,66.18 L87.282,58.486 L88.146,58.486 L91.24,66.18 Z" id="shape" fill="#1A1919"></path> <path d="M99.789,61.238 C99.01,61.238 98.341,61.847 98.341,62.926 C98.341,64.005 99.037,64.659 99.789,64.659 C100.637,64.659 101.365,63.972 101.365,62.958 C101.365,61.764 100.57,61.238 99.789,61.238 M99.797,67.98 C98.944,67.98 98.171,67.708 97.498,67.167 L97.451,67.128 L97.915,66.157 L97.971,66.206 C98.538,66.685 99.17,66.927 99.85,66.927 C100.96,66.927 101.469,66.151 101.469,65.126 L101.469,64.659 C101.127,65.384 100.395,65.733 99.645,65.733 C98.463,65.733 97.24,64.7 97.24,62.972 C97.24,61.202 98.463,60.161 99.645,60.161 C100.397,60.161 101.162,60.522 101.527,61.183 L101.527,60.282 L102.485,60.282 L102.485,65.106 C102.485,65.988 102.263,66.69 101.831,67.192 C101.383,67.708 100.623,67.98 99.797,67.98" id="shape" fill="#1A1919"></path> <polygon id="shape" fill="#1A1919" points="103.688 66.179 104.764 66.179 104.764 58.491 103.688 58.491"></polygon> <path d="M43.647,66.294 C42.701,66.294 42.126,65.69 42.126,64.597 L42.126,61.374 L41.433,61.374 L41.433,60.296 L42.11,60.295 L42.11,58.661 L43.207,58.661 L43.207,60.298 L44.665,60.298 L44.665,61.374 L43.207,61.374 L43.207,64.312 C43.207,64.866 43.392,65.194 43.86,65.194 C44.105,65.194 44.346,65.136 44.525,65.03 L44.615,64.981 L44.611,66.02 L44.57,66.04 C44.283,66.214 43.988,66.294 43.647,66.294" id="shape" fill="#1A1919"></path> <path d="M81.133,66.275 C80.186,66.275 79.611,65.672 79.611,64.579 L79.611,61.356 L78.917,61.356 L78.917,60.289 L79.59,60.288 L79.588,58.642 L80.692,58.642 L80.692,60.278 L82.149,60.278 L82.149,61.356 L80.692,61.356 L80.692,64.293 C80.692,64.847 80.877,65.175 81.345,65.175 C81.591,65.175 81.831,65.118 82.01,65.012 L82.1,64.962 L82.102,66.002 L82.055,66.023 C81.768,66.195 81.473,66.275 81.133,66.275" id="shape" fill="#1A1919"></path> <path d="M96.369,66.184 L95.29,66.184 L95.29,62.751 C95.29,61.779 94.883,61.265 94.186,61.265 C93.455,61.265 92.879,61.849 92.879,62.818 L92.879,66.184 L91.802,66.184 L91.802,60.288 L92.816,60.288 L92.816,61.12 C93.161,60.482 93.706,60.165 94.397,60.165 C95.594,60.165 96.369,61.097 96.369,62.54 L96.369,66.184" id="shape" fill="#1A1919"></path> <path d="M39.445,59.591 L40.508,59.591 L40.508,58.5 L39.445,58.5 L39.445,59.591 Z M39.441,66.202 L40.518,66.202 L40.518,60.294 L39.441,60.294 L39.441,66.202 Z" id="shape" fill="#1A1919"></path> <path d="M106.04,59.595 L107.103,59.595 L107.103,58.504 L106.04,58.504 L106.04,59.595 Z M106.036,66.176 L107.112,66.176 L107.112,60.28 L106.036,60.28 L106.036,66.176 Z" id="shape" fill="#1A1919"></path> <path d="M76.36,66.274 C75.704,66.274 74.964,66.006 74.397,65.474 L74.35,65.433 L74.835,64.589 L74.887,64.636 C75.429,65.106 75.909,65.294 76.467,65.294 C77.046,65.294 77.387,65.019 77.387,64.567 C77.387,64.095 77.022,63.926 76.342,63.706 C75.628,63.473 74.651,63.132 74.651,61.909 C74.651,60.874 75.496,60.168 76.529,60.168 C77.144,60.168 77.741,60.348 78.27,60.752 L78.321,60.79 L77.884,61.673 L77.832,61.634 C77.36,61.28 76.831,61.149 76.483,61.149 C75.953,61.149 75.635,61.429 75.635,61.798 C75.635,62.263 75.93,62.372 76.808,62.645 C77.774,62.944 78.368,63.5 78.368,64.456 C78.368,65.552 77.539,66.274 76.36,66.274" id="shape" fill="#1A1919"></path> <path d="M109.129,64.378 C109.129,64.988 109.572,65.302 110.145,65.302 C111.054,65.302 111.572,64.645 111.572,63.891 L111.572,63.569 C111.331,63.423 110.901,63.321 110.438,63.321 C109.782,63.321 109.129,63.649 109.129,64.378 Z M110,66.309 C109.046,66.309 108.039,65.702 108.039,64.407 C108.039,63.162 108.951,62.321 110.324,62.321 C110.852,62.321 111.293,62.435 111.55,62.544 L111.55,62.461 C111.55,61.843 111.234,61.265 110.375,61.265 C109.758,61.265 109.174,61.487 108.706,61.798 L108.644,61.837 L108.333,60.823 L108.385,60.786 C108.846,60.482 109.608,60.202 110.396,60.202 C111.105,60.202 111.701,60.427 112.073,60.856 C112.433,61.275 112.629,61.845 112.629,62.599 L112.629,66.187 L111.685,66.187 L111.685,65.457 C111.473,65.86 110.852,66.309 110,66.309 Z" id="shape" fill="#1A1919"></path> </g> </g> </svg>
+              </div><!--logo-->  
+
+
+
+
+
+              <div class="quote__container quote__container--primary"> 
+                <div class="quote" data-max-line="4"> {{{UEA_quote--ptc}}} </div> <!-- quote -->
+              </div> <!-- quote__container -->
+
+
+
+            </div> <!-- section__bottom -->
+          </div> <!-- section--left -->
+          <div class="section section--right">
+            <div class="details" data-max-height="css">  {{{UEA_postcard-details--ptc}}} </div> <!-- details -->
+            <div class="statistic__container">
+              {{#UEA_statistic-preceeding-text--ptc}} <div class="statistic__text statistic__text--preceeding" data-max-line="1"> {{{UEA_statistic-preceeding-text--ptc}}}  </div> <!-- statistic__text--preceeding  --> {{/UEA_statistic-preceeding-text--ptc}}
+              {{#UEA_statistic--ptc}} <div class="statistic textFit  {{#UEA_statistic-preceeding-text--ptc}}statistic--top{{/UEA_statistic-preceeding-text--ptc}}" data-char-limit="6"> {{{UEA_statistic--ptc}}} </div> <!-- statistic --> {{/UEA_statistic--ptc}}
+              {{#UEA_statistic-main-text--ptc}} <div class="statistic__text" data-max-line="2"> {{{UEA_statistic-main-text--ptc}}}  </div> <!-- statistic__text --> {{/UEA_statistic-main-text--ptc}}
+              {{#UEA_statistic-ref--ptc}} <div class="statistic__ref" data-max-height="css"> {{{UEA_statistic-ref--ptc}}}  </div> <!-- statistic__ref --> {{/UEA_statistic-ref--ptc}}
+            </div> <!-- statistic__container -->
+            <div class="logo logo--quaternary">
+              <svg viewBox="0 0 113 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="fill" stroke="none" stroke-width="1" fill="" fill-rule="evenodd"> <g id="UEA_NEW_BRAND_Green"> <path d="M27.731,51.046 C27.117,51.046 27.535,51.029 26.958,51.029 C19.827,51.029 14.474,46.128 14.474,32.408 L14.474,12.187 C14.474,5.253 17.541,2.622 21.878,2.622 L21.878,1.798 L0,1.798 L0,2.612 C3.802,2.686 5.177,5.917 5.177,10.167 L5.177,30.101 C5.177,45.118 12.366,51.899 25.4,51.899 C25.541,51.899 25.86,51.899 25.86,51.899 L27.729,51.899 L27.731,51.046" id="shape" fill="#1A1919"></path> <path d="M71.689,37.099 C71.604,29.571 69.907,27.952 62.389,27.88 L62.389,27.136 C69.907,27.062 71.604,25.446 71.689,17.919 L72.397,17.919 C72.484,25.446 74.177,27.057 81.695,27.13 L81.695,27.88 C74.177,27.952 72.484,29.571 72.397,37.099 L71.689,37.099" id="star" fill="purple" class="glint"></path> <path d="M31.349,51.051 C38.152,51.051 41.146,46.432 41.146,39.903 C41.146,32.083 41.146,39.903 41.146,39.903 L41.139,11.515 C41.139,4.847 37.798,2.629 33.747,2.629 L33.744,1.796 L72.388,1.796 L72.406,12.283 L71.72,12.281 C70.567,6.116 68.162,3.708 60.322,3.708 C60.322,3.708 59.009,3.708 58.504,3.708 C51.131,3.708 49.681,6.06 49.681,12.659 C49.681,14.544 49.681,18.798 49.681,18.798 C49.681,26.8 52.948,27.128 59.106,27.128 L59.106,27.878 C52.948,27.878 49.681,28.55 49.681,36.63 L49.681,39.257 C49.681,49.155 50.93,49.814 59.249,49.814 C64.167,49.814 70.163,48.554 71.704,41.769 L72.407,41.772 L72.407,51.899 L31.349,51.899 L31.349,51.051" id="shape" fill="#1A1919"></path> <path d="M86.156,51.046 C92.949,51.046 94.665,46.659 91.585,39.778 L81.175,13.744 L84.183,0.868 L84.756,0.866 C84.756,0.866 99.072,34.856 102.622,41.733 C106.369,48.991 109.518,51.051 112.625,51.051 L112.625,51.899 L86.156,51.899 L86.156,51.046" id="shape" fill="#1A1919"></path> <path d="M7.958,66.364 C6.165,66.364 5.093,65.073 5.093,62.911 L5.093,58.488 L6.198,58.488 L6.198,62.855 C6.198,64.478 6.935,65.209 7.979,65.209 C9.019,65.209 9.73,64.497 9.73,62.911 L9.73,58.488 L10.834,58.488 L10.834,62.845 C10.834,65.048 9.76,66.364 7.958,66.364" id="shape" fill="#1A1919"></path> <path d="M16.516,66.189 L15.439,66.189 L15.439,62.755 C15.439,61.783 15.032,61.269 14.334,61.269 C13.603,61.269 13.027,61.853 13.027,62.823 L13.027,66.189 L11.951,66.189 L11.951,60.292 L12.964,60.292 L12.964,61.124 C13.309,60.487 13.854,60.17 14.546,60.17 C15.742,60.17 16.516,61.101 16.516,62.545 L16.516,66.189" id="shape" fill="#1A1919"></path> <path d="M17.901,59.588 L18.963,59.588 L18.963,58.497 L17.901,58.497 L17.901,59.588 Z M17.897,66.189 L18.973,66.189 L18.973,60.292 L17.897,60.292 L17.897,66.189 Z" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="22.841 66.231 21.89 66.231 19.778 60.292 20.917 60.292 22.368 64.71 23.827 60.292 24.947 60.292 22.841 66.231"></polyline> <path d="M26.335,62.766 L29.072,62.766 C28.978,61.885 28.53,61.192 27.723,61.192 C26.956,61.192 26.425,61.909 26.335,62.766 Z M27.837,66.322 C26.324,66.322 25.221,64.999 25.221,63.245 C25.221,61.491 26.315,60.17 27.742,60.17 C29.168,60.17 30.168,61.423 30.168,63.289 C30.168,63.369 30.168,63.46 30.158,63.597 L30.154,63.724 L26.341,63.724 C26.462,64.785 27.117,65.314 27.857,65.314 C28.336,65.314 28.851,65.114 29.296,64.574 L29.339,64.524 L29.384,64.569 L29.931,65.115 L29.977,65.163 L29.936,65.219 C29.389,65.974 28.698,66.322 27.837,66.322 Z" id="shape" fill="#1A1919"></path> <path d="M32.177,66.189 L31.119,66.189 L31.119,60.292 L32.152,60.292 L32.152,61.558 C32.51,60.642 33.14,60.19 33.919,60.19 C33.95,60.19 34.069,60.194 34.069,60.194 L34.069,61.462 L33.949,61.462 C32.978,61.462 32.177,62.224 32.177,63.823 L32.177,66.189" id="shape" fill="#1A1919"></path> <path d="M36.405,66.298 C35.75,66.298 35.01,66.03 34.441,65.497 L34.395,65.456 L34.879,64.614 L34.932,64.659 C35.474,65.13 35.953,65.317 36.513,65.317 C37.091,65.317 37.432,65.042 37.432,64.591 C37.432,64.118 37.067,63.95 36.388,63.731 C35.673,63.497 34.696,63.157 34.696,61.933 C34.696,60.898 35.541,60.192 36.574,60.192 C37.189,60.192 37.787,60.372 38.315,60.776 L38.366,60.814 L37.93,61.698 L37.877,61.657 C37.405,61.305 36.876,61.173 36.529,61.173 C35.998,61.173 35.68,61.453 35.68,61.821 C35.68,62.286 35.976,62.397 36.854,62.669 C37.82,62.97 38.413,63.524 38.413,64.48 C38.413,65.576 37.584,66.298 36.405,66.298" id="shape" fill="#1A1919"></path> <path d="M46.412,68 C45.693,68 45.01,67.501 45.01,67.501 L45.37,66.512 C45.37,66.512 45.924,66.925 46.351,66.925 C46.926,66.925 47.187,66.565 47.396,65.966 L45.153,60.292 L46.319,60.292 L47.917,64.505 L49.226,60.292 L50.362,60.292 L48.236,66.331 C47.828,67.403 47.231,68 46.436,68" id="shape" fill="#1A1919"></path> <path d="M54.704,61.223 C53.871,61.223 53.114,61.98 53.114,63.206 C53.114,64.44 53.879,65.229 54.723,65.229 C55.562,65.229 56.327,64.47 56.327,63.251 C56.327,62.129 55.624,61.225 54.704,61.225 M54.704,66.306 C53.222,66.306 52.019,64.963 52.019,63.251 C52.019,61.503 53.229,60.153 54.723,60.153 C56.21,60.153 57.428,61.494 57.428,63.206 C57.428,64.952 56.202,66.306 54.704,66.306" id="shape" fill="#1A1919"></path> <path d="M59.579,66.183 L58.486,66.183 L58.486,61.353 L57.802,61.353 L57.802,60.286 L58.486,60.286 L58.486,59.903 C58.486,58.466 59.592,58.173 60.103,58.173 C60.489,58.173 60.742,58.241 60.943,58.323 L60.985,58.341 L60.985,59.407 L60.931,59.382 C60.773,59.302 60.502,59.239 60.322,59.239 C59.781,59.239 59.57,59.542 59.57,60.029 L59.57,60.298 L60.975,60.298 L60.975,61.353 L59.579,61.353 L59.579,66.183" id="shape" fill="#1A1919"></path> <polyline id="shape" fill="#1A1919" points="68.461 66.18 63.709 66.18 63.709 58.476 68.413 58.476 68.413 59.589 64.83 59.589 64.83 61.591 67.979 61.591 67.979 62.702 64.83 62.702 64.83 65.077 68.461 65.077 68.461 66.18"></polyline> <path d="M70.168,64.355 C70.168,64.964 70.61,65.278 71.183,65.278 C72.092,65.278 72.61,64.62 72.61,63.866 L72.61,63.545 C72.368,63.398 71.939,63.296 71.476,63.296 C70.819,63.296 70.168,63.625 70.168,64.355 Z M71.038,66.284 C70.084,66.284 69.076,65.678 69.076,64.383 C69.076,63.138 69.987,62.296 71.362,62.296 C71.891,62.296 72.331,62.41 72.587,62.519 L72.587,62.437 C72.587,61.817 72.271,61.239 71.413,61.239 C70.796,61.239 70.212,61.463 69.744,61.773 L69.683,61.813 L69.372,60.8 L69.423,60.761 C69.884,60.458 70.646,60.177 71.433,60.177 C72.143,60.177 72.739,60.403 73.11,60.832 C73.471,61.251 73.667,61.82 73.667,62.574 L73.667,66.18 L72.723,66.18 L72.723,65.433 C72.511,65.835 71.89,66.284 71.038,66.284 Z" id="shape" fill="#1A1919"></path> <path d="M88.896,63.121 L87.704,60.089 L86.514,63.124 L88.896,63.121 Z M91.24,66.18 L90.04,66.18 L89.31,64.232 L86.104,64.232 L85.374,66.18 L84.188,66.18 L87.282,58.486 L88.146,58.486 L91.24,66.18 Z" id="shape" fill="#1A1919"></path> <path d="M99.789,61.238 C99.01,61.238 98.341,61.847 98.341,62.926 C98.341,64.005 99.037,64.659 99.789,64.659 C100.637,64.659 101.365,63.972 101.365,62.958 C101.365,61.764 100.57,61.238 99.789,61.238 M99.797,67.98 C98.944,67.98 98.171,67.708 97.498,67.167 L97.451,67.128 L97.915,66.157 L97.971,66.206 C98.538,66.685 99.17,66.927 99.85,66.927 C100.96,66.927 101.469,66.151 101.469,65.126 L101.469,64.659 C101.127,65.384 100.395,65.733 99.645,65.733 C98.463,65.733 97.24,64.7 97.24,62.972 C97.24,61.202 98.463,60.161 99.645,60.161 C100.397,60.161 101.162,60.522 101.527,61.183 L101.527,60.282 L102.485,60.282 L102.485,65.106 C102.485,65.988 102.263,66.69 101.831,67.192 C101.383,67.708 100.623,67.98 99.797,67.98" id="shape" fill="#1A1919"></path> <polygon id="shape" fill="#1A1919" points="103.688 66.179 104.764 66.179 104.764 58.491 103.688 58.491"></polygon> <path d="M43.647,66.294 C42.701,66.294 42.126,65.69 42.126,64.597 L42.126,61.374 L41.433,61.374 L41.433,60.296 L42.11,60.295 L42.11,58.661 L43.207,58.661 L43.207,60.298 L44.665,60.298 L44.665,61.374 L43.207,61.374 L43.207,64.312 C43.207,64.866 43.392,65.194 43.86,65.194 C44.105,65.194 44.346,65.136 44.525,65.03 L44.615,64.981 L44.611,66.02 L44.57,66.04 C44.283,66.214 43.988,66.294 43.647,66.294" id="shape" fill="#1A1919"></path> <path d="M81.133,66.275 C80.186,66.275 79.611,65.672 79.611,64.579 L79.611,61.356 L78.917,61.356 L78.917,60.289 L79.59,60.288 L79.588,58.642 L80.692,58.642 L80.692,60.278 L82.149,60.278 L82.149,61.356 L80.692,61.356 L80.692,64.293 C80.692,64.847 80.877,65.175 81.345,65.175 C81.591,65.175 81.831,65.118 82.01,65.012 L82.1,64.962 L82.102,66.002 L82.055,66.023 C81.768,66.195 81.473,66.275 81.133,66.275" id="shape" fill="#1A1919"></path> <path d="M96.369,66.184 L95.29,66.184 L95.29,62.751 C95.29,61.779 94.883,61.265 94.186,61.265 C93.455,61.265 92.879,61.849 92.879,62.818 L92.879,66.184 L91.802,66.184 L91.802,60.288 L92.816,60.288 L92.816,61.12 C93.161,60.482 93.706,60.165 94.397,60.165 C95.594,60.165 96.369,61.097 96.369,62.54 L96.369,66.184" id="shape" fill="#1A1919"></path> <path d="M39.445,59.591 L40.508,59.591 L40.508,58.5 L39.445,58.5 L39.445,59.591 Z M39.441,66.202 L40.518,66.202 L40.518,60.294 L39.441,60.294 L39.441,66.202 Z" id="shape" fill="#1A1919"></path> <path d="M106.04,59.595 L107.103,59.595 L107.103,58.504 L106.04,58.504 L106.04,59.595 Z M106.036,66.176 L107.112,66.176 L107.112,60.28 L106.036,60.28 L106.036,66.176 Z" id="shape" fill="#1A1919"></path> <path d="M76.36,66.274 C75.704,66.274 74.964,66.006 74.397,65.474 L74.35,65.433 L74.835,64.589 L74.887,64.636 C75.429,65.106 75.909,65.294 76.467,65.294 C77.046,65.294 77.387,65.019 77.387,64.567 C77.387,64.095 77.022,63.926 76.342,63.706 C75.628,63.473 74.651,63.132 74.651,61.909 C74.651,60.874 75.496,60.168 76.529,60.168 C77.144,60.168 77.741,60.348 78.27,60.752 L78.321,60.79 L77.884,61.673 L77.832,61.634 C77.36,61.28 76.831,61.149 76.483,61.149 C75.953,61.149 75.635,61.429 75.635,61.798 C75.635,62.263 75.93,62.372 76.808,62.645 C77.774,62.944 78.368,63.5 78.368,64.456 C78.368,65.552 77.539,66.274 76.36,66.274" id="shape" fill="#1A1919"></path> <path d="M109.129,64.378 C109.129,64.988 109.572,65.302 110.145,65.302 C111.054,65.302 111.572,64.645 111.572,63.891 L111.572,63.569 C111.331,63.423 110.901,63.321 110.438,63.321 C109.782,63.321 109.129,63.649 109.129,64.378 Z M110,66.309 C109.046,66.309 108.039,65.702 108.039,64.407 C108.039,63.162 108.951,62.321 110.324,62.321 C110.852,62.321 111.293,62.435 111.55,62.544 L111.55,62.461 C111.55,61.843 111.234,61.265 110.375,61.265 C109.758,61.265 109.174,61.487 108.706,61.798 L108.644,61.837 L108.333,60.823 L108.385,60.786 C108.846,60.482 109.608,60.202 110.396,60.202 C111.105,60.202 111.701,60.427 112.073,60.856 C112.433,61.275 112.629,61.845 112.629,62.599 L112.629,66.187 L111.685,66.187 L111.685,65.457 C111.473,65.86 110.852,66.309 110,66.309 Z" id="shape" fill="#1A1919"></path> </g> </g> </svg>
+            </div><!--logo--> 
+
+
+
+            <div class="quote__container quote__container--secondary"> 
+              <div class="quote" data-max-line="4"> {{{UEA_quote--ptc}}} </div> <!-- quote -->
+            </div> <!-- quote__container -->
+
+          </div> <!-- section--right -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- BACK PAGE -->
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      const paddedMultilineObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          multilineBackgrounds();
+        });
+      });
+
+      const paddedMultilineSrcs = document.querySelectorAll('.js-padded-multiline-src');
+
+      paddedMultilineSrcs.forEach(paddedMultilineSrc => {
+        paddedMultilineObserver.observe(paddedMultilineSrc, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });        
+      })
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      // Adding background for the multiline text blocks
+      function multilineBackgrounds() {
+        const multilineBlocks = document.querySelectorAll('.js-padded-multiline-src');
+        multilineBlocks.forEach(multilineBlock => {
+          const originalContent = multilineBlock.innerHTML;
+          let formated = originalContent.replace(/<br>/gi, '[linebreak]');
+          let tempDiv = document.createElement('div');
+          tempDiv.innerHTML = formated.trim();
+          const split = tempDiv.innerText.trim().split("[linebreak]");
+          const target = document.querySelector(`#${multilineBlock.dataset.targetId}`);
+          let output = "";
+          let zIndex = split.length;
+          split.forEach((line, i) => {
+            output += `<span>${line}</span>`;
+            if (i < split.length - 1) {
+              output += "<br>";
+            }
+            zIndex--;
+          });
+          target.innerHTML = `<div class="padded-multiline-bg">${output}</div><div class="padded-multiline-fg">${output}<div>`;
+        });
+      }   
+
+      setInterval(() => {
+        maxHeightCheck();
+      }, 1000);
+
+      detectSystem();
+      multilineBackgrounds();
+
+    </script>
+
+
+  </body>
+</html>
