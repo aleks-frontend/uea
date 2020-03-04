@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html data-sign="OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+        --white: #FFF;
+        --black: {{{account.colors.black}}};
+
+
+        --dynamic-colour: var(--orange);
+      }                               
+
+      .colourTheme--orange { --dynamic-colour: var(--orange); }
+      .colourTheme--cyan { --dynamic-colour: var(--cyan); }
+      .colourTheme--magenta { --dynamic-colour: var(--magenta); }
+      .colourTheme--green { --dynamic-colour: var(--green); }
+      .colourTheme--purple { --dynamic-colour: var(--purple); }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .backgroundImageSize--halfImage .backgroundImage { bottom: 3209.6pt;}
+      .show-crop.backgroundImageSize--halfImage .backgroundImage { bottom: 3358pt; }
+
+      .templateTheme--brand.backgroundImageSize--halfImage .backgroundImage { 
+        top: auto;
+        bottom: 0;
+        height: 2855.8pt;       
+      }
+
+      .show-crop.templateTheme--brand.backgroundImageSize--halfImage .backgroundImage { height: 2990pt; }
+
+      .templateTheme--postgraduate .backgroundImage {
+        top: auto;
+        height: 3108.5pt;
+      }
+
+      .show-crop.templateTheme--postgraduate .backgroundImage { height: 3214.5pt; }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        background: var(--dynamic-colour);
+      }
+
+      .templateTheme--brand .fit,
+      .templateTheme--postgraduate .fit{
+        background: var(--white);
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 2365.5pt;
+        /*padding-top: 363.9pt;*/
+      }
+
+      .templateTheme--brand .header { height: 1006.59pt; }
+
+      .templateTheme--postgraduate .header {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        height: 646.71pt;
+        padding-top: 189.72pt;
+        padding-left: 341.50pt;
+        background: var(--black);
+      }
+
+      .templateTheme--uea.backgroundImageSize--fullBleed.logo--hide .header { display: none; }
+
+      .logo { width: 1187.8pt;}
+      .templateTheme--postgraduate .logo { width: 480.63pt; }
+
+      #shape { fill: var(--white); }
+
+      .backgroundImageSize--halfImage #shape,
+      .backgroundImageSize--noImage #shape { 
+        fill: var(--black); 
+      }
+
+      .logoColour--black #shape { fill: var(--black); }
+      .logoColour--white #shape { fill: var(--white); }
+
+      .logo--hide .logo { display: none; }
+
+      .templateTheme--postgraduate.logo--hide .logo { 
+        display: block;
+        opacity: 0;
+      }
+
+      .templateTheme--postgraduate #shape { fill: var(--white); }
+
+      #star { fill: var(--dynamic-colour); }
+      .templateTheme--uea.backgroundImageSize--noImage.logoColour--black #star { fill: var(--white); }
+      .templateTheme--uea.backgroundImageSize--noImage.logoColour--white #star { fill: var(--black); }
+
+      .body {
+        position: relative;
+        flex: 1;
+        padding: 0 202.17pt 0 454.90pt;
+      }
+
+      .templateTheme--brand .body { padding: 0 404.35pt; }
+
+      .templateTheme--postgraduate .body { 
+        flex: 0 0 38.5%;
+        padding: 0 252.96pt 0 344.03pt;
+        background: var(--black); 
+      }
+
+      .templateTheme--postgraduate.backgroundImageSize--noImage .body { flex: 0 0 70.8%; }
+
+      .templateTheme--uea.backgroundImageSize--fullBleed.logo--hide .body { margin-top: 364.9pt; }
+
+      .decoration {
+        display: none;
+        position: absolute;
+        top: -263.16pt;
+        left: 197.12pt;
+        justify-content: center;
+        align-items: center;
+        height: 260pt;
+        width: 260pt;
+        background: var(--dynamic-colour);
+      }
+
+      .templateTheme--uea .decoration { display: flex; }
+
+      .backgroundImageSize--halfImage .decoration,
+      .backgroundImageSize--noImage .decoration { 
+        background: var(--black); 
+      }
+
+      .templateTheme--uea.backgroundImageSize--small .decoration {
+        top: -304pt;
+        left: 0;
+      }
+
+      .decoration__element { width: 210pt; }
+
+      .heading {
+        display: none;
+        margin-bottom: 75.89pt;
+        max-height: 550pt;
+        padding: 50.59pt 75.89pt;
+        font-size: 149.25pt;
+        line-height: 0.9em;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--white);
+      }      
+      .is-export-mode .heading { font-size: 147.75pt; }
+
+      .heading--secondary {
+        margin-bottom: 116.3pt;
+        max-height: 631.81pt;
+        padding: 0;
+        font-size: 164.3pt;
+        line-height: 1.15em;
+        text-align: center;
+        text-transform: none;
+      }
+      .is-export-mode .heading--secondary { font-size: 162.65pt; }
+
+      .templateTheme--uea .heading--primary { display: block; }
+
+      .templateTheme--brand .heading--secondary,
+      .templateTheme--postgraduate .heading--secondary { 
+        display: block;
+      }
+
+      .templateTheme--brand .heading--secondary { line-height: 1.1em; }
+
+      .templateTheme--brand.backgroundImageSize--halfImage .heading--secondary,
+      .templateTheme--brand.backgroundImageSize--noImage .heading--secondary { 
+        color: var(--black); 
+      }
+
+      .templateTheme--postgraduate .heading--secondary {
+        max-height: 808.71pt;
+        font-size: 186.94pt;
+        line-height: 0.97em;
+        font-weight: 300;
+        text-align: left;
+      }
+      .is-export-mode.templateTheme--postgraduate .heading--secondary { font-size: 185.07pt; }
+
+      .templateTheme--postgraduate.backgroundImageSize--noImage  .heading--secondary {
+        margin-bottom: 177.1pt;
+        max-height: 1138.35pt;
+        font-size: 228.02pt;
+        line-height: 0.92em;
+      }
+      .is-export-mode.templateTheme--postgraduate.backgroundImageSize--noImage  .heading--secondary { font-size: 225.74pt; }
+
+      .templateTheme--postgraduate .heading__inner--primary,
+      .heading__inner--postgraduate {
+        display: none;
+      }
+
+      .templateTheme--postgraduate .heading__inner--postgraduate { display: block; }
+
+      .copy {
+        display: none;
+        margin-bottom: 73.3pt;
+        max-height: 505.44pt;
+        padding: 10.1pt 50.54pt;
+        font-size: 93pt;
+        line-height: 1.25em;
+        font-weight: 600;
+        color: var(--black);
+      }
+      .is-export-mode { font-size: 92.1pt; }
+
+      .copy--secondary {
+        margin-bottom: 128.9pt;
+        max-height: 379.1pt;
+        padding: 0;
+        font-size: 80.9pt;
+        line-height: 1.3em;
+        text-align: center;
+      }
+      .is-export-mode .copy--secondary { font-size: 79.28pt; }
+
+      .templateTheme--postgraduate .copy--secondary {
+        margin-bottom: 118.89pt;
+        max-height: 430.04pt;
+        line-height: 1.1em;
+        font-weight: normal;
+        text-align: left;
+      }
+
+      .templateTheme--uea .copy--primary { display: block; line-height: 1.2em; }
+
+      .templateTheme--brand .copy--secondary,
+      .templateTheme--postgraduate .copy--secondary { 
+        display: block; 
+      }
+
+      .templateTheme--brand.backgroundImageSize--fullBleed .heading--secondary { 
+        color: {{#UEA_text-color-toggle--ttbst}}{{UEA_text-color-toggle--ttbst}}{{/UEA_text-color-toggle--ttbst}}{{^UEA_text-color-toggle--ttbst}}var(--white){{/UEA_text-color-toggle--ttbst}}; 
+      }
+
+      .templateTheme--brand.backgroundImageSize--fullBleed .copy--secondary { 
+        color: {{#UEA_text-color-toggle--ttbst}}{{UEA_text-color-toggle--ttbst}}{{/UEA_text-color-toggle--ttbst}}{{^UEA_text-color-toggle--ttbst}}var(--white){{/UEA_text-color-toggle--ttbst}};
+      }
+
+      .templateTheme--postgraduate .copy--secondary { color: var(--white); }
+
+      .postgraduateText { 
+        display: none;
+        padding: 50.59pt 126.48pt;
+        font-size: 96.12pt;
+        line-height: 1em;
+        font-weight: 600;
+        color: var(--white);
+        background: var(--dynamic-colour);
+      }
+      .is-export-mode .postgraduateText { font-size: 95.15pt;  }
+
+      .templateTheme--postgraduate.pgChoice--postgraduate .postgraduateText--postgraduate,
+      .templateTheme--postgraduate.pgChoice--masters .postgraduateText--masters,
+      .templateTheme--postgraduate.pgChoice--phd .postgraduateText--phd { 
+        display: block; 
+      }
+
+      .table { font-size: 0;}   
+
+      .table__row { 
+        position: relative;
+        margin-bottom: 50.54pt;    
+      }
+
+      .templateTheme--brand .table__row:after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: -32.5pt;
+        width: 100%;
+        height: 7.5pt;
+        background: var(--dynamic-colour);
+      }
+
+      .templateTheme--brand .table__row:last-child:after { display: none; }
+      .table__row:last-child { margin-bottom: 0; }
+
+      .templateTheme--brand .table__row { 
+        display: flex; 
+        margin-bottom: 34.2pt;
+      }
+
+      .templateTheme--postgraduate .table__row { margin-bottom: 55.65pt;}
+
+      .table__item {
+        display: inline-block;
+        padding-left: 25.3pt;
+        font-size: 85.9pt;
+        color: var(--white);
+      }
+      .is-export-mode .table__item { font-size: 85.04pt; }
+
+      .templateTheme--brand.backgroundImageSize--fullBleed .table__item { 
+        color: {{#UEA_text-color-toggle--ttbst}}{{UEA_text-color-toggle--ttbst}}{{/UEA_text-color-toggle--ttbst}}{{^UEA_text-color-toggle--ttbst}}var(--white){{/UEA_text-color-toggle--ttbst}}; 
+      }
+
+      .templateTheme--brand .table__item { display: block; }
+
+      .templateTheme--postgraduate .table__item { 
+        padding-left: 0; 
+        line-height: 1.2em;
+      }
+
+      .table__item--heading {
+        margin-bottom: 25.27pt;
+        padding: 0 50.54pt;
+        font-size: 75.89pt;
+        font-weight: 600;
+        text-transform: uppercase;
+        background: var(--dynamic-colour);
+      }
+      .is-export-mode .table__item--heading { font-size: 75.13pt; }
+
+      .backgroundImageSize--halfImage .table__item--heading,
+      .backgroundImageSize--noImage .table__item--heading { 
+        background: var(--black);
+      }
+
+      .templateTheme--brand .table__item--heading { 
+        margin-bottom: 0;
+        width: 358.86pt;
+        padding: 0;
+        font-size: 88.45pt;
+        text-transform: none;
+        background: transparent;
+      }
+      .is-export-mode.templateTheme--brand .table__item--heading { font-size: 87.56pt; }
+
+      .templateTheme--postgraduate .table__item--heading {
+        margin-bottom: 0;
+        padding: 0;
+        color: var(--dynamic-colour);
+        text-transform: none;
+        background: transparent;
+      }
+
+      .backgroundImageSize--halfImage .table__item--text,
+      .templateTheme--brand.backgroundImageSize--noImage .table__item--text,
+      .templateTheme--brand.backgroundImageSize--halfImage .table__item--heading,
+      .templateTheme--brand.backgroundImageSize--noImage .table__item--heading { 
+        color: var(--black);
+      }
+
+      .templateTheme--brand .table__item--text { flex:1; }   
+      .templateTheme--postgraduate .table__item--text { font-size: 73.36pt;}
+
+      .table__item--when { max-height: 200px; }
+      .templateTheme--brand .table__item--when { max-height: 350px;}
+
+      .tableFont--white .table__item,
+      .templateTheme--brand.backgroundImageSize--fullBleed .tableFont--white .table__item {
+        color: var(--white);
+      }
+
+      .tableFont--black .table__item { color: var(--black); }
+
+      .element__container {
+        display: none;
+        position: absolute;
+        top: 99.9%;
+        left: 249.5pt;
+        flex-direction: column;
+        align-items: center;
+        width: 581.3pt;
+        height: 960.35pt;
+        font-size: 0;
+      }
+
+      .element__container--right {
+        left: auto;
+        right: 249.5pt;
+      }
+
+      .templateTheme--postgraduate .element__container { display: flex; }
+
+      .element__stand { 
+        width: 581.29pt;
+        margin-left: 6pt;
+        margin-bottom: 22pt;
+      }        
+
+      .element { width: 606.52pt; }
+
+      .padded-multiline { position: relative;}
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.8em;
+        font-size: 1em;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .padded-multiline-bg span {  color: transparent; }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.25em;
+        bottom: -0.86em;
+        left: 0;
+        right: -0.54rem;
+        background: var(--white);
+      }
+
+      .padded-multiline-bg span.emptyLine:before { display: none; }
+
+      .heading .padded-multiline-bg span:before {      
+        top: 0;
+        background: var(--dynamic-colour);      
+      }
+
+      .backgroundImageSize--halfImage .heading .padded-multiline-bg span:before ,
+      .backgroundImageSize--noImage .heading .padded-multiline-bg span:before { 
+        background: var(--black);
+      }
+
+      .copy .padded-multiline-bg span:before {
+        bottom: -0.46em;
+        right: -0.34rem;
+      }
+
+      .templateTheme--uea.backgroundImageSize--small .heading .padded-multiline-bg span:before  { background: var(--black); }
+      .padded-multiline-bg span:first-child:before { top: -0.12em; }
+
+      .padded-multiline-fg {
+        position: relative;
+        z-index: 999;
+      }      
+
+      .js-padded-multiline-src { 
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        z-index: 999;
+      }    
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;    
+        overflow: hidden;
+      }     
+
+      .reposition-fix div {
+        width: 100% !important;
+        height: 100% !important;
+        right: 0 !important;
+        bottom: 0 !important;
+      }
+
+      .templateTheme--brand .u-height-190 { height: 190px; }
+      .templateTheme--uea .heading { max-height: 580pt; }
+
+      .contentContainer{ max-height: 6em; }
+
+      .backgroundImageSize--halfImage .contentContainer{ max-height: 3em; }
+      .templateTheme--uea.backgroundImageSize--halfImage .contentContainer { max-height: 4em; }
+
+      .cropMark::before,
+      .cropMark::after {
+        content: '';
+        position: absolute;        
+        background: gray;
+      }
+
+      .cropMark::before { 
+        width: 20px; 
+        height: 1px;
+      }
+
+      .cropMark::after { 
+        height: 20px; 
+        width: 1px;
+      }
+
+      .cropMark--top::before { bottom: 0; }
+      .cropMark--bottom::before { top: 0; }
+
+      .cropMark--top::after { top: 0; }
+      .cropMark--bottom::after { bottom: 0; height: calc(150mm + 5px); }      
+
+      .cropMark--left::before { left: 0; }
+      .cropMark--right::before { right: 0; }
+
+      .cropMark--left::after { right: 0; }
+      .cropMark--right::after { left: 0; }    
+
+      .placeholder__container { bottom: 50mm; }      
+
+      .hide-crop .placeholder__container { bottom: 3mm; }
+      .show-crop .container { padding-bottom: 50mm; }
+
+      .container {
+        padding-top: 363.9pt;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         templateTheme--{{UEA_template-theme--ttbst}}{{^UEA_template-theme--ttbst}}uea{{/UEA_template-theme--ttbst}}
+                                         colourTheme--{{UEA_colour-theme--ttbst}}{{^UEA_colour-theme--ttbst}}orange{{/UEA_colour-theme--ttbst}}
+                                         backgroundImageSize--{{#UEA_background-image--ttbst}}{{{UEA_background-image-size--ttbst}}}{{^UEA_background-image-size--ttbst}}fullImage{{/UEA_background-image-size--ttbst}}{{/UEA_background-image--ttbst}}{{^UEA_background-image--ttbst}}noImage{{/UEA_background-image--ttbst}}
+                                         pgChoice--{{UEA_pg-choice--ttbst}}{{^UEA_pg-choice--ttbst}}masters{{/UEA_pg-choice--ttbst}}
+                                         logoColour--{{logo-colour}}{{^logo-colour}}black{{/logo-colour}}
+                                         logo--{{UEA_logo-toggle--ttbst}}{{^UEA_logo-toggle--ttbst}}show{{/UEA_logo-toggle--ttbst}}
+                                         " data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          {{#UEA_background-image--ttbst}} <div class="backgroundImage"> <div class="reposition-fix"> {{{UEA_background-image--ttbst}}} </div><!-- reposition-fix -->  </div> <!-- backgroundImage --> {{/UEA_background-image--ttbst}}
+          <div class="header"> 
+            <div class="logo">
+              <svg viewBox="0 0 113 68" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><path d="M27.731 51.046c-.614 0-.196-.017-.773-.017-7.131 0-12.484-4.901-12.484-18.621V12.187c0-6.934 3.067-9.565 7.404-9.565v-.824H0v.814c3.802.074 5.177 3.305 5.177 7.555v19.934c0 15.017 7.189 21.798 20.223 21.798h2.329l.002-.853" fill="#1A1919" id="shape"/><path d="M71.689 37.099c-.085-7.528-1.782-9.147-9.3-9.219v-.744c7.518-.074 9.215-1.69 9.3-9.217h.708c.087 7.527 1.78 9.138 9.298 9.211v.75c-7.518.072-9.211 1.691-9.298 9.219h-.708" fill="purple" id="star" class="glint"/><path d="M31.349 51.051c6.803 0 9.797-4.619 9.797-11.148 0-7.82 0 0 0 0l-.007-28.388c0-6.668-3.341-8.886-7.392-8.886l-.003-.833h38.644l.018 10.487-.686-.002c-1.153-6.165-3.558-8.573-11.398-8.573h-1.818c-7.373 0-8.823 2.352-8.823 8.951v6.139c0 8.002 3.267 8.33 9.425 8.33v.75c-6.158 0-9.425.672-9.425 8.752v2.627c0 9.898 1.249 10.557 9.568 10.557 4.918 0 10.914-1.26 12.455-8.045l.703.003v10.127H31.349v-.848M86.156 51.046c6.793 0 8.509-4.387 5.429-11.268l-10.41-26.034L84.183.868l.573-.002s14.316 33.99 17.866 40.867c3.747 7.258 6.896 9.318 10.003 9.318v.848H86.156v-.853M7.958 66.364c-1.793 0-2.865-1.291-2.865-3.453v-4.423h1.105v4.367c0 1.623.737 2.354 1.781 2.354 1.04 0 1.751-.712 1.751-2.298v-4.423h1.104v4.357c0 2.203-1.074 3.519-2.876 3.519M16.516 66.189h-1.077v-3.434c0-.972-.407-1.486-1.105-1.486-.731 0-1.307.584-1.307 1.554v3.366h-1.076v-5.897h1.013v.832c.345-.637.89-.954 1.582-.954 1.196 0 1.97.931 1.97 2.375v3.644M17.901 59.588h1.062v-1.091h-1.062v1.091zm-.004 6.601h1.076v-5.897h-1.076v5.897zM22.841 66.231h-.951l-2.112-5.939h1.139l1.451 4.418 1.459-4.418h1.12l-2.106 5.939M26.335 62.766h2.737c-.094-.881-.542-1.574-1.349-1.574-.767 0-1.298.717-1.388 1.574zm1.502 3.556c-1.513 0-2.616-1.323-2.616-3.077s1.094-3.075 2.521-3.075c1.426 0 2.426 1.253 2.426 3.119 0 .08 0 .171-.01.308l-.004.127h-3.813c.121 1.061.776 1.59 1.516 1.59.479 0 .994-.2 1.439-.74l.043-.05.045.045.547.546.046.048-.041.056c-.547.755-1.238 1.103-2.099 1.103zM32.177 66.189h-1.058v-5.897h1.033v1.266c.358-.916.988-1.368 1.767-1.368l.15.004v1.268h-.12c-.971 0-1.772.762-1.772 2.361v2.366M36.405 66.298c-.655 0-1.395-.268-1.964-.801l-.046-.041.484-.842.053.045c.542.471 1.021.658 1.581.658.578 0 .919-.275.919-.726 0-.473-.365-.641-1.044-.86-.715-.234-1.692-.574-1.692-1.798 0-1.035.845-1.741 1.878-1.741.615 0 1.213.18 1.741.584l.051.038-.436.884-.053-.041c-.472-.352-1.001-.484-1.348-.484-.531 0-.849.28-.849.648 0 .465.296.576 1.174.848.966.301 1.559.855 1.559 1.811 0 1.096-.829 1.818-2.008 1.818M46.412 68c-.719 0-1.402-.499-1.402-.499l.36-.989s.554.413.981.413c.575 0 .836-.36 1.045-.959l-2.243-5.674h1.166l1.598 4.213 1.309-4.213h1.136l-2.126 6.039c-.408 1.072-1.005 1.669-1.8 1.669M54.704 61.223c-.833 0-1.59.757-1.59 1.983 0 1.234.765 2.023 1.609 2.023.839 0 1.604-.759 1.604-1.978 0-1.122-.703-2.026-1.623-2.026m0 5.081c-1.482 0-2.685-1.343-2.685-3.055 0-1.748 1.21-3.098 2.704-3.098 1.487 0 2.705 1.341 2.705 3.053 0 1.746-1.226 3.1-2.724 3.1M59.579 66.183h-1.093v-4.83h-.684v-1.067h.684v-.383c0-1.437 1.106-1.73 1.617-1.73.386 0 .639.068.84.15l.042.018v1.066l-.054-.025a1.589 1.589 0 0 0-.609-.143c-.541 0-.752.303-.752.79v.269h1.405v1.055h-1.396v4.83M68.461 66.18h-4.752v-7.704h4.704v1.113H64.83v2.002h3.149v1.111H64.83v2.375h3.631v1.103M70.168 64.355c0 .609.442.923 1.015.923.909 0 1.427-.658 1.427-1.412v-.321c-.242-.147-.671-.249-1.134-.249-.657 0-1.308.329-1.308 1.059zm.87 1.929c-.954 0-1.962-.606-1.962-1.901 0-1.245.911-2.087 2.286-2.087.529 0 .969.114 1.225.223v-.082c0-.62-.316-1.198-1.174-1.198-.617 0-1.201.224-1.669.534l-.061.04-.311-1.013.051-.039a3.87 3.87 0 0 1 2.01-.584c.71 0 1.306.226 1.677.655.361.419.557.988.557 1.742v3.606h-.944v-.747c-.212.402-.833.851-1.685.851zM88.896 63.121l-1.192-3.032-1.19 3.035 2.382-.003zm2.344 3.059h-1.2l-.73-1.948h-3.206l-.73 1.948h-1.186l3.094-7.694h.864l3.094 7.694zM99.789 61.238c-.779 0-1.448.609-1.448 1.688s.696 1.733 1.448 1.733c.848 0 1.576-.687 1.576-1.701 0-1.194-.795-1.72-1.576-1.72m.008 6.742a3.584 3.584 0 0 1-2.299-.813l-.047-.039.464-.971.056.049c.567.479 1.199.721 1.879.721 1.11 0 1.619-.776 1.619-1.801v-.467c-.342.725-1.074 1.074-1.824 1.074-1.182 0-2.405-1.033-2.405-2.761 0-1.77 1.223-2.811 2.405-2.811.752 0 1.517.361 1.882 1.022v-.901h.958v4.824c0 .882-.222 1.584-.654 2.086-.448.516-1.208.788-2.034.788M103.688 66.179h1.076v-7.688h-1.076zM43.647 66.294c-.946 0-1.521-.604-1.521-1.697v-3.223h-.693v-1.078l.677-.001v-1.634h1.097v1.637h1.458v1.076h-1.458v2.938c0 .554.185.882.653.882.245 0 .486-.058.665-.164l.09-.049-.004 1.039-.041.02a1.712 1.712 0 0 1-.923.254M81.133 66.275c-.947 0-1.522-.603-1.522-1.696v-3.223h-.694v-1.067l.673-.001-.002-1.646h1.104v1.636h1.457v1.078h-1.457v2.937c0 .554.185.882.653.882.246 0 .486-.057.665-.163l.09-.05.002 1.04-.047.021a1.727 1.727 0 0 1-.922.252M96.369 66.184H95.29v-3.433c0-.972-.407-1.486-1.104-1.486-.731 0-1.307.584-1.307 1.553v3.366h-1.077v-5.896h1.014v.832c.345-.638.89-.955 1.581-.955 1.197 0 1.972.932 1.972 2.375v3.644M39.445 59.591h1.063V58.5h-1.063v1.091zm-.004 6.611h1.077v-5.908h-1.077v5.908zM106.04 59.595h1.063v-1.091h-1.063v1.091zm-.004 6.581h1.076V60.28h-1.076v5.896zM76.36 66.274c-.656 0-1.396-.268-1.963-.8l-.047-.041.485-.844.052.047c.542.47 1.022.658 1.58.658.579 0 .92-.275.92-.727 0-.472-.365-.641-1.045-.861-.714-.233-1.691-.574-1.691-1.797 0-1.035.845-1.741 1.878-1.741.615 0 1.212.18 1.741.584l.051.038-.437.883-.052-.039c-.472-.354-1.001-.485-1.349-.485-.53 0-.848.28-.848.649 0 .465.295.574 1.173.847.966.299 1.56.855 1.56 1.811 0 1.096-.829 1.818-2.008 1.818M109.129 64.378c0 .61.443.924 1.016.924.909 0 1.427-.657 1.427-1.411v-.322c-.241-.146-.671-.248-1.134-.248-.656 0-1.309.328-1.309 1.057zm.871 1.931c-.954 0-1.961-.607-1.961-1.902 0-1.245.912-2.086 2.285-2.086.528 0 .969.114 1.226.223v-.083c0-.618-.316-1.196-1.175-1.196-.617 0-1.201.222-1.669.533l-.062.039-.311-1.014.052-.037c.461-.304 1.223-.584 2.011-.584.709 0 1.305.225 1.677.654.36.419.556.989.556 1.743v3.588h-.944v-.73c-.212.403-.833.852-1.685.852z" fill="#1A1919" id="shape"/></g></svg> 
+            </div><!--logo--> 
+            <div class="postgraduateText postgraduateText--postgraduate"> POSTGRADUATE </div> <!-- postgraduateText -->
+            <div class="postgraduateText postgraduateText--masters"> MASTER'S DEGREES </div> <!-- postgraduateText -->
+            <div class="postgraduateText postgraduateText--phd"> PhDs AND<br> RESEARCH DEGREES </div> <!-- postgraduateText -->
+          </div> <!-- header -->
+          <div class="body"> 
+            {{#UEA_heading--ttbst}}
+            <div class="decoration"> 
+              <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="decoration__element">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"/>
+              </svg>
+            </div> <!-- decoration -->
+            <div class="heading heading--primary padded-multiline" data-max-height="css">
+              <div class="heading__inner heading__inner--primary" style="line-height: 1em; font-size: {{UEA_heading-font-size--ttbst}}{{^UEA_heading-font-size--ttbst}}100{{/UEA_heading-font-size--ttbst}}%;">
+                <div id="js-padded-multiline-target-1"></div>              
+                <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-1">
+                  {{{UEA_heading--ttbst}}}
+                </div>       
+              </div><!-- heading__inner -->
+            </div> <!-- heading -->
+            <div class="heading heading--secondary" data-max-height="css">
+              <div class="heading__inner heading__inner--primary" style="line-height: 1em; font-size: {{UEA_heading-font-size--ttbst}}{{^UEA_heading-font-size--ttbst}}100{{/UEA_heading-font-size--ttbst}}%;">
+                {{{UEA_heading--ttbst}}}
+              </div><!-- heading__inner -->
+              <div class="heading__inner heading__inner--postgraduate" style="line-height: 0.9em; font-size: {{UEA_heading-font-size--ttbst}}{{^UEA_heading-font-size--ttbst}}100{{/UEA_heading-font-size--ttbst}}%;">
+                {{{UEA_heading--ttbst}}}
+              </div><!-- heading__inner -->
+            </div> <!-- heading -->
+            {{/UEA_heading--ttbst}}
+            {{#UEA_copy--ttbst}}
+            <div class="copy copy--primary padded-multiline" data-max-height="css">
+              <div id="js-padded-multiline-target-2"></div>              
+              <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-2">
+                {{{UEA_copy--ttbst}}}
+              </div>            
+            </div> <!-- copy -->
+            <div class="copy copy--secondary" data-max-height="css"> {{{UEA_copy--ttbst}}} </div> <!-- copy -->
+            {{/UEA_copy--ttbst}}
+            <div class="contentContainer" data-max-height="css">
+              <div class="table tableFont--{{UEA_table-font-color--ttbst}}">
+                {{#UEA_speaker-text--ttbst}}
+                <div class="table__row">
+                  <div class="table__item table__item--heading" data-max-line="2"> {{^UEA_speaker-heading--ttbst}}Speaker{{/UEA_speaker-heading--ttbst}}{{{UEA_speaker-heading--ttbst}}} </div> <!-- table__item --> <br>
+                  <div class="table__item table__item--text" data-max-line="2"> {{^UEA_speaker-text--ttbst}}Text{{/UEA_speaker-text--ttbst}}{{{UEA_speaker-text--ttbst}}} </div> <!-- table__item -->
+                </div> <!-- table__row -->
+                {{/UEA_speaker-text--ttbst}}
+                {{#UEA_when-text--ttbst}}
+                <div class="table__row">
+                  <div class="table__item table__item--heading u-height-190" data-max-line="2"> {{^UEA_when-heading--ttbst}}When{{/UEA_when-heading--ttbst}}{{{UEA_when-heading--ttbst}}} </div> <!-- table__item --> <br>
+                  <div class="table__item table__item--text table__item--when" data-max-line="2"> {{^UEA_when-text--ttbst}}Text{{/UEA_when-text--ttbst}}{{{UEA_when-text--ttbst}}} </div> <!-- table__item -->
+                </div> <!-- table__row -->
+                {{/UEA_when-text--ttbst}}
+                {{#UEA_where-text--ttbst}}
+                <div class="table__row">
+                  <div class="table__item table__item--heading" data-max-line="2"> {{^UEA_where-heading--ttbst}}Where{{/UEA_where-heading--ttbst}}{{{UEA_where-heading--ttbst}}} </div> <!-- table__item --> <br>
+                  <div class="table__item table__item--text" data-max-line="2"> {{^UEA_where-text--ttbst}}Text{{/UEA_where-text--ttbst}}{{{UEA_where-text--ttbst}}}</div> <!-- table__item -->
+                </div> <!-- table__row -->
+                {{/UEA_where-text--ttbst}}
+              </div> <!-- table -->
+            </div>
+            <div class="element__container element__container--{{UEA_glint-position--ttbst}}">
+              <img src="https://files.outfit.io/media_library_items/93089/glint-stand.svg" class="element__stand">               
+              <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="element">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"  id="star"/>
+              </svg>
+            </div> <!-- element__container -->
+          </div> <!-- body -->
+        </div><!--container fit-->
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      {{{account.snippets.multilineBackgrounds}}}
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+        });
+      });
+
+      const paddedMultilineObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          multilineBackgrounds();
+        });
+      });
+
+      const paddedMultilineSrcs = document.querySelectorAll('.js-padded-multiline-src');
+
+      paddedMultilineSrcs.forEach(paddedMultilineSrc => {
+        paddedMultilineObserver.observe(paddedMultilineSrc, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });        
+      })
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Adding a show-crop or hide-crop class to body depending on the 'Display Crop Marks' input      
+      function addCropClass() {
+        if (window.showCrop) {
+          document.body.classList.add('show-crop');
+        } else {
+          document.body.classList.add('hide-crop');
+        }
+      }  
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        addCropClass();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();            
+      multilineBackgrounds();
+
+    </script>
+
+
+  </body>
+</html>
