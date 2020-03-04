@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-sign="OSB">
+<html data-sign="OSB" async>
   <head>
     <title>Template title</title>
     <meta charset="utf-8">
@@ -503,10 +503,10 @@
       .templateTheme--brand .u-height-190 { height: 190px; }
       .templateTheme--uea .heading { max-height: 580pt; }
 
-      .contentContainer{ max-height: 6em; }
+      .contentContainer{ max-height: 6rem; }
 
-      .backgroundImageSize--halfImage .contentContainer{ max-height: 3em; }
-      .templateTheme--uea.backgroundImageSize--halfImage .contentContainer { max-height: 4em; }
+      .backgroundImageSize--halfImage .contentContainer{ max-height: 3rem; }
+      .templateTheme--uea.backgroundImageSize--halfImage .contentContainer { max-height: 4rem; }
 
       .cropMark::before,
       .cropMark::after {
@@ -733,6 +733,18 @@
 
     </script>
 
+    <script type="text/javascript">
+      // Add many fallbacks for Print Ready
+      document.addEventListener('DOMContentLoaded', function(event) {
+        document.dispatchEvent(new Event('printready'));
+      });
+
+      setTimeout(function() {
+        document.dispatchEvent(new Event('printready'));
+      }, 2500);
+
+      document.dispatchEvent(new Event('printready'));
+    </script>    
 
   </body>
 </html>
