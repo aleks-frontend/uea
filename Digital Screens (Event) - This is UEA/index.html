@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html data-sign="OSM">
+  <!--
+ {{ placeholder-toggle-new }}
+ {{show-crop}}
+    {{ placeholder-opacity }}
+    {{ placeholder-image-1 }}
+    {{UEA_template-variation--dse}}
+    {{UEA_colour-theme--dse}}
+    {{UEA_feature-image--dse}}
+    {{UEA_heading--dse}}
+    {{UEA_heading-size--dse}}
+ {{UEA_heading-and-subheading-colour--dse}}
+  -->
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+        --black: {{{account.colors.black}}};
+        --white: #FFF;
+      }    
+
+      .colourTheme--orange {
+        --dynamic-colour: var(--orange);
+      }
+
+      .colourTheme--cyan { 
+        --dynamic-colour: var(--cyan);     
+      }
+
+      .colourTheme--magenta { 
+        --dynamic-colour: var(--magenta); 
+      }
+
+      .colourTheme--green { 
+        --dynamic-colour: var(--green); 
+      }
+
+      .colourTheme--purple {
+        --dynamic-colour: var(--purple); 
+      }
+
+      .primaryTextColour--white,
+      .headingAndUrlTextColour--white {
+        --dynamic-text-colour: var(--white);
+      }
+
+      .primaryTextColour--black,
+      .headingAndUrlTextColour--black {
+        --dynamic-text-colour: var(--black);
+      }
+
+      .logoOptions--white {
+        --dynamic-logo-colour: var(--white);
+      }
+
+      .logoOptions--black {
+        --dynamic-logo-colour: var(--black);
+      }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 0.257rem;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        padding-right: 50%;
+        padding: 50pt 800pt 63.4pt 65pt;
+      }
+
+      .variation--half-image-1 .fit,
+      .variation--no-image .fit {
+        background-color: var(--dynamic-colour);
+      }
+
+      .variation--half-image-2 .fit {
+        padding: 127pt 55pt 63.4pt 138pt;
+      }
+
+      .variation--no-image .fit {
+        padding: 101pt 57pt 65pt 116pt;
+      }
+
+      .variation--half-image-2 .body {
+        padding-top: 9pt;
+      }
+
+      .variation--half-image-2 .body,
+      .variation--half-image-2 .footer {
+        padding-left: 663pt;
+      }
+
+      .header {
+        position: relative;
+        margin-bottom: 67pt;
+      }
+
+      .variation--no-image .header {
+        margin-bottom: 64pt;
+      }
+
+      .heading {
+        position: relative;       
+        text-transform: uppercase;
+        font-size: 0;
+        font-weight: 900;
+        color: var(--dynamic-text-colour);
+      }
+
+      .variation--half-image-1 .heading__inner {
+        max-height: 210pt;
+      }
+
+      .variation--half-image-2 .heading__inner {
+        max-height: 150pt;
+      }
+
+      .variation--no-image .heading {
+        color: var(--dynamic-colour);
+      }
+
+      .headingAndSubheadingColour--black.variation--half-image-1 .heading { color: var(--black); }
+      .headingAndSubheadingColour--white.variation--half-image-1 .heading { color: var(--white); }
+
+      .variation--no-image .heading__inner {
+        max-height: 140pt;
+      }
+
+      .variation--half-image-1 .heading span {
+        font-size: calc(73.3 / 100 * {{UEA_heading-size--dse}}pt);
+        line-height: 1.08em;
+      }
+
+      .is-export-mode .variation--half-image-1 .heading span {
+        font-size: calc(72.56 / 100 * {{UEA_heading-size--dse}}pt);
+      }
+
+      .variation--half-image-2 .heading span {
+        font-size: calc(73.3 / 100 * {{UEA_heading-size--dse}}pt);
+        line-height: 1em;
+      }
+
+      .is-export-mode .variation--half-image-2 .heading span {
+        font-size: calc(72.56 / 100 * {{UEA_heading-size--dse}}pt);
+      }
+
+      .variation--no-image .heading span {
+        font-size: calc(80 / 100 * {{UEA_heading-size--dse}}pt);
+        line-height: 1.08em;
+      }
+
+      .is-export-mode .variation--no-image .heading span {
+        font-size: calc(79.2 / 100 * {{UEA_heading-size--dse}}pt);
+      }
+      .star__container {
+        position: absolute;
+        top: -42pt;
+        right: -177pt;
+        width: 102pt;
+        height: 107pt;
+        background: var(--dynamic-colour);
+        z-index: 1;
+      }
+
+      .variation--half-image-2 .star__container {
+        top: -12pt;
+        left: -24pt;
+        width: 108pt;
+        transform: translate(-100%, -100%);
+      }
+
+      .variation--no-image .star__container {
+        top: -7pt;
+        left: -20pt;
+        width: 88pt;
+        height: 87pt;
+        background: var(--white);
+        transform: translate(-100%, -100%);
+      }
+
+      .star {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 77pt;
+      }
+
+      .variation--no-image .star {
+        width: 60pt;
+      }
+
+
+      .variation--no-image .star path,
+      .headingAndUrlTextColour--black .star path,
+      .headingAndSubheadingColour--black.variation--half-image-1 .star path {
+        fill: var(--black);
+      }
+
+      .headingAndSubheadingColour--white.variation--half-image-1 .star path {
+        fill: var(--white)
+      }
+
+      .variation--no-image .star path {
+        fill: var(--dynamic-colour);
+      }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      .content {
+        flex: 1;
+        margin-bottom: 10pt;
+      }
+
+      .variation--half-image .body {
+        flex-direction: row;
+      }
+
+      .variation--no-image .body {
+        flex-direction: row;
+      }
+
+      .variation--no-image .content {
+        margin-right: 66pt;
+        flex: 1.34;
+      }
+
+      .variation--half-image-1 .content {
+        order: 2;
+      }
+
+      .subheading {
+        margin-bottom: 24pt;
+        font-size: 37.1pt;
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 0.5pt;
+        color: var(--white);
+      }
+      .is-export-mode .subheading { font-size: 36.72pt; }
+
+      .subheading__inner {
+        line-height: 1.3em;
+      }
+
+      .variation--half-image-2 .subheading,
+      .variation--no-image .subheading {
+        color: var(--dynamic-colour);
+      }
+
+      .variation--half-image-2 .subheading {
+        margin-bottom: 16pt;
+      }
+
+      .variation--no-image .subheading {
+        margin-bottom: 46pt;
+        font-size: 48.5pt;
+        line-height: 1.2em;
+      }
+      .is-export-mode.variation--no-image .subheading { font-size: 47.52pt; }
+
+      .variation--no-image .subheading__inner {
+        line-height: 1.2em;
+      }
+
+      .subheading--withBg {
+        display: none;
+      }
+
+      .variation--no-image .subheading--withBg {
+        display: block;
+      }
+
+      .variation--no-image .subheading--noBg {
+        display: none;
+      }
+
+      .headingAndSubheadingColour--black.variation--half-image-1 .subheading { color: var(--black); }
+      .headingAndSubheadingColour--white.variation--half-image-1 .subheading { color: var(--white); }
+
+      .copy p {
+        font-size: 32.4pt;
+        font-weight: 500;
+        line-height: 1.15em;
+        color: var(--dynamic-text-colour);
+      }
+      .is-export-mode .copy p { font-size: 32.07pt; }
+
+      .variation--half-image-2 .copy p {
+        color: var(--black);
+      }
+
+      .variation--no-image .copy p { font-size: 35.1pt; }
+      .is-export-mode.variation--no-image .copy p { font-size: 34.74pt; }
+
+      .event {
+        padding-left: 7pt;
+      }
+
+      .variation--half-image-2 .event {
+        padding-left: 0;
+      }
+
+      .variation--no-image .event {
+        padding-left: 0;
+      }
+
+      .event__container {
+        margin-bottom: 62pt;
+      }
+
+      .variation--half-image-2 .event__container {
+        margin-bottom: 44pt;
+      }
+
+      .variation--no-image .event__container {
+        flex: 1;
+      }
+
+      .event__wrapper {
+        display: flex;
+        margin-bottom: 5.3pt;
+      }
+
+      .event__wrapper:last-child {
+        margin-bottom: 0;
+      }
+
+      .variation--no-image .event__wrapper {
+        margin-bottom: 56pt
+      }
+
+      .event__label {
+        font-size: 27pt;
+        text-transform: uppercase;
+        font-weight: 900;
+        color: var(--dynamic-colour);
+        min-width: 91pt;
+      }
+      .is-export-mode .event__label { font-size: 26.73pt; }
+
+      .variation--no-image .event__label {
+        margin-top: -12pt;
+        font-size: 40pt;
+        min-width: 137pt;
+      }
+      .is-export-mode.variation--no-image .event__label { font-size: 39.6pt; }
+
+      .event__text {
+        flex: 1;
+        margin-left: 18pt;
+        font-size: 27.4pt;
+        font-weight: 900;
+        text-transform: uppercase;
+        line-height: 1.3em;
+        color: var(--dynamic-text-colour);
+      }
+      .is-export-mode .event__text { font-size: 27.126pt; }
+
+      .variation--half-image-1 .event__text--primary,
+      .variation--half-image-2 .event__text--primary {
+        max-height: 1.4em;
+      }
+
+      .variation--no-image .event__text--primary {
+        max-height: 2.5em; 
+      }
+
+      .event__text--secondary {
+        max-height: 3.7em;
+      }
+
+      .variation--half-image-2 .event__text { font-size: 28.2pt; }
+      .is-export-mode.variation--half-image-2 .event__text { font-size: 27.91pt; }
+
+      .variation--half-image-2 .event__text { color: var(--black); }
+
+      .variation--no-image .event__text {
+        margin-top: -7.2pt;
+        margin-left: 30pt;
+        font-size: 38.7pt;
+        letter-spacing: 0.9pt;
+        line-height: 1.1em;
+      }
+      .is-export-mode.variation--no-image .event__text { font-size: 38.313pt; }
+
+      .event__label--withBg {}
+
+      .event__label--noBg {
+        display: none;
+      }
+
+      .variation--no-image .footer {
+        margin-left: -20pt;
+      }
+
+      .cta {
+        font-size: 33.3pt;
+        font-weight: 900;
+        line-height: 1.2em;
+        margin-bottom: 10.7pt;
+        color: var(--dynamic-text-colour);
+      }
+      .is-export-mode .cta { font-size: 32.96pt; }
+
+      .variation--half-image-2 .cta {
+        font-size: 41pt;
+        margin-bottom: 6pt;
+        color: var(--black);
+      }
+      .is-export-mode.variation--half-image-2 .cta { font-size: 40.59pt; }
+
+      .variation--no-image .cta {
+        margin-bottom: 7pt;
+        max-width: 1050pt;
+        font-size: 51.4pt;
+      }
+      .is-export-mode.variation--no-image .cta { font-size: 50.886pt; }
+
+      .url {
+        font-size: 33.7pt;
+        line-height: 1.2em;
+        font-weight: 900;
+        padding-left: 6pt;
+        color: var(--dynamic-colour);
+      }
+      .is-export-mode .url { font-size: 33.36pt; }
+
+      .variation--half-image-2 .url {
+        color: var(--dynamic-text-colour);
+        font-size: 43pt;
+        font-weight: normal;
+      }
+      .is-export-mode.variation--half-image-2 .url { font-size: 42.57pt; }
+
+      .variation--no-image .url {
+        max-width: 1050pt;
+        font-size: 53pt;
+        font-weight: bold;
+      }
+      .is-export-mode .variation--no-image .url { font-size: 52.47pt; }
+
+      .logo {
+        position: absolute;
+        top: 63pt;
+        right: 65pt;
+        width: 220pt;
+      }
+
+      .logoOptions--hidden .logo {
+        display: none;
+      }
+
+      .variation--half-image-2 .logo {
+        top: auto;
+        bottom: 47pt;
+        left: 112pt;
+      }
+
+      .variation--no-image .logo {
+        top: auto;
+        bottom: 47pt;
+        width: 194pt;
+      }
+
+      .hero {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 724pt;
+        height: 100%;
+      }
+
+      .variation--half-image-2 .hero {
+        left: 0;
+        width: 727pt;
+      }
+
+      .glint {
+        fill: var(--black);
+      }
+
+      .variation--half-image-1 .glint,
+      .variation--half-image-2 .glint {
+        fill: var(--dynamic-colour);
+      }
+
+      .variation--no-image.logoOptions--white .glint {
+        fill: var(--black);
+      }
+
+      .variation--no-image.logoOptions--black .glint {
+        fill: var(--white);
+      }
+
+      #shape {
+        fill: var(--dynamic-logo-colour);
+      }
+
+      .padded-multiline {
+        position: relative;
+      }
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.9em;
+        font-size: 1em;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .padded-multiline-bg span {
+        color: transparent;
+      }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.25em;
+        bottom: -0.5em;
+        left: -0.55em;
+        right: -0.6em;
+        background: var(--white);
+      }
+
+      .padded-multiline-bg span.emptyLine:before { display: none; }
+
+      .heading .padded-multiline-bg span:before {
+        background: var(--dynamic-colour);
+      }
+
+      .variation--no-image .heading .padded-multiline-bg span:before {
+        top: -7pt;
+        left: -20pt;
+        right: -22pt;
+        bottom: -7pt;
+        background: var(--white);
+      }
+
+      .variation--half-image-2 .heading .padded-multiline-bg span:before {
+        top: -12pt;
+        left: -24pt;
+        right: -27pt;
+        bottom: -15.2pt;
+      }
+
+      .variation--no-image .subheading .padded-multiline-bg span:before {
+        top: -0.25em;
+        bottom: -0.38em;
+        left: -0.39em;
+        right: -0.4em;
+      }
+
+      .event__label--withBg .padded-multiline-bg span:before {
+        top: -4pt;
+        left: -7pt;
+        bottom: -5pt;
+        right: -8pt;
+      }
+
+      .variation--no-image .event__label--withBg .padded-multiline-bg span:before {
+        top: -3pt;
+        bottom: -2pt;
+      }
+
+      .url .padded-multiline-bg span:before {
+        top: -4.7pt;
+        left: 0pt;
+        bottom: -0.35em;
+        right: -13pt;
+      }
+
+      .variation--half-image-2 .url .padded-multiline-bg span:before {
+        top: -4.7pt;
+        left: 0pt;
+        right: -16pt;
+        bottom: -0.35em;
+        background: var(--dynamic-colour);
+      }
+
+      .padded-multiline-fg {
+        position: relative;
+        z-index: 1;
+      }      
+
+      .js-padded-multiline-src { 
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        z-index: 999;
+      }   
+
+      #js-padded-multiline-target-1 {
+        position: relative;
+        z-index: 1;
+      }
+
+      .event__label.padded-multiline span{
+        line-height: 1.1em;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         variation--{{UEA_template-variation--dse}}{{^UEA_template-variation--dse}}half-image-1{{/UEA_template-variation--dse}}
+                                         colourTheme--{{UEA_colour-theme--dse}}{{^UEA_colour-theme--dse}}orange{{/UEA_colour-theme--dse}}
+                                         primaryTextColour--{{UEA_primary-text-colour--dse}}{{^UEA_primary-text-colour--dse}}white{{/UEA_primary-text-colour--dse}}
+                                         headingAndUrlTextColour--{{UEA_heading-and-url-text-colour--dse}}
+                                         logoOptions--{{logoColorOption}}{{^logoColorOption}}black{{/logoColorOption}}
+                                         logoOptions--{{logoVisibilityOption}}
+                                         headingAndSubheadingColour--{{UEA_heading-and-subheading-colour--dse}}{{^UEA_heading-and-subheading-colour--dse}}white{{/UEA_heading-and-subheading-colour--dse}}"
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="header">
+            {{#UEA_heading--dse}}
+            <div class="heading padded-multiline">
+              <div class="heading__inner" data-max-height="css">
+                <div id="js-padded-multiline-target-1"></div>
+                <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-1">
+                  {{{UEA_heading--dse}}}
+                </div><!--js-padded-multiline-src-->
+              </div><!--heading__inner-->
+            </div><!--heading-->
+            {{/UEA_heading--dse}}
+            {{#UEA_heading--dse}}
+            <div class="star__container">
+              <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="star">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"  id="star"/>
+              </svg>
+            </div><!--star__container-->
+            {{/UEA_heading--dse}}
+          </div><!--header-->
+          <div class="body">
+            <div class="content">   
+              <div data-max-height="dynamic">
+                {{#UEA_subheading--dse}}
+                <div class="subheading subheading--noBg">
+                  <div class="subheading__inner" style="font-size: {{UEA_subheading-size--dse}}%;" data-max-height="css">
+                    {{{UEA_subheading--dse}}}
+                  </div><!--subheading__inner-->
+                </div><!--subheading--noBg-->
+                {{/UEA_subheading--dse}}
+                {{#UEA_subheading--dse}}
+                <div class="subheading subheading--withBg padded-multiline">
+                  <div class="subheading__inner" style="font-size: {{UEA_subheading-size--dse}}%;" data-max-height="css">
+                    <div id="js-padded-multiline-target-2"></div>
+                    <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-2">
+                      {{{UEA_subheading--dse}}}
+                    </div><!--js-padded-multiline-src-->
+                  </div><!--subheading__inner-->
+                </div><!--subheading--withBg-->
+                {{/UEA_subheading--dse}}
+                {{#UEA_body-copy--dse}}
+                <div class="copy">{{{UEA_body-copy--dse}}}</div><!--copy-->
+                {{/UEA_body-copy--dse}}
+              </div>
+            </div><!--content-->
+            <div class="event__container">
+              <div class="event">
+                {{#UEA_when--dse}}
+                <div class="event__wrapper">
+                  <div class="event__label event__label--withBg padded-multiline">
+                    <div id="js-padded-multiline-target-3"></div>
+                    <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-3">
+                      when
+                    </div><!--js-padded-multiline-src-->
+                  </div><!--event__label--withBg-->
+                  <div class="event__label event__label--noBg">when</div><!--event__text--withBg-->
+                  <div class="event__text event__text--primary" data-max-height="css">{{{UEA_when--dse}}}</div><!--event__text--noBg-->
+                </div><!--event__wrapper-->
+                {{/UEA_when--dse}}
+                {{#UEA_where--dse}}
+                <div class="event__wrapper">
+                  <div class="event__label event__label--withBg padded-multiline">
+                    <div id="js-padded-multiline-target-4"></div>
+                    <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-4">
+                      where
+                    </div><!--js-padded-multiline-src-->
+                  </div><!--event__label--withBg-->
+                  <div class="event__label event__label--noBg">where</div><!--event__text--withBg-->
+                  <div class="event__text event__text--secondary" data-max-height="css">{{{UEA_where--dse}}}</div><!--event__text--noBg-->
+                </div><!--event__wrapper-->
+                {{/UEA_where--dse}}
+              </div><!--event-->
+            </div><!--event__container-->
+          </div><!--body-->
+          <div class="footer">
+            <div class="footer__text">
+              <div class="cta" data-max-line="1">{{{UEA_call-to-action--dse}}}</div><!--cta-->
+              <div class="url padded-multiline" data-max-line="1">
+                <div id="js-padded-multiline-target-5"></div>
+                <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-5">
+                  {{{UEA_url--dse}}}
+                </div><!--js-padded-multiline-src-->
+              </div><!--url-->
+            </div><!--footer__text-->
+            <img class="logo" src=""><!--logo-->
+          </div><!--footer-->
+          <div class="hero"><div class="reposition-fix">{{{UEA_feature-image--dse}}}</div></div><!--hero-->
+          <div class="logo">
+            {{{account.snippets.logo}}}
+          </div> <!--logo-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+
+      {{{account.snippets.multilineBackgrounds}}}      
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          charLimit();
+        });
+      });
+
+      setInterval(() => {
+        maxHeightCheck();
+        maxLineCheck();
+      }, 1000)
+
+      const paddedMultilineObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          multilineBackgrounds();
+        });
+      });
+
+      const paddedMultilineSrcs = document.querySelectorAll('.js-padded-multiline-src');
+
+      paddedMultilineSrcs.forEach(paddedMultilineSrc => {
+        paddedMultilineObserver.observe(paddedMultilineSrc, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });        
+      })
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }   
+
+
+
+      detectSystem();            
+      multilineBackgrounds();  
+    </script> 
+
+    <script type="text/javascript">
+      // Add many fallbacks for Print Ready
+      document.addEventListener('DOMContentLoaded', function(event) {
+        document.dispatchEvent(new Event('printready'));
+      });
+
+      setTimeout(function() {
+        document.dispatchEvent(new Event('printready'));
+      }, 2000);
+
+      document.dispatchEvent(new Event('printready'));
+    </script>
+
+  </body>
+</html>
+
