@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      strong {
+        font-weight: 900;
+      }      
+
+      .overflow {
+        border: none;
+        box-shadow: 0 0 0 0.0362rem red;
+        background: rgba(255, 0, 0, 0.4);
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+        z-index: 9; 
+      }
+
+      .placeholder {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/2bf886220ae5bf0966e214296ad4c65d/poster%20placedholder.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;      
+      }
+
+      :root {
+        --dynamic-color: rgb(127,64,152);
+        --dynamic-bg-color: rgb(141,198,63);        
+      }   
+
+      .mainColour--cyan {
+        --dynamic-color: rgb(0,174,239);
+      }       
+
+      .mainColour--green {
+        --dynamic-color: rgb(141,198,63);
+      }            
+
+      .mainColour--orange {
+        --dynamic-color: rgb(250,166,26);
+      }                  
+
+      .mainColour--purple {
+        --dynamic-color: rgb(127,64,152);
+      }            
+
+      .mainColour--magenta {
+        --dynamic-color: rgb(236,0,140);
+      }                
+
+      .mainColour--black {
+        --dynamic-color: black;
+      }                
+
+      .mainColour--white {
+        --dynamic-color: white;
+      }                      
+
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        flex-basis: 519pt;
+        position: relative;
+        padding: 73pt 53pt;
+        text-transform: uppercase;
+        font-weight: 900;
+        color: #fff;
+        z-index: -1;
+      }         
+
+      .green .header {
+        background: rgb(141,198,63);
+      }
+
+      .cyan .header{
+        background: rgb(0,174,239);
+      }
+
+      .orange .header {
+        background: rgb(250,166,26);
+      }
+
+      .magenta .header {
+        background: rgb(236,0,140);
+      }
+
+      .purple .header {
+        background: rgb(127,64,152);
+      }
+
+      .white .header {
+        background: #fff;
+      }
+
+      .black .header{
+        background: #000;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+      }    
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      } 
+
+      .mainColour--white .title {
+        color: black;
+      }
+      .mainColour--black .title {
+        color: white;
+      }
+
+      .title.title--black {
+        color: #000;
+      }
+
+      .title.title--white {
+        color: #fff;
+      }
+      .mainColour--black .padded-multiline span {
+        color: white;
+        background: black;
+      }
+
+      .mainColour--white .padded-multiline span {
+        color: black;
+        background: white;
+      }      
+
+      .question--white {
+        color: #fff;
+      }
+
+      .question--black {
+        color: #000;
+      }
+
+      .main {
+        position: relative;
+        flex-grow: 1;
+        padding: 38pt 51pt;      
+        font-size: 14.3pt;
+        font-weight: 900;   
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;        
+      }
+      .is-export-mode .main { font-size: 14.16pt; }
+
+      .introCopy {
+        margin-bottom: 7.4pt;
+        text-transform: uppercase;
+        line-height: 1.22em;
+        font-size: 14.4pt;
+      }
+      .is-export-mode .introCopy { font-size: 14.27pt; }
+      
+      .introCopy a {
+        text-decoration: underline;
+      }      
+
+      .info {
+        margin-bottom: 16pt;
+        list-style: none;
+        line-height: 1.27em;
+        text-transform: uppercase;
+      }
+      .info a {
+        font-size: inherit;
+        text-decoration: underline;
+      }      
+
+      .info__item {
+        font-weight: normal;
+      }
+
+      .furtherInformation {
+        font-size: 15.8pt;
+        line-height: 1em;
+        font-weight: normal;
+      }
+      .is-export-mode .furtherInformation { font-size: 15.64pt; }
+
+      .furtherInformation a {
+        font-size: inherit;
+        text-decoration: underline;
+      }
+
+      .email {
+        font-size: 16.2pt;
+        font-weight: 900;        
+      }
+      .is-export-mode .email {font-size: 16.04pt; }
+
+      .socialSection {
+        color: var(--dynamic-colour);
+        margin-bottom: 9pt;
+      }
+      .socialSection a {
+        color: inherit;
+      }
+
+      .mainColour--cyan .socialSection {
+        color: rgb(0,174,239);
+      }
+
+      .mainColour--green .socialSection {
+        color: rgb(141,198,63);
+
+      }
+      .mainColour--orange .socialSection {
+        color: rgb(250,166,26);
+      }
+
+      .mainColour--purple .socialSection {
+        color: rgb(127,64,152);
+      }
+
+      .mainColour--magenta .socialSection {
+        color: rgb(236,0,140);
+      }
+
+      .footer__lockup {
+        display: flex;
+        flex-basis: 78px;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        color: var(--dynamic-color);
+      }      
+
+      .social {
+        display: flex;
+        align-items: flex-start;
+        flex-flow: column nowrap;
+        line-height: 1em;   
+        width: 50%;
+      }
+
+      a {
+        text-decoration: none;
+        font-size: 15.9pt;
+        color: #000;
+      }
+      .is-export-mode a { font-size: 15.74pt; }
+    
+      .mainColour--cyan a {
+        color: rgb(0,174,239);
+      }
+
+      .mainColour--green a {
+        color: rgb(141,198,63);
+
+      }
+      .mainColour--orange a {
+        color: rgb(250,166,26);
+      }
+
+      .mainColour--purple a {
+        color: rgb(127,64,152);
+      }
+
+      .mainColour--magenta a {
+        color: rgb(236,0,140);
+      }
+
+      .mainColour--white .social__hashtag {
+        color: black;
+      }            
+
+      .social__hashtag {
+        margin-right: 9pt;
+        line-height: 1em;
+        font-weight: normal;
+        font-size: 15.9pt;        
+        display: block;
+        margin-bottom: 4px;        
+      }
+      .is-export-mode .social__hashtag  { font-size: 15.74pt; }
+
+      .social__hashtag a {
+        font-size: inherit;
+      }      
+
+      .vanityUrl {
+        display: inline-block;
+        line-height: 1em;      
+        font-weight: normal;
+        font-size: 15.9pt;        
+      }
+      .vanityUrl a {
+        display: block;
+        margin-bottom: 3px;
+        font-size: inherit;
+      }      
+
+      .social__icon  {
+        display: inline-block;
+        min-width: 15.9pt;    
+        width: 15.9pt;    
+        margin-right: 3pt;
+      }      
+
+      .social__icons {
+        display: flex;        
+        line-height: 1px;
+        font-size: 1px;
+        margin: 0 0 4px;
+      }
+
+      .social__icons p,
+      .social__icons p a {
+        font-size: 14.9pt;
+        font-weight: 900;
+        line-height: 1em;
+        display: inline-block;
+        text-decoration: none;
+      }   
+      .is-export-mode .social__icons p,
+     .is-export-mode .social__icons p a { font-size: 14.75pt;}        
+
+      .logo {
+        width: 119pt;
+      }    
+
+      .logo svg {
+        display: block;
+      }      
+
+      .mainColour--cyan svg {
+        fill: rgb(0,174,239);
+      }
+
+      .mainColour--green svg{
+        fill: rgb(141,198,63);
+
+      }
+      .mainColour--orange svg {
+        fill: rgb(250,166,26);
+      }
+
+      .mainColour--purple svg {
+        fill: rgb(127,64,152);
+      }
+
+      .mainColour--magenta svg {
+        fill: rgb(236,0,140);
+      }
+
+      .glint {
+        fill: var(--dynamic-color);
+      }
+
+      .mainColour--black .glint,
+      .mainColour--white .glint {
+        fill: rgb(150,150,155);
+      }
+
+      /** MULTI LINE REFACTOR **/
+      .multiline-container {
+        position: relative;
+        z-index: 2;
+        font-size: 48pt;
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 0.0501pt;        
+      }
+      .is-export-mode .multiline-container { font-size: 47.52pt; }
+
+      .title--black {
+        color: #000;
+      }
+
+      .title--white {
+        color: #fff;
+      }
+
+      .title--p1 { 
+        line-height: 0.93em;
+        color: #fff;
+      }
+
+      .title__inner {
+        margin-bottom: 0.4em;
+        line-height: 0.93em;
+      }
+
+      .question {
+        font-size: 48pt;
+        color: #fff;
+      }
+      .is-export-mode .question { font-size: 47.52pt; }
+
+      .question__inner {
+        max-height: 3.4em;
+        line-height: 0.93em;
+      }
+
+      .question--black {
+        color: #000;
+      }
+
+      .question--white {
+        color: #fff;
+      }
+
+      .padded-multiline {
+        position: relative;
+      }
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.8em;
+        text-transform: uppercase;
+        font-size: 1em;
+        letter-spacing: 0.0501pt;
+        font-weight: 900;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .padded-multiline-bg span {
+        color: transparent;
+      }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.25em;
+        bottom: -0.3em;
+        left: -0.3em;
+        right: -0.3em;
+        background: var(--dynamic-color);
+        z-index: -1;
+      }
+
+      .padded-multiline-bg span:first-child:before {
+        top: -0.25em;
+      }
+
+      .padded-multiline-bg span:last-child:before {
+        bottom: -0.3em;
+      }
+
+      .padded-multiline-fg {
+        position: relative;
+        z-index: 999;
+      }
+
+      .padded-multiline span:last-of-type::after {
+        content: '?';
+      }            
+
+      /* Logo container - OUTREACH support tag */
+
+      .logos-container {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        height: 100%;
+        align-items: center;
+        padding-left: 25px;
+      }
+
+      .support-logo-logo {
+        margin-right: 17px;
+        padding-right: 17px;      
+        border-right: solid 1px black;
+      }
+
+      .type-portrait .support-logo-logo {
+        margin-right: 22px;
+        padding-right: 22px;  
+      }
+
+      .support-logo-container {
+        max-width: 50%;
+        max-height: 200%;
+      }
+      .type-portrait .support-logo-container {
+        max-height: 120px;
+      }
+
+      .logo {
+        height: 100%;
+      }   
+
+      .type-landscape .logo.support-logo-logo {
+        height: 77%;
+      }
+
+      /* New Dynamic Refactored Footer */
+      {{{account.snippets.dynamicFooterCSS}}}      
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="{{#UEAoP_ks2-5-theme}} mainColour--{{UEAoP_ks2-5-theme}} {{/UEAoP_ks2-5-theme}} {{^UEAoP_ks2-5-theme}} mainColour--cyan {{/UEAoP_ks2-5-theme}}">    
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="placeholder"></div>
+
+        <div class="container fit">
+
+          <div class="header">
+            <div class="backgroundImage">
+              {{{ UEAoP_background-image }}}
+            </div><!--backgroundImage-->
+            <div class="multiline-container">
+              <div class="title title--p1 title--{{UEA_have-you-ever-wondered-text-colour--oTpf}}">
+                <div class="title__inner" style="font-size: {{UEAoP_question-size}}%;">
+                  <p>have</p>
+                  <p>you ever</p>
+                  <p>wondered</p>
+                </div>
+              </div><!--title-->
+              <div class="question question--{{UEAoTpf_question-colour}}">
+                <div class="question__inner" style="font-size:{{UEAoP_question-size}}%;">
+                  <div class="check-overflow">
+                    <div class="padded-multiline" data-question="{{UEAoPUB_question}}"></div><!-- end padded-multiline -->
+                  </div>
+                </div>              
+              </div><!--question-->  
+
+            </div><!--multi-line-container-->
+          </div>
+          <div class="main">
+            <div class="copy">
+              {{#UEAoP_intro-copy}}
+              <div class="introCopy">
+                <div style="max-height: 4em">
+                  <div class="check-overflow">{{{ UEAoP_intro-copy }}}</div>
+                </div>
+              </div><!--introCopy-->  
+              {{/UEAoP_intro-copy}}
+              <ul class="info">
+                {{#UEAoP_event-date}}
+                <li class="info__item">
+                  <div style="max-height: 2em">
+                    <div class="check-overflow">{{{ UEAoP_event-date }}}</div>
+                  </div>  
+                </li><!--info__item-->
+                {{/UEAoP_event-date}}
+                {{#UEAoP_event-time}}
+                <li class="info__item">
+                  <div style="max-height: 2em">
+                    <div class="check-overflow">{{{ UEAoP_event-time }}}</div>
+                  </div>
+                </li><!--info__item-->
+                {{/UEAoP_event-time}}
+                {{#UEAoP_event-venue }}
+                <li class="info__item">
+                  <div style="max-height: 2em">
+                    <div class="check-overflow">{{{ UEAoP_event-venue }}}</div>
+                  </div>
+                </li><!--info__item-->
+                {{/UEAoP_event-venue }}
+                {{#UEAoP_event-coordinator}}
+                <li class="info__item">
+                  <div style="max-height: 2em">
+                    <div class="check-overflow">{{{ UEAoP_event-coordinator }}}</div>
+                  </div>
+                </li><!--info__item-->
+                {{/UEAoP_event-coordinator}}
+              </ul>
+              <div class="socialSection">
+                <div class="furtherInformation">{{{ UEAop_further-information }}}</div><!--furtherInformation-->
+                <div class="email">
+                  <div style="max-height: 2em">
+                    <div class="check-overflow"> {{{ UEAoP_email }}}</div>
+                  </div>
+                </div><!--email-->
+              </div><!--socialSection-->          
+            </div>
+
+            <div class="dynamicFooter js-dynamic-footer {{#UEA-OR-support-logo}}has-support-logo{{/UEA-OR-support-logo}}">
+              <div class="dynamicFooter__section dynamicFooter__section--text">
+                {{#UEAoP_url-text}}
+                <div class="dynamicSocial">
+                  <div class="dynamicSocial__text dynamicSocial__text--url textfit">{{{UEAoP_url-text}}}</div>
+                </div><!--dynamicSocial-->
+                {{/UEAoP_url-text}}
+
+                {{#UEAoTpf_hastag}}
+                <div class="dynamicSocial">
+                  <div class="dynamicSocial__text dynamicSocial__text--hashtag textfit">#{{{UEAoTpf_hastag}}}</div>
+                </div><!--dynamicSocial-->
+                {{/UEAoTpf_hastag}}
+
+                {{#UEAoTpf_twitterHandle}}
+                <div class="dynamicSocial dynamicSocial--withIcon">                
+                  <svg class="dynamicSocial__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.81 12.12"><title>twitter</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M13.28,3a6.64,6.64,0,0,0,1.53-1.6,6.73,6.73,0,0,1-1.73.49A3.1,3.1,0,0,0,14.41.23,6.07,6.07,0,0,1,12.47,1a3.53,3.53,0,0,0-1-.7A3,3,0,0,0,10.24,0a3,3,0,0,0-2.6,1.53,3.05,3.05,0,0,0-.41,1.53,4.23,4.23,0,0,0,.06.7A8.47,8.47,0,0,1,3.8,2.83,8.36,8.36,0,0,1,1,.55,3,3,0,0,0,.61,2.08,2.92,2.92,0,0,0,1,3.55,3.31,3.31,0,0,0,2,4.66,2.74,2.74,0,0,1,.61,4.25v.06A2.94,2.94,0,0,0,1.3,6.23,3,3,0,0,0,3,7.31a3.72,3.72,0,0,1-.81.09l-.55,0a3,3,0,0,0,1.05,1.5,2.81,2.81,0,0,0,1.78.6A6,6,0,0,1,.72,10.78q-.4,0-.72,0a8.41,8.41,0,0,0,4.66,1.37,8.32,8.32,0,0,0,4.71-1.37,8.23,8.23,0,0,0,2.92-3.29,8.63,8.63,0,0,0,1-4,1.68,1.68,0,0,0,0-.38"></path></g></g></svg>
+                  <div class="dynamicSocial__inner">
+                    <div class="dynamicSocial__text dynamicSocial__text--twitter textfit">{{{UEAoTpf_twitterHandle}}}</div><!--social__text--> 
+                  </div><!--dynamicSocial__inner-->                
+                </div><!--dynamicSocial__withIcon-->
+                {{/UEAoTpf_twitterHandle}}
+              </div><!--dynamicFooter__section-->
+
+              <div class="dynamicFooter__section dynamicFooter__section--logos">
+                <div class="dynamicLogo">
+                  <svg class="dynamicLogo__img" viewBox="0 0 113 68" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="UEA_NEW_BRAND_Green">
+                    <path d="M27.731,51.046 C27.117,51.046 27.535,51.029 26.958,51.029 C19.827,51.029 14.474,46.128 14.474,32.408 L14.474,12.187 C14.474,5.253 17.541,2.622 21.878,2.622 L21.878,1.798 L0,1.798 L0,2.612 C3.802,2.686 5.177,5.917 5.177,10.167 L5.177,30.101 C5.177,45.118 12.366,51.899 25.4,51.899 C25.541,51.899 25.86,51.899 25.86,51.899 L27.729,51.899 L27.731,51.046" id="Fill-1" fill="#1A1919"></path> 
+                    <path d="M71.689,37.099 C71.604,29.571 69.907,27.952 62.389,27.88 L62.389,27.136 C69.907,27.062 71.604,25.446 71.689,17.919 L72.397,17.919 C72.484,25.446 74.177,27.057 81.695,27.13 L81.695,27.88 C74.177,27.952 72.484,29.571 72.397,37.099 L71.689,37.099" id="Fill-2" fill="" class="glint"></path> 
+                    <path d="M31.349,51.051 C38.152,51.051 41.146,46.432 41.146,39.903 C41.146,32.083 41.146,39.903 41.146,39.903 L41.139,11.515 C41.139,4.847 37.798,2.629 33.747,2.629 L33.744,1.796 L72.388,1.796 L72.406,12.283 L71.72,12.281 C70.567,6.116 68.162,3.708 60.322,3.708 C60.322,3.708 59.009,3.708 58.504,3.708 C51.131,3.708 49.681,6.06 49.681,12.659 C49.681,14.544 49.681,18.798 49.681,18.798 C49.681,26.8 52.948,27.128 59.106,27.128 L59.106,27.878 C52.948,27.878 49.681,28.55 49.681,36.63 L49.681,39.257 C49.681,49.155 50.93,49.814 59.249,49.814 C64.167,49.814 70.163,48.554 71.704,41.769 L72.407,41.772 L72.407,51.899 L31.349,51.899 L31.349,51.051" id="Fill-3" fill="#1A1919"></path> 
+                    <path d="M86.156,51.046 C92.949,51.046 94.665,46.659 91.585,39.778 L81.175,13.744 L84.183,0.868 L84.756,0.866 C84.756,0.866 99.072,34.856 102.622,41.733 C106.369,48.991 109.518,51.051 112.625,51.051 L112.625,51.899 L86.156,51.899 L86.156,51.046" id="Fill-4" fill="#1A1919"></path> 
+                    <path d="M7.958,66.364 C6.165,66.364 5.093,65.073 5.093,62.911 L5.093,58.488 L6.198,58.488 L6.198,62.855 C6.198,64.478 6.935,65.209 7.979,65.209 C9.019,65.209 9.73,64.497 9.73,62.911 L9.73,58.488 L10.834,58.488 L10.834,62.845 C10.834,65.048 9.76,66.364 7.958,66.364" id="Fill-5" fill="#1A1919"></path> 
+                    <path d="M16.516,66.189 L15.439,66.189 L15.439,62.755 C15.439,61.783 15.032,61.269 14.334,61.269 C13.603,61.269 13.027,61.853 13.027,62.823 L13.027,66.189 L11.951,66.189 L11.951,60.292 L12.964,60.292 L12.964,61.124 C13.309,60.487 13.854,60.17 14.546,60.17 C15.742,60.17 16.516,61.101 16.516,62.545 L16.516,66.189" id="Fill-6" fill="#1A1919"></path> 
+                    <path d="M17.901,59.588 L18.963,59.588 L18.963,58.497 L17.901,58.497 L17.901,59.588 Z M17.897,66.189 L18.973,66.189 L18.973,60.292 L17.897,60.292 L17.897,66.189 Z" id="Fill-7" fill="#1A1919"></path> 
+                    <polyline id="Fill-8" fill="#1A1919" points="22.841 66.231 21.89 66.231 19.778 60.292 20.917 60.292 22.368 64.71 23.827 60.292 24.947 60.292 22.841 66.231"></polyline> 
+                    <path d="M26.335,62.766 L29.072,62.766 C28.978,61.885 28.53,61.192 27.723,61.192 C26.956,61.192 26.425,61.909 26.335,62.766 Z M27.837,66.322 C26.324,66.322 25.221,64.999 25.221,63.245 C25.221,61.491 26.315,60.17 27.742,60.17 C29.168,60.17 30.168,61.423 30.168,63.289 C30.168,63.369 30.168,63.46 30.158,63.597 L30.154,63.724 L26.341,63.724 C26.462,64.785 27.117,65.314 27.857,65.314 C28.336,65.314 28.851,65.114 29.296,64.574 L29.339,64.524 L29.384,64.569 L29.931,65.115 L29.977,65.163 L29.936,65.219 C29.389,65.974 28.698,66.322 27.837,66.322 Z" id="Fill-9" fill="#1A1919"></path> 
+                    <path d="M32.177,66.189 L31.119,66.189 L31.119,60.292 L32.152,60.292 L32.152,61.558 C32.51,60.642 33.14,60.19 33.919,60.19 C33.95,60.19 34.069,60.194 34.069,60.194 L34.069,61.462 L33.949,61.462 C32.978,61.462 32.177,62.224 32.177,63.823 L32.177,66.189" id="Fill-10" fill="#1A1919"></path> 
+                    <path d="M36.405,66.298 C35.75,66.298 35.01,66.03 34.441,65.497 L34.395,65.456 L34.879,64.614 L34.932,64.659 C35.474,65.13 35.953,65.317 36.513,65.317 C37.091,65.317 37.432,65.042 37.432,64.591 C37.432,64.118 37.067,63.95 36.388,63.731 C35.673,63.497 34.696,63.157 34.696,61.933 C34.696,60.898 35.541,60.192 36.574,60.192 C37.189,60.192 37.787,60.372 38.315,60.776 L38.366,60.814 L37.93,61.698 L37.877,61.657 C37.405,61.305 36.876,61.173 36.529,61.173 C35.998,61.173 35.68,61.453 35.68,61.821 C35.68,62.286 35.976,62.397 36.854,62.669 C37.82,62.97 38.413,63.524 38.413,64.48 C38.413,65.576 37.584,66.298 36.405,66.298" id="Fill-11" fill="#1A1919"></path> 
+                    <path d="M46.412,68 C45.693,68 45.01,67.501 45.01,67.501 L45.37,66.512 C45.37,66.512 45.924,66.925 46.351,66.925 C46.926,66.925 47.187,66.565 47.396,65.966 L45.153,60.292 L46.319,60.292 L47.917,64.505 L49.226,60.292 L50.362,60.292 L48.236,66.331 C47.828,67.403 47.231,68 46.436,68" id="Fill-12" fill="#1A1919"></path> 
+                    <path d="M54.704,61.223 C53.871,61.223 53.114,61.98 53.114,63.206 C53.114,64.44 53.879,65.229 54.723,65.229 C55.562,65.229 56.327,64.47 56.327,63.251 C56.327,62.129 55.624,61.225 54.704,61.225 M54.704,66.306 C53.222,66.306 52.019,64.963 52.019,63.251 C52.019,61.503 53.229,60.153 54.723,60.153 C56.21,60.153 57.428,61.494 57.428,63.206 C57.428,64.952 56.202,66.306 54.704,66.306" id="Fill-13" fill="#1A1919"></path> 
+                    <path d="M59.579,66.183 L58.486,66.183 L58.486,61.353 L57.802,61.353 L57.802,60.286 L58.486,60.286 L58.486,59.903 C58.486,58.466 59.592,58.173 60.103,58.173 C60.489,58.173 60.742,58.241 60.943,58.323 L60.985,58.341 L60.985,59.407 L60.931,59.382 C60.773,59.302 60.502,59.239 60.322,59.239 C59.781,59.239 59.57,59.542 59.57,60.029 L59.57,60.298 L60.975,60.298 L60.975,61.353 L59.579,61.353 L59.579,66.183" id="Fill-14" fill="#1A1919"></path> 
+                    <polyline id="Fill-15" fill="#1A1919" points="68.461 66.18 63.709 66.18 63.709 58.476 68.413 58.476 68.413 59.589 64.83 59.589 64.83 61.591 67.979 61.591 67.979 62.702 64.83 62.702 64.83 65.077 68.461 65.077 68.461 66.18"></polyline>
+                    <path d="M70.168,64.355 C70.168,64.964 70.61,65.278 71.183,65.278 C72.092,65.278 72.61,64.62 72.61,63.866 L72.61,63.545 C72.368,63.398 71.939,63.296 71.476,63.296 C70.819,63.296 70.168,63.625 70.168,64.355 Z M71.038,66.284 C70.084,66.284 69.076,65.678 69.076,64.383 C69.076,63.138 69.987,62.296 71.362,62.296 C71.891,62.296 72.331,62.41 72.587,62.519 L72.587,62.437 C72.587,61.817 72.271,61.239 71.413,61.239 C70.796,61.239 70.212,61.463 69.744,61.773 L69.683,61.813 L69.372,60.8 L69.423,60.761 C69.884,60.458 70.646,60.177 71.433,60.177 C72.143,60.177 72.739,60.403 73.11,60.832 C73.471,61.251 73.667,61.82 73.667,62.574 L73.667,66.18 L72.723,66.18 L72.723,65.433 C72.511,65.835 71.89,66.284 71.038,66.284 Z" id="Fill-16" fill="#1A1919"></path> 
+                    <path d="M88.896,63.121 L87.704,60.089 L86.514,63.124 L88.896,63.121 Z M91.24,66.18 L90.04,66.18 L89.31,64.232 L86.104,64.232 L85.374,66.18 L84.188,66.18 L87.282,58.486 L88.146,58.486 L91.24,66.18 Z" id="Fill-17" fill="#1A1919"></path> 
+                    <path d="M99.789,61.238 C99.01,61.238 98.341,61.847 98.341,62.926 C98.341,64.005 99.037,64.659 99.789,64.659 C100.637,64.659 101.365,63.972 101.365,62.958 C101.365,61.764 100.57,61.238 99.789,61.238 M99.797,67.98 C98.944,67.98 98.171,67.708 97.498,67.167 L97.451,67.128 L97.915,66.157 L97.971,66.206 C98.538,66.685 99.17,66.927 99.85,66.927 C100.96,66.927 101.469,66.151 101.469,65.126 L101.469,64.659 C101.127,65.384 100.395,65.733 99.645,65.733 C98.463,65.733 97.24,64.7 97.24,62.972 C97.24,61.202 98.463,60.161 99.645,60.161 C100.397,60.161 101.162,60.522 101.527,61.183 L101.527,60.282 L102.485,60.282 L102.485,65.106 C102.485,65.988 102.263,66.69 101.831,67.192 C101.383,67.708 100.623,67.98 99.797,67.98" id="Fill-18" fill="#1A1919"></path> 
+                    <polygon id="Fill-19" fill="#1A1919" points="103.688 66.179 104.764 66.179 104.764 58.491 103.688 58.491"></polygon> 
+                    <path d="M43.647,66.294 C42.701,66.294 42.126,65.69 42.126,64.597 L42.126,61.374 L41.433,61.374 L41.433,60.296 L42.11,60.295 L42.11,58.661 L43.207,58.661 L43.207,60.298 L44.665,60.298 L44.665,61.374 L43.207,61.374 L43.207,64.312 C43.207,64.866 43.392,65.194 43.86,65.194 C44.105,65.194 44.346,65.136 44.525,65.03 L44.615,64.981 L44.611,66.02 L44.57,66.04 C44.283,66.214 43.988,66.294 43.647,66.294" id="Fill-20" fill="#1A1919"></path> 
+                    <path d="M81.133,66.275 C80.186,66.275 79.611,65.672 79.611,64.579 L79.611,61.356 L78.917,61.356 L78.917,60.289 L79.59,60.288 L79.588,58.642 L80.692,58.642 L80.692,60.278 L82.149,60.278 L82.149,61.356 L80.692,61.356 L80.692,64.293 C80.692,64.847 80.877,65.175 81.345,65.175 C81.591,65.175 81.831,65.118 82.01,65.012 L82.1,64.962 L82.102,66.002 L82.055,66.023 C81.768,66.195 81.473,66.275 81.133,66.275" id="Fill-21" fill="#1A1919"></path> 
+                    <path d="M96.369,66.184 L95.29,66.184 L95.29,62.751 C95.29,61.779 94.883,61.265 94.186,61.265 C93.455,61.265 92.879,61.849 92.879,62.818 L92.879,66.184 L91.802,66.184 L91.802,60.288 L92.816,60.288 L92.816,61.12 C93.161,60.482 93.706,60.165 94.397,60.165 C95.594,60.165 96.369,61.097 96.369,62.54 L96.369,66.184" id="Fill-22" fill="#1A1919"></path> 
+                    <path d="M39.445,59.591 L40.508,59.591 L40.508,58.5 L39.445,58.5 L39.445,59.591 Z M39.441,66.202 L40.518,66.202 L40.518,60.294 L39.441,60.294 L39.441,66.202 Z" id="Fill-23" fill="#1A1919"></path> 
+                    <path d="M106.04,59.595 L107.103,59.595 L107.103,58.504 L106.04,58.504 L106.04,59.595 Z M106.036,66.176 L107.112,66.176 L107.112,60.28 L106.036,60.28 L106.036,66.176 Z" id="Fill-24" fill="#1A1919"></path> 
+                    <path d="M76.36,66.274 C75.704,66.274 74.964,66.006 74.397,65.474 L74.35,65.433 L74.835,64.589 L74.887,64.636 C75.429,65.106 75.909,65.294 76.467,65.294 C77.046,65.294 77.387,65.019 77.387,64.567 C77.387,64.095 77.022,63.926 76.342,63.706 C75.628,63.473 74.651,63.132 74.651,61.909 C74.651,60.874 75.496,60.168 76.529,60.168 C77.144,60.168 77.741,60.348 78.27,60.752 L78.321,60.79 L77.884,61.673 L77.832,61.634 C77.36,61.28 76.831,61.149 76.483,61.149 C75.953,61.149 75.635,61.429 75.635,61.798 C75.635,62.263 75.93,62.372 76.808,62.645 C77.774,62.944 78.368,63.5 78.368,64.456 C78.368,65.552 77.539,66.274 76.36,66.274" id="Fill-25" fill="#1A1919"></path> 
+                    <path d="M109.129,64.378 C109.129,64.988 109.572,65.302 110.145,65.302 C111.054,65.302 111.572,64.645 111.572,63.891 L111.572,63.569 C111.331,63.423 110.901,63.321 110.438,63.321 C109.782,63.321 109.129,63.649 109.129,64.378 Z M110,66.309 C109.046,66.309 108.039,65.702 108.039,64.407 C108.039,63.162 108.951,62.321 110.324,62.321 C110.852,62.321 111.293,62.435 111.55,62.544 L111.55,62.461 C111.55,61.843 111.234,61.265 110.375,61.265 C109.758,61.265 109.174,61.487 108.706,61.798 L108.644,61.837 L108.333,60.823 L108.385,60.786 C108.846,60.482 109.608,60.202 110.396,60.202 C111.105,60.202 111.701,60.427 112.073,60.856 C112.433,61.275 112.629,61.845 112.629,62.599 L112.629,66.187 L111.685,66.187 L111.685,65.457 C111.473,65.86 110.852,66.309 110,66.309 Z" id="Fill-26" fill="#1A1919">
+                    </path> 
+                    </g> </g> </svg>
+                </div><!--logo-->
+                {{#UEA-OR-support-logo}}
+                <img src="{{UEA-OR-support-logo}}" class="dynamicSupportLogo js-support-logo" alt="Supporter Logo" />
+                {{/UEA-OR-support-logo}}                
+              </div><!--dynamicFooter__section-->
+            </div><!--dynamicFooter-->            
+
+          </div><!--container fit-->
+
+        </div><!--bleed-->
+
+      </div><!--page-->
+    </div>
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();    
+
+
+      // Adding background for the multiline text blocks
+      function multilineBackgrounds(element) {
+        const multilineBlocks = document.querySelectorAll(element);
+        multilineBlocks.forEach(multilineBlock => {
+          const split = multilineBlock.dataset.question.split("<br />");
+          let output = "";
+          let zIndex = split.length;
+          split.forEach((line, i) => {
+            output += `<span>${line}</span>`;
+            if (i < split.length - 1) {
+              output += "<br>";
+            }
+            zIndex--;
+          });
+          multilineBlock.innerHTML = `<div class="padded-multiline-bg">${output}</div><div class="padded-multiline-fg">${output}<div>`;
+        });
+      }
+
+      multilineBackgrounds(".padded-multiline");
+
+      {{{account.snippets.dynamicFooterJS}}}
+
+      document.fonts.ready.then(() => {        
+        setTimeout(() => {
+          TextFit.fit({selector: '.textfit'});          
+        }, 5000)
+      });   
+
+
+      checkExport();
+
+    </script>
+
+
+  </body>
+</html>
