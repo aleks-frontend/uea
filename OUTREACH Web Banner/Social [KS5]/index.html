@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Template title</title>  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+
+      html {
+        font-family: 'Brandon Text'; 
+        font-size: 11pt;
+        color: #000;
+        word-break: break-word;
+      }
+
+      .overflow {
+        border: none;
+        box-shadow: 0 0 0 0.0362rem red;
+        background: rgba(255, 0, 0, 0.4);
+        position: relative; }
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      }
+
+      .placeholder {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        background-image: url(https://outfit-v2-exports-production.s3-accelerate.amazonaws.com/media_library_items/a865c5ca8c132bc62e4fe6a3a7c3e5f7/SocialMediaTemplate.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .background-image {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .background-image div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }   
+
+      .container {
+        z-index: -1;
+      }
+
+      .white .container {
+        background: #fff;
+      }
+
+      .black .container {
+        background: #000;
+      }
+
+      .green .container {
+        background: rgb(141,198,63);
+      }
+
+      .orange .container {
+        background: rgb(250,166,26);
+      }
+
+      .magenta .container {
+        background: rgb(236,0,140);
+      }
+
+      .purple .container {
+        background: rgb(127,64,152);
+      }
+
+      .cyan .container {
+        background: rgb(0,174,239);
+      } 
+
+      .title.title--white {
+        color: #fff;
+      } 
+
+      .title.title--black {
+        color: #000;
+      }
+
+      .mainColour--white .title {
+        color: black !important;
+      }
+
+      .mainColour--black .title {
+        color: white !important;
+      }
+
+      /* Set the Box Colour with KS2-5 THEME */
+      :root {
+        --dynamic-color: rgb(0,174,239);
+      }
+      .mainColour--cyan {
+        --dynamic-color: rgb(0,174,239) !important;
+      }
+      .mainColour--green {
+        --dynamic-color: rgb(141,198,63) !important;        
+      }
+      .mainColour--orange {
+        --dynamic-color: rgb(250,166,26) !important;        
+      }
+      .mainColour--purple {
+        --dynamic-color: rgb(127,64,152) !important;        
+      }
+      .mainColour--magenta {
+        --dynamic-color: rgb(236,0,140) !important;        
+      }     
+      .mainColour--black {
+        --dynamic-color: black !important;
+      }     
+      .mainColour--white {
+        --dynamic-color: white !important;        
+      }          
+
+      .white .container {
+        background: #fff;
+      }
+
+      .white .title {
+        color: #000;
+      }
+
+      .black .container {
+        background: #000;
+      }
+
+      .black .title {
+        color: #fff;
+      }      
+
+      /* End Testing new theme option */ 
+
+      .question--black {
+        color: #000;
+      }
+
+      .question--white  {
+        color: #fff;
+      }
+
+      .green .container {
+        background: rgb(141,198,63);
+      }
+
+      .cyan .container {
+        background: rgb(0,174,239);
+      }
+
+      .orange .container {
+        background: rgb(250,166,26);
+      }
+
+      .magenta .container {
+        background: rgb(236,0,140);
+      }
+
+      .purple .container {
+        background: rgb(127,64,152);
+      }
+
+      .container {
+        background: var(--dynamic-color);        
+      }
+
+      .white .container {
+        background: #fff;
+      }
+
+      .black .container {
+        background: #000;
+      }
+
+      .bgContainer {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      /** MULTI LINE REFACTOR **/
+
+      .multiline-container {
+        position: absolute;
+        left: 67pt;
+        right: 67pt;
+        top: 63pt;
+        z-index: 2;
+        font-size: 42pt;
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 0.0501pt;        
+      }
+      .is-export-mode .multiline-container { font-size: 41.6pt; }
+
+      .title--p1 { 
+        line-height: 0.93em;
+        color: #fff;
+      }
+
+      .title__inner {
+        margin-bottom: 0.4em;
+        line-height: 0.93em;
+      }
+
+      .question {
+        font-size: 42pt;
+        color: #fff;
+      }
+      .is-export-mode .question { 41.6pt }
+
+      .question__inner {
+        max-height: 3.3em;
+        line-height: 0.93em;
+      }
+
+      .question--black {
+        color: #000;
+      }
+
+      .question--white {
+        color: #fff;
+      }
+
+      .padded-multiline {
+        position: relative;
+      }
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.8em;
+        text-transform: uppercase;
+        font-size: 1em;
+        letter-spacing: 0.0501pt;
+        font-weight: 900;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .padded-multiline-bg span {
+        color: transparent;
+      }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.25em;
+        bottom: -0.3em;
+        left: -0.3em;
+        right: -0.3em;
+        background: var(--dynamic-color);
+        z-index: -1;
+      }
+
+      .padded-multiline-bg span:first-child:before {
+        top: -0.25em;
+      }
+
+      .padded-multiline-bg span:last-child:before {
+        bottom: -0.3em;
+      }
+
+      .padded-multiline-fg {
+        position: relative;
+        z-index: 999;
+      }
+
+      .padded-multiline span:last-of-type::after {
+        content: '?';
+      }                
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="{{#UEAo_ks2-5-theme}} mainColour--{{UEAo_ks2-5-theme}} {{/UEAo_ks2-5-theme}} {{^UEAo_ks2-5-theme}} mainColour--cyan {{/UEAo_ks2-5-theme}}">    
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <div class="placeholder"></div>
+
+        <div class="container fit">
+          <div class="bgContainer">
+            <div class="background-image">{{{ UEAo_image }}}</div>
+          </div><!-- end bgContainer -->
+          <div class="multiline-container">
+            <div class="title title--p1 title--{{UEA_have-you-ever-wondered-text-colour--oTpf}}">
+              <div class="title__inner" style="font-size:{{UEAoP_question-size}}%;">
+                <p>have</p>
+                <p>you ever</p>
+                <p>wondered</p>
+              </div>
+            </div><!--title-->
+            <div class="question question--{{UEAoTpf_question-colour}}">
+              <div class="question__inner" style="font-size:{{UEAoP_question-size}}%;">
+                <div class="check-overflow">
+                  <div class="padded-multiline" data-question="{{UEAoPUB_question}}"></div><!-- end padded-multiline -->
+                </div>
+              </div>              
+            </div><!--question-->  
+
+          </div><!--multi-line-container-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+                                                         if (window.showCrop) {
+                                                           document.querySelector('body').classList.add('show-crop');
+                                                         } else {
+                                                           document.querySelector('body').classList.add('hide-crop');
+                                                         }                                               
+    </script>
+
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+    <script src="js/check-export-mode.js"></script>
+
+    <script>
+
+      // Check Overflow function
+      function checkHeight(element) {
+        for (i = 0 ; i < element.length ; i++ ) {
+          var currentElement = element[i];
+          var height         = currentElement.offsetHeight;
+          var parent         = currentElement.parentNode;
+          var parentHeight   = parent.offsetHeight;
+
+          if (height > parentHeight) {
+            parent.classList.add('overflow');
+          } else {
+            parent.classList.remove('overflow');
+          }
+
+          if ((currentElement).parentNode.classList.contains('overflow')) {
+            document.body.classList.add('overflow-true');
+          } else {
+            document.body.classList.remove('overflow-true'); 
+          }
+        }
+      }   
+
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+      } setInterval(loop, 1000);  
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if ({{show-crop}} === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+      checkCrop();     
+
+      // Adding background for the multiline text blocks
+      function multilineBackgrounds(element) {
+        const multilineBlocks = document.querySelectorAll(element);
+        multilineBlocks.forEach(multilineBlock => {
+          const split = multilineBlock.dataset.question.split("<br />");
+          let output = "";
+          let zIndex = split.length;
+          split.forEach((line, i) => {
+            output += `<span>${line}</span>`;
+            if (i < split.length - 1) {
+              output += "<br>";
+            }
+            zIndex--;
+          });
+          multilineBlock.innerHTML = `<div class="padded-multiline-bg">${output}</div><div class="padded-multiline-fg">${output}<div>`;
+        });
+      }
+
+      multilineBackgrounds(".padded-multiline");
+
+      
+          checkExport();
+    </script>
+
+
+  </body>
+</html>
