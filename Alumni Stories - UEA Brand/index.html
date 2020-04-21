@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+
+        --black: {{{account.colors.black}}};
+        --white: #fff;
+      }    
+
+      .colourTheme--orange {
+        --dynamic-colour: var(--orange);
+      }
+
+      .colourTheme--cyan { 
+        --dynamic-colour: var(--cyan);     
+      }
+
+      .colourTheme--magenta { 
+        --dynamic-colour: var(--magenta); 
+      }
+
+      .colourTheme--green { 
+        --dynamic-colour: var(--green); 
+      }
+
+      .colourTheme--purple {
+        --dynamic-colour: var(--purple); 
+      }
+
+      .logoOptions--white {
+        --dynamic-logo-colour: var(--white);
+      }
+
+      .logoOptions--black {
+        --dynamic-logo-colour: var(--black);
+      }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 0.257rem;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .templateVariation--extendedPoster .fit,
+      .templateVariation--longQuote .fit {
+        padding: 1.41rem 0rem 2.1rem 0rem;
+        padding: 510px 0 0 0;
+      }
+
+      .templateVariation--poster .fit {
+        padding: 1.2rem 0rem 1.105rem 0rem;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+      }
+
+      .templateVariation--extendedPoster .header{   
+        padding: 0rem 1rem 0.21rem 1rem;   
+        padding: 0 362px 76px 362px;
+      }
+
+      .templateVariation--longQuote .header{
+        padding: 0rem 1rem 1.07rem 1rem;   
+        padding: 0rem 361.9px 387.3px 361.9px;
+      }
+
+      .templateVariation--poster .header {
+        padding: 0rem 1rem;
+        justify-content: flex-start;
+        height: 4.74rem;
+      }
+
+      .logo {
+        position: relative;
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .logo,
+      .templateVariation--longQuote .logo {
+        width: 3.73rem;
+        width: 1350.09px;
+      }
+
+      .templateVariation--extendedPoster .logo {
+        margin-bottom: 0.59rem;
+        margin-bottom: 213.5px;
+      }
+
+      .templateVariation--longQuote .logo {
+        margin-bottom: 0.59rem;
+        margin-bottom: 213.5px;
+      }
+
+      .templateVariation--poster .logo {
+        margin-bottom: 0.1rem;
+        width: 2.5rem;
+      }
+
+      .templateVariation--extendedPoster .logo,
+      .templateVariation--longQuote .logo,
+      .templateVariation--poster .logo {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster.logoOptions--hidden .logo,
+      .templateVariation--longQuote.logoOptions--hidden .logo,
+      .templateVariation--poster.logoOptions--hidden .logo {
+        display: none;
+      }
+
+      .templateVariation--poster.logoOptions--hidden .header{
+        height: 2.4rem;
+      }
+
+      .logoOptions--white .glint,
+      .logoOptions--black .glint {
+        fill: var(--dynamic-colour);
+      }
+
+      .logoOptions--white #shape,
+      .logoOptions--black #shape {
+        fill: var(--dynamic-logo-colour);
+      }
+
+      .heading {
+        position: relative;
+        display: none;
+        text-transform: uppercase;
+      }
+      
+      .heading h1{
+        font-weight: 900;
+      }
+
+      .templateVariation--extendedPoster .heading,
+      .templateVariation--longQuote .heading,
+      .templateVariation--poster .heading {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster .heading,
+      .templateVariation--longQuote .heading {
+        font-size: 0.44rem;
+        font-size: 159px;
+      }
+
+      .templateVariation--poster .heading {
+        font-size: 0.834rem;
+      }
+
+      .templateVariation--extendedPoster .heading__inner, 
+      .templateVariation--longQuote .heading__inner,
+      .templateVariation--poster .heading__inner {
+        max-height: 2.5em;
+        line-height: 1.2em;
+      }
+
+      .body {
+        display: flex;
+        flex: 1;
+        width: 100%;
+      }
+
+      .templateVariation--extendedPoster .body,
+      .templateVariation--longQuote .body {
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .templateVariation--poster .body {
+        flex-direction: row;
+      }
+
+      .main {
+        display: flex; 
+        flex: 1;
+        flex-direction: column;       
+      }
+
+      .templateVariation--extendedPoster .main,
+      .templateVariation--longQuote .main {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+      }
+
+      .templateVariation--extendedPoster .main {
+        flex: 1;
+        padding: 0rem 1rem 0.6rem 1rem;
+        padding: 0 362px 217.2px 362px;
+        font-size: 0.34rem;
+        font-size: 123px;
+      }
+
+      .templateVariation--longQuote .main {
+        padding: 0rem 1rem 0rem 1rem;
+        padding: 0rem 361.9px 0rem 361.9px;
+      }
+
+      .templateVariation--poster .main {
+        width: 7.2rem;
+        padding: 0rem 0.5rem 0.2rem 0.89rem;
+        font-size: 0.54rem;
+        font-weight: 500;
+      }
+
+      .quote {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .quote,
+      .templateVariation--poster .quote {
+        display: block;
+        color: var(--dynamic-colour);
+      }
+
+      .templateVariation--extendedPoster .quote {
+        margin-bottom: 0.54rem;
+        margin-bottom: 211.4px;
+        max-height: 5em;
+        font-size: 0.57rem;
+        font-size: 206.315px;
+        line-height: 1.2em;
+        word-spacing: 0.03em;
+      }
+
+
+      .templateVariation--poster .quote {
+        margin-bottom: 0.88rem;
+        max-height: 5em;
+        font-size: 0.613rem;
+        line-height: 1.22em;
+      }
+
+      .templateVariation--extendedPoster .quote h2,
+      .templateVariation--longQuote .quote h2,
+      .templateVariation--poster .quote h2{
+        font-weight: 500;
+      }
+      
+      .templateVariation--extendedPoster .quote h2 strong,
+      .templateVariation--longQuote .quote h2 strong,
+      .templateVariation--poster .quote h2 strong{
+        font-weight: 900;
+      }
+
+      .content {
+        flex: 1;
+      }
+
+      .templateVariation--longQuote .content {
+        display: block;
+      }
+
+      .author__container { width: 100%; }      
+      .author__container--secondary { display: none; }
+      .templateVariation--longQuote .author__container--secondary { display: block; }
+      .templateVariation--longQuote .author__container--primary { display: none; }
+
+      .author {
+        display: none;
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .author,
+      .templateVariation--longQuote .author,
+      .templateVariation--poster .author {
+        display: block;
+        line-height: 1.1em;
+      }
+
+      .templateVariation--extendedPoster .author h3,
+      .templateVariation--longQuote .author h3,
+      .templateVariation--poster .author h3 {
+        font-weight: bold;
+      }
+
+      .templateVariation--extendedPoster .author {
+        margin-bottom: 0.072rem;
+        margin-bottom: 26px;
+        font-size: 0.444rem;
+        font-size: 160.7px;
+      }
+
+      .templateVariation--longQuote .author {
+        margin-bottom: 0.12rem;
+        margin-bottom: 43.4px;
+        font-size: 0.444rem;
+        font-size: 160.7px;
+      }
+
+      .templateVariation--poster .author {
+        margin-bottom: 0.16rem;
+        font-size: 0.75rem;
+      }
+
+      .author__info {
+        display: none;
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .author__info,
+      .templateVariation--longQuote .author__info,
+      .templateVariation--poster .author__info {
+        display: block;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .author__info {
+        max-height: 3.3em;
+        margin-bottom: 0.165rem;
+        margin-bottom: 59.7px;
+      }
+
+      .templateVariation--longQuote .author__info {
+        max-height: 1.2em;
+        margin-bottom: 0.165rem;
+        margin-bottom: 59.7px;
+      }
+
+      .templateVariation--poster .author__info {
+        max-height: 4.2em;
+        margin-bottom: 0.165rem;
+      }
+
+      .templateVariation--extendedPoster .author__info h4,
+      .templateVariation--longQuote .author__info h4,
+      .templateVariation--poster .author__info h4 {
+        color: var(--dynamic-colour);
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .author__info h5,
+      .templateVariation--longQuote .author__info h5,
+      .templateVariation--poster .author__info h5 {
+        font-weight: bold;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .author__info h4 {
+        font-size: 0.296rem;
+        font-size: 107.1px;
+      }
+
+      .templateVariation--longQuote .author__info h4 {
+        font-size: 0.296rem;	
+        font-size: 107.1px;
+      }
+
+      .templateVariation--poster .author__info h4 {
+        font-size: 0.401rem;
+      }
+
+      .templateVariation--extendedPoster .author__info h5 {
+        font-size: 0.24rem;
+        font-size: 86.8px;
+      }
+
+      .templateVariation--longQuote .author__info h5 {
+        font-size: 0.245rem;
+        font-size: 88.7px;
+      }
+
+
+      .templateVariation--poster .author__info h5 {
+        font-size: 0.293rem;
+      }
+
+      .templateVariation--extendedPoster .author__info h4:first-child,
+      .templateVariation--extendedPoster .author__info h5:first-child {
+        margin-top: 0.15rem;
+        margin-top: 54.3px;
+        margin-bottom: 0.07rem;
+        margin-bottom: 25.3px;
+      }
+
+      .templateVariation--longQuote .author__info h4:first-child,
+      .templateVariation--longQuote .author__info h5:first-child {
+        margin-top: 0.07rem;
+        margin-top: 25.3px;
+        margin-bottom: 0.06rem;
+        margin-bottom: 21.7px;
+      }
+
+      .templateVariation--poster .author__info h4:first-child,
+      .templateVariation--poster .author__info h5:first-child {
+        margin-top: 0.18rem;
+        margin-bottom: 0.16rem;
+      }
+
+      .copy {
+        display: none;
+        position: relative;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .copy,
+      .templateVariation--longQuote .copy,
+      .templateVariation--poster .copy {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster .copy p,
+      .templateVariation--longQuote .copy p,
+      .templateVariation--poster .copy p {
+        font-weight: 500;
+      }
+
+      .templateVariation--extendedPoster .copy p,
+      .templateVariation--longQuote .copy p {
+        margin-bottom: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .copy p:last-child,
+      .templateVariation--longQuote .copy p:last-child,
+      .templateVariation--poster .copy p:last-child {
+        margin-bottom: 0em;
+      }
+
+      .templateVariation--extendedPoster .copy {
+        max-height: 14.5em;
+        margin-top: 0.23rem;
+        margin-top: 83.2px;
+        margin-bottom: 0.47rem;
+        margin-bottom: 170.119px;
+        font-size: 0.285rem;
+        font-size: 103.1px;
+      }
+
+      .templateVariation--longQuote .copy {
+        max-height: 19.5em;
+        margin-bottom: 0.81rem;
+        margin-bottom: 293.2px;
+        font-size: 0.295rem;
+        font-size: 106.8px;
+      }
+
+      .templateVariation--poster .copy {
+        max-height: 19em;
+        margin-top: 0.6rem;
+        font-size: 0.297rem;
+      }
+
+      .footer {
+        display: none;
+        position: relative;
+        width: 100%;  
+      }
+
+      .templateVariation--extendedPoster .footer--primary,
+      .templateVariation--longQuote .footer--primary {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .footer--secondary,
+      .templateVariation--longQuote .footer--secondary {
+        display: block;
+      }     
+
+      .templateVariation--poster .footer--primary {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 2.4rem;
+        padding: 0rem 3rem;
+        align-items: center;
+        text-align: center;
+      }
+
+      .templateVariation--poster .footer--secondary  {
+        display: none;
+      }
+
+      .cta {
+        display: none;
+        position: relative;
+        font-weight: bold;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .cta,
+      .templateVariation--longQuote .cta,
+      .templateVariation--poster .cta {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster .cta {
+        color: var(--dynamic-colour);
+        font-size: 0.405rem;
+        font-size: 146.6px;
+      }
+
+      .templateVariation--longQuote .cta {
+        display: none;
+      }
+
+      .templateVariation--poster .cta  {
+        font-size: 0.33rem;
+      }
+
+      .url {
+        display: none;
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .url,
+      .templateVariation--longQuote .url,
+      .templateVariation--poster .url {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster .url {
+        margin-top: 0.12rem;
+        margin-top: 43.4347px;
+        font-size: 0.46rem;
+        font-size: 166.5px;
+        font-weight: bold;
+      }
+
+      .templateVariation--longQuote .url {
+        display: none;
+      }
+
+      .templateVariation--poster .url  {
+        margin-top: 0.17rem;
+        font-size: 0.38rem;
+        font-weight: bold;
+        color: var(--dynamic-colour);
+      }
+
+      .templateVariation--extendedPoster .url__inner,
+      .templateVariation--longQuote .url__inner,
+      .templateVariation--poster .url__inner {
+        line-height: 0.9em;
+      }
+
+      .featureImg {
+        position: relative;
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .featureImg,
+      .templateVariation--longQuote .featureImg,
+      .templateVariation--poster .featureImg {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster .featureImg {
+        width: 100%;
+        height: 7.1rem;
+        height: 2577px;
+      }
+
+      .show-crop.templateVariation--extendedPoster .featureImg {
+        height: 2754px;
+      }
+
+      .templateVariation--longQuote .featureImg {
+        width: 100%;
+        height: 8.4rem;
+        height: 2842.4px;
+      }
+
+      .show-crop.templateVariation--longQuote .featureImg  {
+        height: 3040.4px;
+      }
+
+      .templateVariation--poster .featureImg {
+        margin-top: 0.16rem;
+        width: 7.22rem;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      .templateVariation--extendedPoster .heading__inner.u-hide ,
+      .templateVariation--longQuote .heading__inner.u-hide ,
+      .templateVariation--poster .heading__inner.u-hide  {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .quote.u-hide,
+      .templateVariation--longQuote .quote.u-hide,
+      .templateVariation--poster .quote.u-hide {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .author.u-hide,
+      .templateVariation--longQuote .author.u-hide,
+      .templateVariation--poster .author.u-hide {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .author__info.u-hide,
+      .templateVariation--longQuote .author__info.u-hide,
+      .templateVariation--poster .author__info.u-hide {
+        display: none;
+      }
+
+
+      /* Custom Crop Marks styling */  
+      .cropMark::before,
+      .cropMark::after {
+        content: '';
+        position: absolute;        
+        background: gray;
+      }
+
+      .cropMark::before { 
+        width: 20px; 
+        height: 1px;
+      }
+
+      .cropMark::after { 
+        height: 20px; 
+        width: 1px;
+      }
+
+      .cropMark--top::before { bottom: 0; }
+      .cropMark--bottom::before { top: 0; }
+
+      .cropMark--top::after { top: 0; }
+      .cropMark--bottom::after { bottom: 145mm; height: calc(5mm + 5px); }      
+
+      .cropMark--left::before { left: 0; }
+      .cropMark--right::before { right: 0; }
+
+      .cropMark--left::after { right: 0; }
+      .cropMark--right::after { left: 0; }         
+
+      .show-crop.templateVariation--extendedPoster .placeholder__container, 
+      .show-crop.templateVariation--longQuote .placeholder__container { bottom: 50mm; }
+
+      .hide-crop .placeholder__container {
+        bottom: 3mm;
+      }
+
+      .invalidLogoText{
+        display: none;
+      }
+
+      .invalidLogo{
+        outline: 5px solid #E40046;
+      }
+
+      .invalidLogo .invalidLogoText{
+        display: block;
+        position: absolute;
+        font-size: 0.3rem;
+        width: 100%;
+        background: #E40046;
+        outline: 5px solid #E40046;
+        margin-top: -15px;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <!--
+  {{ placeholder-toggle-new }}
+  {{show-crop}}
+  {{ placeholder-opacity }}
+  {{ placeholder-image-1 }}
+  {{UEA_template-variation--as}}		
+  {{UEA_colour-theme--as}}
+  {{logoColorOption}}
+  {{logoVisibilityOption}}
+  {{{UEA_heading--as}}}
+  {{UEA_heading-size--as}}
+  {{{UEA_subheading--as}}}
+  {{{UEA_feature-image--as}}}
+  {{{UEA_name--as}}}
+  {{{UEA_free-text--as}}}
+  {{{UEA_body-copy--as}}}
+  {{{UEA_cta--as}}}
+  {{{UEA_url--as}}}
+  {{UEA_url-size--as}}
+  -->
+
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         templateVariation--{{UEA_template-variation--as}}{{^UEA_template-variation--as}}extendedPoster{{/UEA_template-variation--as}}
+                                         colourTheme--{{UEA_colour-theme--as}}{{^UEA_colour-theme--as}}orange{{/UEA_colour-theme--as}}
+                                         logoOptions--{{logoColorOption}}{{^logoColorOption}}black{{/logoColorOption}}
+                                         logoOptions--{{logoVisibilityOption}}" 
+        data-crop="{{show-crop}}" data-variation="{{UEA_template-variation--as}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="header">
+            <div class="logo">
+              {{{account.snippets.logo}}}
+              <div class="invalidLogoText">Invalid Logo</div>
+            </div><!--logo-->
+            <div class="heading">
+              {{#UEA_heading--as}}
+              <div class="heading__inner u-heading-patch" style="font-size: {{UEA_heading-size--as}}%;" data-max-height="css">
+                {{{UEA_heading--as}}}
+              </div><!--heading__inner-->
+            </div><!--heading-->
+            {{/UEA_heading--as}}
+          </div><!--header-->
+          <div class="body">
+            <div class="main">
+              {{#UEA_subheading--as}}
+              <div class="quote u-heading-patch" data-max-height="css">{{{UEA_subheading--as}}}</div><!--quote-->
+              {{/UEA_subheading--as}}
+              <div class="content">
+                <div data-max-height="dynamic" class="content__inner">
+                  <div class="author__container author__container--primary">
+                    {{#UEA_name--as}}
+                    <div class="author u-heading-patch" data-max-line="2">{{{UEA_name--as}}}</div><!--author-->
+                    {{/UEA_name--as}}
+                    {{#UEA_free-text--as}}
+                    <div class="author__info u-heading-patch" data-max-height="css">{{{UEA_free-text--as}}}</div><!--author__info-->
+                    {{/UEA_free-text--as}}
+                  </div><!--author__conainer-->
+                  {{#UEA_body-copy--as}}
+                  <div class="copy" data-max-height="css">{{{UEA_body-copy--as}}}</div><!--copy-->
+                  {{/UEA_body-copy--as}}
+                  <div class="author__container author__container--secondary">
+                    {{#UEA_name--as}}
+                    <div class="author u-heading-patch" data-max-line="2">{{{UEA_name--as}}}</div><!--author-->
+                    {{/UEA_name--as}}
+                    {{#UEA_free-text--as}}
+                    <div class="author__info u-heading-patch" data-max-height="css">{{{UEA_free-text--as}}}</div><!--author__info-->
+                    {{/UEA_free-text--as}}
+                  </div><!--author__conainer-->
+                </div>
+              </div><!--content-->
+              <div class="footer footer--secondary">
+                {{#UEA_cta--as}}
+                <div class="cta" data-max-line="2">{{{UEA_cta--as}}}</div><!--cta-->
+                {{/UEA_cta--as}}
+                {{#UEA_url--as}}
+                <div class="url" data-max-line="1">
+                  <div class="url__inner" style="font-size: {{UEA_url-size--as}}%;" data-max-height="css">
+                    {{{UEA_url--as}}}
+                  </div><!--url__inner-->
+                </div><!--url-->
+                {{/UEA_url--as}}
+              </div><!--footer--secondary-->
+            </div><!--main-->
+            <div class="featureImg"><div class="reposition-fix">{{{UEA_feature-image--as}}}</div></div><!--featureImg-->
+          </div><!--body-->
+          <div class="footer footer--primary">
+            {{#UEA_cta--as}}
+            <div class="cta" data-max-line="2">{{{UEA_cta--as}}}</div><!--cta-->
+            {{/UEA_cta--as}}
+            {{#UEA_url--as}}
+            <div class="url" data-max-line="1">
+              <div class="url__inner" style="font-size: {{UEA_url-size--as}}%;" data-max-height="css">
+                {{{UEA_url--as}}}
+              </div><!--url__inner-->
+            </div><!--url-->
+            {{/UEA_url--as}}
+          </div><!--footer--primary-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
