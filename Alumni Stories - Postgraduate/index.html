@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+
+        --black: {{{account.colors.black}}};
+        --white: #fff;
+      }    
+
+      .colourTheme--orange {
+        --dynamic-colour: var(--orange);
+      }
+
+      .colourTheme--cyan { 
+        --dynamic-colour: var(--cyan);     
+      }
+
+      .colourTheme--magenta { 
+        --dynamic-colour: var(--magenta); 
+      }
+
+      .colourTheme--green { 
+        --dynamic-colour: var(--green); 
+      }
+
+      .colourTheme--purple {
+        --dynamic-colour: var(--purple); 
+      }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 0.257rem;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;        
+        background-color: var(--black);
+      }
+
+      .templateVariation--extendedPoster .fit,
+      .templateVariation--longQuote .fit {
+        flex-direction: column;
+        padding-top: 257px;
+      }
+
+      .templateVariation--poster .fit {
+        flex-direction: row;
+      }
+
+      .main {
+        display: flex;
+        position: relative;
+        flex: 1;
+        flex-direction: column;
+      }
+
+      .templateVariation--extendedPoster .main {       
+        padding-bottom: 100px;
+      }
+
+      .templateVariation--poster .main {
+        padding: 0.87rem 0rem 0.9rem 0.9rem;
+        width: 8.32rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .main,
+      .formatVariation--a2.templateVariation--poster .main {
+        padding: 0.8rem 0rem 0.78rem 0.8rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .main {
+        padding: 0.8rem 0rem 0.8rem 0.84rem;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .templateVariation--extendedPoster .header, 
+      .templateVariation--longQuote .header {
+        height: 630px;
+        padding-left: 361.9px;     
+      }
+
+      .templateVariation--longQuote .header {
+        margin-bottom: 217.2px;
+      }
+
+      .templateVariation--poster .header {
+        position: relative;
+        height: 5.17rem;
+        justify-content: flex-end;
+      }
+
+      .formatVariation--a1.templateVariation--poster .header {
+        height: 5.32rem;
+      }
+
+      .formatVariation--a2.templateVariation--poster .header {
+        height: 5.3rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .header {
+        height: 5.26rem;
+      }
+
+      .logo {
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .logo,
+      .templateVariation--longQuote .logo {
+        width: 644.2px;
+      }
+
+      .templateVariation--poster .logo {
+        position: absolute;
+        left: 0;
+        top: 1.83rem;
+        width: 3.15rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .logo,
+      .formatVariation--a2.templateVariation--poster .logo {
+        top: 1.86rem;
+        width: 3.27rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .logo {
+        top: 1.89rem;
+        width: 3.23rem;
+      }
+
+      .logo .glint {
+        fill: var(--dynamic-colour);
+      }
+
+      .logo #shape {
+        fill: var(--white);
+      }
+
+      .postgraduateText {
+        display: none;
+        align-self: flex-end;
+        align-items: center;
+        justify-content: flex-start;
+        font-weight: bold;
+        background: var(--dynamic-colour);
+        color: var(--white);
+        z-index: 1;
+      }
+
+      .templateVariation--extendedPoster .postgraduateText,
+      .templateVariation--longQuote .postgraduateText {
+        margin-top: 10.8px;
+        height: 238.1px;  
+        width: 1513px;
+        padding-left: 155.6px;
+        font-size: 122px;
+      }
+
+      .templateVariation--poster .postgraduateText {
+        margin-top: 0.02rem;
+        height: 0.8rem;
+        width: 5.14rem;
+        padding-left: 0.53rem;
+        font-size: 0.43rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .postgraduateText,
+      .formatVariation--a2.templateVariation--poster .postgraduateText {
+        padding-left: 0.53rem;
+        font-size: 0.43rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .postgraduateText {
+        height: 0.82rem;
+        width: 5.3rem;
+      }
+
+      .formatVariation--a2.templateVariation--poster .postgraduateText {
+        width: 5.25rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .postgraduateText {
+        width: 5.2rem;
+        height: 0.83rem;
+      }
+
+      .templateVariation--extendedPoster .postgraduateText--phd,
+      .templateVariation--longQuote .postgraduateText--phd {
+        height: 340.2px;
+        line-height: 1em;
+      }
+
+      .templateVariation--poster .postgraduateText--phd,
+      .formatVariation--a1.templateVariation--poster .postgraduateText--phd,
+      .formatVariation--a3.templateVariation--poster .postgraduateText--phd {
+        height: 1.1rem;
+        line-height: 1em;
+      }
+
+      .pgChoice--postgraduate .postgraduateText--postgraduate,
+      .pgChoice--masters .postgraduateText--masters ,
+      .pgChoice--phd .postgraduateText--phd { 
+        display: flex; 
+      }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        flex: 1;
+        width: 100%;
+      }
+
+      .templateVariation--extendedPoster .body {
+        padding: 0 217.2px 0 304px;
+      }
+
+      .templateVariation--longQuote .body {
+        padding: 0 217.1px 0rem 289.5px;
+      }
+
+      .templateVariation--poster .body {
+        padding-right: 1.4rem;
+      }
+
+      .heading {
+        display: none;
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .heading,
+      .templateVariation--poster .heading {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster .heading {
+        margin-bottom: 100px;
+        font-size: 289.4px;
+      }
+
+      .templateVariation--poster .heading {
+        margin-bottom: 0.58rem;
+        font-size: 0.76rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .heading {
+        margin-bottom: 0.51rem;
+        font-size: 0.7865rem;
+      }
+
+      .formatVariation--a2.templateVariation--poster .heading {
+        margin-bottom: 0.51rem;
+        font-size: 0.7865rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .heading {
+        margin-bottom: 0.5rem;
+        font-size: 0.775rem;
+      }
+
+      .templateVariation--extendedPoster .heading h1,
+      .templateVariation--poster .heading h1 {
+        font-weight: 300;
+      }
+
+      .templateVariation--extendedPoster .heading strong,
+      .templateVariation--poster .heading strong {
+        font-weight: 700;
+      }
+
+      .templateVariation--extendedPoster .heading__inner {
+        max-height: 1600px;
+        line-height: 0.88em;
+      }
+
+      .templateVariation--poster .heading__inner {
+        max-height: 4.7rem;
+        line-height: 0.96em;
+        letter-spacing: 0.023em;
+      }
+
+      .formatVariation--a1.templateVariation--poster .heading__inner,
+      .formatVariation--a2.templateVariation--poster .heading__inner,
+      .formatVariation--a3.templateVariation--poster .heading__inner {
+        max-height: 4.9rem;
+      }
+
+      .content {
+        flex: 1;
+      }
+
+      .templateVariation--extendedPoster .content__inner {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+      }
+
+      .templateVariation--longQuote .content {
+        display: block;
+      }
+
+      .templateVariation--poster .content__inner {
+        display: flex;
+        flex-direction: column;
+        /*justify-content: space-between;*/
+        height: 100%;
+      }
+
+      .author__container {
+        width: 100%;
+        margin-top: 1em;
+      }
+
+      .templateVariation--extendedPoster .author__container {
+        margin-bottom: 104.9px;
+        margin-top: 0;
+      }
+
+      .templateVariation--longQuote .author__container {
+        margin-bottom: 43.4px;
+        margin-top: 0;
+      }
+
+      .author {
+        position: relative;
+        line-height: 1.1em;
+      }
+
+      .templateVariation--extendedPoster .author h3,
+      .templateVariation--longQuote .author h3,
+      .templateVariation--poster .author h3 {
+        font-weight: 700;
+      }
+
+      .templateVariation--extendedPoster .author {
+        margin-bottom: 0.272em;
+        font-size: 0.398rem;
+        font-size: 144px;
+      }
+
+      .templateVariation--longQuote .author {
+        margin-bottom: 0.3em;
+        font-size: 144.1px;
+      }
+
+      .templateVariation--poster .author {
+        font-size: 0.58rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .author,
+      .formatVariation--a2.templateVariation--poster .author {
+        font-size: 0.6rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .author {
+        font-size: 0.59rem;
+      }
+
+      .formatVariation--a2.templateVariation--poster .author,
+      .formatVariation--a3.templateVariation--poster .author {
+        line-height: 1.03em;
+      }
+
+      .author__info {
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .author__info,
+      .templateVariation--longQuote .author__info,
+      .templateVariation--poster .author__info {
+        display: block;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .author__info,
+      .templateVariation--longQuote .author__info{
+        max-height: 416.2px;
+        margin-bottom: 59.7px;
+      }
+
+      .templateVariation--poster .author__info {
+        max-height: 1.33rem;
+        margin-bottom: 0.165rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .author__info,
+      .formatVariation--a2.templateVariation--poster .author__info,
+      .formatVariation--a3.templateVariation--poster .author__info {
+        max-height: 1.4rem;
+      }
+
+      .templateVariation--extendedPoster .author__info h4,
+      .templateVariation--longQuote .author__info h4,
+      .templateVariation--poster .author__info h4 {
+        color: var(--dynamic-colour);
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .author__info h5,
+      .templateVariation--longQuote .author__info h5,
+      .templateVariation--poster .author__info h5 {
+        margin-bottom: 0.27em;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .author__info h4 {
+        margin-bottom: 25.7px;
+        font-size: 95.5px;
+      }
+
+      .templateVariation--longQuote .author__info h4 {
+        margin-bottom: 0.2em;
+        font-size: 97.5px;
+      }
+
+      .templateVariation--poster .author__info h4 {
+        margin-bottom: 0.27em;
+        font-size: 0.31rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .author__info h4,
+      .formatVariation--a2.templateVariation--poster .author__info h4 {
+        font-size: 0.322rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .author__info h4 {
+        font-size: 0.319rem;
+      }
+
+      .templateVariation--extendedPoster .author__info h5 {
+        font-size: 74.9px;
+      }
+
+      .templateVariation--longQuote .author__info h5 {
+        font-size: 78px;
+      }
+
+      .templateVariation--poster .author__info h5 {
+        font-size: 0.226rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .author__info h5,
+      .formatVariation--a2.templateVariation--poster .author__info h5 {
+        font-size: 0.235rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .author__info h5 {
+        font-size: 0.231rem;
+      }
+
+      .templateVariation--extendedPoster .author__info h4:last-child,
+      .templateVariation--longQuote .author__info h4:last-child,
+      .templateVariation--poster .author__info h4:last-child,
+      .templateVariation--extendedPoster .author__info h5:last-child,
+      .templateVariation--longQuote .author__info h5:last-child,
+      .templateVariation--poster .author__info h5:last-child {
+        margin-bottom: 0em;
+      }
+
+      .copy {
+        position: relative;
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .copy  {
+        line-height: 1.2em;
+      }
+
+      .templateVariation--longQuote .copy  {
+        line-height: 1.1em;
+      }
+
+      .templateVariation--extendedPoster .copy p,
+      .templateVariation--longQuote .copy p,
+      .templateVariation--poster .copy p {
+        font-weight: 500;
+        margin-bottom: 1em;
+      }
+
+      .templateVariation--extendedPoster .copy strong,
+      .templateVariation--longQuote .copy strong,
+      .templateVariation--poster .copy strong {
+        font-weight: bold;
+      }
+
+      .templateVariation--extendedPoster .copy p:last-child,
+      .templateVariation--longQuote .copy p:last-child,
+      .templateVariation--poster .copy p:last-child {
+        margin-bottom: 0em;
+      }
+
+      .templateVariation--extendedPoster .copy {
+        max-height: 1266.8px;
+        font-size: 85.8px;
+      }
+
+      .templateVariation--longQuote .copy {
+        max-height: 2569.9px;
+        margin-bottom: 137.5px;
+        font-size: 159.3px;
+      }
+
+      .templateVariation--poster .copy {
+        max-height: 9rem;
+        font-size: 0.27rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .copy,
+      .formatVariation--a2.templateVariation--poster .copy {
+        max-height: 5.8rem;
+        font-size: 0.278rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .copy {
+        max-height: 5.78rem;
+        font-size: 0.277rem;
+      }
+
+      .footer {
+        display: none;
+        position: relative;
+        width: 100%;  
+      }
+
+      .templateVariation--extendedPoster .footer ,
+      .templateVariation--poster .footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .templateVariation--extendedPoster .footer {
+        height: 1.08rem;
+        padding: 0 217.1px 0rem 304px;
+      }
+
+      .templateVariation--poster .footer  {
+        height: 2.91rem;
+        padding-right: 1.4rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .footer,
+      .formatVariation--a2.templateVariation--poster .footer {
+        height: 3.04rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .footer  {
+        height: 3rem;
+      }
+
+      .cta {
+        position: relative;
+        font-weight: bold;
+        line-height: 1.2em;
+        color: var(--dynamic-colour);
+      }
+
+      .templateVariation--extendedPoster .cta {
+        font-size: 97px;
+      }
+
+      .templateVariation--poster .cta  {
+        font-size: 0.297rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .cta,
+      .formatVariation--a2.templateVariation--poster .cta {
+        font-size: 0.307rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .cta {
+        font-size: 0.302rem;
+      }
+
+      .url {
+        position: relative;
+        font-weight: bold;
+      }
+
+      .templateVariation--extendedPoster .url {
+        margin-top: 57.9px;
+        font-size: 95.5px;
+      }
+
+      .templateVariation--poster .url  {
+        margin-top: 0.15rem;
+        font-size: 0.289rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .url,
+      .formatVariation--a2.templateVariation--poster .url {
+        font-size: 0.299rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .url {
+        font-size: 0.294rem;
+      }
+
+      .templateVariation--extendedPoster .url__inner,
+      .templateVariation--longQuote .url__inner,
+      .templateVariation--poster .url__inner {
+        line-height: 0.9em;
+      }
+
+      .element__container {
+        display: none;
+        position: absolute;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 0;
+        z-index: 2;
+      }
+
+      .templateVariation--extendedPoster .element__container,
+      .templateVariation--longQuote .element__container,
+      .templateVariation--poster .element__container {
+        display: flex;
+        z-index: 2;
+      }
+
+      .verticalGlintPosition--top.templateVariation--poster .element__container {
+        top: 3.13rem;
+        right: -2.82rem;
+        width: 2.36rem;
+        transform: rotate(270deg);
+      }
+
+      .formatVariation--a1.verticalGlintPosition--top.templateVariation--poster .element__container,
+      .formatVariation--a2.verticalGlintPosition--top.templateVariation--poster .element__container{
+        top: 3.12rem;
+        right: -2.92rem;
+        width: 2.42rem;
+        transform: rotate(270deg);
+      }
+
+      .verticalGlintPosition--bottom.templateVariation--poster .element__container {
+        bottom: 3.13rem;
+        right: -2.82rem;
+        width: 2.36rem;
+        transform: rotate(270deg);
+      }
+
+      .formatVariation--a1.verticalGlintPosition--bottom.templateVariation--poster .element__container,
+      .formatVariation--a2.verticalGlintPosition--bottom.templateVariation--poster .element__container {
+        bottom: 3.12rem;
+        right: -2.92rem;
+        width: 2.42rem;
+        transform: rotate(270deg);
+      }
+
+      .horizontalGlintPosition--left.templateVariation--extendedPoster .element__container,
+      .horizontalGlintPosition--left.templateVariation--longQuote .element__container {
+        left: 363.766px;
+        bottom: -1172.74px;
+        width: 778.2px;
+        transform: rotate(0deg);
+      }
+
+      .horizontalGlintPosition--right.templateVariation--extendedPoster .element__container,
+      .horizontalGlintPosition--right.templateVariation--longQuote .element__container {
+        right: 338.9px;
+        bottom: -1092.76px;
+        width: 725.1px;
+        transform: rotate(0deg);
+      }
+
+      .element {
+        width: 100%;
+      }
+
+      .element path {
+        width: 100%;
+        height: auto;
+        fill: var(--dynamic-colour);
+      }
+
+      .element__stand {
+        width: 100%;
+        margin-bottom: 0.07rem;
+        height: auto;
+        margin-left: 0.025rem;
+      }
+
+      .templateVariation--extendedPoster .element__stand ,
+      .templateVariation--longQuote .element__stand  {
+        margin-bottom: 25.3px;
+        margin-left: 9px;
+      }
+
+      .featureImg {
+        display: none;
+        position: relative;
+        z-index: 1;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .templateVariation--extendedPoster .featureImg,
+      .templateVariation--longQuote .featureImg {
+        display: block;
+        width: 100%;
+        height: 10.7rem;
+      }
+
+      .show-crop.templateVariation--extendedPoster .featureImg,
+      .show-crop.templateVariation--longQuote .featureImg {
+        height: 3786.1px;
+      }
+
+      .templateVariation--poster .featureImg {
+        display: block;
+        height: 100%;
+        width: 5.98rem;
+      }
+
+      .formatVariation--a1.templateVariation--poster .featureImg {
+        width: 6.08rem;
+      }
+
+      .formatVariation--a2.templateVariation--poster .featureImg {
+        width: 6.05rem;
+      }
+
+      .formatVariation--a3.templateVariation--poster .featureImg {
+        width: 6.02rem;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      .templateVariation--extendedPoster .heading.u-hide ,
+      .templateVariation--longQuote .heading.u-hide ,
+      .templateVariation--poster .heading.u-hide  {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .heading__inner.u-hide ,
+      .templateVariation--longQuote .heading__inner.u-hide ,
+      .templateVariation--poster .heading__inner.u-hide  {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .quote.u-hide,
+      .templateVariation--longQuote .quote.u-hide,
+      .templateVariation--poster .quote.u-hide {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .author.u-hide,
+      .templateVariation--longQuote .author.u-hide,
+      .templateVariation--poster .author.u-hide {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .author__info.u-hide,
+      .templateVariation--longQuote .author__info.u-hide,
+      .templateVariation--poster .author__info.u-hide {
+        display: none;
+      }
+
+      /* Custom Crop Marks styling */  
+      .cropMark::before,
+      .cropMark::after {
+        content: '';
+        position: absolute;        
+        background: gray;
+      }
+
+      .cropMark::before { 
+        width: 20px; 
+        height: 1px;
+      }
+
+      .cropMark::after { 
+        height: 20px; 
+        width: 1px;
+      }
+
+      .cropMark--top::before { bottom: 0; }
+      .cropMark--bottom::before { top: 0; }
+
+      .cropMark--top::after { top: 0; }
+      .cropMark--bottom::after { bottom: 145mm; height: calc(5mm + 5px); }      
+
+      .cropMark--left::before { left: 0; }
+      .cropMark--right::before { right: 0; }
+
+      .cropMark--left::after { right: 0; }
+      .cropMark--right::after { left: 0; }         
+
+      .show-crop.templateVariation--extendedPoster .placeholder__container, 
+      .show-crop.templateVariation--longQuote .placeholder__container { bottom: 50mm; }
+
+      .hide-crop .placeholder__container {
+        bottom: 3mm;
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <!--
+  {{ placeholder-toggle-new }}
+  {{show-crop}}
+  {{ placeholder-opacity }}
+  {{ placeholder-image-1 }}
+  {{UEA_template-variation--as}}	
+  {{UEA_format-variation--as}}{
+  {{UEA_colour-theme--as}}
+  {{UEA_postgraduate--choice--as}}
+  {{{UEA_heading--pg}}}
+  {{UEA_heading-size--as}}
+  {{{UEA_feature-image--as}}}
+  {{{UEA_name--as}}}
+  {{{UEA_free-text--as}}}
+  {{{UEA_body-copy--as}}}
+  {{{UEA_cta--as}}}
+  {{{UEA_url--as}}}
+  {{UEA_url-size--as}}
+  {{UEA_vertical-glint-position--as}}
+  {{UEA_horizontal-glint-position--as}}
+  -->   
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         templateVariation--{{UEA_template-variation--as}}{{^UEA_template-variation--as}}extendedPoster{{/UEA_template-variation--as}}
+                                         formatVariation--{{UEA_format-variation--as}}{{^UEA_format-variation--as}}a4{{/UEA_format-variation--as}}
+                                         colourTheme--{{UEA_colour-theme--as}}{{^UEA_colour-theme--as}}orange{{/UEA_colour-theme--as}}
+                                         pgChoice--{{UEA_postgraduate--choice--as}}{{^UEA_postgraduate--choice--as}}postgraduate{{/UEA_postgraduate--choice--as}}
+                                         verticalGlintPosition--{{UEA_vertical-glint-position--as}}{{^UEA_vertical-glint-position--as}}bottom{{/UEA_vertical-glint-position--as}}
+                                         horizontalGlintPosition--{{UEA_horizontal-glint-position--as}}{{^UEA_horizontal-glint-position--as}}left{{/UEA_horizontal-glint-position--as}}" 
+        data-crop="{{show-crop}}" data-variation="{{UEA_template-variation--as}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->  
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="main">
+            <div class="header">
+              <div class="logo">{{{account.snippets.logo}}}</div><!--logo-->
+              <div class="pgBanner">
+                <div class="postgraduateText postgraduateText--postgraduate"> POSTGRADUATE </div> <!-- postgraduateText -->
+                <div class="postgraduateText postgraduateText--masters"> MASTER'S DEGREES </div> <!-- postgraduateText -->
+                <div class="postgraduateText postgraduateText--phd"> PhDs AND<br> RESEARCH DEGREES</div>
+              </div><!--pgBanner-->
+            </div><!--header-->
+            <div class="body">
+              {{#UEA_heading--pg}}
+              <div class="heading u-heading-patch">                
+                <div class="heading__inner u-heading-patch" style="font-size: {{UEA_heading-size--as}}%;" data-max-height="css">
+                  {{{UEA_heading--pg}}}
+                </div><!--heading__inner-->
+              </div><!--heading-->
+              {{/UEA_heading--pg}}
+              <div class="content">           
+                <div class="content__inner" data-max-height="dynamic">
+                  {{#UEA_body-copy--as}}
+                  <div class="copy" data-max-height="css">{{{UEA_body-copy--as}}}</div><!--copy-->
+                  {{/UEA_body-copy--as}}
+                  <div class="author__container">
+                    {{#UEA_name--as}}
+                    <div class="author u-heading-patch" data-max-line="2">{{{UEA_name--as}}}</div><!--author-->
+                    {{/UEA_name--as}}
+                    {{#UEA_free-text--as}}
+                    <div class="author__info u-heading-patch" data-max-height="css">{{{UEA_free-text--as}}}</div><!--author__info-->
+                    {{/UEA_free-text--as}}
+                  </div><!--author__conainer-->
+                </div>
+              </div><!--content-->
+            </div><!--body-->
+            <div class="footer">
+              {{#UEA_cta--as}}
+              <div class="cta" data-max-line="2">{{{UEA_cta--as}}}</div><!--cta-->
+              {{/UEA_cta--as}}
+              {{#UEA_url--as}}
+              <div class="url" data-max-line="1">
+                <div class="url__inner" style="font-size: {{UEA_url-size--as}}%;">
+                  {{{UEA_url--as}}}
+                </div><!--url__inner-->
+              </div><!--url-->
+              {{/UEA_url--as}}
+            </div><!--footer-->
+            <div class="element__container">
+              <img src="https://files.outfit.io/media_library_items/93089/glint-stand.svg" class="element__stand">               
+              <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="element">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"  id="star"/>
+              </svg>
+            </div><!--element__container-->
+          </div><!--main-->	
+          {{#UEA_feature-image--as}}
+          <div class="featureImg featureImg">
+            
+            <div class="reposition-fix">{{{UEA_feature-image--as}}}</div>
+            
+          </div><!--featureImg-->
+          {{/UEA_feature-image--as}}
+        </div><!--bleed-->
+
+      </div><!--page-->
+
+      <script>
+        window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+      </script>
+      <script src="js/main.js"></script>   
+      <script src="js/prefixfree.js"></script>
+      <script src="js/placeholder-controller.js"></script>
+      <script src="js/char-limit.js"></script>
+      <script src="js/check-export-mode.js"></script>
+      <script src="js/max-line-check.js"></script>
+      <script src="js/max-height-check.js"></script>
+      <script src="js/hide-empty-titles.js"></script>
+      <script src="js/dynamic-inject.js"></script>
+      <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+      <script>
+
+        // Tracking text changes and firing text restriction functions (mutationObserver)
+        const overflowObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            maxLineCheck();
+            maxHeightCheck();
+            charLimit();
+            hideEmptyTitles();
+          });
+        });
+
+        const injectObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            injectDynamicContent();
+          });
+        });
+
+        const injectSources = document.querySelectorAll('[data-target-id]');
+
+        overflowObserver.observe(document.body, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });
+
+        if ( injectSources.length > 0 ) {
+          injectSources.forEach(src => {
+            injectObserver.observe(src, {
+              attributes: false,
+              characterData: true,
+              childList: true,
+              subtree: true,
+              attributeOldValue: false,
+              characterDataOldValue: true
+            });            
+          });
+        }    
+
+        // Calling text size restriction functions once the fonts are loaded
+        document.fonts.ready.then(() => {
+          maxLineCheck();
+          maxHeightCheck();
+          injectDynamicContent();
+          hideEmptyTitles();
+        });
+
+        placeholderController();
+        checkCrop();
+        checkExport();
+        charLimit();
+
+        // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+        TextFit.fit({
+          selector: '.textFit'
+        });
+
+        function detectSystem() {
+          const isMac = window.navigator.appVersion.includes('Mac');
+          if ( isMac ) document.body.classList.add('is-mac');
+        }
+
+        detectSystem();
+
+      </script>
+
+
+      </body>
+    </html>
