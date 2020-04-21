@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+
+        --black: {{{account.colors.black}}};
+        --white: #fff;
+      }    
+
+      .colourTheme--orange {
+        --dynamic-colour: var(--orange);
+      }
+
+      .colourTheme--cyan { 
+        --dynamic-colour: var(--cyan);     
+      }
+
+      .colourTheme--magenta { 
+        --dynamic-colour: var(--magenta); 
+      }
+
+      .colourTheme--green { 
+        --dynamic-colour: var(--green); 
+      }
+
+      .colourTheme--purple {
+        --dynamic-colour: var(--purple); 
+      }
+
+      .logoOptions--white {
+        --dynamic-logo-colour: var(--white);
+        --dynamic-glint-colour: var(--black);
+      }
+
+      .logoOptions--black {
+        --dynamic-logo-colour: var(--black);
+        --dynamic-glint-colour: var(--white);
+      }
+
+      .primaryTextColour--black {
+        --dynamic-text-colour: var(--black);
+      }
+
+      .primaryTextColour--white {
+        --dynamic-text-colour: var(--white);
+      }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 0.257rem;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      } 
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--dynamic-colour)
+      }
+
+      .templateVariation--extendedPoster .fit,
+      .templateVariation--longQuote .fit {  
+        padding-top: 519px;
+      }
+
+      .templateVariation--poster .fit {
+        padding: 0rem 1.2rem 1.14rem 0rem;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .templateVariation--extendedPoster .header,
+      .templateVariation--longQuote .header {
+        align-items: center;
+        padding-bottom: 303px;
+      }
+
+      .templateVariation--poster .header {
+        position: relative;
+        height: 5.05rem;
+        padding-left: 3.22rem;
+      }
+
+      .header__inner { 
+        position: absolute;
+        top: 2.38rem;
+        z-index: 1;
+      }
+
+      .logo {
+        display: none;
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .logo--primary,
+      .templateVariation--longQuote .logo--primary {
+        display: block;
+        width: 1595px;
+      }
+
+      .templateVariation--poster .logo--secondary {
+        position: absolute;
+        display: block;
+        right: 0.06rem;
+        bottom: -0.3rem;
+        width: 2.9rem;
+      }
+
+      .logoOptions--black #shape,
+      .logoOptions--white #shape {
+        fill: var(--dynamic-logo-colour);
+      }
+
+      .logoOptions--black .glint,
+      .logoOptions--white .glint {
+        fill: var(--dynamic-glint-colour);
+      }
+
+      .logoOptions--hidden .logo {
+        display: none;
+      }
+
+      .body {
+        display: flex;
+        flex: 1;
+      }
+
+      .templateVariation--extendedPoster .body,
+      .templateVariation--longQuote .body {
+        flex-direction: column;
+      }
+
+
+      .templateVariation--poster .body {
+        flex-direction: row-reverse;
+      }
+
+      .main {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+      }
+
+      .templateVariation--extendedPoster .main {
+        padding: 0 414px 247px 414px;
+      }
+
+      .templateVariation--longQuote .main{
+        padding: 0 231px 0px 267px;
+      }
+
+      .templateVariation--poster .main {
+        padding-top: 2.8rem;
+        padding-left: 0.37rem;
+      }
+
+      .content {
+        flex: 1;
+      }
+
+      .templateVariation--longQuote .content {
+        display: block;
+      }
+
+      .heading {
+        display: none;
+        position: relative;
+        text-transform: uppercase;
+        color: var(--white);
+		font-weight: 900;
+      }
+
+      .templateVariation--extendedPoster .heading {
+        margin-top: 13px;
+        margin-bottom: 44px;
+        margin-left: 0.1rem;
+        font-size: 0.46rem;
+        font-size: 167px;
+      }     
+      .is-export-mode.templateVariation--extendedPoster .heading { font-size: 165.33px; }
+
+      .templateVariation--longQuote .heading {
+        margin-bottom: 121px;
+        margin-top: 59px;
+        margin-left: 0.15rem;
+        margin-left: 53px;
+        font-size: 190px;
+      }
+      .is-export-mode.templateVariation--longQuote .heading { font-size: 188.1px; }
+
+      .templateVariation--poster .heading {
+        margin-bottom: 0.1rem;
+        margin-left: 0.21rem;
+        font-size: 0.83rem;
+      }
+      .is-export-mode.templateVariation--poster .heading { font-size: 0.8217rem; }
+
+      .templateVariation--poster .heading--primary {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster .heading--secondary ,
+      .templateVariation--longQuote .heading--secondary  {
+        display: block;
+      }
+
+      .heading__inner {
+        max-height: 2.5em;
+        line-height: 1.1em;
+      }
+
+      .templateVariation--extendedPoster .heading__inner {
+        letter-spacing: 0.022em;
+      }
+
+      .templateVariation--longQuote .heading__inner {
+        letter-spacing: 0.055em;
+      }
+
+      .templateVariation--poster .heading__inner {
+        letter-spacing: 0.047em;
+      }
+
+      .quote {
+        display: none;
+        position: relative;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: var(--dynamic-colour);
+        line-height: 1.2em;
+      }
+
+      .templateVariation--extendedPoster .quote {
+        max-height: 5.7em;
+        margin-bottom: 76px;
+        margin-top: 72px;
+        margin-left: 0.15rem;
+        font-size: 168px;
+        word-spacing: 0.04em;
+        letter-spacing: 0.01em;   
+      }      
+      .is-export-mode.templateVariation--extendedPoster .quote { font-size: 166.32px; }
+
+      .templateVariation--poster .quote {
+        max-height: 6.5em;
+        margin-top: 0.27rem;
+        margin-left: 0.23rem;
+        font-size: 0.64rem;
+        word-spacing: 0.02em;
+        letter-spacing: 0.004em;
+      }
+      .is-export-mode.templateVariation--poster .quote { font-size: 0.6336rem; } 
+
+      .star__container {
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        background: var(--white);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .format--banner .star__container, 
+      .format--a4 .star__container {
+        left: -1.16rem;
+        bottom: -1.05rem;
+      }
+
+      .format--a1 .star__container{
+        left: -1.162rem;
+        bottom: -1.034rem;
+      }
+
+      .format--a2 .star__container{
+        left: -1.16rem;
+        bottom: -1.04rem;
+      }
+
+      .format--a3 .star__container {
+        left: -1.16rem;
+        bottom: -1.025rem;
+      }
+
+      .star {
+        width: 0.7rem;
+      }
+
+      .star path {
+        fill: var(--dynamic-colour);
+      }
+
+      .templateVariation--poster .quote--primary {
+        display: block;
+      }
+
+      .templateVariation--extendedPoster .quote--secondary  {
+        display: block;
+      }
+
+      .author__container {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .author__container--primary {
+        display: block;
+        margin-bottom: 109px;
+        padding-left: 0.14rem;
+      }
+
+      .templateVariation--poster .author__container--primary {
+        display: block;
+        margin-bottom: 0.57rem;
+      }
+
+      .templateVariation--longQuote .author__container--secondary {
+        display: block;
+        margin-bottom: 0.34rem;
+        padding-left: 0.18rem;
+      }
+
+      .author {
+        position: relative;
+        text-transform: uppercase;
+        color: var(--dynamic-text-colour);
+      }
+
+      .templateVariation--extendedPoster .author,
+      .templateVariation--longQuote .author,
+      .templateVariation--poster .author {
+        line-height: 1.1em;
+      }
+
+      .templateVariation--extendedPoster .author {
+        margin-bottom: 44px;
+        font-size: 134px
+      }      
+      .is-export-mode.templateVariation--extendedPoster .author { font-size: 132.66px; }
+
+      .templateVariation--longQuote .author {
+        margin-bottom: 0.08rem;
+        font-size:133px;
+      }
+      .is-export-mode.templateVariation--longQuote .author { font-size: 131.67px; }
+
+      .templateVariation--poster .author {
+        margin-bottom: 0.18rem;
+        font-size: 0.55rem;
+      }
+      .is-export-mode.templateVariation--poster .author { font-size: 0.5445rem; }      
+
+      .templateVariation--extendedPoster .author h3,
+      .templateVariation--longQuote .author h3,
+      .templateVariation--poster .author h3 {
+        font-weight: bold;
+      }
+
+      .author__info {
+        position: relative;
+        text-transform: uppercase;
+        color: var(--dynamic-text-colour);
+      }
+
+      .templateVariation--extendedPoster .author__info,
+      .templateVariation--poster .author__info {
+        line-height: 1.1em;
+      }
+
+      .templateVariation--extendedPoster .author__info {
+        max-height: 3.7em;
+        margin-bottom: 26px;
+        font-size: 0.247rem;
+      }
+      .is-export-mode.templateVariation--extendedPoster .author__info { font-size: 0.24453rem; }
+
+      .templateVariation--longQuote .author__info {
+        max-height: 2.3em;
+        margin-bottom: 0.12rem;
+        font-size: 0.444rem;
+      }
+      .is-export-mode.templateVariation--longQuote .author__info { font-size: 0.43956rem; }
+
+      .templateVariation--poster .author__info { 
+        max-height: 2.8em;
+        margin-bottom: 0.16rem;
+        font-size: 0.75rem;
+      }
+      .is-export-mode.templateVariation--poster .author__info { font-size: 0.7425rem; }
+
+      .templateVariation--extendedPoster .author__info h4 {
+        margin-bottom: 23px;
+        line-height: 1em;     
+        font-size: 90px;
+      }
+      .is-export-mode.templateVariation--extendedPoster .author__info h4 { font-size: 89.1px; }
+
+      .templateVariation--longQuote .author__info h4 {
+        font-size: 89px;
+      }      
+      .is-export-mode.templateVariation--longQuote .author__info h4 { font-size: 88.11px; }
+
+      .templateVariation--poster .author__info h4 {
+        line-height: 1em;
+        font-size: 0.367rem;
+        margin-bottom: 0.3em;
+      }
+      .is-export-mode.templateVariation--poster .author__info h4 { font-size: 0.36333rem; }
+
+      .templateVariation--extendedPoster .author__info h5, 
+      .templateVariation--poster .author__info h5 {
+        margin-bottom: 0.25em;
+      }
+
+      .templateVariation--extendedPoster .author__info h5 {
+        line-height: 1.2em;
+        font-size: 73px;
+      }
+      .is-export-mode.templateVariation--extendedPoster .author__info h5 { font-size: 72.27px; }
+
+      .templateVariation--longQuote .author__info h5 {
+        line-height: 1.4em;
+        font-size: 74px;
+      }
+      .is-export-mode.templateVariation--longQuote .author__info h5 { font-size: 73.26px: }
+
+      .templateVariation--poster .author__info h5 {
+        font-size: 0.285rem;
+        line-height: 1.4em;
+      }
+      .is-export-mode.templateVariation--poster .author__info h5 { font-size: 0.28215rem; }
+
+      .templateVariation--extendedPoster .author__info h4:last-child,
+      .templateVariation--poster .author__info h4:last-child,
+      .templateVariation--longQuote .author__info h4:last-child,
+      .templateVariation--extendedPoster .author__info h5:last-child,
+      .templateVariation--poster .author__info h5:last-child,
+      .templateVariation--longQuote .author__info h5:last-child {
+        margin-bottom: 0em;
+      }
+
+      .copy {
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .copy {
+        max-height: 11.5em;
+        margin-bottom: 180px;
+        margin-top: 110px;
+        margin-left: 0.134rem;
+        line-height: 1.2em;
+        font-size: 90px;
+      }
+      .is-export-mode.templateVariation--extendedPoster .copy { font-size: 89.1px}
+
+      .templateVariation--longQuote .copy {
+        max-height: 19em;
+        margin-top: 114px;
+        margin-left: 0.138rem;
+        margin-bottom: 119px;
+        line-height: 1.2em;     
+        font-size: 121px;
+      }
+      .is-export-mode.templateVariation--longQuote .copy { font-size: 119.79px; }
+
+      .templateVariation--poster .copy {
+        max-height: 20em;
+        font-size: 0.32rem;
+        line-height: 1.21em;
+      }
+      .is-export-mode.templateVariation--poster .copy { font-size: 0.3168rem; }
+
+      .footer {
+        display: none;
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .footer--secondary  {
+        display: block;
+      }
+
+      .templateVariation--poster .footer--primary  {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .templateVariation--poster .footer {
+        height: 2.4rem;
+        padding-left: 1.2rem;
+        padding-right: 4rem;
+      }
+
+      .cta {
+        position: relative;
+        line-height: 1.2em;
+        font-weight: bold;
+        color: var(--dynamic-text-colour);
+      }
+
+      .templateVariation--extendedPoster .cta {
+        font-size: 119px;
+      }
+      .is-export-mode.templateVariation--extendedPoster .cta { font-size: 117.81px; }
+
+      .templateVariation--poster .cta {
+        font-size: 0.38rem;
+        text-transform: uppercase;
+      }
+      .is-export-mode.templateVariation--poster .cta { font-size: 0.3762rem; }
+
+      .url {
+        position: relative;
+        font-weight: bold;
+      }
+
+      .templateVariation--extendedPoster .url {
+        margin-bottom: 54px;
+        margin-top: 87px;
+        margin-left: 0.06rem;
+        font-size: 120px;
+      }
+      .is-export-mode.templateVariation--extendedPoster .url { font-size: 118.8px; }
+
+      .templateVariation--poster .url {
+        margin-bottom: 0.19rem;
+        margin-top: 0.3rem;
+        margin-left: 0.1rem;
+        font-size: 0.41rem;
+      }      
+      .is-export-mode.templateVariation--poster .url { font-size: 0.4059rem; }
+
+      .templateVariation--extendedPoster .url__inner,
+      .templateVariation--longQuote .url__inner,
+      .templateVariation--poster .url__inner {
+        line-height: 0.9em;
+      }
+
+      .featureImg {
+        position: relative;
+      }
+
+      .templateVariation--extendedPoster .featureImg {
+        width: 100%;
+        height: 2564px;
+      }
+
+      .templateVariation--longQuote .featureImg {
+        width: 100%;
+        height: 7.57rem;
+      }
+
+      .show-crop.templateVariation--extendedPoster .featureImg,
+      .show-crop.templateVariation--longQuote .featureImg {
+        height: 2742px;
+      }
+
+      .templateVariation--poster .featureImg {
+        width: 7rem;
+        height: 11.1rem;
+        z-index: 0;
+      }
+
+      .templateVariation--extendedPoster .featureImg::before,
+      .templateVariation--longQuote .heading::before {
+        content: "";
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        background-image: url(https://files.outfit.io/media_library_items/92501/White%2520Star.png);
+        background-position: center;
+        background-size: 70%;
+        background-position: 60%;
+        background-repeat: no-repeat;
+        z-index: 1;
+      }
+
+      .templateVariation--extendedPoster .featureImg::before {
+        height: 380px;
+        width: 406px; 
+        background-color: var(--dynamic-colour);
+      }
+
+      .templateVariation--longQuote .heading::before {
+        top: -265px;
+        left: -321px;
+        height: 252px;
+        width: 274px;
+        background-color: var(--black);
+      }
+
+      /* Padded multiline styling */      
+      .padded-multiline {
+        position: relative;
+      }
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.9em;
+        font-size: 1em;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .padded-multiline-bg span {
+        color: transparent;
+      }
+
+      .heading .padded-multiline span strong {
+        font-weight: bold;
+      }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.055rem;
+        bottom: -0.3em;
+        left: -0.11rem;
+        right: -0.5em;
+        background: var(--white);
+      }      
+
+      .padded-multiline-bg span.emptyLine:before { display: none; }
+
+      .heading .padded-multiline-bg span:before {      
+        background: var(--black);      
+      }
+
+      .quote .padded-multiline-bg span:before {      
+        left: -0.16rem;
+        top: -0.2em;
+        right: -0.27em;
+        bottom: -0.2em;
+      }
+
+      .templateVariation--extendedPoster .copy .padded-multiline-bg span:before {
+        top: -0.1rem;
+        bottom: -0.5em;
+        left: -0.15rem;
+        right: -0.63em;
+      }
+
+      .templateVariation--longQuote .copy .padded-multiline-bg span:before {      
+        left: -0.14rem;
+        top: -0.095rem;
+        right: -0.38em;
+        bottom: -0.4em;
+      }
+
+      .templateVariation--poster .copy .padded-multiline-bg span:before {
+        top: -0.1rem;
+        bottom: -0.5em;
+        left: -0.15rem;
+        right: -0.47em;
+      }
+
+      .url .padded-multiline-bg span:before  {
+        bottom: -0.2em;
+        right: -0.27em;
+        left: -0.079rem;
+      }
+
+      .templateVariation--extendedPoster .heading .padded-multiline-bg span:before {
+        bottom: -0.25em;
+        right: -0.22em;
+      }
+
+      .templateVariation--longQuote .heading .padded-multiline-bg span:before {
+        bottom: -0.25em;
+        right: -0.22em;
+        left: -47px;
+      }
+
+      .templateVariation--poster .heading .padded-multiline-bg span:before {
+        bottom: -0.25em;
+        right: -0.16em;
+        left: -0.2rem;
+      }
+
+      .templateVariation--poster .quote .padded-multiline-bg span:before{
+
+      }
+
+      .templateVariation--fullImage .url .padded-multiline-bg span:before {
+        top: -0.1rem;     
+        left: -0.27rem;
+        background: var(--white);
+      }
+
+
+      .padded-multiline-bg span:first-child:before {
+        top: -0.1rem;
+      }   
+
+      .padded-multiline-bg span:last-child:before {
+        bottom: -0.4em;
+      }
+
+      .templateVariation--extendedPoster .heading .padded-multiline-bg span:first-child:before {
+        top: -0.055rem;
+      } 
+
+      .templateVariation--longQuote .heading .padded-multiline-bg span:first-child:before {
+        top: -32px;
+      } 
+
+      .templateVariation--poster .heading .padded-multiline-bg span:first-child:before {
+        top: -0.095rem;
+      } 
+
+      .templateVariation--extendedPoster .quote .padded-multiline-bg span:first-child:before {
+        top: -0.09rem;
+        right: -0.16rem;
+      }  
+
+      .templateVariation--poster .quote .padded-multiline-bg span:first-child:before {
+        top: -0.17em;
+        right: -0.33em;
+        bottom: -0.13rem;
+      }  
+
+      .templateVariation--extendedPoster .copy .padded-multiline-bg span:first-child:before {
+        top: -0.12rem;
+        right: -0.57em;
+      }
+
+      .templateVariation--longQuote .copy .padded-multiline-bg span:first-child:before {
+        top: -0.08rem;
+        right: -0.47em;
+      }  
+
+      .templateVariation--poster .copy .padded-multiline-bg span:first-child:before {
+        top: -0.09rem;
+        right: -0.47em;
+      } 
+
+      .templateVariation--extendedPoster .url .padded-multiline-bg span:first-child:before {
+        top: -0.09em;
+        left: -0.08rem;
+      } 
+
+      .templateVariation--poster .url .padded-multiline-bg span:first-child:before {
+        top: -0.1em;
+        left: -0.08rem;
+        right: -0.09rem;
+      }  
+
+      .templateVariation--extendedPoster .heading .padded-multiline-bg span:last-child:before {
+        top: -0.05rem;
+        bottom: -0.21em;
+      }
+
+      .templateVariation--longQuote .heading .padded-multiline-bg span:last-child:before {
+        top: -0.09rem;
+        bottom: -0.22em;
+      }
+
+      .templateVariation--poster .heading .padded-multiline-bg span:last-child:before {
+        top: -0.1rem;
+        bottom: -0.17em;
+        right: -0.23em;
+      }
+
+      .templateVariation--extendedPoster .quote .padded-multiline-bg span:last-child:before {
+        bottom: -0.25em;
+        right: -0.17rem;
+      }
+
+      .format--a4.templateVariation--poster .quote .padded-multiline-bg span:last-child:before  {
+        top: -0.2em;
+        right: -0.37em;
+      } 
+
+      .format--a4.templateVariation--poster .quote .padded-multiline-bg span:last-child:before {
+        bottom: -0.134rem;
+      }
+
+      .format--a2.templateVariation--poster .quote .padded-multiline-bg span:last-child:before {
+        bottom: -0.132rem;
+      }
+
+      .format--a3.templateVariation--poster .quote .padded-multiline-bg span:last-child:before {
+        bottom: -0.123rem;
+      }
+
+      .format--a1.templateVariation--poster .quote .padded-multiline-bg span:last-child:before {
+        bottom: -0.13rem;
+      }
+
+      .templateVariation--extendedPoster .copy .padded-multiline-bg span:last-child:before {
+        bottom: -0.55em;
+      }
+
+      .templateVariation--longQuote .copy .padded-multiline-bg span:last-child:before {
+        bottom: -0.23em;
+        right: -0.46em;
+      }
+
+      .templateVariation--poster .copy .padded-multiline-bg span:last-child:before {
+        bottom: -0.45em;
+        right: -0.5em;
+      }
+
+      .url .padded-multiline-bg span:last-child:before {
+        bottom: -0.11rem;
+      }
+
+      .padded-multiline-fg {
+        position: relative;
+        z-index: 1;
+      }      
+
+      .js-padded-multiline-src { 
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        z-index: 999;
+      } 
+
+      #js-padded-multiline-target-1 {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      .templateVariation--extendedPoster .author.u-hide,
+      .templateVariation--longQuote .author.u-hide,
+      .templateVariation--poster .author.u-hide {
+        display: none;
+      }
+
+      .templateVariation--extendedPoster .author__info.u-hide,
+      .templateVariation--longQuote .author__info.u-hide,
+      .templateVariation--poster .author__info.u-hide {
+        display: none;
+      }
+
+      /* Custom Crop Marks styling */  
+      .cropMark::before,
+      .cropMark::after {
+        content: '';
+        position: absolute;        
+        background: gray;
+      }
+
+      .cropMark::before { 
+        width: 20px; 
+        height: 1px;
+      }
+
+      .cropMark::after { 
+        height: 20px; 
+        width: 1px;
+      }
+
+      .cropMark--top::before { bottom: 0; }
+      .cropMark--bottom::before { top: 0; }
+
+      .cropMark--top::after { top: 0; }
+      .cropMark--bottom::after { bottom: 145mm; height: calc(5mm + 5px); }      
+
+      .cropMark--left::before { left: 0; }
+      .cropMark--right::before { right: 0; }
+
+      .cropMark--left::after { right: 0; }
+      .cropMark--right::after { left: 0; }         
+
+      .show-crop.templateVariation--extendedPoster .placeholder__container, 
+      .show-crop.templateVariation--longQuote .placeholder__container { bottom: 50mm; }
+
+      .hide-crop .placeholder__container {
+        bottom: 3mm;
+      }
+
+      /* Testing new glynt */
+      .heading::before { display: none; }
+      .heading__inner .padded-multiline-bg span { position: relative; }
+      .heading__inner .padded-multiline-bg span:first-child::after {
+        content: "";
+        position: absolute;
+        justify-content: center;
+        align-items: center;
+        top: -32px;
+        left: -47px;
+        height: 252px;
+        width: 274px;   
+        background-color: var(--black);     
+        background-image: url(https://files.outfit.io/media_library_items/92501/White%2520Star.png);
+        background-position: center;
+        background-size: 70%;
+        background-position: 60%;
+        background-repeat: no-repeat;
+        transform: translate(-100%, -100%);
+        z-index: 1;             
+      }
+
+      .templateVariation--poster .heading__inner .padded-multiline-bg span:first-child::after,
+      .templateVariation--extendedPoster .heading__inner .padded-multiline-bg span:first-child::after { display: none; }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <!--
+  {{ placeholder-toggle-new }}
+  {{show-crop}}
+  {{ placeholder-opacity }}
+  {{ placeholder-image-1 }}
+  {{UEA_format--as}}
+  {{UEA_template-variation--as}}		
+  {{UEA_colour-theme--as}}
+  {{logoColorOption}}
+  {{logoVisibilityOption}}
+  {{{UEA_heading-uea--as}}}
+  {{UEA_heading-size--as}}
+  {{{UEA_subheading-uea--as}}}
+  {{{UEA_feature-image--as}}}
+  {{{UEA_name--as}}}
+  {{{UEA_free-text--as}}}
+  {{{UEA_body-copy-uea--as}}}
+  {{{UEA_cta--as}}}
+  {{{UEA_url-uea--as}}}
+  {{UEA_url-size--as}}
+  {{UEA_primary-text-colour--as}}
+  -->   
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         format--{{UEA_format--as}}{{^UEA_format--as}}a4{{/UEA_format--as}}
+                                         templateVariation--{{UEA_template-variation--as}}{{^UEA_template-variation--as}}extendedPoster{{/UEA_template-variation--as}}
+                                         colourTheme--{{UEA_colour-theme--as}}{{^UEA_colour-theme--as}}orange{{/UEA_colour-theme--as}}
+                                         primaryTextColour--{{UEA_primary-text-colour--as}}{{^UEA_primary-text-colour--as}}black{{/UEA_primary-text-colour--as}}
+                                         logoOptions--{{logoColorOption}}{{^logoColorOption}}black{{/logoColorOption}}
+                                         logoOptions--{{logoVisibilityOption}}" 
+        data-crop="{{show-crop}}" data-variation="{{UEA_template-variation--as}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="header">
+            <div class="logo logo--primary">{{{account.snippets.logo}}}</div><!--logo--primary-->
+            <div class="header__inner">
+              {{#UEA_heading-uea--as}}
+              <div class="heading heading--primary padded-multiline">
+                <div class="heading__inner" style="font-size: {{UEA_heading-size--as}}%;" data-max-height="css">
+                  <div id="js-padded-multiline-target-1"></div>
+                  <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-1">
+                    {{{UEA_heading-uea--as}}}         
+                  </div><!--js-padded-multiline-src-->    
+                </div><!--heading__inner-->
+              </div> <!--heading--primary-->
+              {{/UEA_heading-uea--as}}
+              {{#UEA_subheading-uea--as}}
+              <div class="quote quote--primary padded-multiline" data-max-height="css">
+                <div id="js-padded-multiline-target-2"></div>
+                <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-2">
+                  {{{UEA_subheading-uea--as}}}
+                </div><!--js-padded-multiline-src--> 
+                <div class="star__container">
+                  <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="star">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"  id="star"/>
+                  </svg>
+                </div><!--star__container-->
+              </div><!--quote--primary-->
+              {{/UEA_subheading-uea--as}}
+            </div><!--header__inner-->          
+          </div><!--header-->
+
+          <div class="body">
+            <div class="main">               
+              <div class="content">
+                <div data-max-height="dynamic">
+                  {{#UEA_heading-uea--as}}
+                  <div class="heading heading--secondary padded-multiline">
+                    <div class="heading__inner" style="font-size: {{UEA_heading-size--as}}%;" data-max-height="css">
+                      <div id="js-padded-multiline-target-3"></div>
+                      <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-3">
+                        {{{UEA_heading-uea--as}}}         
+                      </div><!--js-padded-multiline-src-->    
+                    </div><!--heading__inner-->
+                  </div> <!--heading--secondary-->
+                  {{/UEA_heading-uea--as}}
+                  {{#UEA_subheading-uea--as}}
+                  <div class="quote quote--secondary padded-multiline" data-max-height="css">
+                    <div id="js-padded-multiline-target-4"></div>
+                    <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-4">
+                      {{{UEA_subheading-uea--as}}}
+                    </div><!--js-padded-multiline-src-->   
+                  </div><!--quote--secondary-->
+                  {{/UEA_subheading-uea--as}}
+                  <div class="author__container author__container--primary">
+                    {{#UEA_name--as}}
+                    <div class="author u-heading-patch" data-max-line="2">{{{UEA_name--as}}}</div><!--author-->
+                    {{/UEA_name--as}}
+                    {{#UEA_free-text--as}}
+                    <div class="author__info u-heading-patch" data-max-height="css">{{{UEA_free-text--as}}}</div><!--author__info-->
+                    {{/UEA_free-text--as}}
+                  </div><!--author__container-->  
+                  {{#UEA_body-copy-uea--as}}
+                  <div class="copy padded-multiline" data-max-height="css">
+                    <div id="js-padded-multiline-target-5"></div>
+                    <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-5">
+                      {{{UEA_body-copy-uea--as}}}
+                    </div><!--js-padded-multiline-src--> 
+                  </div><!--copy-->
+                  {{/UEA_body-copy-uea--as}}
+                  <div class="author__container author__container--secondary">
+                    {{#UEA_name--as}}
+                    <div class="author u-heading-patch" data-max-line="2">{{{UEA_name--as}}}</div><!--author-->
+                    {{/UEA_name--as}}
+                    {{#UEA_free-text--as}}
+                    <div class="author__info u-heading-patch" data-max-height="css">{{{UEA_free-text--as}}}</div><!--author__info-->
+                    {{/UEA_free-text--as}}
+                  </div><!--author__container--> 
+                </div>
+              </div><!--content-->                
+              <div class="footer footer--secondary">
+                {{#UEA_cta--as}}
+                <div class="cta" data-max-line="2">{{{UEA_cta--as}}}</div><!--cta-->
+                {{/UEA_cta--as}}
+                {{#UEA_url-uea--as}}
+                <div class="url padded-multiline">
+                  <div class="url__inner" style="font-size: {{UEA_url-size--as}}%;" data-max-line="1">
+                    <div id="js-padded-multiline-target-6"></div>
+                    <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-6">
+                      {{{UEA_url-uea--as}}}
+                    </div><!--js-padded-multiline-src-->    
+                  </div><!--url__inner-->
+                </div><!--url-->
+                {{/UEA_url-uea--as}}
+              </div><!--footer--secondary-->             
+            </div><!--main-->
+            <div class="featureImg">
+              {{#UEA_feature-image--as}}
+              <div class="reposition-fix">{{{UEA_feature-image--as}}}</div>
+              {{/UEA_feature-image--as}}
+            </div><!--featureImg-->            
+          </div><!--body-->
+          <div class="footer footer--primary">
+            {{#UEA_cta--as}}
+            <div class="cta" data-max-line="2">{{{UEA_cta--as}}}</div><!--cta-->
+            {{/UEA_cta--as}}
+            <div class="url padded-multiline">
+              {{#UEA_url-uea--as}}
+              <div class="url__inner" style="font-size: {{UEA_url-size--as}}%;" data-max-line="1">
+                <div id="js-padded-multiline-target-7"></div>
+                <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-7">
+                  {{{UEA_url-uea--as}}}
+                </div><!--js-padded-multiline-src-->         
+              </div><!--url__inner-->
+            </div><!--url-->
+            {{/UEA_url-uea--as}}
+            <div class="logo logo--secondary">{{{account.snippets.logo}}}</div><!--logo--primary-->
+          </div><!--footer--primary--> 
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+
+      {{{account.snippets.multilineBackgrounds}}}      
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      setInterval(() => {
+        maxHeightCheck();
+        maxLineCheck();
+      }, 1000)
+
+      const paddedMultilineObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          multilineBackgrounds();
+        });
+      });
+
+      const paddedMultilineSrcs = document.querySelectorAll('.js-padded-multiline-src');
+
+      paddedMultilineSrcs.forEach(paddedMultilineSrc => {
+        paddedMultilineObserver.observe(paddedMultilineSrc, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });        
+      })
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+      hideEmptyTitles();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }   
+
+
+
+      detectSystem();            
+      multilineBackgrounds();  
+    </script> 
+
+    <script type="text/javascript">
+      // Add many fallbacks for Print Ready
+      document.addEventListener('DOMContentLoaded', function(event) {
+        document.dispatchEvent(new Event('printready'));
+      });
+
+      setTimeout(function() {
+        document.dispatchEvent(new Event('printready'));
+      }, 2000);
+
+      document.dispatchEvent(new Event('printready'));
+    </script>
+
+
+  </body>
+</html>
