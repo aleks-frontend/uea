@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+
+        --black: {{{account.colors.black}}};
+        --white: #fff;
+      }    
+
+      .colourTheme--orange {
+        --dynamic-colour: var(--orange);
+      }
+
+      .colourTheme--cyan { 
+        --dynamic-colour: var(--cyan);     
+      }
+
+      .colourTheme--magenta { 
+        --dynamic-colour: var(--magenta); 
+      }
+
+      .colourTheme--green { 
+        --dynamic-colour: var(--green); 
+      }
+
+      .colourTheme--purple {
+        --dynamic-colour: var(--purple); 
+      }
+
+      .logoOptions--white {
+        --dynamic-logo-colour: var(--white);
+      }
+
+      .logoOptions--black {
+        --dynamic-logo-colour: var(--black);
+      }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 0.257rem;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .templateVariation--halfImage .fit{
+        padding: 64pt 790pt 64pt 65pt;
+      }
+
+      .templateVariation--noImage .fit{
+        padding: 62.6pt 250pt 62pt 64pt;
+      }
+      
+      .templateVariation--noImage.logoOptions--hidden .fit {
+        padding-right: 64pt;
+      }
+
+      .hero {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .templateVariation--halfImage .hero {
+        width: 729pt;
+      }
+
+      .templateVariation--noImage .hero {
+        display: none;
+      }
+
+      .main {
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .templateVariation--halfImage .main {
+        flex-direction: column;
+      }
+
+      .templateVariation--noImage .main {
+        flex-direction: row;
+      }
+
+      .templateVariation--noImage .header {
+        flex-direction: row;
+      }
+
+      .logo {
+        position: relative;
+      }
+
+      .logoOptions--hidden .logo {
+        display: none;
+      }
+
+      .templateVariation--halfImage .logo {
+        width: 171pt;
+        margin-bottom: 41pt;
+      }
+
+      .templateVariation--noImage .logo {
+        width: 211pt;
+        margin-right: 176pt;
+      }
+
+      .logoOptions--white .glint,
+      .logoOptions--black .glint {
+        fill: var(--dynamic-colour);
+      }
+
+      .logoOptions--white #shape,
+      .logoOptions--black #shape {
+        fill: var(--dynamic-logo-colour);
+      }
+
+      .body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .templateVariation--noImage .body {
+        margin-top: 56pt;
+      }
+
+      .templateVariation--halfImage .content {
+        max-height: 400pt;
+      }
+
+      .templateVariation--noImage .content {
+        max-height: 530pt;
+      }
+
+      .heading {
+        display: none;
+        position: relative;
+        color: var(--dynamic-colour);
+      }
+
+      .templateVariation--halfImage .heading,
+      .templateVariation--noImage .heading {
+        display: block;
+      }
+
+      .templateVariation--halfImage .heading {
+        margin-bottom: 31pt;
+        font-size: 54.4pt;
+      }
+
+      .templateVariation--noImage .heading {
+        margin-bottom: 44pt;
+        font-size: 70pt;
+      }
+
+      .heading__inner {
+        line-height: 1.2em;
+      }
+
+      .templateVariation--halfImage .heading__inner {
+        max-height: 4em;
+      }
+
+      .templateVariation--noImage .heading__inner {
+        max-height: 3em;
+      }
+
+      .templateVariation--halfImage .heading h1,
+      .templateVariation--noImage .heading h1{
+        font-weight: bold;
+      }
+
+      .copy {
+        display: none;
+        position: relative;
+        color: var(--black);
+      }
+
+      .templateVariation--halfImage .copy,
+      .templateVariation--noImage .copy {
+        display: block;
+      }
+
+      .templateVariation--halfImage .copy {
+        max-height: 8em;
+        font-size: 34.4pt;
+        line-height: 1.14em;
+      }
+
+      .templateVariation--noImage .copy {
+        max-height: 7em;
+        font-size: 44.5pt;
+        line-height: 1.14em;
+      }
+
+      .footer {
+        position: relative;
+        line-height: 1.14em;
+      }
+
+      .templateVariation--halfImage .copy p,
+      .templateVariation--noImage .copy p{
+        margin-bottom: 0.3em;
+      }
+
+      .templateVariation--halfImage .copy p:last-child,
+      .templateVariation--noImage .copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .templateVariation--halfImage .footer {
+        font-size: 34.4pt;
+      }
+
+      .cta {
+        display: none;
+        position: relative;
+        font-weight: bold;
+        color: var(--black);
+        line-height: 0.9em;
+      }
+
+      .templateVariation--halfImage .cta,
+      .templateVariation--noImage .cta {
+        display: block;
+      }
+
+      .templateVariation--halfImage .cta {
+        max-height: 1.5em;
+        font-size: 35.5pt;   
+      }
+
+      .templateVariation--noImage .cta {
+        max-height: 2.5em;
+        font-size: 51.8pt; 
+      }
+
+      .url {
+        display: none;
+        position: relative;
+        font-weight: bold;
+        color: var(--dynamic-colour);
+        line-height: 0.9em;
+      }
+
+      .templateVariation--halfImage .url,
+      .templateVariation--noImage .url {
+        display: block;
+      }
+
+      .templateVariation--halfImage .url {
+        margin-top: 11.8pt;
+        font-size: 35.5pt;
+      }
+
+      .templateVariation--noImage .url {
+        margin-top: 18pt;
+        font-size: 59.5pt;
+      }
+
+      .invalidLogoText{
+        display: none;
+      }
+
+      .invalidLogo{
+        outline: 5px solid #E40046;
+      }
+
+      .invalidLogo .invalidLogoText {
+        display: block;
+        position: absolute;
+        font-size: 20pt;
+        width: 171pt;
+        background: #E40046;
+        outline: 5px solid #E40046;
+        margin-top: 7px;
+      }
+
+      .templateVariation--noImage .invalidLogo .invalidLogoText { width: 211pt; }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <!--
+  {{ placeholder-toggle-new }}
+  {{show-crop}}
+  {{ placeholder-opacity }}
+  {{ placeholder-image-1 }}
+  {{UEA_template-variation--dsne}}		
+  {{UEA_colour-theme--dsne}}
+  {{{UEA_feature-image--dsne}}}
+  {{logoColorOption}}
+  {{logoVisibilityOption}}
+  {{{UEA_heading-brand--dsne}}}
+  {{UEA_heading-size--dsne}}
+  {{{UEA_body-copy-brand--dsne}}}
+  {{{UEA_cta--dsne}}}
+  {{{UEA_url--dsne}}}
+  {{{urlFontSize}}}
+  -->  
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         templateVariation--{{UEA_template-variation--dsne}}{{^UEA_template-variation--dsne}}fullImage{{/UEA_template-variation--dsne}}
+                                         colourTheme--{{UEA_colour-theme--dsne}}{{^UEA_colour-theme--dsne}}orange{{/UEA_colour-theme--dsne}}
+                                         logoOptions--{{logoColorOption}}{{^logoColorOption}}black{{/logoColorOption}}
+                                         logoOptions--{{logoVisibilityOption}}" 
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="hero"><div class="reposition-fix">{{{UEA_feature-image--dsne}}}</div></div>
+          <div class="main">
+            <div class="header">
+              <div class="logo">
+                {{{account.snippets.logo}}}
+                <div class="invalidLogoText">Invalid Logo</div>
+              </div><!--logo-->
+            </div><!--header-->
+            <div class="body">
+              <div class="content" data-max-height="css">
+                {{ #UEA_heading-brand--dsne }}
+                <div class="heading">
+                  <div class="heading__inner" style="font-size: {{UEA_heading-size--dsne}}%;" data-max-height="css">
+                    {{{UEA_heading-brand--dsne}}}
+                  </div><!--heading__inner-->
+                </div><!--heading-->
+                {{ /UEA_heading-brand--dsne }}
+                {{ #UEA_body-copy-brand--dsne }}
+                <div class="copy" data-max-height="css">{{{UEA_body-copy-brand--dsne}}}</div><!--copy-->
+                {{ /UEA_body-copy-brand--dsne }}
+              </div><!--content-->
+              <div class="footer">
+                {{ #UEA_cta--dsne }}
+                <div class="cta" data-max-height="css">{{{UEA_cta--dsne}}}</div><!--cta-->
+                {{ /UEA_cta--dsne }}
+                {{ #UEA_url--dsne }}
+                <div class="url" data-max-line="1"><span style="font-size: {{{urlFontSize}}}{{^urlFontSize}}100{{/urlFontSize}}%">{{{UEA_url--dsne}}}</span></div><!--url-->
+                {{ /UEA_url--dsne }}
+              </div><!--footer-->
+            </div><!--body-->
+          </div><!--main-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
