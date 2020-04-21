@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+
+        --black: {{{account.colors.black}}};
+        --white: #FFF;
+        --light-grey: {{{account.colors.uea-light-grey-rgb}}};   
+      }    
+
+      .colourTheme--orange {
+        --dynamic-colour: var(--orange);
+      }
+
+      .colourTheme--cyan { 
+        --dynamic-colour: var(--cyan);     
+      }
+
+      .colourTheme--magenta { 
+        --dynamic-colour: var(--magenta); 
+      }
+
+      .colourTheme--green { 
+        --dynamic-colour: var(--green); 
+      }
+
+      .colourTheme--purple {
+        --dynamic-colour: var(--purple); 
+      }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .fit {
+        display: flex;
+        flex-direction: row-reverse;
+      }
+
+      .hero {
+        position: relative;
+        width: 210pt;
+      }
+
+      .main {
+        flex: 1;
+        display: flex; 
+        flex-direction: column;
+        padding: 30pt 20pt 28pt 31pt;
+      }
+
+      .header {
+        font-size: 0;
+      }
+
+      .logo {
+        margin-bottom: 20.1pt;
+        width: 62pt;
+      }
+
+      .logo_visibility--hide .logo {
+        display: none;
+      }
+
+      .glint {
+        fill: var(--dynamic-colour);
+      }
+
+      .body {
+        flex :1;
+      }
+
+      .subheading {
+        margin-bottom: 2pt;
+        font-size: 11.5pt;
+        line-height: 1em;
+      }
+
+      .heading {
+        margin-bottom: 14pt;
+        font-size: 14.8pt;
+        line-height: 1em;
+      }
+
+      .heading h1 {
+        font-weight: 900;
+        color: var(--dynamic-colour);
+      }
+
+      .content {
+        margin-bottom: 12pt;
+        font-size: 8.2pt;
+        line-height: 1.2em;
+      }
+
+      .location {
+        margin-bottom: 1pt;
+        font-size: 9pt;
+        line-height: 1.2em;
+      }
+
+      .date {
+        margin-bottom: 10pt;
+        font-size: 9pt;
+        line-height: 1.2em;
+      }
+
+      .date p {
+        font-weight: bold;
+        color: var(--dynamic-colour);
+      }
+
+      .cta {
+        font-size: 8pt;
+        line-height: 1.3em;
+      }
+
+      .cta p {
+        font-weight: bold;
+      }
+
+      .tinymce_style--dark {
+        color: var(--black);
+      }
+
+      .tinymce_style--light {
+        color: var(--dynamic-colour);
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         colourTheme--{{UEA_colour-theme--ei}}{{^UEA_colour-theme--ei}}cyan{{/UEA_colour-theme--ei}}
+                                         logo_visibility--{{logo_visibility}}{{^logo_visibility}}show{{/logo_visibility}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+
+          <div class="hero">
+            <div class="reposition-fix">{{{UEA_fetaure-image--ei}}}</div> <!--reposition-fix-->
+          </div> <!--hero-->
+
+          <div class="main">
+            <div class="header">
+              <div class="logo">
+                {{{account.snippets.logo}}}
+              </div><!--logo-->
+            </div> <!--header-->
+
+            <div class="body">
+              {{ #UEA_event-title-prefix--ei }}
+              <div class="subheading" data-max-line="1">{{{UEA_event-title-prefix--ei}}}</div> <!--subheading-->
+              {{ /UEA_event-title-prefix--ei }}
+              {{ #UEA_event-title--ei }}
+              <div class="heading u-heading-patch" data-max-line="2">{{{UEA_event-title--ei}}}</div> <!--heading-->
+              {{ /UEA_event-title--ei }}
+              {{ #UEA_event-details--ei }}
+              <div class="content" data-max-line="2">{{{UEA_event-details--ei}}}</div> <!--content-->
+              {{ /UEA_event-details--ei }}
+
+              {{ #UEA_location--ei }}
+              <div class="location" data-max-line="2">{{{UEA_location--ei}}}</div> <!--location-->
+              {{ /UEA_location--ei }}
+              {{ #UEA_date--ei }}
+              <div class="date" data-max-line="1">{{{UEA_date--ei}}}</div> <!--date-->
+              {{ /UEA_date--ei }}
+              {{ #UEA_cta--ei }}
+              <div class="cta" data-max-line="2">{{{UEA_cta--ei}}}</div> <!--cta-->
+              {{ /UEA_cta--ei }}
+            </div> <!--body-->
+          </div> <!--main-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
