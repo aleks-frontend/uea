@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html data-sign="OSZ">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      :root {
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};   
+
+        --black: {{{account.colors.black}}};
+        --white: #fff;
+      }    
+
+      .colourTheme--orange {
+        --dynamic-colour: var(--orange);
+      }
+
+      .colourTheme--cyan { 
+        --dynamic-colour: var(--cyan);     
+      }
+
+      .colourTheme--magenta { 
+        --dynamic-colour: var(--magenta); 
+      }
+
+      .colourTheme--green { 
+        --dynamic-colour: var(--green); 
+      }
+
+      .colourTheme--purple {
+        --dynamic-colour: var(--purple); 
+      }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 0.257rem;
+        color: var(--white);
+        word-break: break-word;
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .backgroundImage div {
+        width: auto !important;
+        height: auto !important;
+        right: 0;
+        bottom: 0;
+      }      
+
+      /* Helper classes */
+      .u-hide { display: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;        
+      }
+
+      .reposition-fix div {
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .hero {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .templateVariation--halfImage .hero {
+        width: 620pt;
+      }
+
+      .templateVariation--noImage .hero {
+        display: none;
+      }
+
+      .templateVariation--halfImage .fit{
+        padding: 63pt 674pt 62pt 64.4pt;
+        background-color: var(--black);
+      }
+
+      .main {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+      }
+
+      .header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+
+      .templateVariation--halfImage .header {
+        margin-bottom: 90pt;
+        height: 120pt;
+      }
+
+      .templateVariation--noImage .header  {
+        height: 191pt;
+        padding: 63pt 0 0 65pt;
+        background-color: var(--black);
+      }
+
+      .logo {
+        position: relative;
+        height: 100%;
+      }
+
+      .templateVariation--halfImage .logo{
+        width: 195.5pt;
+      }
+
+      .templateVariation--noImage .logo{
+        width: 195.2pt;
+      }
+
+      .postgraduateText {
+        display: none;
+        align-self: flex-end;
+        align-items: center;
+        justify-content: flex-start;
+        font-weight: bold;
+        background: var(--dynamic-colour);
+        color: var(--white);
+        z-index: 1;
+      }
+
+      .templateVariation--halfImage .postgraduateText  {
+        margin-top: 0.03rem;
+        margin-right: -0.99rem;
+        height: 0.9rem;
+        width: 5.7rem;
+        padding-left: 0.55rem;
+        font-size: 0.48rem;
+      }
+
+      .templateVariation--noImage .postgraduateText {
+        margin-top: 0.03rem;
+        height: 1.05rem;
+        width: 7.78rem;
+        padding-left: 0.67rem;
+        font-size: 0.5rem;
+      }
+
+      .templateVariation--halfImage .postgraduateText--phd {
+        height: 1.34rem;
+        line-height: 1em;
+      }
+
+      .templateVariation--noImage .postgraduateText--phd {
+        height: 1.5rem;
+        line-height: 1em;
+      }
+
+      .pgChoice--postgraduate .postgraduateText--postgraduate,
+      .pgChoice--masters .postgraduateText--masters ,
+      .pgChoice--phd .postgraduateText--phd { 
+        display: flex; 
+      }
+
+      .body {
+        flex: 1;
+        display: flex;
+      }
+
+      .templateVariation--halfImage .body {
+        flex-direction: column;
+      }
+
+      .templateVariation--noImage .body {
+        flex-direction: row;
+        margin-top: -2pt;
+        padding: 55pt 40pt 10pt 65pt;
+        background-color: var(--black);
+      }
+
+      .heading {
+        display: none;
+        position: relative;
+        text-transform: uppercase;
+      }
+
+      .templateVariation--halfImage .heading,
+      .templateVariation--noImage .heading {
+        display: block;
+      }
+
+      .templateVariation--halfImage .heading {
+        margin-bottom: 52pt;
+        font-size: 56.2pt;
+      }
+
+      .templateVariation--noImage .heading {
+        width: 635pt;
+        font-size: 85.7pt;
+        flex-shrink: 0;
+      }
+      
+      .templateVariation--halfImage .heading h1,
+      .templateVariation--noImage .heading h1 {
+        font-weight: 300;
+      }
+
+      .templateVariation--halfImage .heading strong,
+      .templateVariation--noImage .heading strong{
+        font-weight: bold;
+      }
+
+      .templateVariation--halfImage .heading strong {
+        word-spacing: 0.08em;
+      }
+
+      .templateVariation--halfImage .heading__inner {
+        max-height: 2.5rem;
+        line-height: 1em;
+      }
+
+      .templateVariation--noImage .heading__inner {
+        max-height: 4.3em;
+        line-height: 0.96em;
+      }
+
+      .copy {
+        display: none;
+        position: relative;
+      }
+
+      .templateVariation--halfImage .copy,
+      .templateVariation--noImage .copy {
+        display: block;
+      }
+
+      .templateVariation--halfImage .copy {
+        max-height: 6.2em;
+        font-size: 33.8pt;
+      }
+
+      .templateVariation--noImage .copy {
+        max-height: 8.4em;
+        font-size: 33.6pt;
+        margin-top: 56pt;
+        margin-left: 42pt;
+      }
+
+      .templateVariation--halfImage .copy__inner {
+        line-height: 1.18em;
+      }
+
+      .templateVariation--noImage .copy__inner {
+        line-height: 1.18em;
+      }
+      
+      .templateVariation--halfImage .copy p,
+      .templateVariation--noImage .copy p{
+        margin-bottom: 0.3em;
+        font-weight: 500;
+      }
+      
+      .templateVariation--halfImage .copy p:last-child,
+      .templateVariation--noImage .copy p:last-child{
+        margin-bottom: 0em;
+      }
+      
+      .templateVariation--halfImage .copy strong,
+      .templateVariation--noImage .copy strong{
+        font-weight: bold;
+      }
+
+      .element__container {
+        display: none;
+        position: absolute;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 0;
+      }
+
+      .templateVariation--halfImage .element__container,
+      .templateVariation--noImage .element__container {
+        display: flex;
+        z-index: 1;
+      }
+
+      .glintLocation--top.templateVariation--halfImage .element__container {
+        right: 477pt;
+        width: 116pt;
+        top: 112pt;
+        transform: rotate(270deg);
+      }
+
+      .glintLocation--bottom.templateVariation--halfImage .element__container {
+        right: 477pt;
+        width: 116pt;
+        bottom: 112pt;
+        transform: rotate(270deg);
+      }
+
+      .glintLocation2--left.templateVariation--noImage .element__container {
+        left: 93pt;
+        width: 116pt;
+        bottom: 24pt;
+        transform: rotate(0deg);
+      }
+
+      .glintLocation2--right.templateVariation--noImage .element__container {
+        right: 93pt;
+        width: 116pt;
+        bottom: 24pt;
+        transform: rotate(0deg);
+      }
+
+      .element {
+        width: 100%;
+      }
+
+      .element path {
+        width: 100%;
+        height: auto;
+        fill: var(--dynamic-colour);
+      }
+
+      .element__stand {
+        width: 100%;
+        margin-bottom: 1.6pt;
+        height: auto;
+        margin-left: 0.9pt;
+      }
+
+      .footer {
+        display: none;
+        position: relative;
+      }
+
+      .templateVariation--halfImage .footer,
+      .templateVariation--noImage .footer {
+        display: block;
+      }
+
+      .templateVariation--noImage .footer {
+        height: 196pt;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        flex-shrink: 0;
+        padding: 35pt 257pt 60pt 257pt;
+      }
+
+      .cta {
+        display: none;
+        position: relative;
+        font-weight: bold;
+        line-height: 0.9em;
+        text-transform: uppercase;
+      }
+
+      .templateVariation--halfImage .cta,
+      .templateVariation--noImage .cta {
+        display: block;
+      }
+
+      .templateVariation--halfImage .cta {
+        font-size: 40.7pt;
+      }
+
+      .templateVariation--noImage .cta {
+        font-size: 53.1pt;
+        color: var(--black);
+      }
+
+      .url {
+        display: none;
+        position: relative;
+        font-weight: bold;
+        color: var(--dynamic-colour);
+        line-height: 0.9em;
+      }
+
+      .templateVariation--halfImage .url,
+      .templateVariation--noImage .url {
+        display: block;
+      }
+
+      .templateVariation--halfImage .url {
+        margin-top: 12.3pt;
+        font-size: 51.3pt;
+      }
+
+      .templateVariation--noImage .url {
+        margin-top: 9.2pt;
+        font-size: 51.5pt;
+      }
+
+      .glint {
+        fill: var(--dynamic-colour);
+      }
+
+      #shape {
+        fill: var(--white);
+      }
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head> 
+  <!--
+  {{ placeholder-toggle-new }}
+  {{show-crop}}
+  {{ placeholder-opacity }}
+  {{ placeholder-image-1 }}
+  {{UEA_template-variation--dsne}}		
+  {{UEA_colour-theme--dsne}}
+  {{UEA_postgraduate--choice--dsne}}
+  {{{UEA_feature-image--dsne}}}
+  {{{UEA_heading-postgraduate--dsne}}}
+  {{UEA_heading-size--dsne}}
+  {{{UEA_body-copy-postgraduate--dsne}}}
+  {{UEA_body-copy-size--dsne}}
+  {{{UEA_cta--dsne}}}
+  {{{UEA_url--dsne}}}
+  {{UEA_glint-location--dsne}}
+  -->  
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         templateVariation--{{UEA_template-variation--dsne}}{{^UEA_template-variation--dsne}}fullImage{{/UEA_template-variation--dsne}}
+                                         colourTheme--{{UEA_colour-theme--dsne}}{{^UEA_colour-theme--dsne}}orange{{/UEA_colour-theme--dsne}}
+                                         pgChoice--{{UEA_postgraduate--choice--dsne}}{{^UEA_postgraduate--choice--dsne}}postgraduate{{/UEA_postgraduate--choice--dsne}}
+                                         glintLocation--{{UEA_glint-location--dsne}}{{^UEA_glint-location--dsne}}top{{/UEA_glint-location--dsne}} glintLocation2--{{UEA_glint-location2--dsne}}{{^UEA_glint-location2--dsne}}right{{/UEA_glint-location2--dsne}}" 
+        data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          {{ #UEA_feature-image--dsne }}
+          <div class="hero"><div class="reposition-fix">{{{UEA_feature-image--dsne}}}</div></div><!--hero-->
+          {{ /UEA_feature-image--dsne }}
+          <div class="main"> 
+            <div class="header">
+              <div class="logo">{{{account.snippets.logo}}}</div><!--logo-->
+              <div class="pgLabel">
+                <div class="postgraduateText postgraduateText--postgraduate"> POSTGRADUATE </div> <!-- postgraduateText -->
+                <div class="postgraduateText postgraduateText--masters"> MASTER'S DEGREES </div> <!-- postgraduateText -->
+                <div class="postgraduateText postgraduateText--phd"> PhDs AND<br> RESEARCH DEGREES</div>
+              </div><!--pgLabel-->
+            </div><!--header-->
+            <div class="body">
+              {{ #UEA_heading-postgraduate--dsne }}
+              <div class="heading">
+                <div class="heading__inner" style="font-size: {{UEA_heading-size--dsne}}%;" data-max-height="css">
+                  {{{UEA_heading-postgraduate--dsne}}}
+                </div><!--heading__inner-->
+              </div><!--heading-->
+              {{ /UEA_heading-postgraduate--dsne }}
+              <div class="copy" data-max-height="css">
+                {{ #UEA_body-copy-postgraduate--dsne }}
+                <div class="copy__inner" style="font-size: {{UEA_body-copy-size--dsne}}%;">
+                  {{{UEA_body-copy-postgraduate--dsne}}}
+                </div><!--copy__inner-->
+                {{ /UEA_body-copy-postgraduate--dsne }}
+              </div><!--copy-->
+              <div class="element__container">
+                <img src="https://files.outfit.io/media_library_items/93089/glint-stand.svg" class="element__stand">               
+                <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="element">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"  id="star"/>
+                </svg>
+              </div><!--element__container-->
+            </div><!--body-->
+            <div class="footer">
+              {{ #UEA_cta--dsne }}
+              <div class="cta" data-max-line="1">{{{UEA_cta--dsne}}}</div><!--cta-->
+              {{ /UEA_cta--dsne }}
+              {{ #UEA_url--dsne }}
+              <div class="url" data-max-line="1">{{{UEA_url--dsne}}}</div><!--url-->
+              {{ /UEA_url--dsne }}
+            </div><!--footer-->
+          </div><!--main-->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="js/hide-empty-titles.js"></script>
+    <script src="js/dynamic-inject.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles();
+        });
+      });
+
+      const injectObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          injectDynamicContent();
+        });
+      });      
+
+      const injectSources = document.querySelectorAll('[data-target-id]');
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      if ( injectSources.length > 0 ) {
+        injectSources.forEach(src => {
+          injectObserver.observe(src, {
+            attributes: false,
+            characterData: true,
+            childList: true,
+            subtree: true,
+            attributeOldValue: false,
+            characterDataOldValue: true
+          });            
+        });
+      }    
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+        injectDynamicContent();
+        hideEmptyTitles();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      detectSystem();
+
+    </script>
+
+
+  </body>
+</html>
