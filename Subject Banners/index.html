@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<!--<html async-->
+<html data-sign="OSB">
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Brandon/stylesheet.css');
+
+      /*
+      {{placeholder-toggle-new}}{{UEA_theme--sbv}}{{primaryHeadingBackgroundColour}}{{UEA_colour-theme--sbv}}{{UEA_logo-colour--sbv}}{{UEA_page-orientation--svb}}{{UEA_background-image-size--sbv}}{{UEA_pg-choice--sbv}}{{UEA_background-image--sbv}}{{UEA_toggle-heading-text--sbv}}{{UEA_pgheading--sbv}}{{UEA_heading--sbv}}{{UEA_body-copy--sbv}}{{UEA_body-copy-font-slider--sbv}}{{UEA_cta--sbv}}{{UEA_cta-font-slider--sbv}}{{UEA_url--sbv}}{{UEA_cta-text-colour--sbv}}{{UEA_url-size--pb}}{{UEA_glint-position--sbv}}{{UEA_statistic-visibility--sbv}}{{statisticTextColour}}*/
+
+      :root {
+        --white: #FFF;
+        --black: {{{account.colors.black}}};
+        --orange: {{{account.colors.uea-orange-rgb}}};
+        --cyan: {{{account.colors.uea-cyan-rgb}}};
+        --magenta: {{{account.colors.uea-magenta-rgb}}};
+        --green: {{{account.colors.uea-green-rgb}}};
+        --purple: {{{account.colors.uea-purple-rgb}}};     
+
+        --dynamic-colour: var(--orange);
+      }                               
+
+      .colourTheme--orange { --dynamic-colour: var(--orange); }
+      .colourTheme--cyan { --dynamic-colour: var(--cyan); }
+      .colourTheme--magenta { --dynamic-colour: var(--magenta); }
+      .colourTheme--green { --dynamic-colour: var(--green); }
+      .colourTheme--purple { --dynamic-colour: var(--purple); }
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 11pt;
+        color: var(--black);
+        word-break: break-word;        
+      }   
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;   
+        overflow: hidden;
+      } 
+
+      .reposition-fix div {
+        width: 100% !important;
+        height: 100% !important;
+        right: 0 !important;
+        bottom: 0 !important;
+      }
+
+      .fit {
+        display: flex;
+        background: var(--dynamic-colour); 
+      }
+
+      .templateTheme--postgraduate .fit { 
+        background: transparent;
+        flex-direction: row-reverse;
+      }
+
+      .pageOrientation--portrait.templateTheme--uea.backgroundImage--bottomImage .fit {  background: transparent; }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }      
+
+      .backgroundImage--bottomImage .backgroundImage { top: 14.5rem; }
+      .pageOrientation--landscape.backgroundImage--bottomImage .backgroundImage { top: 8.02rem; }    
+      .templateTheme--postgraduate .backgroundImage { top: 11.69rem; }
+
+      .pageOrientation--landscape.templateTheme--postgraduate .backgroundImage { 
+        position: relative;
+        top: auto;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        flex: 1;
+      }
+
+      .body {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 1.45rem 1.05rem 0.2rem 1.8rem;
+        z-index: 1;
+      }
+
+      .backgroundImage--bottomImage .body { 
+        height: 14.52rem;
+        padding-left: 1.4rem; 
+      }   
+
+      .pageOrientation--portrait.templateTheme--uea.backgroundImage--bottomImage .body { background: var(--dynamic-colour); }
+
+      .pageOrientation--landscape .body { padding: 0.86rem 2.7rem 0 0.55rem; }
+      .pageOrientation--landscape.backgroundImage--noImage .body { padding-top: 0.96rem; }
+
+      .pageOrientation--landscape.backgroundImage--bottomImage .body { 
+        flex-direction: row;
+        height: 8.02rem; 
+        padding: 0.96rem 2.3rem 0 0.25rem;
+      }
+
+      .templateTheme--postgraduate .body { 
+        height: 11.75rem;
+        padding: 0.7rem 1.35rem 0 1.3rem;
+        background: var(--black);
+      }
+
+      .templateTheme--postgraduate.pageOrientation--landscape .body {
+        height: auto;
+        flex: 0 0 49.9%;
+        padding: 1rem 0.8rem 0 0.9rem;
+      }
+
+      .logo {
+        margin-left: 0.36rem;
+        margin-bottom: 3.7rem;
+        width: 4.8rem;
+      }
+
+      .backgroundImage--bottomImage .logo {
+        margin-left: 0.7rem;
+        margin-bottom: 1.6rem;
+      }
+
+      .pageOrientation--landscape .logo { 
+        width: 4.66rem;
+        margin-bottom: 4.09rem;
+      }
+
+      .templateTheme--postgraduate .logo {
+        margin-bottom: 3.98rem;
+        margin-left: 0;
+        width: 1.96rem;
+      }
+
+      .pageOrientation--landscape.templateTheme--postgraduate .logo {
+        margin-bottom: 1.3rem;
+        width: 4.6rem;
+      }
+
+      .backgroundImage--noImage .logo { margin-bottom: 3.1rem; }
+      .pageOrientation--landscape.backgroundImage--noImage .logo { margin-bottom: 3rem; }
+      .logo--white #shape { fill: var(--white); }	    
+      .logo--black.backgroundImage--bottomImage #star, .logo--black.backgroundImage--noImage #star { fill: var(--white); }
+      .templateTheme--uea.logo--white.backgroundImage--bottomImage #star, .templateTheme--uea.logo--white.backgroundImage--noImage #star { fill: var(--black); } 
+      #star { fill: var(--dynamic-colour); }
+
+      .decoration {
+        position: absolute;
+        top: -1.1rem;
+        left: -0.96rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 1rem;
+        width: 1rem;
+        background: var(--dynamic-colour);
+      }
+
+      .backgroundImage--fullBleedImage .decoration { top: -1rem; }
+
+      .backgroundImage--noImage .decoration { 
+        top: -1rem;
+        left: -0.96rem;
+        background: var(--black);
+      }
+
+      .decoration__element { width: 0.7rem; }   
+      .pageOrientation--landscape  .decoration__element { width: 1rem; }
+      .decoration--secondary .decoration__element { width: 1.1rem;}
+
+      .pageOrientation--landscape .decoration {
+        top: -1.35rem;
+        left: -1.31rem;
+        height: 1.35rem;
+        width: 1.35rem;
+      }
+
+      .pageOrientation--landscape.backgroundImage--noImage  .decoration {
+        top: -1.49rem;
+        left: -1.5rem;
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+
+      .backgroundImage--noImage .u--hide { top: -1.1rem; }
+
+      .pageOrientation--landscape.backgroundImage--noImage .u--hide { top: -1.65rem; }
+      .decoration--secondary {
+        display: none;
+        top: auto;
+        left: 0;
+        bottom: -1.52rem;
+        height: 1.55rem;
+        width: 1.55rem;
+      }
+
+      .pageOrientation--landscape .decoration--secondary {
+        top: auto;
+        bottom: -1.3rem;
+        left: 0.95rem;
+      }
+
+      .decoration--right { 
+        left: auto;
+        right: 0;
+      }
+
+      .pageOrientation--landscape .decoration--right {
+        left: auto;
+        right: 0.95rem;
+      }
+
+      .backgroundImage--bottomImage .decoration--primary { display: none; }
+      .backgroundImage--bottomImage .decoration--secondary { display: flex; }
+      .templateTheme--postgraduate .decoration { display: none; }
+
+      .heading__container { 
+        position: relative;
+        font-size: 0;
+      }
+
+      .pageOrientation--landscape .heading__container { margin-left: 3.3rem; }
+
+      .templateTheme--postgraduate.pageOrientation--landscape .heading__container { 
+        margin-left: 0;
+        font-size: 0.67rem;
+      }      
+      .is-export-mode.templateTheme--postgraduate.pageOrientation--landscape .heading__container { font-size: 0.6633rem; }
+
+      .pageOrientation--landscape.backgroundImage--bottomImage .heading__container { 
+        margin-left: 0.9rem;
+        margin-top: 0.2rem;
+      }
+
+      .heading__text { 
+        margin-left: 0.04rem;
+        padding: 0.2rem 0.3rem 0 0.27rem;
+        font-size: 0.98rem;
+        line-height: 0.88em;
+        font-weight: 600;
+        text-transform: uppercase;
+        background: var(--black);
+        color: var(--white);
+      }
+      .is-export-mode .heading__text { font-size: 0.97rem; }
+
+      .templateTheme--uea.pageOrientation--landscape.backgroundImage--bottomImage .heading__text{ margin-left: 0rem; }
+      .backgroundImage--noImage .heading__text--hide { display: none; }
+
+      .pageOrientation--landscape.backgroundImage--noImage .heading__text { 
+        margin-left: 0;
+        font-size: 1.6rem; 
+      }
+      .is-export-mode.pageOrientation--landscape.backgroundImage--noImage .heading__text { font-size: 1.584rem; }
+
+      .heading {
+        max-height: 3.3rem;
+        margin: 0.1rem 0 0.4rem 0.17rem;
+        padding-top: 0.1rem;
+        padding-left: 0.1rem;
+        font-size: 0.59rem;
+        line-height: 0.9em;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--white);
+      }
+      .is-export-mode .heading { font-size: 0.5841rem; } 
+
+      .heading--secondary {
+        display: none;
+        margin: 0 0 0.17rem 0;
+        max-height: 1.5rem;
+        padding: 0;
+        font-size: 0.415rem;
+        line-height: 1em;
+        font-weight: normal;
+        color: var(--dynamic-colour);
+      }
+      .is-export-mode .heading--secondary { font-size: 0.4108rem; }
+
+      .pageOrientation--landscape .heading {
+        margin-bottom: 1.5rem;
+        max-height: 3rem;
+        {{^UEA_body-copy--sbv}}max-height: 4rem;{{/UEA_body-copy--sbv}}
+        font-size: 0.78rem;
+      }  
+      .is-export-mode.pageOrientation--landscape .heading { font-size: 0.7722rem; }
+
+      .pageOrientation--landscape .heading--secondary {
+        max-height: 2.3rem;
+        font-size: 0.67rem;
+        line-height: 1.05em;
+      }
+      .is-export-mode.pageOrientation--landscape .heading--secondary { font-size: 0.6633rem; }
+
+      .pageOrientation--landscape.backgroundImage--bottomImage .heading { margin-bottom: 1.1rem }
+      .pageOrientation--landscape.backgroundImage--noImage .heading { margin-bottom: 1rem;  }
+
+      .templateTheme--postgraduate .heading { display: none; }
+      .templateTheme--postgraduate .heading--secondary { 
+        display: block;
+        text-transform: none;
+      }
+      .templateTheme--postgraduate.pageOrientation--landscape .heading { margin-bottom: 0.4rem; }
+
+      .content__container { flex: 1; }
+
+      .pageOrientation--landscape .content { 
+        display: flex;
+        align-items: flex-start;
+        margin-left: 3.3rem;
+      }
+
+      .templateTheme--postgraduate.pageOrientation--landscape .content { 
+        display: block;
+        margin-left: 0;
+      }
+
+      .pageOrientation--landscape.backgroundImage--bottomImage .content { margin-left: 0.9rem; }
+
+      .templateTheme--uea.pageOrientation--landscape .content__right,
+      .templateTheme--brand.pageOrientation--landscape .content__right{ 
+        width: 5.2rem;
+      }
+
+      .templateTheme--uea.pageOrientation--landscape .content__right { width: 6rem; }
+
+      .copy {
+        max-height: 3.5rem;
+        margin-left: 0.12rem;
+        margin-bottom: 1.2rem;
+        padding-left: 0.07rem;
+        font-size: 0.375rem;
+        line-height: 1.3em;
+      }
+      .is-export-mode .copy--primary { font-size: 0.3712rem; } 
+
+      .templateTheme--uea.pageOrientation--portrait .copy { padding-left: 0.04rem; }
+
+      .copy--secondary {
+        display: none;
+        max-height: 2.2rem;
+        margin: 0 0 0.9rem 0;
+        padding: 0;
+        font-size: 0.293rem;
+        line-height: 1.2em;
+        color: var(--white);
+      }
+      .is-export-mode .copy--secondary { font-size: 0.29rem; }
+
+      .templateTheme--postgraduate .copy { display: none; }
+
+      .templateTheme--postgraduate .copy--secondary { 
+        display: block; 
+        margin-bottom: 1.4rem;
+      }
+
+      .backgroundImage--bottomImage .copy { margin-bottom: 0.8rem; }
+
+      .backgroundImage--noImage .copy {   
+        margin-bottom: 0.9rem;
+        line-height: 1.25em; 
+      }
+
+      .pageOrientation--landscape .copy {
+        margin: 0 1.25rem 0 0.09rem;
+        max-height: 2.5rem;
+        width: 7.8rem;
+        font-size: 0.425rem;
+        line-height: 1.23em;
+      }
+
+      .is-export-mode.pageOrientation--landscape .copy { font-size: 0.4207rem; } 
+
+      .pageOrientation--landscape.backgroundImage--bottomImage .copy {
+        width: 6.4rem;
+        margin-right: 1.8rem;
+      }
+
+      .pageOrientation--landscape.backgroundImage--noImage .copy { margin-right: 1.15rem; }
+
+      .templateTheme--postgraduate.pageOrientation--landscape .copy {
+        margin: 0 0 1.45rem 0;
+        width: 100%;
+      }
+
+      .cta {
+        margin-bottom: 0.15rem;
+        margin-left: 0.04rem;
+        font-size: 0.37rem;
+        line-height: 1em;
+        color: var(--white);
+      }
+      .is-export-mode .cta { font-size: 0.3663rem; }
+
+      .cta--black { color: var(--black); }
+
+      .templateTheme--postgraduate .cta {       
+        font-size: 0.305rem;
+        font-weight: 600;
+        text-transform: none;
+        color: var(--dynamic-colour);
+      }
+      .is-export-mode.templateTheme--postgraduate .cta { font-size: 0.3rem; }
+
+      .pageOrientation--landscape .cta { margin-bottom: 0.86rem; }      
+      .templateTheme--uea.pageOrientation--landscape .cta { margin-bottom: 0.3rem; }
+
+      .templateTheme--postgraduate.pageOrientation--landscape .cta { 
+        margin-bottom: 0.06rem;
+        font-size: 0.43rem; 
+      }
+      .is-export-mode.templateTheme--postgraduate.pageOrientation--landscape .cta { font-size: 0.425rem; }
+
+      .url {
+        margin-left: 0.12rem;
+        font-size: 0.4466rem;
+        color: var(--black);
+        word-break: break-all;
+        max-height: 0.8rem;
+      }
+      .is-export-mode .url { font-size: 0.442rem; }
+
+      .url--primary .url__inner { line-height: 1.4em; }
+
+      .url--secondary {
+        display: none;
+        margin: 0;
+        font-size: 0.296rem;
+        color: var(--white);
+      }
+
+      .url--secondary .url__inner {
+        line-height: 0.9em;
+      }
+
+      .templateTheme--postgraduate .url { display: none; }
+      .templateTheme--postgraduate .url--secondary { display: block; }
+
+      .pageOrientation--landscape .url {
+        /*margin-left: 0.18rem; */
+        font-size: 0.53rem;     
+        max-height: 0.7rem;
+      }    
+      .is-export-mode.pageOrientation--landscape .url { font-size: 0.5247rem; }
+
+      .pageOrientation--landscape .url .url__inner {
+        line-height: 1em;
+      }
+
+      .templateTheme--postgraduate.pageOrientation--landscape .url {
+        margin-left: 0;
+        font-size: 0.43rem;
+      }
+
+      .statistic__container {
+        position: absolute;
+        bottom: 2.65rem;
+        left: 1.82rem;
+        width: 5rem;
+        color:  var(--{{statisticTextColour}});
+        text-transform: uppercase;
+      }
+
+      .backgroundImage--bottomImage .statistic__container {
+        bottom: 3.95rem;
+        left: 1.78rem;
+      }
+
+      .backgroundImage--noImage .statistic__container { bottom: 3.35rem; }
+
+      .pageOrientation--landscape .statistic__container {
+        bottom: auto;
+        left: auto;
+        right: 2.55rem;
+        top: 1.15rem;
+      }
+
+      .templateTheme--postgraduate .statistic__container {
+        bottom: 3.4rem;
+        left: auto;
+        right: 3.65rem;
+        top: auto;
+      }
+
+      .pageOrientation--landscape.backgroundImage--bottomImage .statistic__container {
+        top: auto;
+        right: auto;
+        bottom: 4.75rem;
+        left: 8.8rem;
+      }
+
+      .pageOrientation--landscape.backgroundImage--noImage .statistic__container {
+        right: 2.75rem;
+        top: 1.25rem
+      }
+
+      .statistic__container--hide { display: none; }
+
+      .statistic {
+        position: relative;
+        font-size: 1.63rem;
+        font-weight: 800;
+        line-height: 1em;
+      }
+      .is-export-mode .statistic { font-size: 1.6137rem; }
+
+      .pageOrientation--landscape .statistic { font-size: 1.53rem; }
+      .is-export-mode.pageOrientation--landscape .statistic { font-size: 1.5147rem; }
+
+      .statistic:before {
+        display: block;
+        position: absolute;
+        content: '';
+        left: 0;
+        top: -0.18rem;
+        height: 0.1rem;
+        width: 1.9rem;
+        background: var(--{{statisticTextColour}}{{^statisticTextColour}}black{{/statisticTextColour}});
+      }
+
+      .pageOrientation--landscape .statistic:before {
+        top: -0.17rem;
+        height: 0.05rem;
+        width: 1.77rem;
+      }
+
+      .statistic sup,
+      .statistic sub {
+        font-size: 0.58em;
+      }
+
+      .statistic sup { top: -0.5em; }
+
+      .statistic__text {
+        margin-top: -0.2rem;
+        font-size: 0.304rem;
+        font-weight: bold;
+        line-height: 1.15em;
+      }
+      .is-export-mode .statistic__text { font-size: 0.3rem; }
+
+      .pageOrientation--landsacpe .statistic__text { font-size: 0.3rem; }
+      .is-export-mode.pageOrientation--landsacpe .statistic__text { font-size: 0.297rem; }
+
+      .statistic__ref {
+        font-size: 0.31rem;
+        line-height: 1em;
+      }
+      .is-export-mode .statistic__ref { font-size: 0.306rem; }
+
+      .element__container {
+        display: none;
+        position: absolute;
+        bottom: -3.79rem;
+        left: 0.66rem;
+        flex-direction: column;
+        align-items: center;
+        width: 3rem;
+        height: 3.8rem;
+        font-size: 0;
+      }
+
+      .element__container--right {
+        left: auto;
+        right: 0.96rem;
+      }
+
+      .templateTheme--postgraduate.pageOrientation--landscape .element__container {
+        left: auto;
+        bottom: auto;
+        right: -3.68rem;
+        top: 1.4rem;
+        width: 3rem;
+        height: 4.4rem;
+        transform: rotateZ(-90deg);
+      }
+
+      .templateTheme--postgraduate .element__container { display: flex; }
+
+      .element__stand {     
+        margin-bottom: 40pt;
+        margin-left: 3pt;
+        width: 100%;
+      }     
+
+      .pageOrientation--landscape .element__stand { 
+        margin-bottom: 52pt;
+        margin-left: 9pt;
+        width: 100%;
+      }   
+
+      .element { width: 2.4rem; }
+      .pageOrientation--landscape .element { width: 2.9rem; }
+
+      .postgraduateText {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0.7rem;
+        align-items: center;
+        justify-content: center;
+        width: 4.5rem;
+        height: 0.8rem;
+        font-size: 0.39rem;
+        font-weight: bold;
+        background: var(--dynamic-colour);
+        color: var(--white);
+      }     
+      .is-export-mode .postgraduateText { font-size: 0.3861rem; }
+
+      .postgraduateText--phd { 
+        height: 1.1rem; 
+        padding-left: 0.3rem;
+      }
+
+      .pageOrientation--landscape .postgraduateText {
+        top: 1rem;
+        width: 4.75rem;
+        height: 0.6rem;
+        font-size: 0.36rem;
+      }
+      .is-export-mode.pageOrientation--landscape .postgraduateText { font-size: 0.3564rem; }
+
+      .pgChoice--postgraduate .postgraduateText--postgraduate,
+      .pgChoice--masters .postgraduateText--masters ,
+      .pgChoice--phd .postgraduateText--phd { 
+        display: flex; 
+      }
+
+      .pgChoice--phd .postgraduateText--phd { height: 1.1rem;}
+      .templateTheme--uea .postgraduateText { display: none; }
+
+      .quote__container {
+        display: none;
+        position: absolute;
+        bottom: 5.85rem;
+        left: 1.3rem;
+        width: 5.3rem;
+      }
+
+      .pageOrientation--landscape .quote__container {
+        top: 13.86rem;
+        left: 0.9rem;
+      }
+
+      .quote {
+        max-height: 3.7rem;
+        font-size: 1.01rem;
+        color: var(--white);
+      }
+      .is-export-mode .quote {  font-size: 0.9999rem; }
+
+      .quote .quote__inner { line-height: 0.8em; }
+
+      .templateTheme--postgraduate .quote { 
+        font-weight: 300;
+        text-transform: none;
+      }
+
+      .quote--bold { font-weight: bold; }
+
+      .pageOrientation--landscape .quote { 
+        width: 1634pt;
+        font-size: 0.83rem;
+      }
+      .is-export-mode.pageOrientation--landscape .quote { font-size: 0.8217rem; }
+
+      .templateTheme--postgraduate .quote__container { display: block; }
+      .templateTheme--uea .quote__container  { display: none; }
+
+      .padded-multiline {
+        position: relative;
+      }
+
+      .padded-multiline span {
+        position: relative;
+        display: inline-block;
+        line-height: 0.83em;
+        font-size: 1em;
+      }
+
+      .templateTheme--uea .copy.padded-multiline span { 
+        line-height: 1em; 
+        margin-bottom: 0.3em;
+      }
+
+      .padded-multiline-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .templateTheme--uea .copy .padded-multiline-bg,
+      .templateTheme--uea .copy .padded-multiline-fg {
+        line-height: 0;
+      }      
+
+      .padded-multiline-bg span {
+        color: transparent;
+      }
+
+      .padded-multiline-bg span:before {
+        content: '';
+        position: absolute;
+        top: -0.25em;
+        bottom: -0.36em;
+        left: -0.22em;
+        right: -0.44em;
+        background: var(--white);
+      }
+
+      .padded-multiline-bg span.emptyLine:before { display: none; }      
+
+      .heading .padded-multiline-bg span:before {      
+        top: 0;
+        background: var(--dynamic-colour);   
+        top: -0.04rem;
+        left: -0.13rem;
+      }      
+
+      .pageOrientation--landscape .heading .padded-multiline-bg span:before { left: -0.17rem; }      
+      .pageOrientation--landscape.backgroundImage--fullBleedImage .heading .padded-multiline-bg span:before { left: -0.13rem; }        
+      .pageOrientation--landscape.backgroundImage--fullBleedImage .headingPositionController--hide.heading .padded-multiline-bg span:before { top: -0.04rem; }
+
+      /*.templateTheme--uea.backgroundImageSize--small .heading .padded-multiline-bg span:before  { background: var(--black); }*/
+
+      .padded-multiline-bg span:first-child:before { top: -0.145rem; }
+      .templateTheme--uea .copy .padded-multiline-bg span:first-child:before { top: -0.145em; }
+
+      .url .padded-multiline-bg span:first-child:before { top: 0; }
+
+      .url .padded-multiline-bg span:last-child:before { 
+        top: -0.1rem;
+        bottom: -0.26em;
+        right: -0.3em;
+      }
+
+      .padded-multiline-fg {
+        position: relative;
+        z-index: 999;
+      }      
+
+      .heading .padded-multiline-bg span:before { background: var(--dynamic-colour);}  
+      .backgroundImage--bottomImage .heading .padded-multiline-bg span:before,
+      .backgroundImage--noImage .heading .padded-multiline-bg span:before{ background: var(--black); }
+      .heading .padded-multiline-bg span:last-child:before { padding-bottom: 0.8rem; }
+
+
+      .js-padded-multiline-src { 
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        z-index: 999;
+      }
+
+      .heading__text.heading__text--hide { display: none; }
+
+      .primaryHeadingBackgroundColour--black .heading .padded-multiline-bg span:before, .primaryHeadingBackgroundColour--brand .heading__text{ background: var(--black); }
+      .primaryHeadingBackgroundColour--brand .heading .padded-multiline-bg span:before, .primaryHeadingBackgroundColour--brand .heading__text { background: var(--dynamic-colour); }
+      .templateTheme--uea.pageOrientation--portrait.backgroundImage--noImage .copy .padded-multiline-bg span:before { right: -0.64em; }
+
+      .heading__text { display: inline-block; }
+
+      .pageOrientation--portrait.backgroundImage--bottomImage.thisIsToggle--show .body { height: 15.52rem; }
+      .pageOrientation--portrait.backgroundImage--bottomImage.thisIsToggle--show .backgroundImage{ top: 15.5rem; }
+
+      .backgroundImage--noImage .copy { max-height: 3.5rem; }
+
+      /* Temporary fix for the approval bug - code appearing over the entire template */
+      body { font-size: 0; }
+      .page { font-size: 1rem; }
+
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         templateTheme--{{UEA_theme--sbv}}{{^UEA_theme--sbv}}uea{{/UEA_theme--sbv}}
+                                         primaryHeadingBackgroundColour--{{primaryHeadingBackgroundColour}}{{^primaryHeadingBackgroundColour}}brand{{/primaryHeadingBackgroundColour}}
+                                         colourTheme--{{UEA_colour-theme--sbv}}{{^UEA_colour-theme--sbv}}orange{{/UEA_colour-theme--sbv}}
+                                         logo--{{UEA_logo-colour--sbv}}{{^UEA_logo-colour--sbv}}black{{/UEA_logo-colour--sbv}}
+                                         pageOrientation--{{UEA_page-orientation--svb}}{{^UEA_page-orientation--svb}}portrait{{/UEA_page-orientation--svb}}
+                                         backgroundImage--{{#UEA_background-image--sbv}}{{UEA_background-image-size--sbv}}{{^UEA_background-image-size--sbv}}fullBleedImage{{/UEA_background-image-size--sbv}}{{/UEA_background-image--sbv}}{{^UEA_background-image--sbv}}noImage{{/UEA_background-image--sbv}}
+                                         pgChoice--{{UEA_pg-choice--sbv}}{{^UEA_pg-choice--sbv}}postgraduate{{/UEA_pg-choice--sbv}}
+                                         thisIsToggle--{{UEA_toggle-heading-text--sbv}}
+                                         " data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+    </div><!-- end placeholderMaster -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit">
+          <div class="backgroundImage"> <div class="reposition-fix"> {{{UEA_background-image--sbv}}} </div> <!-- reposition-fix --> </div> <!-- backgroundImage ---> 
+          <div class="body"> 
+            <div class="logo">
+              <svg viewBox="0 0 113 68" xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><path d="M27.731 51.046c-.614 0-.196-.017-.773-.017-7.131 0-12.484-4.901-12.484-18.621V12.187c0-6.934 3.067-9.565 7.404-9.565v-.824H0v.814c3.802.074 5.177 3.305 5.177 7.555v19.934c0 15.017 7.189 21.798 20.223 21.798h2.329l.002-.853" fill="#1A1919" id="shape"/><path d="M71.689 37.099c-.085-7.528-1.782-9.147-9.3-9.219v-.744c7.518-.074 9.215-1.69 9.3-9.217h.708c.087 7.527 1.78 9.138 9.298 9.211v.75c-7.518.072-9.211 1.691-9.298 9.219h-.708" fill="purple" id="star" class="glint"/><path d="M31.349 51.051c6.803 0 9.797-4.619 9.797-11.148 0-7.82 0 0 0 0l-.007-28.388c0-6.668-3.341-8.886-7.392-8.886l-.003-.833h38.644l.018 10.487-.686-.002c-1.153-6.165-3.558-8.573-11.398-8.573h-1.818c-7.373 0-8.823 2.352-8.823 8.951v6.139c0 8.002 3.267 8.33 9.425 8.33v.75c-6.158 0-9.425.672-9.425 8.752v2.627c0 9.898 1.249 10.557 9.568 10.557 4.918 0 10.914-1.26 12.455-8.045l.703.003v10.127H31.349v-.848M86.156 51.046c6.793 0 8.509-4.387 5.429-11.268l-10.41-26.034L84.183.868l.573-.002s14.316 33.99 17.866 40.867c3.747 7.258 6.896 9.318 10.003 9.318v.848H86.156v-.853M7.958 66.364c-1.793 0-2.865-1.291-2.865-3.453v-4.423h1.105v4.367c0 1.623.737 2.354 1.781 2.354 1.04 0 1.751-.712 1.751-2.298v-4.423h1.104v4.357c0 2.203-1.074 3.519-2.876 3.519M16.516 66.189h-1.077v-3.434c0-.972-.407-1.486-1.105-1.486-.731 0-1.307.584-1.307 1.554v3.366h-1.076v-5.897h1.013v.832c.345-.637.89-.954 1.582-.954 1.196 0 1.97.931 1.97 2.375v3.644M17.901 59.588h1.062v-1.091h-1.062v1.091zm-.004 6.601h1.076v-5.897h-1.076v5.897zM22.841 66.231h-.951l-2.112-5.939h1.139l1.451 4.418 1.459-4.418h1.12l-2.106 5.939M26.335 62.766h2.737c-.094-.881-.542-1.574-1.349-1.574-.767 0-1.298.717-1.388 1.574zm1.502 3.556c-1.513 0-2.616-1.323-2.616-3.077s1.094-3.075 2.521-3.075c1.426 0 2.426 1.253 2.426 3.119 0 .08 0 .171-.01.308l-.004.127h-3.813c.121 1.061.776 1.59 1.516 1.59.479 0 .994-.2 1.439-.74l.043-.05.045.045.547.546.046.048-.041.056c-.547.755-1.238 1.103-2.099 1.103zM32.177 66.189h-1.058v-5.897h1.033v1.266c.358-.916.988-1.368 1.767-1.368l.15.004v1.268h-.12c-.971 0-1.772.762-1.772 2.361v2.366M36.405 66.298c-.655 0-1.395-.268-1.964-.801l-.046-.041.484-.842.053.045c.542.471 1.021.658 1.581.658.578 0 .919-.275.919-.726 0-.473-.365-.641-1.044-.86-.715-.234-1.692-.574-1.692-1.798 0-1.035.845-1.741 1.878-1.741.615 0 1.213.18 1.741.584l.051.038-.436.884-.053-.041c-.472-.352-1.001-.484-1.348-.484-.531 0-.849.28-.849.648 0 .465.296.576 1.174.848.966.301 1.559.855 1.559 1.811 0 1.096-.829 1.818-2.008 1.818M46.412 68c-.719 0-1.402-.499-1.402-.499l.36-.989s.554.413.981.413c.575 0 .836-.36 1.045-.959l-2.243-5.674h1.166l1.598 4.213 1.309-4.213h1.136l-2.126 6.039c-.408 1.072-1.005 1.669-1.8 1.669M54.704 61.223c-.833 0-1.59.757-1.59 1.983 0 1.234.765 2.023 1.609 2.023.839 0 1.604-.759 1.604-1.978 0-1.122-.703-2.026-1.623-2.026m0 5.081c-1.482 0-2.685-1.343-2.685-3.055 0-1.748 1.21-3.098 2.704-3.098 1.487 0 2.705 1.341 2.705 3.053 0 1.746-1.226 3.1-2.724 3.1M59.579 66.183h-1.093v-4.83h-.684v-1.067h.684v-.383c0-1.437 1.106-1.73 1.617-1.73.386 0 .639.068.84.15l.042.018v1.066l-.054-.025a1.589 1.589 0 0 0-.609-.143c-.541 0-.752.303-.752.79v.269h1.405v1.055h-1.396v4.83M68.461 66.18h-4.752v-7.704h4.704v1.113H64.83v2.002h3.149v1.111H64.83v2.375h3.631v1.103M70.168 64.355c0 .609.442.923 1.015.923.909 0 1.427-.658 1.427-1.412v-.321c-.242-.147-.671-.249-1.134-.249-.657 0-1.308.329-1.308 1.059zm.87 1.929c-.954 0-1.962-.606-1.962-1.901 0-1.245.911-2.087 2.286-2.087.529 0 .969.114 1.225.223v-.082c0-.62-.316-1.198-1.174-1.198-.617 0-1.201.224-1.669.534l-.061.04-.311-1.013.051-.039a3.87 3.87 0 0 1 2.01-.584c.71 0 1.306.226 1.677.655.361.419.557.988.557 1.742v3.606h-.944v-.747c-.212.402-.833.851-1.685.851zM88.896 63.121l-1.192-3.032-1.19 3.035 2.382-.003zm2.344 3.059h-1.2l-.73-1.948h-3.206l-.73 1.948h-1.186l3.094-7.694h.864l3.094 7.694zM99.789 61.238c-.779 0-1.448.609-1.448 1.688s.696 1.733 1.448 1.733c.848 0 1.576-.687 1.576-1.701 0-1.194-.795-1.72-1.576-1.72m.008 6.742a3.584 3.584 0 0 1-2.299-.813l-.047-.039.464-.971.056.049c.567.479 1.199.721 1.879.721 1.11 0 1.619-.776 1.619-1.801v-.467c-.342.725-1.074 1.074-1.824 1.074-1.182 0-2.405-1.033-2.405-2.761 0-1.77 1.223-2.811 2.405-2.811.752 0 1.517.361 1.882 1.022v-.901h.958v4.824c0 .882-.222 1.584-.654 2.086-.448.516-1.208.788-2.034.788M103.688 66.179h1.076v-7.688h-1.076zM43.647 66.294c-.946 0-1.521-.604-1.521-1.697v-3.223h-.693v-1.078l.677-.001v-1.634h1.097v1.637h1.458v1.076h-1.458v2.938c0 .554.185.882.653.882.245 0 .486-.058.665-.164l.09-.049-.004 1.039-.041.02a1.712 1.712 0 0 1-.923.254M81.133 66.275c-.947 0-1.522-.603-1.522-1.696v-3.223h-.694v-1.067l.673-.001-.002-1.646h1.104v1.636h1.457v1.078h-1.457v2.937c0 .554.185.882.653.882.246 0 .486-.057.665-.163l.09-.05.002 1.04-.047.021a1.727 1.727 0 0 1-.922.252M96.369 66.184H95.29v-3.433c0-.972-.407-1.486-1.104-1.486-.731 0-1.307.584-1.307 1.553v3.366h-1.077v-5.896h1.014v.832c.345-.638.89-.955 1.581-.955 1.197 0 1.972.932 1.972 2.375v3.644M39.445 59.591h1.063V58.5h-1.063v1.091zm-.004 6.611h1.077v-5.908h-1.077v5.908zM106.04 59.595h1.063v-1.091h-1.063v1.091zm-.004 6.581h1.076V60.28h-1.076v5.896zM76.36 66.274c-.656 0-1.396-.268-1.963-.8l-.047-.041.485-.844.052.047c.542.47 1.022.658 1.58.658.579 0 .92-.275.92-.727 0-.472-.365-.641-1.045-.861-.714-.233-1.691-.574-1.691-1.797 0-1.035.845-1.741 1.878-1.741.615 0 1.212.18 1.741.584l.051.038-.437.883-.052-.039c-.472-.354-1.001-.485-1.349-.485-.53 0-.848.28-.848.649 0 .465.295.574 1.173.847.966.299 1.56.855 1.56 1.811 0 1.096-.829 1.818-2.008 1.818M109.129 64.378c0 .61.443.924 1.016.924.909 0 1.427-.657 1.427-1.411v-.322c-.241-.146-.671-.248-1.134-.248-.656 0-1.309.328-1.309 1.057zm.871 1.931c-.954 0-1.961-.607-1.961-1.902 0-1.245.912-2.086 2.285-2.086.528 0 .969.114 1.226.223v-.083c0-.618-.316-1.196-1.175-1.196-.617 0-1.201.222-1.669.533l-.062.039-.311-1.014.052-.037c.461-.304 1.223-.584 2.011-.584.709 0 1.305.225 1.677.654.36.419.556.989.556 1.743v3.588h-.944v-.73c-.212.403-.833.852-1.685.852z" fill="#1A1919" id="shape"/></g></svg>          
+            </div><!--logo--> 
+            <div class="postgraduateText postgraduateText--postgraduate"> POSTGRADUATE </div> <!-- postgraduateText -->
+            <div class="postgraduateText postgraduateText--masters"> MASTER'S DEGREES </div> <!-- postgraduateText -->
+            <div class="postgraduateText postgraduateText--phd"> PhDs AND<br> RESEARCH DEGREES </div> <!-- postgraduateText -->
+            <div class="quote__container"> 
+              <div class="quote" data-max-height="css"> 
+
+                <div class="quote__inner" style="font-size: {{UEA_heading-size--sbv}}%;">
+
+                  {{{UEA_pgheading--sbv}}}
+
+                </div><!--quote__inner-->
+
+              </div> <!-- quote -->
+            </div> <!-- quote__container -->
+            <div class="content__container">
+              <div data-max-height="dynamic">
+                {{#UEA_heading--sbv}} 
+                <div class="heading__container">
+                  <div class="decoration decoration--primary u--{{UEA_toggle-heading-text--sbv}}"> 
+                    <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="decoration__element">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"/>
+                    </svg>
+                  </div> <!-- decoration -->
+                  <div class="heading__text heading__text--{{UEA_toggle-heading-text--sbv}}"> This is </div> <!-- heading__text --> 
+                  <div class="heading heading--primary headingPositionController--{{UEA_toggle-heading-text--sbv}} u-p-t-15 padded-multiline" data-max-height="css">
+                    <div class="heading__inner" style="font-size: {{UEA_course-subject-name-size--pb}}%; line-height: 0.9em">
+                      <div id="js-padded-multiline-target-1"></div>              
+                      <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-1">
+                        {{{UEA_heading--sbv}}}
+                      </div>  
+                    </div><!--heading__inner-->
+                  </div> <!-- heading --> 
+                  <div class="heading heading--secondary" data-max-height="css"> {{{UEA_heading--sbv}}} </div> <!-- heading -->  
+                </div> <!-- heading__container -->
+                {{/UEA_heading--sbv}}    
+                <div class="content"> 
+                  {{#UEA_body-copy--sbv}}
+                  <div class="copy copy--primary padded-multiline" data-max-height="css">
+                    <div id="js-padded-multiline-target-2" style="font-size: {{UEA_body-copy-font-slider--sbv}}%;"></div>                      
+                    <div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-2">{{{UEA_body-copy--sbv}}}</div>                    
+                  </div> <!-- copy -->
+                  {{/UEA_body-copy--sbv}}
+                  {{#UEA_body-copy--sbv}} <div class="copy copy--secondary" data-max-height="css"><div style="font-size: {{UEA_body-copy-font-slider--sbv}}%;">{{{UEA_body-copy--sbv}}}</div></div> <!-- copy -->{{/UEA_body-copy--sbv}}
+                  <div class="content__right">
+                    {{#UEA_cta--sbv}} <div class="cta cta--{{UEA_cta-text-colour--sbv}}" data-max-line="2"><div style="font-size: {{UEA_cta-font-slider--sbv}}%;">{{{UEA_cta--sbv}}}</div></div> <!-- cta --> {{/UEA_cta--sbv}}           
+                    <div class="url url--primary" data-max-height= "css">                                          
+                      <div class="url__inner" style="font-size: {{UEA_url-size--pb}}{{^UEA_url-size--pb}}{{/UEA_url-size--pb}}%;">                         
+                        <div class="padded-multiline">
+                          <div id="js-padded-multiline-target-3"></div>                      
+                          {{#UEA_url--sbv}}<div class="js-padded-multiline-src" data-target-id="js-padded-multiline-target-3">www.{{{UEA_url--sbv}}}</div>{{/UEA_url--sbv}}                                            
+                        </div><!--padded-multiline-->                     
+                      </div><!--url__inner--> 
+                    </div> <!-- url -->
+                    {{#UEA_url--sbv}}<div class="url url--secondary" data-max-height="css">
+                    <div class="url__inner" style="font-size: {{UEA_url-size--pb}}{{^UEA_url-size--pb}}{{/UEA_url-size--pb}}%;">
+                      www.{{{UEA_url--sbv}}}                    
+                    </div><!--url__inner-->
+                    </div> <!-- url -->{{/UEA_url--sbv}}
+                  </div> <!-- content__right -->
+                </div> <!-- content -->
+              </div> <!-- data-max-height -->
+            </div> <!-- content__container -->
+            <div class="decoration decoration--secondary decoration--{{UEA_glint-position--sbv}}"> 
+              <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="decoration__element">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"/>
+              </svg>
+            </div> <!-- decoration -->
+            <div class="element__container element__container--{{UEA_glint-position--sbv}}">
+              <img src="https://files.outfit.io/media_library_items/93089/glint-stand.svg" class="element__stand">               
+              <svg viewBox="0 0 139 138" fill="#FFF" xmlns="http://www.w3.org/2000/svg" class="element">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M66.495 137.137C65.8872 83.3118 53.7537 71.7359 0 71.2211V65.9015C53.7537 65.3724 65.8872 53.818 66.495 0H71.5572C72.1792 53.818 84.2842 65.3367 138.038 65.8586V71.2211C84.2842 71.7359 72.1792 83.3118 71.5572 137.137H66.495Z" fill="#FFF"  id="star"/>
+              </svg>
+            </div> <!-- element__container -->
+          </div> <!-- body -->
+          <div class="statistic__container statistic__container--{{UEA_statistic-visibility--sbv}}">
+            {{#UEA_statistic--sbv}} <div class="statistic textFit"> {{{UEA_statistic--sbv}}} </div> <!-- statistic --> {{/UEA_statistic--sbv}}
+            {{#UEA_statistic-main-text--sbv}} <div class="statistic__text" data-max-line="5"> {{{UEA_statistic-main-text--sbv}}}  </div> <!-- statistic__text --> {{/UEA_statistic-main-text--sbv}}
+            {{#UEA_statistic-ref--sbv}} <div class="statistic__ref" data-max-line="3"> {{{UEA_statistic-ref--sbv}}}  </div> <!-- statistic__ref --> {{/UEA_statistic-ref--sbv}}
+          </div> <!-- statistic__container -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+
+
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      {{{account.snippets.multilineBackgrounds}}}      
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          charLimit();
+        });
+      });
+
+      setInterval(() => {
+        maxHeightCheck();
+        maxLineCheck();
+      }, 1000)
+
+      const paddedMultilineObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          multilineBackgrounds();
+        });
+      });
+
+      const paddedMultilineSrcs = document.querySelectorAll('.js-padded-multiline-src');
+
+      paddedMultilineSrcs.forEach(paddedMultilineSrc => {
+        paddedMultilineObserver.observe(paddedMultilineSrc, {
+          attributes: false,
+          characterData: true,
+          childList: true,
+          subtree: true,
+          attributeOldValue: false,
+          characterDataOldValue: true
+        });        
+      })
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+      placeholderController();
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }   
+
+
+
+      detectSystem();            
+      multilineBackgrounds();  
+    </script> 
+
+    <!--   <script type="text/javascript">
+      // Add many fallbacks for Print Ready
+      document.addEventListener('DOMContentLoaded', function(event) {
+        document.dispatchEvent(new Event('printready'));
+      });
+
+      setTimeout(function() {
+        document.dispatchEvent(new Event('printready'));
+      }, 2000);
+
+      document.dispatchEvent(new Event('printready'));
+    </script>-->
+
+  </body>
+</html>
