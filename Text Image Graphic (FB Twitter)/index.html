@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html data-sign="OSL" async>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <style>
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/BrandonText/stylesheet.css');
+
+
+      html {
+        font-family: 'Brandon Text';
+        font-size: 11pt;
+        color: #000;
+      }
+
+      /* Placeholder Styling */
+      .placeholder__container {
+        position: absolute;
+        top: 3mm;
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;
+        transition: 0.3s all;
+      }
+
+      .placeholder {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-image: url({{{ placeholder-image }}}); 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;   
+        opacity: 0.4;
+      }
+
+      .u-placeholder-locked .placeholder__container {
+        opacity: 1;  
+      }
+
+      .u-placeholder-hidden .placeholder__container,
+      .u-placeholder-hidden .placeholder__trigger {
+        display: none;
+      }
+
+      .placeholder__trigger {
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 1rem;
+        height: 1rem;
+        border-bottom-left-radius: 1rem;
+        background: #467BE3;
+        transition: all 0.3s;
+        transform: translate(30%, -30%);
+        opacity: 0;
+        z-index: 9999;
+      }   
+
+      .bleed:hover .placeholder__trigger:hover {
+        cursor: pointer;
+        opacity: 1;        
+      }
+
+      .placeholder__trigger svg {
+        width: 50%;
+        height: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-25%, -50%);
+      }
+
+      .bleed:hover .placeholder__trigger {
+        transform: translate(0, 0);
+        opacity: 0.5;
+      }      
+
+      .bleed:hover .placeholder__trigger:hover + .placeholder__container {
+        opacity: 1;
+      }      
+
+      .placeholderBtn__container {
+        position: absolute;
+        top: 0;
+        left: -0.6rem;
+        bottom: -0.6rem;
+        right: 0;
+        transition: 0.3s all;
+        transform: rotate(-90deg);
+        transform-origin: top right;
+        opacity: 0;
+      }
+
+      .placeholder__trigger:hover .placeholderBtn__container {
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+
+      .placeholderBtn {
+        position: absolute;
+        left: 0;
+        top: 0.04rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: #467BE3;
+        color: #fff;
+        font-size: 0.27rem;
+        text-decoration: none;
+        line-height: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }     
+
+      .placeholderBtn--plus::before {
+        content: '+';
+      }            
+
+      .placeholderBtn--minus {
+        top: 0.68rem;
+        left: 0.4rem;       
+      }    
+
+      .placeholderBtn--minus::before {
+        content: '-';        
+      }
+
+      .placeholderBtn--lock {
+        bottom: 0;
+        top: auto;
+        right: 0.04rem;
+        left: auto;
+      }
+
+      .placeholderBtn--lock::before {
+        content: 'L';
+      }
+
+      .u-placeholder-locked .placeholderBtn--lock::before {
+        content: 'U';
+      }      
+
+      /* End Placeholder Styling */
+
+      .overflow {
+        border: none;
+        box-shadow: 0 0 0 0.0362rem red;
+        background: rgba(255, 0, 0, 0.4);
+        position: relative;
+        z-index: 999;}
+      .overflow h1, 
+      .overflow h2, 
+      .overflow h3, 
+      .overflow h4, 
+      .overflow h5, 
+      .overflow h6, 
+      .overflow p, 
+      .overflow li { color: red !important; }
+      .overflow::before {
+        content: '+';
+        position: absolute;
+        z-index: 5;
+        top: 0.1rem;
+        right: 0.1rem;
+        height: .3107rem;
+        width: .3107rem;
+        border: 0.01rem solid red;
+        color: red;
+        padding: 0.01rem 0.01rem 0.01rem 0.0155rem;
+        box-sizing: border-box;
+        font-size: 0.2279rem;
+        text-align: center;
+        line-height: .2693rem;
+        background-color: white;
+        text-align: center; }
+      .overflow:hover:before {
+        background-color: red;
+        color: white; }
+      .overflow:after {
+        display: none; }
+      .overflow:hover:after {
+        display: block;
+        content: 'There is overset content in this column. Please remove it';
+        position: absolute;
+        top: 0.5rem;
+        right:  0.1rem;
+        background-color: black;
+        color: white;
+        border-radius: 0.01rem;
+        padding: 0.2rem 0.2rem;        
+        box-sizing: border-box;
+        font-size: 0.35rem;
+        font-weight: 400;     
+        text-align: right;
+        width: 6rem;
+        line-height: 0.45rem;
+      }
+
+      .overflow[data-char-limit]:hover:after {
+        content: 'Character limit exceeded';        
+      }
+
+      .is-export-mode .placeholder__container,
+      .is-export-mode .placeholder__trigger {
+        display: none;
+      }
+
+      :root {   
+        --dynamic-color: {{account.colors.uea-cyan-rgb}}
+      }
+
+      .green { 
+        --dynamic-color: {{account.colors.uea-green-rgb}}
+      }   
+
+      .purple { 
+        --dynamic-color: {{account.colors.uea-purple-rgb}}
+      }
+
+      .orange {    
+        --dynamic-color: {{account.colors.uea-orange-rgb}}
+      }
+
+      .cyan {       
+        --dynamic-color: {{account.colors.uea-cyan-rgb}}
+      }
+
+      .magenta {    
+        --dynamic-color: {{account.colors.uea-magenta-rgb}}
+      }      
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        left: 3mm;
+        overflow: hidden;
+      }
+
+      .body {
+        flex: 1;
+        position: relative;
+        flex-basis: 8.5778rem;
+        text-align: center;
+        padding: 1.7577rem 3.5506rem 1.7577rem;       
+        background-color: var(--dynamic-color);
+      }
+
+      .backgroundImage {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+      }
+
+      .headline {
+        text-transform: uppercase;
+        font-size: {{UEAtigft_headline-font-size}}pt;
+        line-height: 1.2em;
+        font-weight: 900;
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer {
+        height: 2.3554rem;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0;
+        padding: 0.3164rem 0.6328rem 0.2461rem 0.457rem;
+        background: #000;
+        color: #fff;        
+      }
+
+      .credit {
+        align-self: flex-end;
+        width: 15.1166rem;
+        padding-bottom: 0.1055rem;
+        font-size: 0.2900rem;       
+        line-height: 1.2em;
+      }
+
+      .logo {
+        width: 8.1559rem;
+        align-self: center;
+      }
+
+      svg {
+        width: 100%;
+      }
+
+      path,polygon {
+        fill: #fff;
+      }    
+
+      .glint {
+        fill: var(--dynamic-color);
+      }
+      
+      .headline.black {
+        color: black;
+      }
+      
+      .headline.white {
+        color: white;
+      }
+      
+      .headline.theme {
+        color: var(--dynamic-color);
+      }
+      
+      .no-background-image .headline.theme {
+        color: white;
+      }
+      
+      .body {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+      }     
+      
+      .body.align-end {
+        justify-content: flex-end;
+      }
+      
+      .body.align-start {
+        justify-content: flex-start;
+      }
+      
+      .body.align-center {
+        justify-content: center;
+      }      
+
+
+      /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
+    </style>
+  </head>
+  <body style="background: white" data-crop="{{show-crop}}" class="{{ placeholder-toggle }}  {{UEAtigft_theme}}{{^UEAtigft_theme}}cyan{{/UEAtigft_theme}} {{ ^UEAtigft_background-image }}no-background-image{{ /UEAtigft_background-image }}">    
+
+    <div class="page">
+
+      <div class="bleed center-children">
+
+        <span class="placeholder__trigger">   
+          <div class="placeholderBtn__container">
+            <div class="placeholderBtn placeholderBtn--operation placeholderBtn--plus" data-operation="plus"></div>
+            <div href="#" class="placeholderBtn placeholderBtn--operation placeholderBtn--minus" data-operation="minus"></div>
+            <div href="#" class="placeholderBtn placeholderBtn--lock"></div>
+          </div>
+          <svg viewBox="0 0 144 100" preserveAspectRatio xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <title>background</title>
+              <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+            </g>
+            <g>
+              <title>Layer 1</title>
+              <path fill="#ffffff" id="svg_1" d="m89.668,38.786c0,-10.773 -8.731,-19.512 -19.51,-19.512s-19.512,8.736 -19.512,19.512c0,10.774 8.732,19.511 19.512,19.511c10.776,0 19.51,-8.736 19.51,-19.511m38.684,-0.059c-13.315,17.599 -34.426,28.972 -58.193,28.972c-23.77,0 -44.879,-11.373 -58.194,-28.972c13.314,-17.598 34.424,-28.971 58.193,-28.971c23.769,0 44.878,11.373 58.194,28.971m11.962,0.033c-14.648,-23.282 -40.589,-38.76 -70.156,-38.76s-55.51,15.478 -70.158,38.76c14.648,23.312 40.591,38.81 70.158,38.81s55.508,-15.498 70.156,-38.81"/>
+            </g>
+          </svg>
+        </span><!-- end placeholder__trigger -->
+        <div class="placeholder__container">
+          <div class="placeholder"></div>
+        </div><!-- end placeholder__container -->
+
+        <div class="container fit">
+
+          <div class="body {{{ text-alignment }}}">
+            <div class="backgroundImage">{{{ UEAtigft_background-image }}}</div>
+            <div class="headline {{{ UEAtigft_headline-colour-fb }}}" style="opacity: {{{ UEAtigi_text-opacity }}};">
+              <div style="max-height: 4em;">
+                <div class="check-overflow">
+                  {{{UEAtigft_headline}}}
+                </div><!--checkoverflow--> 
+              </div><!--max-height-->
+            </div><!--headline-->
+          </div><!--body-->
+          <div class="footer">
+            <div class="credit">            
+              <div style="max-height: 2.5em;">
+                <div class="check-overflow">
+                  {{{UEAtigft_optional-credit-copy}}}
+                </div><!--checkoverflow--> 
+              </div><!--max-height-->             
+            </div><!--credit-->
+            <div class="logo">
+              <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170.67 35.33"><title>horizontal-logo</title><path d="M116.51,84.61c-3.07,0-4.9-2.21-4.9-5.91V71.38h1.89V78.6c0,2.78,1.26,4,3,4s3-1.22,3-3.93V71.38h1.89v7.2c0,3.77-1.84,6-4.92,6" transform="translate(-35.76 -70.56)"/><path d="M123.43,84.33V74.58h1.74V76a2.92,2.92,0,0,1,2.71-1.63c2,0,3.37,1.59,3.37,4.07v5.9H129.4V78.79c0-1.67-.7-2.55-1.89-2.55s-2.24,1-2.24,2.66v5.42h-1.84Z" transform="translate(-35.76 -70.56)"/><path d="M135.18,84.32h-1.84V74.58h1.84v9.74h0m0-11.08h-1.89V71.38h1.89v1.87h0Z" transform="translate(-35.76 -70.56)"/><polygon points="105.83 13.86 104.2 13.86 100.58 4.03 102.53 4.03 105.02 11.25 107.51 4.03 109.43 4.03 105.83 13.86 105.83 13.86 105.83 13.86"/><path d="M149.94,84.54c-2.72,0-4.48-2.13-4.48-5.27,0-2.85,1.87-4.89,4.31-4.89s4.15,1.94,4.15,5.13c0,0.14,0,.29,0,0.52v0.22h-6.53a2.53,2.53,0,0,0,2.6,2.55,3.14,3.14,0,0,0,2.46-1.27l0.07-.09,1.09,1.1-0.07.09a4.21,4.21,0,0,1-3.59,1.89M152,78.62c-0.16-1.51-.93-2.48-2.31-2.48-1.12,0-2.14.76-2.37,2.48H152Z" transform="translate(-35.76 -70.56)"/><path d="M157.37,84.33H155.5V74.57h1.77v2.17a3.2,3.2,0,0,1,3-2.34h0.26v2.17h-0.21c-1.66,0-3,1.3-3,4v3.71h0Z" transform="translate(-35.76 -70.56)"/><path d="M164.59,84.51a5.22,5.22,0,0,1-3.36-1.37l-0.08-.07L162,81.63l0.09,0.08a3.92,3.92,0,0,0,2.71,1.13c1,0,1.51-.4,1.51-1.17s-0.56-1-1.72-1.38-2.9-1-2.9-3.08c0-1.77,1.45-2.82,3.21-2.82a4.94,4.94,0,0,1,3,1l0.09,0.06L167.2,77l-0.09-.07a4.07,4.07,0,0,0-2.31-.83c-0.91,0-1.38.34-1.38,1s0.76,1,2,1.38C167.08,79,168,79.9,168,81.56c0,1.88-1.44,3-3.45,3" transform="translate(-35.76 -70.56)"/><path d="M179.81,84.86a2.89,2.89,0,0,0,1.68.71c1,0,1.43-.62,1.79-1.64l-3.77-9.19-0.07-.18h2l0,0.07,2.71,6.79,2.21-6.78,0-.08h1.95l-0.06.17-3.57,9.82c-0.7,1.84-1.58,2.86-3.22,2.86a4.49,4.49,0,0,1-2.31-.85Z" transform="translate(-35.76 -70.56)"/><path d="M195.46,84.55a4.76,4.76,0,0,1-4.6-5.06c0-3,2.07-5.13,4.63-5.13a4.77,4.77,0,0,1,4.61,5.06c0,3-2.08,5.14-4.64,5.14m0-8.36c-1.43,0-2.72,1.13-2.72,3.23s1.31,3.29,2.76,3.29,2.75-1.13,2.75-3.22c0-1.92-1.2-3.3-2.78-3.3" transform="translate(-35.76 -70.56)"/><path d="M204,84.31h-1.87V76.4H201V74.58h1.17V73.52a2.72,2.72,0,0,1,2.77-3,3.55,3.55,0,0,1,1.44.25l0.07,0v1.83l-0.09,0a2.28,2.28,0,0,0-1-.24A1.17,1.17,0,0,0,204,73.74v0.84h2.41V76.4H204v7.91h0Z" transform="translate(-35.76 -70.56)"/><polygon points="84.35 32.22 75.86 32.22 75.86 19.32 84.26 19.32 84.26 21.22 77.78 21.22 77.78 24.65 83.52 24.65 83.52 26.55 77.78 26.55 77.78 30.34 84.35 30.34 84.35 32.22 84.35 32.22 84.35 32.22"/><path d="M124.46,103a3.08,3.08,0,0,1-3.36-3.14c0-2,1.56-3.37,3.91-3.37a5.63,5.63,0,0,1,2.1.38V96.74A1.92,1.92,0,0,0,125,94.67a4.83,4.83,0,0,0-2.73.94l-0.1.06-0.53-1.73,0.09,0a6.61,6.61,0,0,1,3.44-1c2.41,0,3.82,1.47,3.82,4.1v5.83h-1.62v-1.25a3.28,3.28,0,0,1-2.89,1.46M123,99.86a1.52,1.52,0,0,0,1.74,1.42,2.18,2.18,0,0,0,2.44-2.17V98.63a4.87,4.87,0,0,0-2.1-.42A1.81,1.81,0,0,0,123,99.86Z" transform="translate(-35.76 -70.56)"/><path d="M159.58,102.79h-2.12l-1.36-3.33h-5.31l-1.32,3.33h-2l5.29-12.91h1.48l0,0.07,5.27,12.84h0m-4.17-5.24-1.88-5-2,5h3.9Z" transform="translate(-35.76 -70.56)"/><path d="M174.76,105.89a6.15,6.15,0,0,1-3.94-1.39l-0.08-.06,0.79-1.66,0.09,0.08a4.9,4.9,0,0,0,3.22,1.23c1.9,0,2.77-1.33,2.77-3.08v-0.8A3.35,3.35,0,0,1,174.5,102a4.26,4.26,0,0,1-4.12-4.58c0-3,2.09-4.64,4.12-4.64a3.66,3.66,0,0,1,3.22,1.75V93.06h1.64V101a5.32,5.32,0,0,1-1.12,3.57,4.59,4.59,0,0,1-3.48,1.35m0-11.22a2.43,2.43,0,0,0-2.48,2.72,2.54,2.54,0,0,0,2.48,2.82,2.63,2.63,0,0,0,2.7-2.76,2.53,2.53,0,0,0-2.7-2.77" transform="translate(-35.76 -70.56)"/><polygon points="147.61 32.24 145.76 32.24 145.76 19.31 147.61 19.31 147.61 32.24 147.61 32.24 147.61 32.24"/><path d="M177,84.51c-1.62,0-2.6-1-2.6-2.91V76.43h-1.19V74.59h1.15V71.76h1.88v2.83h2.5v1.85h-2.5v4.68c0,0.95.32,1.51,1.12,1.51a2.68,2.68,0,0,0,1.23-.31l0.15-.09V84l-0.06,0a3.33,3.33,0,0,1-1.68.47" transform="translate(-35.76 -70.56)"/><path d="M171.51,84.33h-1.84V74.58h1.84v9.75h0m0-11.09h-1.89V71.37h1.89v1.87h0Z" transform="translate(-35.76 -70.56)"/><path d="M133.68,103a5.23,5.23,0,0,1-3.36-1.37l-0.08-.07,0.83-1.44,0.09,0.08a3.92,3.92,0,0,0,2.71,1.13c1,0,1.51-.4,1.51-1.17s-0.56-1-1.72-1.38-2.9-1-2.9-3.08c0-1.77,1.45-2.82,3.22-2.82a4.94,4.94,0,0,1,3,1L137,93.93l-0.75,1.51-0.09-.07a4.07,4.07,0,0,0-2.31-.83c-0.91,0-1.38.34-1.38,1s0.76,1,2,1.37c1.68,0.57,2.65,1.43,2.65,3.09,0,1.88-1.44,3-3.45,3" transform="translate(-35.76 -70.56)"/><path d="M141.87,103c-1.62,0-2.6-1-2.6-2.9v-5.2h-1.19V93.05h1.15V90.24h1.88v2.82h2.5v1.83h-2.5v4.71c0,0.95.32,1.51,1.12,1.51a2.67,2.67,0,0,0,1.23-.31l0.15-.08v1.78l-0.07,0a3.33,3.33,0,0,1-1.68.46" transform="translate(-35.76 -70.56)"/><path d="M160.89,102.8V93h1.73v1.42a2.92,2.92,0,0,1,2.71-1.63c2,0,3.37,1.59,3.37,4.06v5.9h-1.84V97.26c0-1.66-.7-2.55-1.89-2.55s-2.24,1-2.24,2.66v5.42h-1.84Z" transform="translate(-35.76 -70.56)"/><path d="M187.32,102.8h-1.84V93.06h1.84v9.74h0m0-11.05h-1.89V89.88h1.89v1.87h0Z" transform="translate(-35.76 -70.56)"/><path d="M192.34,103A3.08,3.08,0,0,1,189,99.85c0-2,1.56-3.37,3.91-3.37a5.64,5.64,0,0,1,2.1.38V96.72a1.92,1.92,0,0,0-2.14-2.07,4.83,4.83,0,0,0-2.73.94l-0.1.06-0.53-1.73,0.09,0a6.6,6.6,0,0,1,3.44-1c2.41,0,3.82,1.47,3.82,4.1v5.83h-1.62v-1.25a3.28,3.28,0,0,1-2.89,1.46m-1.49-3.15a1.52,1.52,0,0,0,1.74,1.42A2.18,2.18,0,0,0,195,99.1V98.62a4.87,4.87,0,0,0-2.1-.43A1.81,1.81,0,0,0,190.85,99.85Z" transform="translate(-35.76 -70.56)"/><path d="M53.15,102.26H52.67c-4.47,0-7.83-3.07-7.83-11.67V77.9c0-4.35,1.92-6,4.64-6V71.38H35.76v0.51C38.15,71.94,39,74,39,76.63v12.5c0,9.42,4.51,13.67,12.68,13.67h1.46v-0.54Z" transform="translate(-35.76 -70.56)"/><path d="M80.71,93.51c-0.05-4.72-1.12-5.73-5.83-5.78V87.27c4.71,0,5.78-1.06,5.83-5.78h0.44c0.05,4.72,1.12,5.73,5.83,5.78v0.47c-4.71,0-5.78,1.06-5.83,5.78H80.71Z" transform="translate(-35.76 -70.56)" fill="" class="glint"/><path d="M55.42,102.26c4.27,0,6.14-2.9,6.14-7h0V77.47c0-4.18-2.09-5.57-4.63-5.57V71.38H81.15V78H80.73c-0.72-3.87-2.23-5.38-7.15-5.38H72.44c-4.62,0-5.53,1.47-5.53,5.61V82c0,5,2,5.22,5.91,5.22v0.47c-3.86,0-5.91.42-5.91,5.49v1.65c0,6.21.78,6.62,6,6.62,3.08,0,6.84-.79,7.81-5h0.44v6.35H55.42v-0.53Z" transform="translate(-35.76 -70.56)"/><path d="M89.78,102.26c4.26,0,5.33-2.75,3.4-7.06L86.66,78.87l1.89-8.07H88.9s9,21.31,11.2,25.62c2.35,4.55,4.32,5.84,6.27,5.84v0.53H89.78v-0.54h0Z" transform="translate(-35.76 -70.56)"/></svg> 
+            </div><!--logo-->
+          </div><!--footer-->
+
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};                                      
+    </script>
+    <script src="main.js"></script>   
+    <script src="prefixfree.js"></script>
+    <script src="placeholder-controller.js"></script>
+    <script src="char-limit.js"></script>
+    <script src="check-export-mode.js"></script>
+    <script src="check-height.js"></script>    
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.3.min.js" type="text/javascript"></script>
+    <script>
+      function loop() {
+        checkHeight(document.getElementsByClassName('check-overflow'));
+        setTimeout(function() {
+        document.dispatchEvent(new Event('printready'));
+        }, 500);
+      } setInterval(loop, 1000); 
+
+      // Fix for the resizable background images - fullscreen and digital vairaitons only
+      function checkCrop() {
+        if (window.showCrop === true) {
+        } else {
+          [].forEach.call(document.querySelectorAll('.outfit-resizable-background'), function (el) {
+            el.parentNode.style.left = '0';
+            el.parentNode.style.right = '0';
+            el.parentNode.style.top = '0';
+            el.parentNode.style.bottom = '0';
+            el.parentNode.style.width = '100%';
+            el.parentNode.style.height = '100%';
+          });
+        }
+      }
+
+      placeholderControler();             
+      checkCrop();  
+      checkExport(); 
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      /*
+      TextFit.fit({
+        selector: '.textFit'
+      });      
+      */
+
+    </script>
+
+
+  </body>
+</html>
