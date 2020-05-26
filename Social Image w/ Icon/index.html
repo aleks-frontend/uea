@@ -329,11 +329,12 @@
         line-height: 1.1em;
       }
 
-      .subheading__inner { font-size: {{{UEA_sub-heading-font-size--ct}}}%; }
+      .subheading__inner { 
+        overflow: hidden;
+        font-size: {{{UEA_sub-heading-font-size--ct}}}%; 
+        line-height: 1em;
+      }
 
-      .layoutChoice--facebook .subheading__inner { line-height: 1em; }
-      .layoutChoice--twitter .subheading__inner { line-height: 1em; }
-      .layoutChoice--instagram .subheading__inner { line-height: 1em; }
       .layoutChoice--crm-banner .subheading__inner { line-height: 1.1em; }
 
       .heading:last-child,
