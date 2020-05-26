@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html data-sign="OSB" async>
+  <head>
+    <title>Template title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/minireset.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/placeholder-controller.css">
+    <link rel="stylesheet" type="text/css" href="css/typography.css">
+    <link rel="stylesheet" type="text/css" href="css/element-colours.css">
+
+    <style> 
+
+      @import url('https://outfit-assets-production.s3.amazonaws.com/fonts/Gotham/stylesheet.css');
+      @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
+
+      :root {
+        --primary: {{{account.colors.type-ink}}};
+        --white: #fff;
+        --black: {{{account.colors.type-black}}};
+
+        /* Primary Colours */
+
+        --purple-pantone: {{{account.colors.primary-purple}}};
+        --yellow-pantone: {{{account.colors.primary-yellow}}};
+        --cyan-pantone: {{{account.colors.primary-cyan}}};
+        --red-pantone: {{{account.colors.primary-red}}};
+        --gold-pantone: {{{account.colors.primary-gold}}};
+
+        /* Secondary Colours */
+
+        --heather-pantone: {{{account.colors.secondary-heather}}};
+        --stone-pantone: {{{account.colors.secondary-stone}}};
+        --sky-pantone: {{{account.colors.secondary-sky}}};
+        --cedar-pantone: {{{account.colors.secondary-cedar}}};
+        --concrete-pantone: {{{account.colors.secondary-concrete}}};
+
+        --font-primary: 'Gotham';
+        --font-secondary: 'Gotham', 'Open Sans', sans-serif;
+        --headings-colour: var(--primary);
+      }  
+
+      h3 .tinymce_style--dark { color: var(--purple-pantone); }
+      h3 .tinymce_style--light { color: var(--primary); }
+
+      .fit--default { --dynamic-colour: var(--white); }
+      .fit--white { --dynamic-colour: var(--white); }
+      .fit--heather { --dynamic-colour: var(--heather-pantone); }
+      .fit--stone { --dynamic-colour: var(--stone-pantone); }
+      .fit--sky { --dynamic-colour: var(--sky-pantone); }
+      .fit--cedar { --dynamic-colour: var(--cedar-pantone); }
+      .fit--concrete  { --dynamic-colour: var(--concrete-pantone); }
+
+      .fit {
+        display: flex;
+        flex-direction: column;
+        padding: 1.143rem 1.049rem 1.143rem 0.816rem;
+        word-break: break-word;
+      }      
+
+      .fit--page1 { padding: 2.612rem 0.793rem 2.752rem 1.143rem; }
+      .fit--page2 { padding: 2.775rem 1.119rem 0.979rem 1.213rem; }
+
+      .fit--page3,
+      .fit--page4 {
+        padding: 2.379rem 1.213rem 1.026rem 1.073rem;
+      }
+
+      .fit--page5 { padding-top: 2.449rem; }
+
+      .fit--page6 {
+        padding-top: 2.729rem;
+        padding-right: 1.049rem;
+      }
+
+      .fit--page7 { padding: 2.705rem 1.096rem 3.148rem; }
+      .fit--page8 { padding-top: 2.635rem; }
+      .fit--page9 { padding: 0; }
+
+      .fit--page10 { 
+        justify-content: space-between;
+        padding: 2.612rem 0.793rem 2.752rem 1.143rem; 
+      }
+
+      .fit--backPage1 { padding: 1.043rem 1.147rem 1.043rem 1.18em; }
+
+      .fit--backPage2 { padding: 1.4rem 1.2rem 0.8rem 1.08em; }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        height: 2.75rem;
+        padding: 0 0.303rem;
+        padding-right: 0;
+        font-family: var(--font-primary);
+      }
+
+      .header--page7 {
+        position: relative;
+        display: block;
+        height: auto;
+        padding-bottom: 0.4rem;
+        border-bottom: 0.05rem solid var(--primary);
+      }
+
+      .header--backPage1 {
+        display: block;
+        height: 1.85rem;
+        padding: 0;
+      }
+
+      .header--backPage2 {
+        display: block;
+        height: 1.9rem;
+        padding: 0;
+      }
+
+      .header__column {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .header__column--left { width: 6.5rem; }
+
+      .strapline {
+        margin-top: 0.8rem;
+        width: 4.26rem;
+      }
+
+      .strapline--hide { display: none;}
+
+      .logo { width: 3.869rem; } 
+      .logo--backPage1 { width: 3.169rem; }      
+      .logo--backPage2 { width: 4.369rem; }
+
+      .info { 
+        margin-left: 1.12rem;
+        margin-top: 0.117rem;
+        font-size: 0.34rem; 
+        line-height: 1em;
+        font-family: var(--font-primary);
+      }
+      
+      .info--backPage {
+            margin-left: 1.28rem;
+      }
+
+      .body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 0%;
+        height: 84%;
+      }
+
+      .body--page7 { display: block; }
+
+      .body__inner {
+        column-count: 2;
+        column-gap: 0.443rem;
+        padding-top: 0.350rem;
+      }
+
+      .body--page8 {
+        flex: unset;
+        height: auto;
+        max-height: 4.37rem;
+        margin-bottom: 0.233rem;
+      }
+
+      .body--backPage2 { padding: 1.516rem 0 0.265rem; }
+
+      .heading {
+        height: 2.45rem;
+        margin: 0 1.423rem;
+      }
+
+      .heading--page1 {
+        position: relative;
+        height: auto;
+        margin: 0;
+        padding-bottom: 0.3rem;
+        border-bottom: 0.05rem solid var(--primary);
+      }
+
+      .heading--page10 {
+        position: relative;
+        height: auto;
+        margin: 0;
+        padding-bottom: 0.34rem;
+      }
+
+      .heading--page1:after,
+      .header--page7:after {
+        content: '';
+        position: absolute;
+        display: block;
+        left: 50%;
+        bottom: -0.06rem;
+        width: 0.4rem;
+        height: 0.1rem;
+        background: var(--white);
+        transform: translateX(-50%);
+      }
+
+      .header--page7:after { background: var(--dynamic-colour); }
+
+      .grid__container { flex: 1 0 0%; }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 2fr;
+        flex: 1 0 0%;
+        max-height: 100%;
+      }
+
+      .grid--coverOption2 {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+      }
+
+      .grid--page1 {
+        grid-template-rows: 1fr 1fr;
+      }
+
+      .grid--page2 {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-column-gap: 0.35rem;
+      }
+
+      .grid--page3,
+      .grid--page4 {
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr;
+        grid-column-gap: 0.35rem;
+      }
+
+      .grid--page5,
+      .grid--page6 {
+        grid-template-rows: repeat(4, 1fr);
+      }
+
+      .grid--backPage1 {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr;
+      }
+
+      .grid--backPage2 {
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 0.7rem;
+        grid-template-rows: auto auto auto;
+        flex: none;
+      }
+
+      .grid__item {
+        position: relative;
+        display: flex;
+      }
+
+      .grid__item--page2,
+      .grid__item--page3,
+      .grid__item--page4 {
+        flex-direction: column;
+      }
+
+      .grid__item--main { padding: 0.606rem 0.77rem 0.606rem 0; }  
+
+      .grid__item--backPage1 {
+        padding: 0.163rem 0.163rem 0.163rem 0;
+        border-bottom: 0.05rem solid var(--primary); 
+      }
+
+      .grid__item--backPage2 { 
+        flex-direction: column;
+        padding: 0.163rem 0.163rem 0.163rem 0; 
+        border-bottom: 0.05rem solid var(--primary); 
+      }
+
+
+      .grid--alt .grid__item--hide { display: none; }
+
+      .grid--page10 {
+        flex: unset;
+        height: 8.4rem;
+        grid-template-rows: 1fr 1fr;
+      }
+
+      .grid--alt {
+        height: 4.2rem;
+        grid-template-rows: 1fr;
+      }
+
+      .grid__shape,
+      .floatingBox__shape {
+        flex: 1 0 0%;
+        clip-path: inset(0 0 0 0 round 0 0 0 4.035rem);
+        -webkit-clip-path: inset(0 0 0 0 round 0 0 0 4.035rem);
+      }
+
+      .floatingBox--left .floatingBox__shape {
+        clip-path: inset(0 0 0 0 round 0 0 10.611rem 0);
+        -webkit-clip-path: inset(0 0 0 0 round 0 0 10.611rem 0);
+      }
+
+      .floatingBox--right .floatingBox__shape {
+        clip-path: inset(0 0 0 0 round 0 0 0 10.611rem);
+        -webkit-clip-path: inset(0 0 0 0 round 0 0 0 10.611rem);
+      }
+
+      .grid__shape--bottomRight {
+        clip-path: inset(0 0 0 0 round 0 0 4.035remt 0);
+        -webkit-clip-path: inset(0 0 0 0 round 0 0 4.035rem 0);
+      }
+
+      .contentSection {
+        display: flex;
+        flex-direction: column;
+        height: 6.343rem;
+      }
+
+      .contentSection--page10 {
+        display: block;
+        height: auto;
+      } 
+
+      .grid__text {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 0.373rem 1.166rem 0.513rem 0.28rem;
+        color: var(--white);
+        word-wrap: break-all;
+      }     
+
+      .contactBox__item { padding-bottom: 0.163rem; }
+
+      .contactBox__item--bottom { 
+        padding-top: 0.163rem; 
+        border-top: 0.05rem solid var(--primary);
+        border-bottom: 0.05rem solid var(--primary);
+      }
+
+      .copy {
+        flex: 1 0 0%;
+        column-count: 2;
+        column-gap: 0.443rem;
+        padding: 0.278rem 0 0.57rem;
+      }
+
+      .copy__maxHeight { max-height: 7.87rem; }
+
+      .copy--page10 { 
+        max-height: 7.85rem;
+        column-count: unset;
+        padding: 0;
+        margin: 0.278rem 0 0;
+      }
+
+      .content--page3,
+      .content--page4 {
+        flex: 1 0 0%;
+        padding-top: 0.303rem;
+      }
+
+      .content--page4 {
+        position: relative;
+        border-top: 0.05rem solid var(--primary);
+      }
+
+      .content__title {
+        position: relative;
+        margin-bottom: 0.28rem;
+        padding-bottom: 0.466rem;
+        border-bottom: 0.05rem solid var(--primary);
+      }
+
+      .content--page4::before { top: 0; }
+
+      .content:first-child { margin-top: 0; }
+      .content + .content { margin-top: 0.396rem; }      
+
+      .image__container {
+        position: relative;
+        margin-bottom: 0.396rem;
+        flex: 0 0 44.6%;
+      }
+
+      .image__container--half { flex-basis: 22.3%; }
+      .content + .image__container { margin-top: 0.396rem; }
+     /* .content__inner { padding-bottom: 0.326rem; } */
+
+      .darkContent {
+        position: relative;
+        padding: 0.42rem;
+      }
+
+      .element__container {
+        flex: 1 0 0%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+      }
+
+      .element__image {
+        position: relative;
+        height: 5.061rem;
+      }
+
+      .element { height: 4.081rem; }
+
+      .hero {
+        position: relative;
+        flex: 1 0 0%;
+      }
+
+      .social {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 1fr;
+        height: 4.874rem;
+      }
+
+      .social__item {
+        display: flex;
+        flex-direction: column;
+        padding-top: 0.42rem;
+        padding-right: 0.233rem;
+        font-size: 0;
+      }
+
+      .social__icon {
+        width: 0.63rem;
+        margin-bottom: 0.117rem;
+      }
+
+      .url__container {
+        display: flex;
+        align-items: center;
+        height: 1.353rem;
+      }
+
+      .url__container--backPage2 {
+        align-items: flex-end;
+        height: 0.77rem;
+      }
+
+      .floatingBox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        height: 5.131rem;
+        width: 5.131rem;
+        color: var(--white);
+      }
+
+      .floatingBox--big {
+        height: 10.168rem;
+        width: 10.168rem;
+      }
+
+      .floatingBox--right {
+        left: auto;
+        right: 0;
+      }
+
+      .floatingBox__text {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 0.42rem 0.723rem 0.42rem 0.42rem;
+      }
+
+      .floatingBox--big .floatingBox__text { padding: 2.099rem 2.659rem 3.428rem 1.049rem; }
+
+      .floatingBox--right .floatingBox__text {
+        padding: 2.099rem 1.049rem 3.428rem 2.659rem;
+        text-align: right;
+      }
+
+      .footer {
+        position: relative;
+        height: 1.96rem;
+        padding-top: 0.1rem;
+        font-size: 0.14em;
+        line-height: 1.35em;
+        border-top: 0.05rem solid var(--primary);
+      }
+
+      .footer--backPage2 {
+        display: flex;
+        flex-direction: column;
+        height: 4.4rem;
+        padding-top: 0.35rem;
+        padding-right: 0.653rem; 
+        font-size: 0.23rem;
+        line-height: 1.3em;
+      }
+
+      .footer__content { margin-bottom: 0.1rem; }
+
+      .footer--backPage2 span { display: block; }
+      .footer--backPage2 span + span { margin-top: 0.163rem; }
+
+      .rotatedText {
+        position: absolute;
+        right: -1.712rem;
+        top: 1.476rem;
+        transform-origin: 0 0;
+        transform: rotate(90deg);
+      }
+
+      .footer__column {
+        flex: 1 0 0%;
+        padding-top: 0.163rem;
+      }
+
+      .footer__column:first-child { margin-right: 0.303rem; }
+
+      .footer__row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.093rem;
+      }
+
+      .footer__row:last-child { margin-bottom: 0; }
+
+      .pageNumber__container {
+        position: absolute;
+        right: 0.8rem;
+        top: 0.8rem;
+        display: flex;
+        font-size: 0.26rem;
+        line-height: 1em;
+      }      
+
+      .pageNumber__container.pageNumber__container--invert {
+        left: 0.8rem;
+        right: auto;
+        color: #fff;
+      }
+
+      .page:nth-child(odd) .pageNumber__container,
+      .page .pageNumber__container--left {
+        right: auto;
+        left: 0.8rem;
+        flex-direction: row-reverse;
+      }
+
+      .page:nth-child(odd) .pageNumber__container--right,
+      .page .pageNumber__container--right {
+        left: auto;
+        right: 0.8rem;
+        flex-direction: row;
+      }
+
+      .pageNumber,
+      .page:nth-child(odd) .pageNumber__container.pageNumber__container--right .pageNumber {
+        margin-left: 0.2rem;
+        font-weight: bold;
+      }
+
+      .page:nth-child(odd) .pageNumber__container .pageNumber,
+      .pageNumber__container--left .pageNumber {
+        margin-left: 0;
+        margin-right: 0.2rem;        
+      }
+
+      .reposition-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;  
+        overflow: hidden;
+      }   
+
+      .fit--page8 .reposition-fix { 
+        top: 0.00875rem; 
+        left: 0.00875rem;
+      }
+
+      /* Helper Functions */
+
+      .u-heading--page3 .reposition-fix { bottom: 0.35rem; }
+
+      .u-hide { display: none; }
+
+      .u-col-span-2 {
+        grid-column: span 2;
+      }
+
+      .u-row-span-2 {
+        grid-row: span 2 ;
+      }
+
+      .u-row-span-3 {
+        grid-row: span 3 ;
+      }
+
+      .u-col-row-span-2 {
+        grid-column: span 2;
+        grid-row: span 2 ;
+      }
+
+      .grid--alt .u-col-row-span-2 { grid-row: span 1;}
+
+      .u-bottom-right-clip-path {
+        clip-path: inset(-1pt 0 0 0 round 0 0 8.559rem 0);
+        -webkit-clip-path: inset(-1pt 0 0 0 round 0 0 8.559rem 0);
+      }
+
+      .u-bottom-left-clip-path {
+        clip-path: inset(0 0 0 0 round 0 0 0 8.559rem);
+        -webkit-clip-path: inset(0 0 0 0 round 0 0 0 8.559rem);
+      }
+
+      .u-heading--page3 {
+        position: relative;
+        margin: 0;
+        height: 3.381rem; 
+        padding-bottom: 0.303rem;
+        border-bottom: 0.05rem solid var(--primary);
+      }
+
+      .u-heading--page4 {
+        position: relative;
+        height: 4.081rem;
+      }
+      .u-p-12-14 { padding: 0.28rem 0.326rem; }
+
+      .u-white { color: var(--white); }
+
+      .u-square {
+        height: 0;
+        padding: 100% 0 0;
+      }
+
+      .u-display-block { display: block; }
+      .u-border-none { border: none; }
+
+      /* Helper class for fixing Reposition tool bug */
+      .reposition-fix {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;  
+        overflow: hidden;
+      }    
+      
+      
+      [data-crop="true"].templateVariation--a5 .heading{
+        margin: 0 1.1rem;
+      }
+      
+      [data-crop="true"].templateVariation--a5 .fit--page2 {
+      	padding: 2.775rem 1.05rem 0.979rem 1.05rem;
+      }
+       
+      [data-crop="true"].templateVariation--a5 .fit--backPage2 {
+        padding: 1.4rem 1.2rem 0.8rem 1.08rem;
+      }
+      
+      [data-crop="true"].templateVariation--a5 .grid--backPage2 {
+        grid-column-gap: 0.5rem;
+      }
+      
+
+    </style>
+  </head>
+  <body style="background: white" class="u-placeholder-{{ placeholder-toggle-new }}{{^placeholder-toggle-new}}hide{{/placeholder-toggle-new}}
+                                         theme--{{DU_colour-theme--brb}}{{^DU_colour-theme--brb}}default{{/DU_colour-theme--brb}}
+                                         templateVariation--{{DU_template-variation--brb}}{{^DU_template-variation--brb}}a4{{/DU_template-variation--brb}}" data-crop="{{show-crop}}">
+    <div class="placeholderMaster" data-opacity="{{ placeholder-opacity }}">
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-1 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-2 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-3 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-4 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-5 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-6 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-7 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-8 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-9 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-10 }}"></div>
+      <div class="placeholderMaster__item" data-bg="{{ placeholder-image-11 }}"></div>
+    </div><!-- end placeholderMaster -->
+
+    {{#collection.DU_cover-page--brb}}
+    {{#block.DU_cover-page-1--brb}}
+    <!-- cover page 1 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--{{{DU_page-background-colour--brb}}}">
+          <div class="header">
+            <div class="header__column header__column--left">
+              <img src="{{{account.logos.primary}}}" class="logo"/>
+              <div class="info">{{{team.lock-up-name}}}</div> <!-- info -->
+            </div> <!-- header__column -->
+            <div class="header__column"> <img src="https://files.outfit.io/media_library_items/91821/strapline.png" class="strapline strapline--{{DU_toggle-strapline--brb}}{{^DU_toggle-strapline--brb}}show{{/DU_toggle-strapline--brb}}"/> </div> <!-- header__column -->
+          </div> <!-- header -->
+          <div class="body">
+            <div class="heading"> 
+              <div data-max-height="2" data-max-height-unit="rem"> {{{DU_heading--brb}}} </div> <!-- data-max-height-->
+            </div> <!-- heading -->
+            <div class="grid">
+              <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-1--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-2--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item"> <div class="grid__shape grid__shape--{{DU_element-colour--brb}}{{^DU_element-colour--brb}}purple{{/DU_element-colour--brb}}"> </div> <!-- grid__shape --> </div> <!-- grid__item -->
+              <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-3--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item u-col-span-2 u-bottom-right-clip-path"> <div class="reposition-fix"> {{{DU_image-4--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            </div> <!-- grid -->
+          </div> <!-- body -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- cover page 1 -->
+    {{/block.DU_cover-page-1--brb}}
+    {{#block.DU_cover-page-2--brb}}
+    <!-- cover page 2 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--{{{DU_page-background-colour--brb}}}">
+          <div class="header">
+            <div class="header__column header__column--left">
+              <img src="{{{account.logos.primary}}}" class="logo"/>
+              <div class="info">{{{team.lock-up-name}}}</div> <!-- info -->
+            </div> <!-- header__column -->
+            <div class="header__column"> <img src="https://files.outfit.io/media_library_items/91821/strapline.png" class="strapline strapline--{{DU_toggle-strapline--brb}}{{^DU_toggle-strapline--brb}}show{{/DU_toggle-strapline--brb}}"/> </div> <!-- header__column -->
+          </div> <!-- header -->
+          <div class="body">
+            <div class="heading"> 
+              <div data-max-height="2" data-max-height-unit="rem"> {{{DU_heading--brb}}} </div> <!-- data-max-height-->
+            </div> <!-- heading -->
+            <div class="grid grid--coverOption2">
+              <div class="grid__item u-col-span-2"> <div class="reposition-fix"> {{{DU_image-1--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item"> </div> <!-- grid__item -->
+              <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-2--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-3--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item"> </div> <!-- grid__item -->
+              <div class="grid__item u-col-span-2"> <div class="reposition-fix"> {{{DU_image-4--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item u-col-row-span-2 u-bottom-left-clip-path"> <div class="reposition-fix"> {{{DU_image-5--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item"> <div class="grid__shape grid__shape--{{DU_element-colour--brb}}{{^DU_element-colour--brb}}purple{{/DU_element-colour--brb}}"> </div> <!-- grid__shape --> </div> <!-- grid__item -->
+              <div class="grid__item"> </div> <!-- grid__item -->
+              <div class="grid__item"> </div> <!-- grid__item -->
+              <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-6--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            </div> <!-- grid -->
+          </div> <!-- body -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- cover page 2 -->
+    {{/block.DU_cover-page-2--brb}}
+    {{/collection.DU_cover-page--brb}}
+    {{#collection.DU_internal-pages--brb}}
+    {{#block.DU_internal-page-1--brb}}
+    <!-- internal page 1 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page1">
+          <div class="contentSection">
+            <div class="heading heading--page1" data-max-height="2" data-max-height-unit="rem"> {{{DU_heading--brb}}} </div> <!-- heading -->
+            <div class="copy"> <div  data-max-height="7.3" data-max-height-unit="rem"> {{{DU_copy--brb}}} </div> <!-- data-max-height --> </div> <!-- copy -->
+          </div> <!-- contentSection -->
+          <div class="grid grid--page1">
+            <div class="grid__item u-col-row-span-2"> <div class="reposition-fix"> {{{DU_image-1--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-2--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item"> 
+              <div class="grid__shape grid__shape--{{DU_element-colour--brb}}{{^DU_element-colour--brb}}purple{{/DU_element-colour--brb}} grid__shape--bottomRight"> </div> <!-- grid__shape --> 
+            </div> <!-- grid__item -->
+          </div> <!-- grid -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 1 -->
+    {{/block.DU_internal-page-1--brb}}
+    {{#block.DU_internal-page-2--brb}}
+    <!-- internal page 2 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page2">
+          <div class="grid grid--page2">
+            <div class="grid__item grid__item--page2" data-max-height="dynamic">
+              {{#collection.DU_left-column-content-blocks--brb}}
+              {{#block.DU_body-copy--brb}}
+              <div class="content">
+                {{#DU_title--brb}} <div class="content__title"> {{{DU_title--brb}}} </div> <!-- content__title -->  {{/DU_title--brb}}
+                <div class="content__text"> {{{DU_text--brb}}} </div> <!-- content__text -->
+              </div> <!-- content --->
+              {{/block.DU_body-copy--brb}}
+              {{#block.DU_image--brb}}
+              <div class="image__container image__container--{{{DU_image-size--brb}}}">
+                <div class="reposition-fix">
+                  {{{DU_image--brb}}} 
+                </div> <!-- reposition-fix -->
+              </div> <!-- image__container -->
+              {{/block.DU_image--brb}}
+              {{#block.DU_highlighted-text-block--brb}}
+              {{#DU_highlighted-text-copy--brb}} 
+              <div class="darkContent darkContent--{{{DU_square-background-colour--brb}}}{{^DU_square-background-colour--brb}}purple{{/DU_square-background-colour--brb}}"> {{{DU_highlighted-text-copy--brb}}} </div> <!-- darkContent -->
+              {{/DU_highlighted-text-copy--brb}}
+              {{/block.DU_highlighted-text-block--brb}}
+              {{/collection.DU_left-column-content-blocks--brb}}
+            </div> <!-- grid__item -->
+            <div class="grid__item grid__item--page2" data-max-height="dynamic">
+              {{#collection.DU_right-column-content-blocks--brb}}
+              {{#block.DU_body-copy--brb}}
+              <div class="content">
+                {{#DU_title--brb}} <div class="content__title"> {{{DU_title--brb}}} </div> <!-- content__title -->  {{/DU_title--brb}}
+                <div class="content__text"> {{{DU_text--brb}}} </div> <!-- content__text -->
+              </div> <!-- content --->
+              {{/block.DU_body-copy--brb}}
+              {{#block.DU_image--brb}}
+              <div class="image__container image__container--{{{DU_image-size--brb}}}">
+                <div class="reposition-fix">
+                  {{{DU_image--brb}}} 
+                </div> <!-- reposition-fix -->
+              </div> <!-- image__container -->
+              {{/block.DU_image--brb}}
+              {{#block.DU_highlighted-text-block--brb}}
+              {{#DU_highlighted-text-copy--brb}} 
+              <div class="darkContent darkContent--{{DU_square-background-colour--brb}}{{^DU_square-background-colour--brb}}purple{{/DU_square-background-colour--brb}}"> {{{DU_highlighted-text-copy--brb}}} </div> <!-- darkContent -->
+              {{/DU_highlighted-text-copy--brb}}
+              {{/block.DU_highlighted-text-block--brb}}
+              {{/collection.DU_right-column-content-blocks--brb}}
+            </div> <!-- grid__item -->
+          </div> <!-- grid -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 2 -->
+    {{/block.DU_internal-page-2--brb}}
+    {{#block.DU_internal-page-3--brb}}
+    <!-- internal page 3 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page3">
+          <div class="grid grid--page3"> 
+            <div class="grid__item grid__item--page3"> 
+              {{#DU_heading--brb}} 
+              <div class="heading u-heading--page3"> 
+                <div data-max-height="dynamic"> {{{DU_heading--brb}}} </div> <!-- data-max-height --> 
+              </div> <!-- heading -->  
+              {{/DU_heading--brb}}
+              <div class="content content--page3">  
+                <div class="content__inner" data-max-height="dynamic">   {{{DU_body-copy--brb}}} </div> <!-- data-max-height -->  
+              </div> <!-- content --> 
+            </div> <!-- grid__item -->
+            <div class="grid__item grid__item--page3">
+              {{#DU_image--brb}}
+              <div class="heading__image u-heading--page3">
+                <div class="reposition-fix"> {{{DU_image--brb}}} </div> <!-- reposition-fix -->
+              </div> <!-- heading__image -->
+              {{/DU_image--brb}}
+              <div class="content content--page3">  
+                <div data-max-height="dynamic">
+                  <div class="content__inner"> {{{DU_body-copy-2--brb}}} </div> <!-- content__inner --> 
+                  {{#DU_highlighted-text-copy--brb}}
+                  <div class="darkContent darkContent--{{DU_square-background-colour--brb}}{{^DU_square-background-colour--brb}}purple{{/DU_square-background-colour--brb}}"> {{{DU_highlighted-text-copy--brb}}} </div> <!-- darkContent -->
+                  {{/DU_highlighted-text-copy--brb}}
+                </div> <!-- data-max-height --> 
+              </div> <!-- content --> 
+            </div> <!-- </div> <!-- grid__item -->
+          </div> <!-- grid -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 3 -->
+    {{/block.DU_internal-page-3--brb}}
+    {{#block.DU_internal-page-4--brb}}
+    <!-- internal page 4 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page4">
+          <div class="grid grid--page4" data-max-height="dynamic"> 
+            <div class="grid__item grid__item--page4"> 
+              <div class="content--page4">
+                {{{DU_body-copy--brb}}}
+              </div> <!-- content--page -->
+            </div> <!-- grid__item--page4 -->
+            <div class="grid__item grid__item--page4"> 
+              {{#DU_image--brb}}
+              <div class="heading__image u-heading--page4">
+                <div class="reposition-fix"> {{{DU_image--brb}}} </div> <!-- reposition-fix -->
+              </div> <!-- heading__image -->
+              {{/DU_image--brb}}
+              <div class="element__container">
+                <div class="element element--{{DU_element-colour--brb}}{{^DU_element-colour--brb}}purple{{/DU_element-colour--brb}} u-bottom-right-clip-path u-square"></div> <!-- element -->
+                <div class="element__image">
+                  <div class="reposition-fix"> {{{DU_image-2--brb}}} </div> <!-- reposition-fix -->
+                </div> <!-- element__image -->
+              </div> <!-- element__container -->
+            </div> <!-- grid__item--page4 -->
+          </div> <!-- grid -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 4 -->
+    {{/block.DU_internal-page-4--brb}}
+    {{#block.DU_internal-page-5--brb}}
+    <!-- internal page 5 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page5">
+          <div class="grid grid--page5"> 
+            <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-1--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-2--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item"> 
+              <div class="grid__shape grid__shape--{{DU_top-right-element-colour--brb}}{{^DU_top-right-element-colour--brb}}purple{{/DU_top-right-element-colour--brb}} u-bottom-right-clip-path"> </div> <!-- grid__shape --> 
+              <div class="grid__text"> <div data-max-height="dynamic"> {{{DU_top-right-text--brb}}} </div> <!-- data-max-height --> </div> <!-- grid__text -->
+            </div> <!-- grid__item -->
+            <div class="grid__item grid__item--strong u-col-span-2 grid__item--main"> <div data-max-height="dynamic"> {{{DU_main-text--brb}}} </div> <!-- data-max-height --> </div> <!-- grid__item -->
+            <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-3--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item u-col-row-span-2"> <div class="reposition-fix"> {{{DU_image-4--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item grid__item--strong u-p-12-14"> <div data-max-height="dynamic"> {{{DU_middle-right-text--brb}}} </div> <!-- data-max-height --> </div> <!-- grid__item -->
+            <div class="grid__item grid__item--strong grid__item--{{{DU_bottom-right-element-colour--brb}}}{{^DU_bottom-right-element-colour--brb}}purple{{/DU_bottom-right-element-colour--brb}} u-p-12-14 u-white"> 
+              <div data-max-height="dynamic">
+                {{{DU_bottom-right-text--brb}}} 
+              </div> <!-- data-max-height -->
+            </div> <!-- grid__item -->
+          </div> <!-- grid -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 5 -->
+    {{/block.DU_internal-page-5--brb}}
+    {{#block.DU_internal-page-6--brb}}
+    <!-- internal page 6 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page6">
+          <div class="grid grid--page6"> 
+            <div class="grid__item"> </div> <!-- grid__item -->
+            <div class="grid__item u-col-row-span-2">  <div class="reposition-fix"> {{{DU_image-1--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item grid__item--strong grid__item--{{{DU_middle-left-element-colour--brb}}}{{^DU_middle-left-element-colour--brb}}purple{{/DU_middle-left-element-colour--brb}} u-p-12-14 u-white"> 
+              <div data-max-height="dynamic">
+                {{{DU_middle-left-text--brb}}} 
+              </div> <!-- data-max-height -->
+            </div> <!-- grid__item -->
+            <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-2--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item u-p-12-14 grid__item--strong "> <div data-max-height="dynamic"> {{{DU_main-middle-text--brb}}}  </div> <!-- data-max-height --> </div> <!-- grid__item -->
+            <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-3--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-4--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item"> <div class="reposition-fix"> {{{DU_image-5--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item"> 
+              <div class="grid__shape grid__shape--{{DU_bottom-right-element-colour--brb}}{{^DU_bottom-right-element-colour--brb}}purple{{/DU_bottom-right-element-colour--brb}} u-bottom-right-clip-path"> </div> <!-- grid__shape --> 
+              <div class="grid__text"> <div data-max-height="dynamic"> {{{DU_bottom-right-text--brb}}} </div> <!-- data-max-height --> </div> <!-- grid__text -->
+            </div> <!-- grid__item -->
+          </div> <!-- grid -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 6 -->
+    {{/block.DU_internal-page-6--brb}}
+    {{#block.DU_internal-page-7--brb}}
+    <!-- internal page 7 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page7 fit--{{DU_background-page-colour--brb}}{{^DU_background-page-colour--brb}}heather{{/DU_background-page-colour--brb}}">
+          {{#DU_heading--brb}} <div class="header header--page7 js-subtrahend" data-max-height="4.3" data-max-height-unit="rem">{{{DU_heading--brb}}} </div> <!-- header--page7 --> {{/DU_heading--brb}}
+          <div data-max-height="dynamic">
+            <div class="body body--page7">
+              <div class="body__inner">
+                {{{DU_body-copy--brb}}}
+              </div> <!-- body__inner -->
+            </div> <!-- body -->
+          </div> <!-- data-max-height -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 7 -->
+    {{/block.DU_internal-page-7--brb}}
+    {{#block.DU_internal-page-8--brb}}
+    <!-- internal page 8 -->
+    <div class="page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page8">
+          <div class="body body--page8" data-max-height="css" data-max-height-unit="rem"> {{{DU_body-copy--brb}}} </div> <!-- body -->
+          <div class="hero">
+            <div class="reposition-fix"> {{{DU_image-1--brb}}} </div> <!-- reposition-fix -->
+            <div class="floatingBox"> 
+              <div class="floatingBox__shape floatingBox__shape--{{DU_element-colour--brb}}{{^DU_element-colour--brb}}purple{{/DU_element-colour--brb}} u-bottom-right-clip-path"> </div> <!-- grid__shape --> 
+              <div class="floatingBox__text"> <div data-max-height="dynamic"> {{{DU_text--brb}}} </div> <!-- data-max-height --> </div> <!-- grid__text -->
+            </div> <!-- grid__item -->
+          </div> <!-- hero -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 8 -->
+    {{/block.DU_internal-page-8--brb}}
+    {{#block.DU_internal-page-9--brb}}
+    <!-- internal page 9 -->
+    <div class="page">
+
+      <div class="bleed">
+        <div class="container fit fit--page9">
+          <div class="hero">
+            <div class="reposition-fix"> {{{DU_image--brb}}} </div> <!-- reposition-fix -->
+            <div class="floatingBox floatingBox--big floatingBox--{{DU_element-location--brb}}{{^DU_element-location--brb}}left{{/DU_element-location--brb}}"> 
+              <div class="floatingBox__shape floatingBox__shape--{{DU_element-colour--brb}}{{^DU_element-colour--brb}}purple{{/DU_element-colour--brb}}"> </div> <!-- grid__shape --> 
+              <div class="floatingBox__text"> <div data-max-height="dynamic"> {{{DU_text--brb}}} </div> <!-- data-max-height --> </div> <!-- grid__text -->
+            </div> <!-- grid__item -->
+          </div> <!-- hero -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} pageNumber__container--invert js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 9 -->
+    {{/block.DU_internal-page-9--brb}}
+    {{#block.DU_internal-page-10--brb}}
+    <!-- internal page 10 -->
+    <div class="page js-gridTransform-page">
+
+      <div class="bleed">
+
+        <div class="container fit fit--page10">
+          <div class="contentSection contentSection--page10 js-gridTransform-contentSection">
+            {{#DU_heading--brb}} <div class="heading heading--page10" data-max-height="2" data-max-height-unit="rem"> {{{DU_heading--brb}}} </div> <!-- heading --> {{/DU_heading--brb}}
+            <div class="copy copy--page10 js-gridTransform-copy" data-max-height="css"> {{{DU_copy--brb}}} </div> <!-- copy -->
+          </div> <!-- contentSection -->
+          <div class="grid grid--page10 js-gridTransform-grid">
+            <div class="grid__item u-col-row-span-2"> <div class="reposition-fix"> {{{DU_image-1--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item grid__item--hide"> <div class="reposition-fix"> {{{DU_image-2--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            <div class="grid__item"> 
+              <div class="grid__shape grid__shape--{{DU_element-colour--brb}}{{^DU_element-colour--brb}}purple{{/DU_element-colour--brb}} grid__shape--bottomRight"> </div> <!-- grid__shape --> 
+            </div> <!-- grid__item -->
+          </div> <!-- grid -->
+          <div class="pageNumber__container pageNumber__container--{{DU_page-number-position--brb}} js-target"> 
+            <div class="pageNumber__text"></div> <!-- pageNumber__text -->
+            <div class="pageNumber"> </div> <!-- pageNumber -->
+          </div> <!-- pageNumber__container  -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- internal page 10 -->
+    {{/block.DU_internal-page-10--brb}}
+    {{/collection.DU_internal-pages--brb}}
+    {{#collection.DU_back-page--brb}}
+    {{#block.DU_back-page-1--brb}}
+    <!-- back page 1 -->
+    <div class="page">
+
+      <div class="bleed">
+        <div class="container fit fit--backPage1">
+          <div class="header header--backPage1">
+            <img src="{{{account.logos.primary}}}" class="logo logo--backPage1" />
+          </div> <!-- header -->
+          <div class="body body--backPage1">
+            <div class="grid grid--backPage1"> 
+              <div class="grid__item u-col-span-2">  <div class="reposition-fix"> {{{DU_image-1--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+              <div class="grid__item"> </div> <!-- grid__item -->
+              <div class="grid__item grid__item--backPage1 u-display-block u-border-none">
+                <div class="contactBox" data-max-height="dynamic">
+                  <div class="contactBox__item">{{{DU_address-information--brb}}}</div>
+                  {{#DU_contact-information--brb}}<div class="contactBox__item contactBox__item--bottom">{{{DU_contact-information--brb}}}</div>{{/DU_contact-information--brb}}
+                </div> <!-- data-max-height --> 
+              </div> <!-- grid__item -->
+              <div class="grid__item u-row-span-2">               
+                <div class="grid__shape grid__shape--{{DU_element-colour--brb}}{{^DU_element-colour--brb}}purple{{/DU_element-colour--brb}}"> </div> <!-- grid__shape --> 
+              </div> <!-- grid__item -->
+              <div class="grid__item u-row-span-2">  <div class="reposition-fix"> {{{DU_image-2--brb}}} </div> <!-- reposition-fix --> </div> <!-- grid__item -->
+            </div> <!-- grid -->
+            <div class="social"> 
+              {{#DU_facebook-grid--brb}}
+              <div class="social__item"> 
+                <img src="https://files.outfit.io/media_library_items/84883/fb%2520icon.svg" class="social__icon js-subtrahend" />
+                <div class="social__content" data-max-height="dynamic"> {{{DU_facebook-grid--brb}}} </div> <!-- social__content -->
+              </div> <!-- social__item -->
+              {{/DU_facebook-grid--brb}}
+              {{#DU_twitter-grid--brb}}
+              <div class="social__item"> 
+                <img src="https://files.outfit.io/media_library_items/84884/tw%2520icon.svg" class="social__icon js-subtrahend" />
+                <div class="social__content" data-max-height="dynamic"> {{{DU_twitter-grid--brb}}} </div> <!-- social__content -->
+              </div> <!-- social__item -->
+              {{/DU_twitter-grid--brb}}
+              {{#DU_youtube-grid--brb}}
+              <div class="social__item"> 
+                <img src="https://files.outfit.io/media_library_items/84885/youtube%2520icon.svg" class="social__icon js-subtrahend" />
+                <div class="social__content" data-max-height="dynamic"> {{{DU_youtube-grid--brb}}} </div> <!-- social__content -->
+              </div> <!-- social__item -->
+              {{/DU_youtube-grid--brb}}
+              {{#DU_instagram-grid--brb}}
+              <div class="social__item"> 
+                <img src="https://files.outfit.io/media_library_items/84882/instagram%2520icon.svg" class="social__icon js-subtrahend" />
+                <div class="social__content" data-max-height="dynamic"> {{{DU_instagram-grid--brb}}} </div> <!-- social__content -->
+              </div> <!-- social__item -->
+              {{/DU_instagram-grid--brb}}
+              {{#DU_blogs-grid--brb}}
+              <div class="social__item"> 
+                <img src="https://files.outfit.io/media_library_items/84881/B%2520icon.svg" class="social__icon js-subtrahend" />
+                <div class="social__content" data-max-height="dynamic"> {{{DU_blogs-grid--brb}}} </div> <!-- social__content -->
+              </div> <!-- social__item -->
+              {{/DU_blogs-grid--brb}}
+              {{#DU_video-grid--brb}}
+              <div class="social__item"> 
+                <img src="https://files.outfit.io/media_library_items/84889/play%2520icon.svg" class="social__icon js-subtrahend" />
+                <div class="social__content" data-max-height="dynamic"> {{{DU_video-grid--brb}}} </div> <!-- social__content -->
+              </div> <!-- social__item -->
+              {{/DU_video-grid--brb}}
+            </div> <!-- social -->
+            <div class="url__container">
+              <div class="url" >
+                <p data-max-line="1">{{{DU_url--brb}}}</p>
+              </div> <!-- url -->
+            </div> <!-- url__container -->
+          </div> <!-- body -->
+          <div class="footer">
+            <div data-max-height="dynamic">
+              <div class="footer__content"> {{{account.snippets.disclaimer}}}  </div> <!-- footer__content  -->
+              <div class="footer__content">  {{{footer-info}}} </div> <!-- footer__content  -->
+              <div>  {{{account.snippets.copyright-info}}} </div>
+              <div class="footer__cell"> {{#metadata}}<span class="rotatedText">OUT_{{export_id}}</span>{{/metadata}} </div> <!--footer__cell -->
+            </div>
+          </div> <!-- footer -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- back page 1 -->
+    {{/block.DU_back-page-1--brb}}
+    {{#block.DU_back-page-2--brb}}
+    <!-- back page 2 -->
+    <div class="page">
+
+      <div class="bleed">
+        <div class="container fit fit--backPage2">
+          <div class="header header--backPage2">
+            <img src="{{{account.logos.primary}}}" class="logo logo--backPage2" />
+             <div class="info info--backPage">{{{team.lock-up-name}}}</div> <!-- info -->
+          </div> <!-- header -->
+          <div class="body body--backPage2">
+            <div class="grid__container">
+              <div class="grid grid--backPage2" data-max-height="dynamic">
+                <div class="grid__item grid__item--backPage2"> {{{DU_contact-information-1--brb}}} </div> <!-- grid__item -->          
+                <div class="u-row-span-3"> 
+                  <div class="darkContent darkContent--{{DU_square-background-colour--brb}}{{^DU_square-background-colour--brb}}purple{{/DU_square-background-colour--brb}}">
+                    {{{DU_highlighted-text--brb}}} 
+                  </div>
+                </div> <!-- darkContent -->     
+                <div class="grid__item grid__item--backPage2"> {{{DU_contact-information-2--brb}}} </div> <!-- grid__item -->     
+                <div class="grid__item grid__item--backPage2"> {{{DU_contact-information-3--brb}}} </div> <!-- grid__item -->     
+              </div> <!-- grid  -->
+            </div> <!-- grid__container -->
+            <div class="url__container url__container--backPage2">
+              <div class="url" >
+                <p data-max-line="1">{{{DU_url--brb}}}</p>
+              </div> <!-- url -->
+            </div> <!-- url__container -->
+          </div> <!-- body -->
+          <div class="footer footer--backPage2">
+            <span>  {{{account.snippets.disclaimer}}} </span>
+            <span date-max-line="2">{{{footer-info}}}</span>
+            <span> {{{account.snippets.copyright-info}}} </span>
+            {{#metadata}}<span class="rotatedText">OUT_{{export_id}}</span> {{/metadata}}
+          </div> <!-- footer -->
+        </div><!--container fit-->
+
+      </div><!--bleed-->
+
+    </div><!--page-->
+    <!-- back page 2 -->
+    {{/block.DU_back-page-2--brb}}
+    {{/collection.DU_back-page--brb}}
+    <script>
+      window.showCrop = {{show-crop}}{{^show-crop}}true{{/show-crop}};
+    </script>
+    <script src="js/main.js"></script>   
+    <script src="js/prefixfree.js"></script>
+    <script src="js/placeholder-controller.js"></script>
+    <script src="js/char-limit.js"></script>
+    <script src="js/check-export-mode.js"></script>
+    <script src="js/max-line-check.js"></script>
+    <script src="js/max-height-check.js"></script>
+    <script src="https://outfit-assets-production.s3-accelerate.amazonaws.com/scripts/textfit.0.0.4.min.js" type="text/javascript"></script>
+    <script>
+
+      // Helper function for changing the height of the bottom grid section in 'Text with single image and tapestry' page
+      function gridTransform() {
+        const gridPages = document.querySelectorAll('.js-gridTransform-page');
+        if ( gridPages.length === 0 ) return;
+
+        gridPages.forEach(page => {
+          const measuringSection = page.querySelector('.js-gridTransform-contentSection');
+          const copy = page.querySelector('.js-gridTransform-copy');
+          const gridSection = page.querySelector('.js-gridTransform-grid');
+          const pageFontSize = parseInt(window.getComputedStyle(page, null).getPropertyValue("font-size").slice(0,-2));
+
+          const measuringSectionHeight = measuringSection.offsetHeight / pageFontSize;
+          if( measuringSectionHeight > 6.9) { 
+            gridSection.classList.add('grid--alt');
+            copy.classList.add('copy--alt');
+          } else { 
+            gridSection.classList.remove('grid--alt');
+            copy.classList.remove('copy--alt');
+          }          
+        })
+      }
+
+      // Tracking text changes and firing text restriction functions (mutationObserver)
+      const overflowObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          gridTransform();
+          maxLineCheck();
+          maxHeightCheck();
+          charLimit();
+          hideEmptyTitles('.content__title');          
+        });
+      });
+
+      overflowObserver.observe(document.body, {
+        attributes: false,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: false,
+        characterDataOldValue: true
+      });
+
+      // Calling text size restriction functions once the fonts are loaded
+      document.fonts.ready.then(() => {
+        maxLineCheck();
+        maxHeightCheck();
+      });
+
+
+      checkCrop();
+      checkExport();
+      charLimit();
+
+      // TextFit function decreases the font of the selected element to make it fit in single line (if needed, uncomment the code bellow)
+      TextFit.fit({
+        selector: '.textFit'
+      });
+
+      function detectSystem() {
+        const isMac = window.navigator.appVersion.includes('Mac');
+        if ( isMac ) document.body.classList.add('is-mac');
+      }
+
+      // Injecting page numbers dynamically
+      function injectPageNumber() {
+        const pages = document.querySelectorAll('.page');
+
+        pages.forEach((page, i) => {
+          const pageNum = page.querySelector('.js-target');
+          if ( pageNum == null ) return;
+
+          pageNum.querySelector('.pageNumber').innerText = i + 1;
+          pageNum.querySelector('.pageNumber__text').innerText = ''; // We will entually add an input here 
+        });
+      }
+
+      // Temporary solution used cause conditional tags for text inputs 
+      // that include heading formatting are not working
+      function hideEmptyTitles(selector) {
+        const titles = document.querySelectorAll(selector);
+        titles.forEach( title => {
+          const isEmpty = title.innerText.trim().length == 0;
+          isEmpty ? title.classList.add('u-hide') : title.classList.remove('u-hide');
+        });
+      }
+
+      gridTransform();
+      hideEmptyTitles('.content__title');
+      injectPageNumber();
+      detectSystem();         
+    </script>
+
+    <script type="text/javascript">
+      // Add many fallbacks for Print Ready
+      document.addEventListener('DOMContentLoaded', function(event) {
+        document.dispatchEvent(new Event('printready'));
+      });
+
+    </script>    
+
+
+  </body>
+</html>
