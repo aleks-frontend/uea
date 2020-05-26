@@ -348,13 +348,11 @@
       .layoutChoice--twitter .copy {
         max-height: 60px;
         font-size: 20pt;
-        line-height: 1em;
       }
 
       .layoutChoice--instagram .copy {
         max-height: 85px; 
         font-size: 29pt;
-        line-height: 1em;
         letter-spacing: 2.5pt;
       }
 
@@ -363,14 +361,14 @@
         letter-spacing: unset;
         max-height: 55px;
         font-size: 9.4pt;
-        line-height: 1.2em;
       }
 
-      .copy__inner { font-size: {{{UEA_body-copy-font-size--ct}}}%; }
+      .copy__inner { 
+        overflow: hidden;
+        font-size: {{{UEA_body-copy-font-size--ct}}}%; 
+        line-height: 1em;
+      }
 
-      .layoutChoice--facebook .copy__inner { line-height: 1em; }
-      .layoutChoice--twitter .copy__inner { line-height: 1em; }
-      .layoutChoice--instagram .copy__inner { line-height: 1em; }
       .layoutChoice--crm-banner .copy__inner { line-height: 1.2em; }
 
       /* ANY OTHER STYLES THAT NEED MUSTACHE.JS CAPABILITIES */
